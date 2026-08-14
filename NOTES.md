@@ -992,3 +992,194 @@ It is run for pipeline realism (a real workflow has this step, and omitting it w
 pipeline unrepresentative), but **its inertness must be stated in the report** rather than
 presented as a finding. It also means MarkDuplicates cannot be a source of difference between
 the nine pipelines here.
+
+---
+
+## Phase 6 — Variant calling
+
+### 6.1 What a variant caller does
+
+The aligner produced a pile of reads stacked over every genome position. The caller looks at
+each position and asks: *do the reads here disagree with the reference in a way that is better
+explained by a real difference than by sequencing error?*
+
+At 30× coverage with ~1-in-1,000 base error, a position covered by 30 reads will show a
+spurious mismatch reasonably often. A single mismatching read is almost certainly error; 28 of
+30 reads agreeing on a different base is almost certainly real. The callers differ in how they
+do this reasoning:
+
+- **GATK HaplotypeCaller** — locally *reassembles* reads into candidate haplotypes and
+  realigns against them. Slow, but robust around indels because it does not trust the aligner's
+  original per-read alignment in messy regions.
+- **FreeBayes** — Bayesian, haplotype-based over short windows.
+- **BCFtools mpileup/call** — the classic pileup model, position by position. Fastest.
+
+### 6.2 R2 — the ploidy verification, and why it is not optional
+
+**All 18 runs (2 genomes × 3 aligners × 3 callers) PASS: every genotype is haploid.**
+Logged to `logs/ploidy_verification.txt`.
+
+The flags, spelled differently by each tool:
+
+| Caller | Flag |
+|---|---|
+| GATK | `--sample-ploidy 1` |
+| FreeBayes | `-p 1` |
+| BCFtools | `bcftools call --ploidy 1` |
+
+`bcftools`' flag needed checking: `--ploidy` normally takes a *predefined assembly name*
+(e.g. `GRCh37`) or a ploidy file, so `--ploidy 1` looks like it might be silently misparsed.
+Verified empirically before the real run — it is accepted and yields `GT=1` with `AN=1`.
+
+The verification greps the `GT` field directly and counts any genotype containing `/` or `|`
+(the diploid separators). The script **aborts** on a single diploid genotype rather than
+continuing.
+
+**Why this cannot be replaced by looking at the F1 score:** Phase 2 established that a caller
+emitting `1/1` everywhere scores a *perfect* F1 against haploid truth, because vcfeval treats
+homozygous-ALT as equivalent to haploid-ALT. A ploidy misconfiguration of that kind is
+completely invisible in the results table. Only the direct GT check catches it.
+
+### 6.3 R7 — no BQSR, and why that is the fair choice
+
+Base Quality Score Recalibration is part of GATK Best Practices. It learns systematic biases in
+the sequencer's quality scores by assuming that mismatches at *known* variant sites are real
+and everything else is error.
+
+That requires a database of known variants. **None exists for phiX or *E. coli*.** It could be
+bootstrapped — call variants, treat confident calls as "known", recalibrate, re-call — but that
+would give GATK an extra data-driven preprocessing step that FreeBayes and BCFtools do not get,
+and any GATK advantage afterwards could not be attributed to the caller. Skipped deliberately
+(R7). This should be stated in the report: **the GATK arm here is deliberately not the full
+Best Practices pipeline**, and that is a fairness decision, not an oversight.
+
+### 6.4 A launcher trap, part two
+
+Phase 5 established that `gatk` needs its environment's `bin/` on `PATH`. Wrapping it in a
+shell function was not enough here, because `/usr/bin/time` **execs a real binary and cannot
+run a shell function**:
+
+```
+time: gatk: No such file or directory
+```
+
+which reads like a missing installation rather than a quoting problem. Fixed by invoking
+`env PATH=... /path/to/gatk`.
+
+### 6.5 Raw counts and runtimes
+
+Truth: phiX 60 variants, *E. coli* 6,000.
+
+| Genome | Aligner | GATK | FreeBayes (GT=1) | BCFtools |
+|---|---|---|---|---|
+| phiX | bwa | 60 | 57 (+4 GT=0) | 60 |
+| phiX | bowtie2 | 60 | 57 (+7 GT=0) | 60 |
+| phiX | minimap2 | 60 | 57 (+4 GT=0) | 60 |
+| *E. coli* | bwa | 5,946 | 5,919 (+2,339 GT=0) | 5,948 |
+| *E. coli* | bowtie2 | 5,896 | 5,939 (+2,858 GT=0) | 5,946 |
+| *E. coli* | minimap2 | 5,938 | 5,920 (+2,340 GT=0) | 5,944 |
+
+Runtime, *E. coli* (seconds, 4 threads where supported):
+
+| Caller | bwa | bowtie2 | minimap2 |
+|---|---|---|---|
+| GATK | 31.25 | 31.00 | 31.72 |
+| FreeBayes | 10.61 | 10.84 | 10.66 |
+| BCFtools | 9.92 | 9.72 | 9.82 |
+
+GATK is ~3× slower than the other two, which is the expected cost of local reassembly. Caller
+runtime is essentially independent of which aligner produced the BAM.
+
+**FreeBayes' `GT=0` records.** FreeBayes emits candidate sites it evaluated and *rejected* —
+they carry an ALT allele but a genotype of `0` (reference) and `QUAL=0`. They are not variant
+calls. vcfeval treats `GT=0` as non-variant, and the shared QUAL≥20 filter removes them anyway,
+so they do not inflate FreeBayes' false positives. But they do mean **raw record counts are not
+comparable across callers** — FreeBayes' 8,258 records represent 5,919 actual calls.
+
+### 6.6 The important discovery: FreeBayes writes complex variants, and it breaks type-splitting
+
+FreeBayes appeared to *miss* 3 of 60 phiX variants. It does not. It **represents them
+differently**:
+
+| Truth (atomic) | GATK | FreeBayes |
+|---|---|---|
+| `215 A>T` and `217 A>T` | two SNP records | **one** record `215 AAA>TAT` |
+| `1234 T>C` and `1235 G>A` | two SNP records | **one** record `1234 TG>CA` |
+| `1699 C>G` and `1702 TC>T` | SNP + indel | **one** record `1699 CCGTCCTT>GCGTCTT` |
+
+FreeBayes is haplotype-based and merges nearby variants into a single MNP or complex record.
+Both representations describe exactly the same sequence. This is precisely the situation rule
+R4 exists for.
+
+**Why this matters far more than it first appears.** The brief specifies scoring SNVs and
+indels *separately*, via `bcftools view -v snps` / `-v indels`. But bcftools classifies a
+record by its overall shape, and a complex record is neither a SNP nor an indel:
+
+```
+FreeBayes phiX raw:  -v snps 49   -v indels 9   -v mnps 2   -v other 1
+truth:                  50 snps      10 indels
+```
+
+Splitting by type *before* vcfeval would silently discard the 2 MNP and 1 complex record —
+along with the 6 real variants inside them. FreeBayes' SNP recall would read 49/50 and its
+indel recall 9/10, and the deficit would look like a genuine sensitivity difference. It is
+purely a representation artefact.
+
+**Fix: add `--atomize` to the normalisation step (R3), applied identically to truth and to all
+nine call sets.** `bcftools norm -f ref -m -any --atomize` decomposes MNVs and complex records
+into consecutive atomic SNVs and indels. Verified on phiX:
+
+```
+FreeBayes after --atomize:  -v snps 54   -v indels 10   -v mnps 0   -v other 0
+```
+
+and the six previously-hidden variants reappear at exactly the truth positions and alleles
+(215 A>T, 217 A>T, 1234 T>C, 1235 G>A, 1699 C>G, 1702 TC>T). Indels now match truth exactly at
+10. (The 54 SNPs include the 4 rejected `GT=0` candidate sites, which are not calls.)
+
+This changes the Phase 7a normalisation command from the brief's
+
+```
+bcftools norm -f <ref.fa> -m -any
+```
+
+to
+
+```
+bcftools norm -f <ref.fa> -m -any --atomize
+```
+
+applied to **the truth set and every call set with identical settings**, as R3 demands. The
+truth set contains no MNPs so atomising it changes nothing — but it must still be atomised,
+because R3's requirement is identical *treatment*, not identical *outcome*.
+
+**Generalisable lesson:** rule R4 says never hand-roll variant comparison because the same
+variant has many valid representations. This shows the same hazard reaching *upstream* of the
+comparison: even when using vcfeval correctly, a `bcftools view -v snps` in the preparation
+step can reintroduce exactly the representation-sensitivity that vcfeval was chosen to avoid.
+
+### 6.7 Hard filtering — identical logic, with a stated caveat (R8)
+
+Both raw and filtered call sets are produced. The filter is identical for every caller:
+
+```
+QUAL >= 20 && INFO/DP >= 5
+```
+
+Only `QUAL` and `DP` are used, because they are the only fields all three callers emit with
+comparable meaning. GATK Best Practices would filter on `QD`, `FS`, `MQRankSum` and similar —
+but FreeBayes and BCFtools do not produce those annotations, so using them would apply a
+better-tuned filter to GATK than to its competitors and confound the comparison.
+
+**The caveat, stated plainly: `QUAL` is not calibrated identically across these three tools.**
+A QUAL of 20 does not mean the same thing to GATK as to FreeBayes. So a single threshold is
+*procedurally* identical but not *statistically* equivalent — it is the fairest available
+choice, not a perfect one.
+
+This is exactly why the raw call sets retain QUAL and why **ROC curves are the honest
+comparison**: the ROC sweeps the threshold across its whole range, removing the arbitrariness
+of any single cut-off. The hard-filtered numbers should be read as one operating point on that
+curve, not as the result.
+
+Filtering effect on *E. coli* is small for GATK and BCFtools (~0.1–0.4% removed) but large for
+FreeBayes (8,258 → 5,914), because it removes the rejected `GT=0` candidate records.

@@ -1,0 +1,83 @@
+Using GATK jar /Users/rash/miniforge3/envs/callers/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar
+Running:
+    java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /Users/rash/miniforge3/envs/callers/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar HaplotypeCaller -R /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/phiX.fa -I /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/phiX_cov30_len150_err0_seed1.minimap2.md.bam -O /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/phiX_cov30_len150_err0_seed1.minimap2.gatk.raw.vcf.gz --sample-ploidy 1 --native-pair-hmm-threads 4
+19:36:15.698 INFO  NativeLibraryLoader - Loading libgkl_compression.dylib from jar:file:/Users/rash/miniforge3/envs/callers/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_compression.dylib
+19:36:15.705 WARN  NativeLibraryLoader - Unable to load libgkl_compression.dylib from native/libgkl_compression.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression14472762132844762038.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression14472762132844762038.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression14472762132844762038.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression14472762132844762038.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression14472762132844762038.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+19:36:15.707 INFO  NativeLibraryLoader - Loading libgkl_compression.dylib from jar:file:/Users/rash/miniforge3/envs/callers/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_compression.dylib
+19:36:15.708 WARN  NativeLibraryLoader - Unable to load libgkl_compression.dylib from native/libgkl_compression.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5201209771446105006.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5201209771446105006.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5201209771446105006.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5201209771446105006.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5201209771446105006.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+19:36:15.746 INFO  HaplotypeCaller - ------------------------------------------------------------
+19:36:15.747 INFO  HaplotypeCaller - The Genome Analysis Toolkit (GATK) v4.6.2.0
+19:36:15.747 INFO  HaplotypeCaller - For support and documentation go to https://software.broadinstitute.org/gatk/
+19:36:15.747 INFO  HaplotypeCaller - Executing as rash@Rashwanths-MacBook-Pro.local on Mac OS X v26.6.1 aarch64
+19:36:15.747 INFO  HaplotypeCaller - Java runtime: Java HotSpot(TM) 64-Bit Server VM v23.0.2+7-58
+19:36:15.747 INFO  HaplotypeCaller - Start Date/Time: August 14, 2026, 7:36:15 PM IST
+19:36:15.747 INFO  HaplotypeCaller - ------------------------------------------------------------
+19:36:15.747 INFO  HaplotypeCaller - ------------------------------------------------------------
+19:36:15.748 INFO  HaplotypeCaller - HTSJDK Version: 4.2.0
+19:36:15.748 INFO  HaplotypeCaller - Picard Version: 3.4.0
+19:36:15.748 INFO  HaplotypeCaller - Built for Spark Version: 3.5.0
+19:36:15.749 INFO  HaplotypeCaller - HTSJDK Defaults.COMPRESSION_LEVEL : 2
+19:36:15.749 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+19:36:15.749 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
+19:36:15.749 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+19:36:15.749 INFO  HaplotypeCaller - Deflater: JdkDeflater
+19:36:15.749 INFO  HaplotypeCaller - Inflater: JdkInflater
+19:36:15.749 INFO  HaplotypeCaller - GCS max retries/reopens: 20
+19:36:15.749 INFO  HaplotypeCaller - Requester pays: disabled
+19:36:15.749 INFO  HaplotypeCaller - Initializing engine
+19:36:15.759 WARN  IntelInflaterFactory - IntelInflater is not supported, using Java.util.zip.Inflater
+19:36:15.760 WARN  IntelInflaterFactory - IntelInflater is not supported, using Java.util.zip.Inflater
+19:36:15.796 INFO  HaplotypeCaller - Done initializing engine
+19:36:15.799 INFO  NativeLibraryLoader - Loading libgkl_utils.dylib from jar:file:/Users/rash/miniforge3/envs/callers/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_utils.dylib
+19:36:15.799 WARN  NativeLibraryLoader - Unable to load libgkl_utils.dylib from native/libgkl_utils.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils17694904848122011642.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils17694904848122011642.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils17694904848122011642.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils17694904848122011642.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils17694904848122011642.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+19:36:15.799 WARN  IntelSmithWaterman - Intel GKL Utils not loaded
+19:36:15.800 INFO  SmithWatermanAligner - AVX accelerated SmithWaterman implementation is not supported, falling back to the Java implementation
+19:36:15.801 INFO  HaplotypeCallerEngine - Currently, physical phasing is only available for diploid samples.
+19:36:15.804 INFO  NativeLibraryLoader - Loading libgkl_utils.dylib from jar:file:/Users/rash/miniforge3/envs/callers/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_utils.dylib
+19:36:15.804 WARN  NativeLibraryLoader - Unable to load libgkl_utils.dylib from native/libgkl_utils.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils5768103568486526852.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils5768103568486526852.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils5768103568486526852.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils5768103568486526852.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils5768103568486526852.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+19:36:15.804 WARN  IntelPairHmm - Intel GKL Utils not loaded
+19:36:15.804 INFO  PairHMM - OpenMP multi-threaded AVX-accelerated native PairHMM implementation is not supported
+19:36:15.804 INFO  NativeLibraryLoader - Loading libgkl_utils.dylib from jar:file:/Users/rash/miniforge3/envs/callers/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_utils.dylib
+19:36:15.805 WARN  NativeLibraryLoader - Unable to load libgkl_utils.dylib from native/libgkl_utils.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils15068023923881891633.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils15068023923881891633.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils15068023923881891633.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils15068023923881891633.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils15068023923881891633.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+19:36:15.805 WARN  IntelPairHmm - Intel GKL Utils not loaded
+19:36:15.805 WARN  PairHMM - ***WARNING: Machine does not have the AVX instruction set support needed for the accelerated AVX PairHmm. Falling back to the MUCH slower LOGLESS_CACHING implementation!
+19:36:15.806 WARN  IntelDeflaterFactory - Intel Deflater not supported, using Java.util.zip.Deflater
+19:36:15.813 INFO  ProgressMeter - Starting traversal
+19:36:15.813 INFO  ProgressMeter -        Current Locus  Elapsed Minutes     Regions Processed   Regions/Minute
+19:36:15.940 WARN  InbreedingCoeff - InbreedingCoeff will not be calculated at position phiX:51 and possibly subsequent; at least 10 samples must have called genotypes
+19:36:17.004 INFO  HaplotypeCaller - 0 read(s) filtered by: MappingQualityReadFilter 
+0 read(s) filtered by: MappingQualityAvailableReadFilter 
+0 read(s) filtered by: MappedReadFilter 
+0 read(s) filtered by: NotSecondaryAlignmentReadFilter 
+0 read(s) filtered by: NotDuplicateReadFilter 
+0 read(s) filtered by: PassesVendorQualityCheckReadFilter 
+0 read(s) filtered by: NonZeroReferenceLengthAlignmentReadFilter 
+0 read(s) filtered by: GoodCigarReadFilter 
+0 read(s) filtered by: WellformedReadFilter 
+0 total reads filtered out of 1080 reads processed
+19:36:17.004 INFO  ProgressMeter -            phiX:4526              0.0                    45           2267.0
+19:36:17.004 INFO  ProgressMeter - Traversal complete. Processed 45 total regions in 0.0 minutes.
+19:36:17.005 WARN  IntelDeflaterFactory - Intel Deflater not supported, using Java.util.zip.Deflater
+19:36:17.006 INFO  PairHMM - Total compute time in PairHMM computeLogLikelihoods() : 0.5368026220000001
+19:36:17.006 INFO  SmithWatermanAligner - Total compute time in java Smith-Waterman : 0.25 sec
+19:36:17.006 INFO  HaplotypeCaller - Shutting down engine
+[August 14, 2026, 7:36:17 PM IST] org.broadinstitute.hellbender.tools.walkers.haplotypecaller.HaplotypeCaller done. Elapsed time: 0.02 minutes.
+Runtime.totalMemory()=264241152
+        1.99 real         4.49 user         0.11 sys
+           441532416  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               32820  page reclaims
+                   4  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  15  messages sent
+                  15  messages received
+                   0  signals received
+                  13  voluntary context switches
+                7839  involuntary context switches
+           206995348  instructions retired
+            76174387  cycles elapsed
+             7504232  peak memory footprint

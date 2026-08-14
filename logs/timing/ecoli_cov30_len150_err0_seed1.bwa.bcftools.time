@@ -1,0 +1,20 @@
+[mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250
+        9.92 real        10.24 user         0.22 sys
+            52592640  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                4692  page reclaims
+                  27  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               10821  voluntary context switches
+                 218  involuntary context switches
+            24498886  instructions retired
+             9502667  cycles elapsed
+             1065248  peak memory footprint
