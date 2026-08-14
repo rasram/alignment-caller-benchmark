@@ -273,3 +273,89 @@ explain.
 projects' binaries into this repo bloats history and confuses provenance. The README gives
 the two commands that recreate `tools/` from scratch, and the exact versions are pinned in
 `logs/versions_*.txt`.
+
+---
+
+## Phase 1 — Reference genomes
+
+### 1.1 What a "reference genome" is, and why we align to it
+
+The reference is one agreed-upon consensus sequence for a species, written down once so that
+everybody can describe positions in the same coordinate system. "Position 1,234,567" only
+means something relative to a named reference. That is why rule R5 (identical contig names
+everywhere) matters so much: a coordinate without an agreed contig name is meaningless.
+
+### 1.2 Accessions used — RefSeq, not GenBank
+
+| Genome | Accession | Assembly | Length (verified from `.fai`) |
+|---|---|---|---|
+| phiX174 | `NC_001422.1` | — | **5,386 bp** ✓ |
+| *E. coli* K-12 MG1655 | `NC_000913.3` | `GCF_000005845.2` | **4,641,652 bp** ✓ |
+
+The original NCBI headers are preserved verbatim in `data/refs/*.original_header.txt`, because
+the renaming step below destroys them and provenance must remain auditable:
+
+```
+>NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
+>NC_001422.1 Escherichia phage phiX174, complete genome
+```
+
+`NC_` accessions are **RefSeq** — NCBI's curated copy. The brief requires RefSeq (`GCF_`) over
+GenBank (`GCA_`). They are usually the same sequence, but GenBank is the depositor's original
+submission and RefSeq is the maintained version; they can and do diverge across updates. Mixing
+them across a project is a classic source of off-by-a-few coordinate errors.
+
+Downloaded via NCBI E-utilities `efetch`, wrapped in a retry loop that also asserts the body
+starts with `>`. Without that check, a rate-limited empty response would have been written out
+as a plausible-looking but truncated FASTA.
+
+### 1.3 Contig renaming — done once, at download time (R5)
+
+NCBI FASTA headers carry a description after the accession:
+
+```
+>NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
+```
+
+Two hazards. First, tools disagree about that description — some truncate the name at the
+first whitespace, some keep the whole line — so the "same" contig can end up named
+`NC_000913.3` in one file and `NC_000913.3 Escherichia coli...` in another. Second,
+versioned accessions are easy to mistype inconsistently across dozens of commands.
+
+So the name is normalised **once, here**, to a short token: `phiX` and `ecoli`. Everything
+downstream — mutated genome, truth VCF, confident BED, all nine call sets, the RTG SDF —
+inherits it.
+
+**What would have gone wrong otherwise:** `rtg vcfeval` matches truth to calls by contig name.
+If truth says `NC_000913.3` and the calls say `ecoli`, vcfeval does not error. It finds zero
+overlapping records and reports **precision 0, recall 0** — which looks exactly like a
+catastrophically bad pipeline rather than a naming bug. This is the single most likely way to
+waste a day on this project.
+
+### 1.4 The five indexes, and why each exists
+
+An index is a precomputed data structure that lets a tool find a sequence without scanning the
+whole genome. Each tool wants its own format, and they are **not** interchangeable:
+
+| Command | Produces | Consumed by |
+|---|---|---|
+| `samtools faidx` | `.fa.fai` | random access to reference bases; also the source for the confident BED |
+| `bwa index` | `.amb .ann .bwt .pac .sa` | BWA-MEM (FM-index / Burrows-Wheeler) |
+| `bowtie2-build` | 6 × `.bt2` | Bowtie2 (its own FM-index) |
+| `gatk CreateSequenceDictionary` | `.dict` | GATK — refuses to run without it |
+| `rtg format` | `.sdf/` directory | `rtg vcfeval` |
+
+All five were built **from the same renamed FASTA**, so all agree on the contig name. Verified
+explicitly: `.fai`, `.dict` and the SDF all report `phiX`/`ecoli` with the correct lengths.
+
+### 1.5 Sanity checks beyond the length assertion
+
+Matching lengths proves the right assembly version, but not that the file contains real
+sequence. Two cheap extra checks:
+
+- **GC content** — phiX **44.76%** (published ~44.8%), *E. coli* K-12 **50.79%**
+  (published ~50.8%). Both match, so these are the genomes they claim to be.
+- **Ambiguous bases** — **zero** non-ACGT characters in either genome. Worth knowing: runs of
+  `N` in a reference create regions where no caller can call anything, which would otherwise
+  show up later as unexplained false negatives. There are none here, so any FN in Phase 7a is
+  a real pipeline limitation, not a masked-reference artefact.

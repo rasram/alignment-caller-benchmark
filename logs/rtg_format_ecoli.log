@@ -1,0 +1,20 @@
+Formatting FASTA data
+Processing "/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/ecoli.fa"
+
+Input Data
+Files              : ecoli.fa
+Format             : FASTA
+Type               : DNA
+Number of sequences: 1
+Total residues     : 4641652
+Minimum length     : 4641652
+Mean length        : 4641652
+Maximum length     : 4641652
+
+Output Data
+SDF-ID             : b7a2474d-c167-426a-9445-3c6c14baf7c1
+Number of sequences: 1
+Total residues     : 4641652
+Minimum length     : 4641652
+Mean length        : 4641652
+Maximum length     : 4641652

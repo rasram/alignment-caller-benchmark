@@ -1,0 +1,9 @@
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.19-r1273
+[main] CMD: bwa index /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/phiX.fa
+[main] Real time: 0.002 sec; CPU: 0.003 sec

@@ -30,13 +30,28 @@ mkdir -p "$REFS" "$REPO/logs"
 # shellcheck disable=SC1091
 source "$CONDA_BASE/etc/profile.d/conda.sh"
 
-# accession -> short contig name, expected length
-declare -a NAMES=(phiX ecoli)
-declare -A ACC=( [phiX]=NC_001422.1 [ecoli]=NC_000913.3 )
-declare -A EXPLEN=( [phiX]=5386 [ecoli]=4641652 )
+# macOS ships bash 3.2, which has no associative arrays (`declare -A`). Rather than
+# add a bash-4 dependency just for two lookups, these are plain case statements.
+NAMES="phiX ecoli"
+
+acc_of() {
+  case "$1" in
+    phiX)  echo "NC_001422.1" ;;
+    ecoli) echo "NC_000913.3" ;;
+    *)     echo "UNKNOWN"     ;;
+  esac
+}
+
+explen_of() {
+  case "$1" in
+    phiX)  echo 5386    ;;
+    ecoli) echo 4641652 ;;
+    *)     echo 0       ;;
+  esac
+}
 
 fetch() {
-  local name="$1" acc="${ACC[$1]}"
+  local name="$1"; local acc; acc="$(acc_of "$1")"
   local fa="$REFS/${name}.fa"
 
   if [[ -s "$fa" ]]; then
@@ -99,7 +114,7 @@ index() {
 }
 
 verify() {
-  local name="$1" exp="${EXPLEN[$1]}"
+  local name="$1"; local exp; exp="$(explen_of "$1")"
   local fai="$REFS/${name}.fa.fai"
   local contig len
   contig=$(cut -f1 "$fai")
@@ -115,8 +130,8 @@ verify() {
   fi
 }
 
-for n in "${NAMES[@]}"; do fetch  "$n"; done
-for n in "${NAMES[@]}"; do index  "$n"; done
+for n in $NAMES; do fetch  "$n"; done
+for n in $NAMES; do index  "$n"; done
 echo
 echo "=== GATE 1 verification ==="
-for n in "${NAMES[@]}"; do verify "$n"; done
+for n in $NAMES; do verify "$n"; done

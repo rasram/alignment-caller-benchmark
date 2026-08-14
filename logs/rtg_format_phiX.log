@@ -1,0 +1,20 @@
+Formatting FASTA data
+Processing "/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/phiX.fa"
+
+Input Data
+Files              : phiX.fa
+Format             : FASTA
+Type               : DNA
+Number of sequences: 1
+Total residues     : 5386
+Minimum length     : 5386
+Mean length        : 5386
+Maximum length     : 5386
+
+Output Data
+SDF-ID             : d1f9ed9f-c537-46cf-b79f-60e3f3797462
+Number of sequences: 1
+Total residues     : 5386
+Minimum length     : 5386
+Mean length        : 5386
+Maximum length     : 5386
