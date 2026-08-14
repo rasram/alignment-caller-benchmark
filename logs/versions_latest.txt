@@ -1,0 +1,39 @@
+# Tool versions — recorded 2026-08-14 13:29:37 UTC
+# Host: Darwin 25.6.0 arm64
+# macOS: 26.6.1
+# conda: conda 26.3.2
+# NOTE: all tools are native arm64 builds — no Rosetta emulation,
+#       so Phase 5 runtime comparisons are on equal footing.
+
+## env: align
+bwa            Version: 0.7.19-r1273
+bowtie2        /Users/rash/miniforge3/envs/align/bin/bowtie2-align-s version 2.5.5
+minimap2       2.31-r1302
+samtools       samtools 1.24
+
+## env: callers
+gatk           The Genome Analysis Toolkit (GATK) v4.6.2.0
+gatk-java      openjdk version "25.0.2" 2026-01-20 LTS
+freebayes      version:  v1.3.10
+bcftools       bcftools 1.21
+
+## env: sim
+art_illumina   Q Version 2.5.8 (June 6, 2016)
+perl           This is perl 5, version 32, subversion 1 (v5.32.1) built for darwin-thread-multi-2level
+
+## env: qc
+fastqc         FastQC v0.12.1
+multiqc        multiqc, version 1.35
+
+## env: ml
+python         Python 3.11.15
+snakemake      9.24.0
+pandas         3.0.5
+sklearn        1.9.0
+matplotlib     3.11.1
+
+## outside conda
+java           java version "23.0.2" 2025-01-21
+rtg            Product: RTG Tools 3.13
+rtg-core       Core Version: c27844a5bb (2025-05-27)
+simuG.pl       present (0289e58)

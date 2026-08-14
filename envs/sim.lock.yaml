@@ -1,0 +1,17 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: osx-arm64
+# created-by: conda 26.3.2
+@EXPLICIT
+https://conda.anaconda.org/conda-forge/osx-arm64/perl-5.32.1-7_h4614cfb_perl5.conda#ba3cbe93f99e896765422cc5f7c3a79e
+https://conda.anaconda.org/conda-forge/osx-arm64/libcxx-22.1.8-h55c6f16_0.conda#89f76a2a21a3ec3ec983b5eb237c4113
+https://conda.anaconda.org/conda-forge/osx-arm64/llvm-openmp-22.1.8-hc7d1edf_0.conda#a9c118f6343fb6301b6f3b4e94c4c562
+https://conda.anaconda.org/conda-forge/osx-arm64/_openmp_mutex-4.5-7_kmp_llvm.conda#a44032f282e7d2acdeb1c240308052dd
+https://conda.anaconda.org/conda-forge/osx-arm64/libgcc-16.1.0-h3cf6597_1.conda#0124dc2e6f70f3e8ebea643b42b18abb
+https://conda.anaconda.org/conda-forge/osx-arm64/libgfortran5-16.1.0-h32cdfcc_1.conda#c1c10ea48f95054aa9b93c2315a0a74a
+https://conda.anaconda.org/conda-forge/osx-arm64/libgfortran-16.1.0-h07b0088_1.conda#d6f10dbb9c5830f540904c91ea5b252a
+https://conda.anaconda.org/conda-forge/osx-arm64/libopenblas-0.3.34-openmp_he657e61_0.conda#89d28fb841cf16211318524fa985e384
+https://conda.anaconda.org/conda-forge/osx-arm64/libblas-3.11.0-9_h51639a9_openblas.conda#cb1f85be9d88af453fcda3dfba995099
+https://conda.anaconda.org/conda-forge/osx-arm64/libcblas-3.11.0-9_hb0561ab_openblas.conda#a7b6ba94e3ca58bc7d4e1ae4ff95c215
+https://conda.anaconda.org/conda-forge/osx-arm64/gsl-2.7-h6e638da_0.tar.bz2#2a2126a940e033e7225a5dc7215eea9a
+https://conda.anaconda.org/bioconda/osx-arm64/art-2016.06.05-h8899720_13.tar.bz2#72b49862b947bb8d2fed3be47a1dce77

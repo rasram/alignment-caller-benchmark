@@ -1,0 +1,40 @@
+# Intermediates — fully regenerable from the workflow, safe to delete
+work/
+
+# Sequencing reads (large, regenerable from ART + a recorded seed)
+*.fq
+*.fastq
+*.fq.gz
+*.fastq.gz
+
+# Alignments (large, regenerable)
+*.bam
+*.bai
+*.sam
+*.cram
+*.crai
+
+# RTG's indexed-reference format is a directory, not a file
+*.sdf/
+
+# Reference FASTAs and their indexes — re-downloadable from NCBI.
+# The accessions are pinned in NOTES.md, so this loses nothing.
+data/refs/*.fa
+data/refs/*.fasta
+data/refs/*.fa.*
+data/refs/*.bt2
+data/refs/*.dict
+
+# simuG's mutated genomes are large FASTAs, regenerable from the recorded seed
+data/truth/*.simseq.genome.fa
+
+# Third-party tools installed into the tree (RTG, simuG) — see README for setup
+tools/
+
+# QC report internals (the aggregated MultiQC HTML is kept)
+results/qc/*_fastqc.zip
+**/multiqc_data/
+
+# OS / editor noise
+.DS_Store
+*.swp
