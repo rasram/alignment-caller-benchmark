@@ -695,3 +695,133 @@ limit, and cannot vary with the environment.
 **The general lesson:** genomics files routinely contain single lines megabytes long. Line-based
 UNIX text tools are not all safe on them, and when they fail they usually truncate silently
 rather than erroring.
+
+---
+
+## Phase 4 — Quality control
+
+### 4.1 What FastQC is for here, and what it is *not* for
+
+FastQC reads a FASTQ and reports diagnostics: quality per cycle, GC content, adapter
+contamination, duplication. MultiQC merges the four per-file reports into one page at
+`results/qc/multiqc_report.html`.
+
+**This phase changes nothing.** It is a sanity check that the simulated reads look like real
+sequencing data, so that when a pipeline performs badly later we know it is the pipeline's
+fault and not because the input was malformed. Per rule R8 nothing is trimmed — see §4.5.
+
+### 4.2 A Phred score, in plain language
+
+Each base in a FASTQ carries a quality character encoding a **Phred score** `Q`, which is the
+sequencer's estimate of the probability that base is wrong:
+
+```
+P(error) = 10 ^ (-Q / 10)
+```
+
+| Q | P(error) | in words |
+|---|---|---|
+| 10 | 1 in 10 | terrible |
+| 20 | 1 in 100 | poor |
+| 30 | 1 in 1,000 | good — the industry "%≥Q30" threshold |
+| 40 | 1 in 10,000 | excellent |
+
+This is the entire reason variant calling is hard. At 30× coverage a position is covered by
+~30 reads; at Q30 roughly 1 base in 1,000 is wrong, so across a 4.6 Mb genome at 30× there
+are ~139 million sequenced bases and therefore **~140,000 erroneous bases**. The truth set
+contains only 6,000 real variants. A caller must therefore separate 6,000 real signals from
+~140,000 pieces of noise — which is why callers weigh evidence probabilistically rather than
+just looking for mismatches.
+
+### 4.3 Results — and the quality profile does look like real Illumina data
+
+| Dataset | mean Q | mean P(error) | Q_effective | % ≥ Q30 | cycle 1 | peak | last 10 cycles | drop from peak |
+|---|---|---|---|---|---|---|---|---|
+| phiX R1 | 36.60 | 1.57e-03 | 28.03 | 91.8% | 33.1 | 39.3 @ c20 | 35.58 | 3.74 |
+| phiX R2 | 36.18 | 2.26e-03 | 26.46 | 89.6% | 33.1 | 38.9 @ c32 | 35.03 | 3.82 |
+| *E. coli* R1 | 36.58 | 1.66e-03 | 27.79 | 91.7% | 33.0 | 39.1 @ c16 | 35.52 | 3.63 |
+| *E. coli* R2 | 36.18 | 2.23e-03 | 26.51 | 89.7% | 32.8 | 38.6 @ c19 | 35.03 | 3.56 |
+
+**Mean Q ≈ 36.6 (R1) / 36.2 (R2).** All FastQC quality modules PASS.
+
+Three signatures of genuine Illumina data are present:
+
+1. **Low at cycle 1, rising to a peak around cycle 16–32, then declining.** Cycle 1 is ~Q33,
+   peaks near Q39, ends near Q35.5. Real Illumina reads behave exactly this way: the first
+   cycles are noisy while cluster identification stabilises, and quality then decays as the
+   run proceeds because of phasing/pre-phasing (molecules in a cluster gradually fall out of
+   sync) and reagent depletion.
+2. **The 3′ decline is present: ~3.6–3.8 Phred points from peak to the last 10 cycles.**
+3. **R2 is consistently worse than R1** — lower mean Q (36.18 vs 36.58) and a lower 3′ end
+   (35.03 vs 35.52). This is real Illumina behaviour: the second read is sequenced after the
+   template has spent longer on the flow cell.
+
+Honest caveat: at ~3.7 points, this decline is **milder than many real HiSeq runs**, where the
+3′ end can fall to Q30 or below. ART's HS25 profile is empirical but represents one
+well-behaved instrument run. So these reads are, if anything, slightly *easier* than typical
+real data — worth stating when comparing absolute numbers to a real experiment.
+
+### 4.4 The measurement subtlety: mean Q is not the mean error rate
+
+`scripts/extract_mean_q.py` reports both, and the gap is large:
+
+```
+mean Q       = 36.58      -> if taken at face value implies P = 2.2e-04
+mean P       = 1.66e-03   -> the actual average error probability
+Q_effective  = 27.79      -> mean P expressed back on the Phred scale
+```
+
+**A ~9 Phred point gap, i.e. the true error rate is ~7.5× higher than "mean Q 36.6" suggests.**
+
+The cause is that Q is logarithmic, so averaging Q values is averaging exponents. A handful of
+very bad bases dominate the true error rate but barely move the arithmetic mean:
+
+> Two bases at Q40 and Q10. Mean Q = 25 (implying P = 0.0032). But the actual mean error
+> probability is (0.0001 + 0.1)/2 = 0.05 — Q13. Twelve Phred points apart, a ~16× difference.
+
+**This is why the script exists.** The brief asks to convert ART's `-qs` shift into "a
+physically interpretable error-rate feature" for the later modelling phase. `-qs = -5` is an
+arbitrary knob; `mean_p` is a physical rate that can be measured on any real dataset and
+compared. **The modelling phase should use `mean_p`, not `mean_q`** — a model fitted on mean Q
+is fitted on a quantity that systematically understates the noise it is trying to explain.
+
+Cross-validated against FastQC's own per-cycle table (cycle 1: 32.99 vs my 33.0; cycle 111:
+35.58 vs my 35.6) so the script is not quietly computing something else.
+
+Output: `results/qc/mean_q.tsv`, one row per FASTQ, with `mean_q`, `mean_p`, `q_effective`,
+`frac_q30`, peak cycle, and the 3′ decline.
+
+### 4.5 No trimming, deliberately (R8)
+
+The standard next step in a real workflow would be trimming low-quality 3′ ends with
+Trimmomatic or fastp. **We do not trim.**
+
+If we did, every aligner would receive reads shaped by the trimmer's decisions, and an
+observed difference between BWA-MEM and Bowtie2 could be caused by how each responds to
+variable-length reads rather than by the aligners themselves. Rule R8 requires byte-identical
+input to all nine pipelines, and untrimmed reads are the only way to guarantee it.
+
+There is little to trim in any case: 91.7% of bases are ≥ Q30 and the worst cycles average
+Q35.
+
+### 4.6 The two FastQC warnings are both expected
+
+| Warning | Where | Explanation |
+|---|---|---|
+| Per sequence GC content | *E. coli*, phiX R2 | FastQC compares the observed GC distribution against a theoretical normal curve fitted to the data. A single-organism sample has a narrow, sharply-peaked GC distribution (here 50%, matching *E. coli*'s 50.79%) that deviates from that model. The warning fires on essentially every clean single-genome dataset. |
+| Overrepresented sequences | phiX only | phiX is 5,386 bp covered at 30× by 150 bp reads. Reads necessarily overlap heavily and identical reads recur by chance. On a 5 kb genome this is arithmetic, not contamination. |
+
+Neither is a data problem, and neither warrants action.
+
+### 4.7 A number to carry into Phase 5
+
+FastQC reports **97.64% "Total Deduplicated Percentage"** for *E. coli* — i.e. ~2.4% of reads
+share a sequence with another read.
+
+These are **not PCR duplicates**. They are coincidental collisions: at 30× coverage of a
+4.6 Mb genome, two independently sampled fragments occasionally start at the same position.
+No PCR amplification was simulated, so no true duplicates exist.
+
+This sets the expectation for Phase 5: `gatk MarkDuplicates` should mark ~0%. It is run
+anyway, for pipeline realism, and its inertness here must be stated in the report rather than
+presented as a meaningful result.
