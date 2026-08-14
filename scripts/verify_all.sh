@@ -46,6 +46,12 @@ for pat in 'work/' '\*.fq' '\*.bam' '\*.sdf/'; do
 done
 
 # Nothing large should actually be tracked by git.
+SMK_TRACKED=$(git ls-files .snakemake 2>/dev/null | wc -l | tr -d ' ')
+[[ "$SMK_TRACKED" -eq 0 ]] && ok ".snakemake/ not tracked in git" \
+  || bad ".snakemake/ not tracked in git" "$SMK_TRACKED files"
+GITSZ=$(du -sm .git 2>/dev/null | cut -f1)
+[[ "${GITSZ:-0}" -lt 200 ]] && ok "git repo size sane" "${GITSZ}MB" \
+  || warn "git repo size" "${GITSZ}MB — something large may be committed"
 BIGTRACKED=$(git ls-files 2>/dev/null | grep -cE '\.(fq|bam|sam|fa)$' || true)
 [[ "$BIGTRACKED" -eq 0 ]] && ok "no reads/BAMs/FASTAs tracked in git" \
                           || bad "no reads/BAMs/FASTAs tracked in git" "$BIGTRACKED tracked"
@@ -68,7 +74,9 @@ else bad "simuG cloned"; fi
 
 VERFILE=$(ls -t logs/versions_*.txt 2>/dev/null | head -1)
 if [[ -n "$VERFILE" ]]; then
-  nf=$(grep -c "NOT FOUND" "$VERFILE" 2>/dev/null || echo 0)
+  # grep -c exits 1 on zero matches, so `|| echo 0` would append a SECOND line
+  # and make $nf "0\n0". Use `|| true` and let grep's own 0 stand.
+  nf=$(grep -c "NOT FOUND" "$VERFILE" 2>/dev/null || true); nf=${nf:-0}
   if [[ "$nf" -eq 0 ]]; then ok "logs/versions_*.txt written, all tools found" "$(basename "$VERFILE")"
   else bad "logs/versions_*.txt has missing tools" "$nf NOT FOUND"; fi
 else bad "logs/versions_*.txt written"; fi
@@ -222,8 +230,12 @@ NFILT=$(ls work/*.filt.vcf.gz 2>/dev/null | wc -l | tr -d ' ')
 check "hard-filtered callsets (raw + filt per pipeline)" 18 "$NFILT"
 
 # R7: no BQSR anywhere.
-if grep -rqiE "BaseRecalibrator|ApplyBQSR" scripts/ Snakefile 2>/dev/null; then
-  bad "R7 — no BQSR" "BQSR reference found"
+# NOTE: exclude this file. verify_all.sh lives in scripts/ and contains the
+# search pattern in its own source, so an unfiltered grep matches itself and
+# reports a BQSR violation that does not exist.
+if grep -rliE "BaseRecalibrator|ApplyBQSR" scripts/ Snakefile 2>/dev/null \
+     | grep -qv 'verify_all.sh'; then
+  bad "R7 — no BQSR" "found in: $(grep -rliE 'BaseRecalibrator|ApplyBQSR' scripts/ Snakefile 2>/dev/null | grep -v verify_all.sh | tr '\n' ' ')"
 else ok "R7 — no BQSR anywhere in scripts or Snakefile"; fi
 
 # =============================================================================

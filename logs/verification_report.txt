@@ -1,0 +1,105 @@
+
+== INFRASTRUCTURE ==
+  [PASS] git repository initialised                                 9 commits
+  [PASS] .gitignore excludes work/                                  
+  [PASS] .gitignore excludes *.fq                                   
+  [PASS] .gitignore excludes *.bam                                  
+  [PASS] .gitignore excludes *.sdf/                                 
+  [PASS] .snakemake/ not tracked in git                             
+  [PASS] git repo size sane                                         20MB
+  [PASS] no reads/BAMs/FASTAs tracked in git                        
+  [PASS] envs/align.yaml exported with pinned versions              4 pinned
+  [PASS] envs/align.lock.yaml exact lock present                    
+  [PASS] envs/callers.yaml exported with pinned versions            3 pinned
+  [PASS] envs/callers.lock.yaml exact lock present                  
+  [PASS] envs/sim.yaml exported with pinned versions                2 pinned
+  [PASS] envs/sim.lock.yaml exact lock present                      
+  [PASS] envs/qc.yaml exported with pinned versions                 2 pinned
+  [PASS] envs/qc.lock.yaml exact lock present                       
+  [PASS] envs/ml.yaml exported with pinned versions                 8 pinned
+  [PASS] envs/ml.lock.yaml exact lock present                       
+  [PASS] RTG Tools runs                                             Product: RTG Tools 3.13
+  [PASS] simuG cloned                                               0289e58
+  [PASS] logs/versions_*.txt written, all tools found               versions_latest.txt
+
+== DATA — references (GATE 1) ==
+  [PASS] phiX length from .fai                                      5386
+  [PASS] ecoli length from .fai                                     4641652
+  [PASS] phiX contig renamed                                        phiX
+  [PASS] ecoli contig renamed                                       ecoli
+  [PASS] phiX fully indexed (fai/bwa/bowtie2/dict/sdf)              
+  [PASS] ecoli fully indexed (fai/bwa/bowtie2/dict/sdf)             
+  [PASS] R5 contig names identical (phiX)                           phiX
+  [PASS] R5 contig names identical (ecoli)                          ecoli
+
+== DATA — truth sets (GATE 2) ==
+  [PASS] phiX truth SNVs                                            50
+  [PASS] phiX truth indels                                          10
+  [PASS] ecoli truth SNVs                                           5000
+  [PASS] ecoli truth indels                                         1000
+  [PASS] truth genotype column is haploid GT=1 (phiX)               
+  [PASS] truth genotype column is haploid GT=1 (ecoli)              
+  [PASS] truth VCF accounts for mutated-genome length (phiX)        14
+  [PASS] truth VCF accounts for mutated-genome length (ecoli)       187
+  [PASS] live REF spot-check (phiX, 5 variants)                     
+  [PASS] live REF spot-check (ecoli, 5 variants)                    
+  [PASS] confident BED present (phiX)                               phiX	0	5386
+  [PASS] confident BED present (ecoli)                              ecoli	0	4641652
+
+== PIPELINE — reads, QC (GATE 3, 4) ==
+  [PASS] reads + ART truth SAM present (phiX)                       540 pairs, 30.00x
+  [PASS] coverage is 30x as requested (phiX)                        
+  [PASS] reads + ART truth SAM present (ecoli)                      464175 pairs, 30.00x
+  [PASS] coverage is 30x as requested (ecoli)                       
+  [PASS] MultiQC report generated                                   
+  [PASS] mean-Q table populated                                     4 datasets
+
+== PIPELINE — alignment (GATE 5) ==
+  [PASS] BAM indexed + duplicate-marked + @RG (phiX/bwa)            
+  [PASS] BAM indexed + duplicate-marked + @RG (phiX/bowtie2)        
+  [PASS] BAM indexed + duplicate-marked + @RG (phiX/minimap2)       
+  [PASS] BAM indexed + duplicate-marked + @RG (ecoli/bwa)           
+  [PASS] BAM indexed + duplicate-marked + @RG (ecoli/bowtie2)       
+  [PASS] BAM indexed + duplicate-marked + @RG (ecoli/minimap2)      
+  [PASS] align_metrics.tsv rows (2 genomes x 3 aligners)            6
+  [PASS] placement_accuracy.tsv rows                                6
+  [PASS] placement accuracy computed (min across aligners)          0.990142
+
+== PIPELINE — variant calling (GATE 6) — R2 PLOIDY ==
+  [PASS] raw VCFs present (2 genomes x 9 pipelines)                 18
+  [PASS] R2 — LIVE re-check: zero diploid genotypes in any VCF    
+  [PASS] logs/ploidy_verification.txt logged                        18 PASS entries
+  [PASS] hard-filtered callsets (raw + filt per pipeline)           18
+  [PASS] R7 — no BQSR anywhere in scripts or Snakefile            
+
+== SCORING (GATE 7a) ==
+  [PASS] all call sets normalised                                   18 files
+  [PASS] R3 — identical norm args in truth, scoring and Snakefile 
+  [PASS] vcfeval runs, full callset (2 x 9)                         18
+  [PASS] vcfeval runs, SNV/indel separately                         36
+  [PASS] results.tsv baseline rows (9 pipelines x 2 genomes x 2 types) 36
+  [PASS] results.tsv total rows (incl. comparison method)           72
+  [PASS] no E. coli pipeline scored F1=0 (bug signature)            
+  [PASS] ROC plot roc_ecoli_SNV.svg                                 
+  [PASS] ROC plot roc_ecoli_INDEL.svg                               
+  [PASS] ROC plot roc_phiX_SNV.svg                                  
+  [PASS] ROC plot roc_phiX_INDEL.svg                                
+  [PASS] scoring negative control recorded                          
+
+== READY FOR THE SWEEP (GATE 7b) ==
+  [PASS] conditions.tsv unique conditions per genome                11
+  [PASS] conditions.tsv rows (11 x 5 seeds x 2 genomes)             110
+  [PASS] pipeline runs implied by design                            990
+  [PASS] Snakefile present                                          
+  [PASS] workflow_dag.svg exported                                  822 nodes
+  [PASS] snakemake -n resolves the FULL sweep DAG                   13070 jobs
+  [PASS] baseline is up to date under Snakemake (idempotent)        
+
+== DOCUMENTATION ==
+  [PASS] NOTES.md present                                           1551 lines, 10 sections
+  [FAIL] README.md present (one-command reproduction)               
+  [FAIL] HANDOFF.md present                                         
+
+== SUMMARY ==
+  PASS 81   FAIL 2   WARN 0
+  2 required check(s) failed — see [FAIL] above.
