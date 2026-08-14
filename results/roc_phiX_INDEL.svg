@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" height="600px" version="1.1" viewBox="0 0 800 600" width="800px" x="0px" y="0px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip836771840">
+      <rect height="590" width="790" x="5" y="5"/>
+    </clipPath>
+    <clipPath id="clip942567424">
+      <rect height="530" width="752" x="21" y="37"/>
+    </clipPath>
+  </defs>
+  <rect height="600" style="fill:rgb(255,255,255);stroke:none;" width="800" x="0" y="0"/>
+  <g clip-path="url(#clip836771840)">
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="5" y="31">True Positives</text>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="787" y="31">%</text>
+    <image height="529" preserveAspectRatio="none" width="751" x="21" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAu8AAAIRCAYAAAD6G1M4AAALYklEQVR4Xu3WaQ6QRRBF0dr/2pxHRERERGSeBwU/+7crqJucSs5Lp1dw57P71wUAAOw3//8AAAB2Eu8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAEDGfnwEAAPYT7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQMV/8eV0AAMB+4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIubLMwAAwH7iHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEeIdAAAixDsAAETMVw+uCwAA2E+8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAEDEfH0GAADYT7wDAECEeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQMR889d1AQAA+4l3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAEDHfngEAAPYT7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQMd89vC4AAGA/8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEfP9GQAAYD/xDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQIR4BwCACPEOAAAR4h0AACLmhzMAAMB+4h0AACLmh0fnAQAArCfeAQAgQrwDAECEeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiJgfzwAAAPuJdwAAiBDvAAAQId4BACBCvAMAQIR4BwCACPEOAAAR4h0AACLEOwAARIh3AACImBtnAACA/cQ7AABEiHcAAIiYG4/PAwAAWE+8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAEDE/nQEAAPYT7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQMTfPAAAA+4l3AACImJtPzgMAAFhPvAMAQIR4BwCACPEOAAAR4h0AACLEOwAARIh3AACIEO8AABAxP58BAAD2E+8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgYm6dAQAA9hPvAAAQMbeengcAALCeeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBifjkDAADsJ94BACBCvAMAQIR4BwCACPEOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIGJunwEAAPYT7wAAECHeAQAgQrwDAECEeAcAgIi5/ew8AACA9cQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAEDE/HoGAADYT7wDAECEeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQMTcOQMAAOwn3gEAIEK8AwBAhHgHAICIufP8PAAAgPXEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAxPx2BgAA2E+8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAECEeAcAgIi5ewYAANhPvAMAQIR4BwCACPEOAAARc/fFeQAAAOuJdwAAiBDvAAAQId4BACBCvAMAQIR4BwCAiPn9DAAAsJ94BwCACPEOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAICIuXcGAADYT7wDAECEeAcAgAjxDgAAEeIdAAAi5t7L8wAAANYT7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEfPHGQAAYD/xDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQIR4BwCACPEOAAARc/8MAACwn3gHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIiY+6/OAwAAWE+8AwBAhHgHAIAI8Q4AABHz5xkAAGA/8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEeIdAAAi5sEZAABgP/EOAAAR4h0AACLEOwAARIh3AACIEO8AABAxD16fBwAAsJ54BwCACPEOAAAR4h0AACLmrzMAAMB+4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIubhGQAAYD/xDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBiHr45DwAAYD3xDgAAEeIdAAAixDsAAETMozMAAMB+4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIubxGQAAYD/xDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQMY/fngcAALCeeAcAgAjxDgAAEeIdAAAi5skZAABgP/EOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIubpGQAAYD/xDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQMQ8fXceAADAeuIdAAAi5tkZAABgP/EOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHz/AwAALCfeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQMQ8f38eAADAeuIdAAAi5sUZAABgP/EOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHz8gwAALCfeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBiXn44DwAAYD3xDgAAEfPqDAAAsJ94BwCACPEOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHz+gwAALCfeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBiXv99HgAAwHriHQAAIubNGQAAYD/xDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQIR4BwCACPEOAAAR8/YMAACwn3gHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAECEeAcAgAjxDgAAEfPun+sCAAD2E+8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAEDHvzwAAAPuJdwAAiBDvAAAQId4BACBCvAMAQIR4BwCACPEOAAAR4h0AACLEOwAARIh3AACImA8frwsAANhPvAMAQIR4BwCACPEOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAICI+fsMAACwn3gHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIgQ7wAAECHeAQAgQrwDAECEeAcAgIj559N1AQAA+4l3AACIEO8AABAh3gEAIEK8AwBAhHgHAIAI8Q4AABHiHQAAIsQ7AABEiHcAAIiYj2cAAID9xDsAAESIdwAAiBDvAAAQId4BACBCvAMAQIR4BwCACPEOAAAR4h0AACLEOwAARIh3AACImE//XhcAALCfeAcAgAjxDgAAEeIdAAAixDsAAESIdwAAiBDvAAAQId4BACBCvAMAQIR4BwCAiPn3DAAAsJ94BwCACPEOAAAR4h0AACLEOwAARIh3AACIEO8AABAh3gEAIEK8AwBAhHgHAICIuZxzzjnnnHOJE+/OOeecc85F7j+Cq8C++Q2SoAAAAABJRU5ErkJggg==" y="37"/>
+    <line style="fill:none;stroke:rgb(183,183,183);stroke-miterlimit:10;" x1="22" x2="773" y1="567" y2="567"/>
+    <line style="fill:none;stroke:rgb(183,183,183);stroke-miterlimit:10;" x1="773" x2="773" y1="567" y2="38"/>
+    <line style="fill:none;stroke:rgb(207,207,207);stroke-miterlimit:10;" x1="23" x2="774" y1="568" y2="568"/>
+    <line style="fill:none;stroke:rgb(207,207,207);stroke-miterlimit:10;" x1="774" x2="774" y1="568" y2="39"/>
+    <line style="fill:none;stroke:rgb(231,231,231);stroke-miterlimit:10;" x1="24" x2="775" y1="569" y2="569"/>
+    <line style="fill:none;stroke:rgb(231,231,231);stroke-miterlimit:10;" x1="775" x2="775" y1="569" y2="40"/>
+    <line style="fill:none;stroke:rgb(255,255,255);stroke-miterlimit:10;" x1="25" x2="776" y1="570" y2="570"/>
+    <line style="fill:none;stroke:rgb(255,255,255);stroke-miterlimit:10;" x1="776" x2="776" y1="570" y2="41"/>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="25" y1="566" y2="566"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="25" x2="772" y1="566" y2="566"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="13" y="570">0</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="25" y1="460" y2="460"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="25" x2="772" y1="460" y2="460"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="13" y="464">2</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="25" y1="354" y2="354"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="25" x2="772" y1="354" y2="354"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="13" y="358">4</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="25" y1="248" y2="248"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="25" x2="772" y1="248" y2="248"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="13" y="252">6</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="25" y1="142" y2="142"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="25" x2="772" y1="142" y2="142"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="13" y="146">8</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="25" y1="37" y2="37"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="25" x2="772" y1="37" y2="37"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="7" y="41">10</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="768" y1="566" y2="566"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="776" y="570">0</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="768" y1="460" y2="460"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="776" y="464">20</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="768" y1="354" y2="354"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="776" y="358">40</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="768" y1="248" y2="248"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="776" y="252">60</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="768" y1="142" y2="142"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="776" y="146">80</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="768" y1="37" y2="37"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="776" y="41">100</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="21" y1="566" y2="562"/>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="21" x2="21" y1="37" y2="41"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="21" x2="21" y1="562" y2="41"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="14" y="579">0.0</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="171" x2="171" y1="566" y2="562"/>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="171" x2="171" y1="37" y2="41"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="171" x2="171" y1="562" y2="41"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="164" y="579">0.2</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="321" x2="321" y1="566" y2="562"/>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="321" x2="321" y1="37" y2="41"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="321" x2="321" y1="562" y2="41"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="314" y="579">0.4</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="471" x2="471" y1="566" y2="562"/>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="471" x2="471" y1="37" y2="41"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="471" x2="471" y1="562" y2="41"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="464" y="579">0.6</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="621" x2="621" y1="566" y2="562"/>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="621" x2="621" y1="37" y2="41"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="621" x2="621" y1="562" y2="41"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="614" y="579">0.8</text>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="772" y1="566" y2="562"/>
+    <line style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" x1="772" x2="772" y1="37" y2="41"/>
+    <line style="fill:none;stroke:rgb(192,192,192);stroke-miterlimit:10;" x1="772" x2="772" y1="562" y2="41"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="765" y="579">1.0</text>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="361" y="592">False Positives</text>
+    <rect height="529" style="fill:none;stroke:rgb(0,0,0);stroke-miterlimit:10;" width="751" x="21" y="37"/>
+    <text style="fill:rgb(0,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="273" y="18">phiX — INDEL — 30x 150bp PE (baseline total = 10)</text>
+  </g>
+  <g clip-path="url(#clip942567424)">
+    <path d="M21,566 L21.0,513 L21.0,460 L21.0,407 L21.0,354 L21.0,301 L21.0,248 L21.0,195 L21.0,142 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(255,64,48);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,513 L21.0,460 L21.0,407 L21.0,354 L21.0,301 L21.0,248 L21.0,195 L21.0,142 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(48,240,48);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,248 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(48,48,255);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,513 L21.0,460 L21.0,407 L21.0,354 L21.0,301 L21.0,248 L21.0,195 L21.0,142 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(255,48,255);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,513 L21.0,460 L21.0,407 L21.0,354 L21.0,301 L21.0,248 L21.0,195 L21.0,142 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(48,255,255);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,248 L21.0,142 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(160,80,80);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,513 L21.0,460 L21.0,407 L21.0,354 L21.0,301 L21.0,248 L21.0,195 L21.0,142 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(240,192,64);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,513 L21.0,460 L21.0,407 L21.0,354 L21.0,301 L21.0,248 L21.0,195 L21.0,142 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(112,112,112);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M21,566 L21.0,248 L21.0,89 L21.0,37" style="fill:none;stroke:rgb(192,0,0);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;"/>
+  </g>
+  <g clip-path="url(#clip836771840)">
+    <text style="fill:rgb(255,64,48);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="447">bwa+gatk</text>
+    <line style="fill:none;stroke:rgb(255,64,48);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="443" y2="443"/>
+    <text style="fill:rgb(48,240,48);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="460">bwa+freebayes</text>
+    <line style="fill:none;stroke:rgb(48,240,48);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="456" y2="456"/>
+    <text style="fill:rgb(48,48,255);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="473">bwa+bcftools</text>
+    <line style="fill:none;stroke:rgb(48,48,255);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="469" y2="469"/>
+    <text style="fill:rgb(255,48,255);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="486">bowtie2+gatk</text>
+    <line style="fill:none;stroke:rgb(255,48,255);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="482" y2="482"/>
+    <text style="fill:rgb(48,255,255);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="499">bowtie2+freebayes</text>
+    <line style="fill:none;stroke:rgb(48,255,255);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="495" y2="495"/>
+    <text style="fill:rgb(160,80,80);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="512">bowtie2+bcftools</text>
+    <line style="fill:none;stroke:rgb(160,80,80);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="508" y2="508"/>
+    <text style="fill:rgb(240,192,64);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="525">minimap2+gatk</text>
+    <line style="fill:none;stroke:rgb(240,192,64);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="521" y2="521"/>
+    <text style="fill:rgb(112,112,112);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="538">minimap2+freebayes</text>
+    <line style="fill:none;stroke:rgb(112,112,112);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="534" y2="534"/>
+    <text style="fill:rgb(192,0,0);stroke:none;font-family:&quot;Lucida Grande&quot;;font-size:10px;" x="658" y="551">minimap2+bcftools</text>
+    <line style="fill:none;stroke:rgb(192,0,0);stroke-width:2;stroke-miterlimit:10;stroke-linecap:round;stroke-linejoin:round;" x1="635" x2="653" y1="547" y2="547"/>
+  </g>
+</svg>

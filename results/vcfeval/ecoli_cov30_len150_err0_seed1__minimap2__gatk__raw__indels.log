@@ -1,0 +1,6 @@
+Selected score threshold using: maximized F-measure
+Threshold  True-pos-baseline  True-pos-call  False-pos  False-neg  Precision  Sensitivity  F-measure
+----------------------------------------------------------------------------------------------------
+   80.010                989            989          6         11     0.9940       0.9890     0.9915
+     None                989            989          6         11     0.9940       0.9890     0.9915
+

@@ -1183,3 +1183,209 @@ curve, not as the result.
 
 Filtering effect on *E. coli* is small for GATK and BCFtools (~0.1–0.4% removed) but large for
 FreeBayes (8,258 → 5,914), because it removes the rejected `GT=0` candidate records.
+
+---
+
+## Phase 7a — Normalisation and GA4GH scoring
+
+### 7.1 The metrics, in plain language
+
+vcfeval sorts every variant into one of three bins:
+
+- **TP (true positive)** — in the truth set *and* called. Correct.
+- **FP (false positive)** — called but not in truth. A variant invented from noise.
+- **FN (false negative)** — in truth but not called. A variant missed.
+
+From these:
+
+```
+precision = TP / (TP + FP)   "of the variants I reported, what fraction were real?"
+recall    = TP / (TP + FN)   "of the variants that exist, what fraction did I find?"
+F1        = 2 * precision * recall / (precision + recall)
+```
+
+**Why F1 is the headline, with the worked example the brief asks for.** Precision and recall
+trade off, and either alone is trivially gameable. Consider a caller on *E. coli* that reports
+only its single most confident variant and nothing else:
+
+```
+TP = 1, FP = 0, FN = 5,999
+precision = 1 / 1        = 1.0000     <- perfect!
+recall    = 1 / 6,000    = 0.000167
+F1        = 2(1)(0.000167)/(1.000167) = 0.000333
+```
+
+Precision 1.0 looks flawless while the caller found 0.017% of the variants. F1 is the harmonic
+mean, which is dominated by the *smaller* of the two, so it collapses to ~0.0003 and correctly
+calls this useless. That is why F1 is reported as the headline.
+
+But F1 is still **one operating point**, determined by whatever QUAL threshold was applied —
+which is why the full ROC curve is also produced (§7.7).
+
+### 7.2 Normalisation — identical treatment, verified (R3)
+
+Every call set is normalised with the command applied to the truth set, character for character:
+
+```
+bcftools norm -f <ref.fa> -m -any --atomize
+```
+
+`--atomize` was added after the Phase 6 discovery (§6.6). The truth set was **re-normalised**
+with it too — it contains no MNVs so nothing changed, but R3 requires identical *treatment*,
+not identical *outcome*.
+
+Comparison is done **only** by `rtg vcfeval` (R4). No position-and-allele string matching
+anywhere in this project.
+
+### 7.3 phiX: all nine pipelines score F1 = 1.0000 — and why that is real
+
+Every pipeline: **50/50 SNVs, 10/10 indels, zero FP, zero FN.**
+
+The brief warns that an F1 of exactly 1.0 usually indicates a bug. That warning is correct and
+was taken seriously, so `scripts/scoring_negative_control.sh` deliberately breaks the call set
+three ways and confirms the machinery punishes each:
+
+| Call set | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| unmodified | 60 | 0 | 0 | 1.0000 | 1.0000 | **1.0000** |
+| all positions shifted +5 bp | 0 | 60 | 60 | 0.0000 | 0.0000 | **0.0000** |
+| every SNV ALT changed | 10 | 50 | 50 | 0.1667 | 0.1667 | **0.1667** |
+| half the calls removed | 30 | 0 | 30 | 1.0000 | 0.5000 | **0.6667** |
+
+The third row is a good internal check: only the 10 indels were left untouched, and exactly 10
+TPs survive. The fourth behaves exactly as arithmetic demands. **The scoring genuinely
+discriminates**, so the perfect phiX scores are a real result, not a broken comparison.
+
+They are also unsurprising. phiX is 5,386 bp with no repetitive sequence; at 30× with 150 bp
+reads every variant is unambiguously recoverable, and Phase 5 already showed ~100% placement
+accuracy. **phiX cannot discriminate between pipelines and should not be presented as if it
+does.** Its role is exactly what R10 says: prove the pipeline works end to end, fast.
+
+(A negative-control note worth keeping: the first version of the ALT-mutation control rotated
+A→C→G→T→A, which sometimes produced `REF == ALT`. vcfeval correctly *refuses* such a record
+rather than scoring it. The control now picks a base different from both REF and the original
+ALT.)
+
+### 7.4 *E. coli* baseline results (PRIMARY — single-run scoring)
+
+**SNV F1**
+
+| | GATK | FreeBayes | BCFtools |
+|---|---|---|---|
+| **BWA-MEM** | **0.9953** | **0.9953** | 0.9948 |
+| **Bowtie2** | 0.9909 | 0.9906 | 0.9914 |
+| **minimap2** | 0.9946 | **0.9953** | 0.9944 |
+
+**Indel F1**
+
+| | GATK | FreeBayes | BCFtools |
+|---|---|---|---|
+| **BWA-MEM** | **0.9975** | 0.9970 | 0.9970 |
+| **Bowtie2** | 0.9935 | 0.9890 | 0.9815 |
+| **minimap2** | 0.9970 | **0.9975** | 0.9970 |
+
+What the numbers actually say:
+
+- **The aligner matters more than the caller at this baseline.** Every Bowtie2 row is worse
+  than the corresponding BWA or minimap2 row, for both variant types. The spread across
+  aligners (SNV 0.9906–0.9953) is wider than across callers within an aligner. Note this is
+  *despite* Phase 5 showing all three aligners at ~99.0% placement accuracy — so the
+  difference is not mainly about where reads land.
+- **The likely mechanism is MAPQ, not placement.** Bowtie2's MAPQ scale tops out at 42 versus
+  60 for the others (§5.7). Callers apply tool-agnostic MAPQ thresholds, so an identical
+  internal cut-off is a *stricter* filter on Bowtie2 output. Bowtie2+GATK has the highest SNV
+  FN count of any pipeline (90 vs 47 for BWA+GATK) with **zero** false positives — the
+  signature of a caller discarding evidence, not of an aligner misplacing reads. This is a
+  hypothesis consistent with the data, not something this experiment has yet proven; the
+  coverage sweep should test it.
+- **Precision is near-perfect almost everywhere; recall is what separates pipelines.** Six of
+  nine SNV pipelines have precision exactly 1.0000. The variation is essentially all in recall
+  — these callers are conservative, and at 30× on a small genome false positives are rare.
+- **Indels are harder than SNVs but not dramatically so at 30×.** The worst indel pipeline
+  (Bowtie2+BCFtools, 0.9815) is meaningfully worse than the worst SNV pipeline (0.9906), and
+  the indel spread (0.9815–0.9975) is wider than the SNV spread. Expect this gap to widen as
+  coverage drops.
+- **Nothing is 0.0 or 1.0 on *E. coli*.** Every pipeline misses 5–18 indels and 44–90 SNVs out
+  of 1,000 and 5,000. That is a plausible result, not a bug signature.
+
+### 7.5 Anomalies flagged
+
+1. **phiX F1 = 1.0000 everywhere.** Investigated with the negative control above. Genuine, but
+   phiX has no discriminating power and must not be reported as a comparison.
+2. **Bowtie2+FreeBayes has the *highest* SNV recall of any pipeline (0.9912) yet a
+   middling F1**, because it also has by far the most false positives (50, versus 0 for six
+   other pipelines). It is the one genuinely aggressive pipeline in the set — a real
+   precision/recall trade-off, visible properly only on the ROC.
+3. **Bowtie2+BCFtools indels: 19 FP and 18 FN**, the worst on both axes simultaneously. Worth
+   watching in the sweep; it may be a Bowtie2 MAPQ/indel-alignment interaction.
+
+### 7.6 IMPORTANT — scoring method: pre-splitting by type distorts the result
+
+The brief specifies scoring SNVs and indels separately by splitting the VCF first
+(`bcftools view -v snps` / `-v indels`, then vcfeval on each). Both that method and RTG's
+native alternative were run, and **they disagree systematically**.
+
+`rtg vcfeval` matches variants **haplotype-aware**: it reconstructs the local haplotype implied
+by a set of variants and compares *sequence*, which is exactly what makes it immune to
+representation differences (R4). Pre-splitting breaks that. Remove the indels from a call set
+and a SNV sitting next to an indel can no longer be reconciled with truth, so vcfeval charges
+it as **both** a false negative and a false positive.
+
+Measured on *E. coli*, BWA + FreeBayes, indels:
+
+| Method | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| Pre-split (brief's method) | 983 | 9 | 17 | 0.9909 | 0.9830 | 0.9869 |
+| Single run, RTG's own per-type split | **994** | **0** | **6** | 1.0000 | 0.9940 | **0.9970** |
+
+11 true positives destroyed and 9 false positives invented, purely by splitting the file.
+**70.6% of the pre-split method's extra false negatives have another truth variant within
+50 bp** — precisely the neighbours whose haplotype context was removed.
+
+The effect is not uniform, so it changes conclusions rather than just shifting all numbers:
+it penalises FreeBayes hardest (haplotype-based calling depends most on context), making
+FreeBayes' indel performance look distinctly worse than GATK's when in fact they are
+comparable (0.9970 vs 0.9975).
+
+**Resolution.** A single vcfeval run per pipeline on the full call set, taking the per-type
+breakdown from RTG's own `snp_roc.tsv.gz` / `non_snp_roc.tsv.gz`. Validated: per-type TP/FP/FN
+sum **exactly** to the combined `summary.txt` for every pipeline checked.
+
+`results/results.tsv` carries a **`scoring_method`** column with both — `single_run` (primary)
+and `pre_split` (the brief's method, retained for comparison) — so the difference is auditable
+rather than hidden.
+
+**The generalisable lesson**, and the deepest one in this project: rule R4 says do not
+hand-roll variant comparison, because one variant has many valid representations. Phase 6
+showed that hazard reaching upstream into *preparation* (type-splitting hides variants inside
+MNVs). This shows it again at a subtler level — even with correct atomisation, splitting the
+call set before scoring silently degrades a haplotype-aware comparator into a
+context-free one. **`bcftools view -v snps` is not a neutral operation before vcfeval.**
+
+### 7.7 ROC curves
+
+`results/roc_{ecoli,phiX}_{SNV,INDEL}.svg`, 9 curves each, generated from the single-run ROC
+files with `rtg rocplot`.
+
+The ROC is the honest comparison and the F1 table is a summary of it. A single F1 depends on
+one QUAL threshold, and **QUAL is not calibrated identically across GATK, FreeBayes and
+BCFtools** (§6.7) — so comparing single F1 values partly compares the callers' QUAL scales
+rather than their ability to find variants. Sweeping the threshold removes that. The
+Bowtie2+FreeBayes case in §7.5 is exactly the situation only a ROC resolves: highest recall,
+most false positives, unremarkable F1.
+
+(`rtg rocplot` refuses to overwrite an existing SVG, so `make_roc.sh` removes the target first;
+otherwise every re-run fails.)
+
+### 7.8 `results/results.tsv`
+
+Written by `scripts/collect_results.py`, which joins four sources: vcfeval output,
+`results/align_metrics.tsv`, `results/placement_accuracy.tsv`, and `logs/call_timing.tsv`.
+
+**72 rows** = 2 genomes × 9 pipelines × 2 variant types × 2 scoring methods. The
+`scoring_method == single_run` subset is exactly the **36 baseline rows** the definition of
+done requires.
+
+The condition axes (genome, coverage, read_length, qs_shift, seed) are parsed out of the run
+tag, which is why tags encode them as `<genome>_cov30_len150_err0_seed1` — the sweep in Phase 8
+adds rows without any schema change.

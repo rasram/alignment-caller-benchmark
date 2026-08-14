@@ -91,18 +91,27 @@ grep -v '^#' "$INDVCF" >> "$work/body.txt"
 # 4. Sort -> normalise -> compress -> index.
 #
 #    `bcftools norm -f ref -m -any` does two things (rule R3):
-#      -f ref   left-align and trim indels against the reference. The same indel
-#               in a repeat can be written at several positions; left-alignment
-#               forces one canonical choice.
-#      -m -any  split any multi-allelic record into one record per ALT allele.
+#      -f ref     left-align and trim indels against the reference. The same indel
+#                 in a repeat can be written at several positions; left-alignment
+#                 forces one canonical choice.
+#      -m -any    split any multi-allelic record into one record per ALT allele.
+#      --atomize  decompose MNVs/complex records into consecutive atomic SNVs and
+#                 indels. Added after Phase 6 found FreeBayes merges nearby
+#                 variants into single records (215 AAA>TAT covering two SNPs;
+#                 1699 CCGTCCTT>GCGTCTT covering a SNP and an indel). Without
+#                 atomising, `bcftools view -v snps` drops those records and the
+#                 variants inside them, understating FreeBayes recall as a pure
+#                 representation artefact. See NOTES 6.6.
 #    The truth set and every call set get IDENTICAL treatment, so representation
-#    differences cannot masquerade as FP/FN.
+#    differences cannot masquerade as FP/FN. The truth contains no MNVs, so
+#    atomising it changes nothing — but R3 requires identical TREATMENT, not
+#    identical outcome, so it is atomised too.
 # ---------------------------------------------------------------------------
 norm_one() {
   local in="$1" out="$2" label="$3"
   bcf sort "$in" -Oz -o "$work/${label}.sorted.vcf.gz" 2>"$work/${label}.sort.log"
   bcf index -t -f "$work/${label}.sorted.vcf.gz"
-  bcf norm -f "$REF" -m -any \
+  bcf norm -f "$REF" -m -any --atomize \
       -Oz -o "$out" "$work/${label}.sorted.vcf.gz" 2>"$work/${label}.norm.log"
   bcf index -t -f "$out"
   echo "  norm($label): $(grep -E 'total|realigned|split|changed' "$work/${label}.norm.log" | tr '\n' ' ')"
