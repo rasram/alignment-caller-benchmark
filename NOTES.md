@@ -548,3 +548,150 @@ default was kept and this is flagged as an assumption to confirm.
 Indel sizes reach ±50 bp, which is genuinely hard for 150 bp reads — a 50 bp deletion leaves
 only ~50 bp of anchor on each side. Expect indel recall to fall off sharply with size, and
 expect that to be one of the more interesting aligner differences.
+
+---
+
+## Phase 3 — Read simulation
+
+### 3.1 What ART does, and the direction that must not be reversed
+
+ART takes a genome and produces the FASTQ files a real Illumina machine would have produced
+from it: fragments of a chosen length, read from both ends, with realistic position-dependent
+sequencing errors and quality scores drawn from an empirical profile of real instrument data.
+
+**Rule R1 lives here.** The input is `data/truth/<g>.simseq.genome.fa` — the **mutated**
+genome — never `data/refs/<g>.fa`. `scripts/simulate_reads.sh` asserts this: it refuses to run
+if the input file is byte-identical to the reference. That guard is cheap insurance against
+the one mistake that would silently make every pipeline score zero.
+
+### 3.2 Baseline parameters
+
+```
+art_illumina -ss HS25 -sam -na -i <mutated>.fa -p -l 150 -f 30 -m 350 -s 50 \
+             -qs 0 -qs2 0 -rs <seed> -o work/<tag>_
+```
+
+| Flag | Meaning |
+|---|---|
+| `-ss HS25` | HiSeq 2500 empirical error profile |
+| `-p -l 150` | paired-end, 150 bp per read |
+| `-f 30` | 30× fold coverage |
+| `-m 350 -s 50` | DNA fragment length: mean 350 bp, sd 50 |
+| `-qs 0 -qs2 0` | quality-score shift for R1/R2 — 0 leaves the profile untouched |
+| `-rs <seed>` | random seed (R9) |
+| `-sam` | **also write the truth alignment** — see §3.4 |
+| `-na` | skip the `.aln` files; the SAM carries the same information |
+
+**Fragment length vs read length.** A 350 bp fragment sequenced 150 bp from each end leaves a
+~50 bp unsequenced gap in the middle. This is normal and is what makes paired-end data useful:
+the aligner knows the two reads should land ~350 bp apart in the correct orientation, which
+helps place reads that are individually ambiguous.
+
+Verified against what ART actually produced (TLEN in the truth SAM):
+
+| Genome | pairs | mean fragment | sd | min | max |
+|---|---|---|---|---|---|
+| phiX | 540 | 347.7 | 49.4 | 191 | 491 |
+| *E. coli* | 464,175 | 349.5 | 50.0 | 150 | 581 |
+
+Both match the requested 350 ± 50.
+
+### 3.3 Coverage verification
+
+"30× coverage" means each base is covered by ~30 reads on average:
+`(number of reads × read length) / genome size`.
+
+Measured against the **mutated** genome length, because that is the template the reads were
+drawn from. Using the reference length would be wrong by the net indel balance — negligible
+here (187 bp in 4.6 Mb) but wrong on principle, and it would grow if a future condition
+injected more indels.
+
+| Genome | Mutated length | Pairs | Reads | Actual coverage |
+|---|---|---|---|---|
+| phiX | 5,400 | 540 | 1,080 | **30.00×** |
+| *E. coli* | 4,641,839 | 464,175 | 928,350 | **30.00×** |
+
+Coverage is an *average*. Real per-base depth follows roughly a Poisson distribution around
+30, so some positions get 15× and some 45× purely by chance. That variance is exactly why low
+coverage hurts variant calling: at 5× a position can easily receive 1–2 reads, and no caller
+can distinguish a real variant from a sequencing error with that little evidence.
+
+### 3.4 Why the `-sam` truth file is retained — and a coordinate trap in it
+
+ART's `-sam` output records, for every read, **where in the input genome that read actually
+came from**. This is ground truth no real experiment ever has, and it enables a metric in
+Phase 5 that isolates the aligner completely: *what fraction of reads did the aligner put back
+where they belong?* That is a pure aligner property, measurable without running any variant
+caller, so it cleanly separates "BWA placed reads better" from "GATK called variants better".
+
+**The trap.** The truth SAM is in **mutated-genome coordinates**:
+
+```
+@SQ  SN:phiX   LN:5400        <- ART truth SAM (mutated genome)
+@SQ  SN:phiX   LN:5386        <- aligner BAMs in Phase 5 (original reference)
+```
+
+The contig is named `phiX` in both, and the lengths differ by only the net indel balance. So
+comparing the two directly **produces no error, no warning — just wrong answers.** Positions
+drift apart as you move along the genome, accumulating the indel offset seen so far. For
+*E. coli* the drift reaches 187 bp by the end of the genome, far beyond the ±10 bp tolerance
+the placement metric uses, so reads near the end would nearly all be scored as misplaced and
+the aligners would look far worse than they are — worse toward one end of the genome, which is
+a bizarre and hard-to-diagnose signature.
+
+`data/truth/<g>.refseq2simseq.map.txt` gives the reference↔mutated coordinate correspondence
+for every injected variant, so the conversion is computable. **Phase 5's
+`placement_accuracy.py` must convert mutated → reference coordinates before comparing.**
+Recorded here so it cannot be forgotten.
+
+### 3.5 Read length is capped at 150 bp by the platform profile
+
+The HS25 (HiSeq 2500) profile supports read lengths only up to **150 bp**. Going to 250 bp
+would require switching to `MSv3` (MiSeq), which is a different instrument with a different
+chemistry and a different error profile entirely.
+
+Doing so would **confound read length with platform chemistry**: any change in results between
+150 bp and 250 bp could be caused by either, and the design could not separate them. The
+read-length sweep is therefore restricted to **75 / 100 / 150**, all on HS25, so read length
+varies alone.
+
+### 3.6 Seeds — and which seed controls what
+
+Two distinct random processes, deliberately seeded separately (R9):
+
+- **simuG seed = 20260814**, fixed across the entire project. The mutated genome and truth set
+  are the *experimental subject*; they must stay identical across every condition, or a
+  coverage comparison would also be comparing two different genomes.
+- **ART seed = 1** for the baseline; the sweep will use **1–5**. Each ART seed is a replicate
+  *sequencing run* of the same sample, capturing run-to-run variation in which fragments
+  happened to be sequenced and where errors happened to land.
+
+The seed appears in every filename (`..._seed1_`) and will appear as a column in
+`results/results.tsv`.
+
+### 3.7 No trimming (R8)
+
+Real workflows often trim low-quality read ends before alignment. **We do not**, so all nine
+pipelines receive byte-identical input. If reads were trimmed, differences between aligners
+could come from how the trimmer interacted with each one rather than from the aligners
+themselves. Mean quality is ~Q36.6 (see Phase 4), so there is little to trim anyway.
+
+### 3.8 A tooling trap worth recording: `grep` and very long lines
+
+While verifying coverage interactively I got a nonsensical *E. coli* genome length of 447,535 bp
+instead of 4,641,839 — and therefore a coverage of 311× instead of 30×.
+
+Cause: the mutated-genome FASTA that simuG writes is **two lines** — a header plus one
+4.6-million-character sequence line. The idiom `grep -v '^>' file | tr -d '\n' | wc -c`
+truncated it. The interactive shell on this machine resolves `grep` to a `ugrep` shim, which
+does not handle a 4.6 MB line; the scripts, which do not inherit interactive shell functions,
+were using `/usr/bin/grep` and had been correct all along.
+
+Both possible outcomes here are bad: a wrong number that looks plausible, or a correct number
+that depends on which `grep` is first on `PATH`. So all sequence-length computation now uses
+`awk '!/^>/{n+=length($0)} END{print n+0}'`, which sums line lengths natively, has no long-line
+limit, and cannot vary with the environment.
+
+**The general lesson:** genomics files routinely contain single lines megabytes long. Line-based
+UNIX text tools are not all safe on them, and when they fail they usually truncate silently
+rather than erroring.

@@ -1,4 +1,4 @@
-# Truth-set verification — ecoli — 2026-08-14 13:42:09 UTC
+# Truth-set verification — ecoli — 2026-08-14 13:48:31 UTC
 
 ## 1. Variant counts
 SNPs   : 5000

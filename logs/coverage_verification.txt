@@ -1,0 +1,4 @@
+tag=phiX_cov30_len150_err0_seed1 genome=phiX mutated_len=5400 read_len=150 seed=1 qs=0
+pairs=540 reads=1080 requested_cov=30x actual_cov=30.00x
+tag=ecoli_cov30_len150_err0_seed1 genome=ecoli mutated_len=4641839 read_len=150 seed=1 qs=0
+pairs=464175 reads=928350 requested_cov=30x actual_cov=30.00x

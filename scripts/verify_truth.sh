@@ -100,8 +100,8 @@ echo
 
 # ---- 5. length bookkeeping (the strong check) ------------------------------
 echo "## 5. Length bookkeeping: truth VCF vs the actual mutated genome"
-REFLEN=$(grep -v '^>' "$REF" | tr -d '\n' | wc -c | tr -d ' ')
-MUTLEN=$(grep -v '^>' "$MUT" | tr -d '\n' | wc -c | tr -d ' ')
+REFLEN=$(awk '!/^>/{n+=length($0)} END{print n+0}' "$REF")
+MUTLEN=$(awk '!/^>/{n+=length($0)} END{print n+0}' "$MUT")
 NETVCF=$(bcf view -H -v indels "$TRUTH" | awk '{s += length($5)-length($4)} END{print s+0}')
 DELTA=$(( MUTLEN - REFLEN ))
 echo "  reference length      : $REFLEN"
@@ -120,7 +120,7 @@ echo "## Contig name consistency (R5)"
 printf "  ref.fai : %s\n" "$(cut -f1 "$REF.fai" | tr '\n' ' ')"
 printf "  truth   : %s\n" "$(bcf view -H "$TRUTH" | cut -f1 | sort -u | tr '\n' ' ')"
 printf "  bed     : %s\n" "$(cut -f1 "$T/${GEN}.confident.bed" | tr '\n' ' ')"
-printf "  mutated : %s\n" "$(grep '^>' "$MUT" | tr -d '>' | tr '\n' ' ')"
+printf "  mutated : %s\n" "$(awk '/^>/{sub(/^>/,""); printf "%s ", $1}' "$MUT")"
 } | tee "$LOG"
 
 echo
