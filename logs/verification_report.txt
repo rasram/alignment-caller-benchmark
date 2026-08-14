@@ -1,6 +1,6 @@
 
 == INFRASTRUCTURE ==
-  [PASS] git repository initialised                                 9 commits
+  [PASS] git repository initialised                                 10 commits
   [PASS] .gitignore excludes work/                                  
   [PASS] .gitignore excludes *.fq                                   
   [PASS] .gitignore excludes *.bam                                  
@@ -97,9 +97,9 @@
 
 == DOCUMENTATION ==
   [PASS] NOTES.md present                                           1551 lines, 10 sections
-  [FAIL] README.md present (one-command reproduction)               
-  [FAIL] HANDOFF.md present                                         
+  [PASS] README.md present                                          
+  [PASS] HANDOFF.md present                                         
 
 == SUMMARY ==
-  PASS 81   FAIL 2   WARN 0
-  2 required check(s) failed — see [FAIL] above.
+  PASS 83   FAIL 0   WARN 0
+  All required checks passed.

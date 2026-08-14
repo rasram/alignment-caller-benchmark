@@ -1,4 +1,4 @@
-# Tool versions — recorded 2026-08-14 13:29:37 UTC
+# Tool versions — recorded 2026-08-14 16:55:58 UTC
 # Host: Darwin 25.6.0 arm64
 # macOS: 26.6.1
 # conda: conda 26.3.2

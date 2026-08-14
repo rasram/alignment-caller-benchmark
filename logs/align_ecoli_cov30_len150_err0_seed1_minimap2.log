@@ -1,12 +1,12 @@
-[M::mm_idx_gen::0.057*1.04] collected minimizers
-[M::mm_idx_gen::0.072*1.45] sorted minimizers
-[M::main::0.072*1.44] loaded/built the index for 1 target sequence(s)
-[M::mm_mapopt_update::0.072*1.44] mid_occ = 1000
+[M::mm_idx_gen::0.061*1.01] collected minimizers
+[M::mm_idx_gen::0.069*1.33] sorted minimizers
+[M::main::0.069*1.33] loaded/built the index for 1 target sequence(s)
+[M::mm_mapopt_update::0.069*1.33] mid_occ = 1000
 [M::mm_idx_stat] kmer size: 21; skip: 11; is_hpc: 0; #seq: 1
-[M::mm_idx_stat::0.080*1.40] distinct minimizers: 757233 (99.27% are singletons); average occurrences: 1.021; average spacing: 6.004; total length: 4641652
-[M::worker_pipeline::1.291*3.52] mapped 333334 sequences
-[M::worker_pipeline::2.113*3.66] mapped 333334 sequences
-[M::worker_pipeline::2.595*3.44] mapped 261682 sequences
+[M::mm_idx_stat::0.073*1.31] distinct minimizers: 757233 (99.27% are singletons); average occurrences: 1.021; average spacing: 6.004; total length: 4641652
+[M::worker_pipeline::1.236*4.03] mapped 333334 sequences
+[M::worker_pipeline::1.908*4.18] mapped 333334 sequences
+[M::worker_pipeline::2.347*3.87] mapped 261682 sequences
 [M::main] Version: 2.31-r1302
 [M::main] CMD: minimap2 -ax sr -t 4 -R @RG\tID:s1\tSM:sim\tPL:ILLUMINA\tLB:lib1 data/refs/ecoli.fa work/ecoli_cov30_len150_err0_seed1_1.fq work/ecoli_cov30_len150_err0_seed1_2.fq
-[M::main] Real time: 2.599 sec; CPU: 8.925 sec; Peak RSS: 0.467 GB
+[M::main] Real time: 2.351 sec; CPU: 9.087 sec; Peak RSS: 0.480 GB
