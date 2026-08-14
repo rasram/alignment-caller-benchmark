@@ -359,3 +359,192 @@ sequence. Two cheap extra checks:
   `N` in a reference create regions where no caller can call anything, which would otherwise
   show up later as unexplained false negatives. There are none here, so any FN in Phase 7a is
   a real pipeline limitation, not a masked-reference artefact.
+
+---
+
+## Phase 2 — Truth sets
+
+### 2.1 What simuG gives you, and why it is not yet usable
+
+`simuG` takes a reference and injects mutations, writing four files per run:
+
+| File | Contents |
+|---|---|
+| `<p>.simseq.genome.fa` | the **mutated genome** — reads get simulated from this |
+| `<p>.refseq2simseq.SNP.vcf` | the injected SNPs, in **reference** coordinates |
+| `<p>.refseq2simseq.INDEL.vcf` | the injected indels, in **reference** coordinates |
+| `<p>.refseq2simseq.map.txt` | reference ↔ mutated coordinate correspondence |
+
+The brief says not to assume these names — verified against the cloned version (`0289e58`)
+before writing any script against them.
+
+"In reference coordinates" is the crucial property and the thing that makes rule R1 work. The
+VCF describes the mutations *as offsets into the original reference*, which is the same
+coordinate system the aligner will place reads into. If simuG had reported mutated-genome
+coordinates, the truth set would be shifted by the cumulative indel length at every position
+and nothing would line up.
+
+Four things were wrong with the raw output for our purposes:
+
+1. **Two separate files** (SNP and INDEL) — vcfeval scores one baseline.
+2. **No `##contig` header lines** — verified: zero present. Downstream tools then have no
+   declared contig order and either refuse to run or sort records unpredictably.
+3. **No `FORMAT` column and no sample** — only the 8 fixed columns. See §2.3.
+4. **Not normalised** — rule R3. See §2.2.
+
+### 2.2 Normalisation, and hard evidence that it was needed
+
+`bcftools norm -f <ref.fa> -m -any` was run on the truth set (and will be run identically on
+every call set). Two operations:
+
+- **`-f ref` left-align and trim.** The same indel can be written at several positions when it
+  sits in a repeat. Deleting one `T` from `TTTT` can be described as deleting the T at any of
+  four positions — all equally true, all different VCF records. Left-alignment forces one
+  canonical choice: push it as far left as possible.
+- **`-m -any` split multi-allelics.** One record listing two ALT alleles becomes two records.
+
+**This was not theoretical.** Normalisation changed real records:
+
+| Genome | Records | Realigned by `norm` |
+|---|---|---|
+| phiX | 60 | **2** |
+| *E. coli* | 6,000 | **256** (25.6% of the 1,000 indels) |
+
+Concretely, on phiX:
+
+```
+simuG wrote:      582  T    -> TT          2002  TTT -> T
+normalised to:    581  C    -> CT          2000  GTT -> G
+```
+
+Both moved left into a homopolymer run. Had the truth kept simuG's coordinates while the
+callers emitted normalised ones, those variants would have been counted as **one false
+negative plus one false positive each** — a double penalty for a variant the pipeline found
+perfectly well. At *E. coli* scale that is 256 indels, which would have made every pipeline's
+indel recall look ~25% worse than reality.
+
+### 2.3 The genotype column — decision and evidence
+
+**Decision: option (a).** The truth VCF carries `FORMAT=GT` and a single haploid sample
+`sim` with **`GT=1`**, and scoring uses vcfeval's **default genotype-aware matching — no
+`--squash-ploidy`**.
+
+The experiment is reproducible via `scripts/test_genotype_encoding.sh`; results in
+`logs/genotype_decision.txt`. Synthetic call sets were built *from the truth itself*, so
+variant content is identical everywhere and only the GT encoding differs — any departure from
+F1 = 1.0 is therefore caused purely by genotype representation.
+
+| Truth | Call GT | `--squash-ploidy` | Precision | Recall | F1 |
+|---|---|---|---|---|---|
+| GT=1 | `1` | no | 1.0000 | 1.0000 | **1.0000** |
+| GT=1 | `1/1` | no | 1.0000 | 1.0000 | **1.0000** |
+| GT=1 | `0/1` | no | 0.0000 | 0.0000 | **0.0000** |
+| GT=1 | `1/1` | yes | 1.0000 | 1.0000 | 1.0000 |
+| GT=1 | `0/1` | yes | 1.0000 | 1.0000 | 1.0000 |
+| *no sample column* | `1` | either | — | — | **vcfeval refuses to run** |
+
+Three findings, in order of importance:
+
+**1. Option (b) does not exist.** vcfeval rejects a baseline with no sample column outright:
+`Error: Record did not contain enough samples`. `--squash-ploidy` does not rescue it — that
+flag relaxes *genotype* comparison, it does not conjure a genotype that was never there. So
+the FORMAT/sample column is mandatory, and the choice collapses to "how should we score",
+not "should we add GT".
+
+**2. `--squash-ploidy` would hide the exact failure R2 warns about.** A call set with
+heterozygous `0/1` genotypes scores **F1 = 0.0000** under default matching and **F1 = 1.0000**
+with squashing. Rule R2 exists because all three callers default to diploid and will silently
+emit het genotypes on a haploid organism. Turning on `--squash-ploidy` would make that
+misconfiguration invisible and report a perfect score. Default matching makes it deafening.
+That is why squashing is **off**.
+
+**3. vcfeval will not catch every ploidy error by itself — hence R2's grep.** Note row two:
+`GT=1/1` matches haploid truth *perfectly* without squashing, because vcfeval treats
+homozygous-ALT as equivalent to haploid-ALT. So a caller emitting `1/1` everywhere would score
+1.0 and look fine while being configured wrongly. **The score cannot be used as a ploidy
+check.** This is exactly why R2 demands grepping the `GT` field directly in Phase 6 rather
+than inferring correctness from F1.
+
+`GT=1` — a single allele index with no slash — is the correct haploid encoding. `1/1` means
+"diploid, both copies ALT" and `0/1` means "diploid, one copy each", and neither is a true
+statement about an organism with one genome copy.
+
+### 2.4 The confident-regions BED, and why a trivial file is not pointless
+
+```
+phiX    0   5386
+ecoli   0   4641652
+```
+
+One line per contig, spanning the whole genome. Built from the `.fai` so contig names are
+inherited, never retyped (R5). BED is **0-based half-open** while VCF is **1-based inclusive**
+— the `0` is not an off-by-one error, it is a different coordinate convention, and mixing the
+two is the classic bug in this area.
+
+**Why it exists even though it covers everything.** vcfeval sorts calls into three bins, not
+two: true positive, false positive, and *ignored*. The confident-region BED decides which
+calls are eligible to be judged at all. With real benchmark data (GIAB and similar) truth is
+only established in part of the genome — the rest is repetitive or structurally messy — and a
+call outside those regions must be scored as **unknown**, not as a false positive, because
+nobody knows whether it is right.
+
+Here, truth is known *everywhere* by construction: we wrote the mutations ourselves, so any
+call not in the truth set genuinely is wrong. The whole genome is confident.
+
+Keeping the file anyway means (i) the command line is identical to what a real benchmark uses,
+so nothing has to change when someone later swaps in GIAB data, and (ii) the scoring is
+explicit about its scope rather than relying on a default. It also matters for the Phase 8
+sweep: if a later condition needs regions masked out, the mechanism is already wired in.
+
+### 2.5 Verification — three independent checks
+
+`scripts/verify_truth.sh` runs three checks that fail in different ways, logged to
+`logs/truth_verification_*.txt`:
+
+1. **Counts** — do we have what we asked simuG for? phiX 50/10, *E. coli* 5000/1000. Both exact.
+2. **REF bases** — for 3 SNPs and 3 indels per genome, pull the reference base with
+   `samtools faidx` and compare to the VCF `REF` field. All 12 matched. This catches
+   coordinate-system errors, which are otherwise invisible.
+3. **Length bookkeeping** — the strongest check, and one the brief did not ask for.
+
+The third deserves explanation. Sum the length change of every indel in the truth VCF
+(`len(ALT) - len(REF)`) and compare it to the actual size difference between the mutated
+genome and the reference:
+
+| Genome | Reference | Mutated | Observed Δ | Net indel sum in VCF | |
+|---|---|---|---|---|---|
+| phiX | 5,386 | 5,400 | +14 | +14 | ✓ |
+| *E. coli* | 4,641,652 | 4,641,839 | +187 | +187 | ✓ |
+
+This ties the truth VCF to *the actual FASTA the Phase 3 reads are generated from*. Checks 1
+and 2 both pass even if simuG's VCF and its mutated genome disagree — and if they disagreed,
+every number in the entire benchmark would be wrong, with no other symptom than mysteriously
+poor scores across all nine pipelines. Now confirmed to the base.
+
+### 2.6 Properties of the truth sets, and one caveat to flag
+
+| | phiX | *E. coli* |
+|---|---|---|
+| SNPs | 50 | 5,000 |
+| Indels | 10 | 1,000 |
+| Density | 1 per 89 bp | 1 per 773 bp |
+| Insertions : deletions | 4 : 6 | 508 : 492 |
+| Indel size range | −2 to +13 | −45 to +50 |
+| Ti/Tv | 0.667 | 0.480 |
+
+**The Ti/Tv caveat.** Transitions (A↔G, C↔T) and transversions (everything else) do not occur
+equally in real genomes — real bacterial genomes run roughly Ti/Tv ≈ 1–2 because transitions
+are chemically easier. Our truth sets sit at **~0.5**, which is simuG's default and is exactly
+what uniformly-random base substitution produces: each base has one transition partner and two
+transversion partners, so random picking gives 1:2 = 0.5.
+
+So **these truth sets are less realistic than real strain divergence in their mutation
+spectrum.** It does not bias the comparison — all nine pipelines are scored against the same
+truth, and no aligner or caller here is tuned for a particular Ti/Tv — so the *ranking* is
+unaffected. But absolute recall numbers are not directly transferable to a real resequencing
+project. Setting `-titv_ratio 2.0` would fix it; the brief specifies neither, so simuG's
+default was kept and this is flagged as an assumption to confirm.
+
+Indel sizes reach ±50 bp, which is genuinely hard for 150 bp reads — a 50 bp deletion leaves
+only ~50 bp of anchor on each side. Expect indel recall to fall off sharply with size, and
+expect that to be one of the more interesting aligner differences.

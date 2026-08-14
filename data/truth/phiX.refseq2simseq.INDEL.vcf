@@ -1,0 +1,22 @@
+##fileformat=VCFv4.1
+##fileDate=Fri Aug 14 13:35:57 2026 (GMT time)
+##source=simuG.pl
+##INFO=<ID=variant_type,Number=1,Type=String,Description="The type of the introduced genomic variant">
+##INFO=<ID=variant_id,Number=1,Type=String,Description="The id of the introduced genomic variant">
+##INFO=<ID=ref_chr,Number=1,Type=String,Description="The reference genome based chromosome ID of the introduced genomic variant">
+##INFO=<ID=ref_start,Number=1,Type=String,Description="The reference genome based start coordinate of the introduced genomic variant">
+##INFO=<ID=ref_end,Number=1,Type=String,Description="The reference genome based end coordinate of the introduced genomic variant">
+##INFO=<ID=sim_chr,Number=1,Type=String,Description="The simulated genome based chromosome ID of the introduced genomic variant">
+##INFO=<ID=sim_start,Number=1,Type=String,Description="The simulated genome based start coordinate of the introduced genomic variant">
+##INFO=<ID=sim_end,Number=1,Type=String,Description="The simulated genome based end coordinate of the introduced genomic variant">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+phiX	469	.	TG	T	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=469;ref_end=470;sim_chr=phiX;sim_start=469;sim_end=469
+phiX	582	.	T	TT	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=582;ref_end=582;sim_chr=phiX;sim_start=581;sim_end=582
+phiX	996	.	A	AT	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=996;ref_end=996;sim_chr=phiX;sim_start=996;sim_end=997
+phiX	1702	.	TC	T	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=1702;ref_end=1703;sim_chr=phiX;sim_start=1703;sim_end=1703
+phiX	2002	.	TTT	T	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=2002;ref_end=2004;sim_chr=phiX;sim_start=2002;sim_end=2002
+phiX	2468	.	CAG	C	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=2468;ref_end=2470;sim_chr=phiX;sim_start=2466;sim_end=2466
+phiX	2614	.	TC	T	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=2614;ref_end=2615;sim_chr=phiX;sim_start=2610;sim_end=2610
+phiX	2902	.	T	TGATCGAGC	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=2902;ref_end=2902;sim_chr=phiX;sim_start=2897;sim_end=2905
+phiX	3613	.	TTA	T	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=3613;ref_end=3615;sim_chr=phiX;sim_start=3616;sim_end=3616
+phiX	3960	.	C	CGACCCGACCGGCA	.	.	variant_type=INDEL;ref_chr=phiX;ref_start=3960;ref_end=3960;sim_chr=phiX;sim_start=3961;sim_end=3974

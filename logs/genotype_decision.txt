@@ -1,0 +1,40 @@
+# Genotype-encoding decision experiment — phiX — 2026-08-14 13:43:20 UTC
+# Variant content is IDENTICAL across all call sets; only GT encoding differs.
+
+## Option (a): truth HAS a sample column with GT=1
+  calls GT=1             TP=60    FP=0     FN=0     precision=1.0000   recall=1.0000   F1=1.0000
+  calls GT=1/1           TP=60    FP=0     FN=0     precision=1.0000   recall=1.0000   F1=1.0000
+  calls GT=0/1           TP=0     FP=60    FN=60    precision=0.0000   recall=0.0000   F1=0.0000
+
+## Option (a) + --squash-ploidy
+  GT=1/1 squashed        TP=60    FP=0     FN=0     precision=1.0000   recall=1.0000   F1=1.0000
+  GT=0/1 squashed        TP=60    FP=0     FN=0     precision=1.0000   recall=1.0000   F1=1.0000
+
+## Option (b): truth has NO sample column (raw simuG shape)
+  no-GT baseline         REFUSED TO RUN: Error: Record did not contain enough samples: phiX	51	.	A	C	.	.	
+  no-GT + squash-ploidy  REFUSED TO RUN: Error: Record did not contain enough samples: phiX	51	.	A	C	.	.	
+
+## DECISION
+
+Option (b) is not available. vcfeval REFUSES a baseline with no sample column,
+with or without --squash-ploidy:
+    Error: Record did not contain enough samples
+So the truth VCF must carry a FORMAT/sample column. Option (a) it is: GT=1.
+
+Chosen scoring mode: option (a) with DEFAULT genotype-aware matching,
+i.e. NO --squash-ploidy.
+
+Reasoning — look at the GT=0/1 row above. Against the haploid truth it scores
+F1 = 0.0000 (every variant counted as both FP and FN), but WITH --squash-ploidy
+the same file scores F1 = 1.0000.
+
+That is exactly the rule-R2 failure mode. If a caller's ploidy flag were dropped
+and it emitted heterozygous genotypes, --squash-ploidy would hide the mistake
+completely and report a perfect score. Default matching makes the failure loud
+and impossible to miss.
+
+Note also the GT=1/1 row: it matches the haploid truth perfectly even WITHOUT
+squashing, because vcfeval treats homozygous-ALT as equivalent to haploid ALT.
+So vcfeval will NOT catch every ploidy misconfiguration on its own. This is why
+rule R2 requires grepping the GT field directly (Phase 6) rather than trusting
+the score.

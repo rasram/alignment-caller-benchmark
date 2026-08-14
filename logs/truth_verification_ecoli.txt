@@ -1,0 +1,82 @@
+# Truth-set verification — ecoli — 2026-08-14 13:42:09 UTC
+
+## 1. Variant counts
+SNPs   : 5000
+INDELs : 1000
+TOTAL  : 6000
+Genome : 4641652 bp  -> 1 variant per 773 bp
+
+## 2. Indel length distribution (ALT length - REF length; +=insertion)
+  size  -45 :     1
+  size  -35 :     1
+  size  -33 :     1
+  size  -30 :     1
+  size  -28 :     1
+  size  -24 :     1
+  size  -21 :     1
+  size  -13 :     2
+  size  -12 :     4
+  size   -9 :     1
+  size   -8 :     3
+  size   -7 :     7
+  size   -6 :    10
+  size   -5 :     4
+  size   -4 :    20
+  size   -3 :    26
+  size   -2 :    60
+  size   -1 :   348
+  size   +1 :   364
+  size   +2 :    53
+  size   +3 :    28
+  size   +4 :    10
+  size   +5 :    12
+  size   +6 :     4
+  size   +7 :     8
+  size   +8 :     3
+  size   +9 :     3
+  size  +10 :     2
+  size  +11 :     1
+  size  +12 :     1
+  size  +13 :     3
+  size  +14 :     2
+  size  +16 :     2
+  size  +17 :     1
+  size  +18 :     1
+  size  +21 :     1
+  size  +22 :     1
+  size  +23 :     2
+  size  +25 :     1
+  size  +27 :     1
+  size  +31 :     1
+  size  +32 :     1
+  size  +49 :     1
+  size  +50 :     1
+
+  insertions: 508
+  deletions : 492
+
+## 3. SNP transition/transversion ratio
+  transitions=1622 transversions=3378 Ti/Tv=0.480
+
+## 4. Manual spot-check: VCF REF vs samtools faidx on the reference
+  TYPE   POS        VCF_REF        FASTA_REF      MATCH
+  snps   446        T              T              OK
+  snps   668        T              T              OK
+  snps   3084       G              G              OK
+  indels 13738      GA             GA             OK
+  indels 17015      C              C              OK
+  indels 25355      A              A              OK
+  RESULT: OK — every checked REF matches the reference FASTA.
+
+## 5. Length bookkeeping: truth VCF vs the actual mutated genome
+  reference length      : 4641652
+  mutated genome length : 4641839
+  observed difference   : 187
+  net indel sum in VCF  : 187
+  RESULT: OK — the truth VCF accounts for every base of length change.
+
+## Contig name consistency (R5)
+  ref.fai : ecoli 
+  truth   : ecoli 
+  bed     : ecoli 
+  mutated : ecoli 
