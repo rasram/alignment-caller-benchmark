@@ -27,6 +27,8 @@ GEN="${1:?usage: verify_truth.sh <genome> [n_spotcheck]}"
 NSPOT="${2:-3}"
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_BASE="${CONDA_BASE:-$HOME/miniforge3}"
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/tools.sh"
 REF="$REPO/data/refs/${GEN}.fa"
 T="$REPO/data/truth"
 TRUTH="$T/${GEN}.truth.vcf.gz"
@@ -35,8 +37,8 @@ LOG="$REPO/logs/truth_verification_${GEN}.txt"
 
 # shellcheck disable=SC1091
 source "$CONDA_BASE/etc/profile.d/conda.sh"
-BCFTOOLS="$CONDA_BASE/envs/callers/bin/bcftools"
-SAMTOOLS="$CONDA_BASE/envs/align/bin/samtools"
+BCFTOOLS="$(resolve_tool bcftools callers)"
+SAMTOOLS="$(resolve_tool samtools align)"
 bcf(){ "$BCFTOOLS" "$@"; }
 sam(){ "$SAMTOOLS" "$@"; }
 

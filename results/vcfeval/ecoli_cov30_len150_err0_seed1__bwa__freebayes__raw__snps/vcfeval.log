@@ -1,89 +1,89 @@
-2026-08-14 19:46:08 serial = 27182818284
-2026-08-14 19:46:08 email = anon
-2026-08-14 19:46:08 RTG version = RTG Tools 3.13 / Core c27844a5bb (2025-05-27)
-2026-08-14 19:46:08 apple.awt.application.name = RtgTools
-2026-08-14 19:46:08 file.encoding = UTF-8
-2026-08-14 19:46:08 file.separator = /
-2026-08-14 19:46:08 ftp.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
-2026-08-14 19:46:08 host.name = Rashwanths-MacBook-Pro.local
-2026-08-14 19:46:08 http.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
-2026-08-14 19:46:08 java.class.path = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/RTG.jar
-2026-08-14 19:46:08 java.class.version = 67.0
-2026-08-14 19:46:08 java.home = /Library/Java/JavaVirtualMachines/jdk-23.jdk/Contents/Home
-2026-08-14 19:46:08 java.io.tmpdir = /var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/
-2026-08-14 19:46:08 java.library.path = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13
-2026-08-14 19:46:08 java.runtime.name = Java(TM) SE Runtime Environment
-2026-08-14 19:46:08 java.runtime.version = 23.0.2+7-58
-2026-08-14 19:46:08 java.specification.name = Java Platform API Specification
-2026-08-14 19:46:08 java.specification.vendor = Oracle Corporation
-2026-08-14 19:46:08 java.specification.version = 23
-2026-08-14 19:46:08 java.vendor = Oracle Corporation
-2026-08-14 19:46:08 java.vendor.url = https://java.oracle.com/
-2026-08-14 19:46:08 java.vendor.url.bug = https://bugreport.java.com/bugreport/
-2026-08-14 19:46:08 java.version = 23.0.2
-2026-08-14 19:46:08 java.version.date = 2025-01-21
-2026-08-14 19:46:08 java.vm.compressedOopsMode = Non-zero disjoint base
-2026-08-14 19:46:08 java.vm.info = mixed mode, sharing
-2026-08-14 19:46:08 java.vm.name = Java HotSpot(TM) 64-Bit Server VM
-2026-08-14 19:46:08 java.vm.specification.name = Java Virtual Machine Specification
-2026-08-14 19:46:08 java.vm.specification.vendor = Oracle Corporation
-2026-08-14 19:46:08 java.vm.specification.version = 23
-2026-08-14 19:46:08 java.vm.vendor = Oracle Corporation
-2026-08-14 19:46:08 java.vm.version = 23.0.2+7-58
-2026-08-14 19:46:08 jdk.debug = release
-2026-08-14 19:46:08 lang.version = 23.0.2
-2026-08-14 19:46:08 line.separator = 
+2026-08-14 21:38:17 serial = 27182818284
+2026-08-14 21:38:17 email = anon
+2026-08-14 21:38:17 RTG version = RTG Tools 3.13 / Core c27844a5bb (2025-05-27)
+2026-08-14 21:38:17 apple.awt.application.name = RtgTools
+2026-08-14 21:38:17 file.encoding = UTF-8
+2026-08-14 21:38:17 file.separator = /
+2026-08-14 21:38:17 ftp.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
+2026-08-14 21:38:17 host.name = Rashwanths-MacBook-Pro.local
+2026-08-14 21:38:17 http.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
+2026-08-14 21:38:17 java.class.path = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/RTG.jar
+2026-08-14 21:38:17 java.class.version = 67.0
+2026-08-14 21:38:17 java.home = /Library/Java/JavaVirtualMachines/jdk-23.jdk/Contents/Home
+2026-08-14 21:38:17 java.io.tmpdir = /var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/
+2026-08-14 21:38:17 java.library.path = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13
+2026-08-14 21:38:17 java.runtime.name = Java(TM) SE Runtime Environment
+2026-08-14 21:38:17 java.runtime.version = 23.0.2+7-58
+2026-08-14 21:38:17 java.specification.name = Java Platform API Specification
+2026-08-14 21:38:17 java.specification.vendor = Oracle Corporation
+2026-08-14 21:38:17 java.specification.version = 23
+2026-08-14 21:38:17 java.vendor = Oracle Corporation
+2026-08-14 21:38:17 java.vendor.url = https://java.oracle.com/
+2026-08-14 21:38:17 java.vendor.url.bug = https://bugreport.java.com/bugreport/
+2026-08-14 21:38:17 java.version = 23.0.2
+2026-08-14 21:38:17 java.version.date = 2025-01-21
+2026-08-14 21:38:17 java.vm.compressedOopsMode = Non-zero disjoint base
+2026-08-14 21:38:17 java.vm.info = mixed mode, sharing
+2026-08-14 21:38:17 java.vm.name = Java HotSpot(TM) 64-Bit Server VM
+2026-08-14 21:38:17 java.vm.specification.name = Java Virtual Machine Specification
+2026-08-14 21:38:17 java.vm.specification.vendor = Oracle Corporation
+2026-08-14 21:38:17 java.vm.specification.version = 23
+2026-08-14 21:38:17 java.vm.vendor = Oracle Corporation
+2026-08-14 21:38:17 java.vm.version = 23.0.2+7-58
+2026-08-14 21:38:17 jdk.debug = release
+2026-08-14 21:38:17 lang.version = 23.0.2
+2026-08-14 21:38:17 line.separator = 
 
-2026-08-14 19:46:08 models.dir = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/models
-2026-08-14 19:46:08 nashorn.option.no.deprecation.warning = true
-2026-08-14 19:46:08 native.encoding = UTF-8
-2026-08-14 19:46:08 os.arch = aarch64
-2026-08-14 19:46:08 os.freememory = 550158336
-2026-08-14 19:46:08 os.name = Mac OS X
-2026-08-14 19:46:08 os.totalmemory = 25769803776
-2026-08-14 19:46:08 os.version = 26.6.1
-2026-08-14 19:46:08 path.separator = :
-2026-08-14 19:46:08 polyglot.js.nashorn-compat = true
-2026-08-14 19:46:08 processor.arch = aarch64
-2026-08-14 19:46:08 processor.count = 10
-2026-08-14 19:46:08 references.dir = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/references
-2026-08-14 19:46:08 runtime.freememory = 406258712
-2026-08-14 19:46:08 runtime.maxmemory = 23202889728
-2026-08-14 19:46:08 runtime.totalMemory = 419430400
-2026-08-14 19:46:08 socksNonProxyHosts = local|*.local|169.254/16|*.169.254/16
-2026-08-14 19:46:08 stderr.encoding = UTF-8
-2026-08-14 19:46:08 stdout.encoding = UTF-8
-2026-08-14 19:46:08 sun.arch.data.model = 64
-2026-08-14 19:46:08 sun.boot.library.path = /Library/Java/JavaVirtualMachines/jdk-23.jdk/Contents/Home/lib
-2026-08-14 19:46:08 sun.cpu.endian = little
-2026-08-14 19:46:08 sun.io.unicode.encoding = UnicodeBig
-2026-08-14 19:46:08 sun.java.command = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/RTG.jar vcfeval -b /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/norm/ecoli.truth.snps.vcf.gz -c /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/norm/ecoli_cov30_len150_err0_seed1.bwa.freebayes.raw.snps.vcf.gz -t /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/ecoli.sdf -e /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/truth/ecoli.confident.bed --vcf-score-field=QUAL -o /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/results/vcfeval/ecoli_cov30_len150_err0_seed1__bwa__freebayes__raw__snps
-2026-08-14 19:46:08 sun.java.launcher = SUN_STANDARD
-2026-08-14 19:46:08 sun.jnu.encoding = UTF-8
-2026-08-14 19:46:08 sun.management.compiler = HotSpot 64-Bit Tiered Compilers
-2026-08-14 19:46:08 talkback = false
-2026-08-14 19:46:08 usage = false
-2026-08-14 19:46:08 user.country = US
-2026-08-14 19:46:08 user.dir = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1
-2026-08-14 19:46:08 user.home = /Users/rash
-2026-08-14 19:46:08 user.language = en
-2026-08-14 19:46:08 user.name = rash
-2026-08-14 19:46:08 user.timezone = Asia/Kolkata
-2026-08-14 19:46:08 vendor = Oracle Corporation
-2026-08-14 19:46:08 gzipfix.enabled = false
-2026-08-14 19:46:08 Command line arguments: rtg vcfeval -b "/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/norm/ecoli.truth.snps.vcf.gz" -c "/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/norm/ecoli_cov30_len150_err0_seed1.bwa.freebayes.raw.snps.vcf.gz" -t "/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/ecoli.sdf" -e "/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/truth/ecoli.confident.bed" --vcf-score-field=QUAL -o "/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/results/vcfeval/ecoli_cov30_len150_err0_seed1__bwa__freebayes__raw__snps"
-2026-08-14 19:46:08 Run Id: e2c87c77-b5c3-4ae1-9fe1-831f0e992829
-2026-08-14 19:46:08 Referenced SDF-ID: b7a2474d-c167-426a-9445-3c6c14baf7c1 Type: DNA Sequences: 1 Max-Length: 4641652 Min-Length: 4641652 Arm: UNKNOWN
-2026-08-14 19:46:08 Variant orientors per pass: [unphased (2 haplotypes):unphased (2 haplotypes)]
-2026-08-14 19:46:08 Reference ecoli baseline contains 5000 variants.
-2026-08-14 19:46:08 Reference ecoli calls contains 4962 variants.
-2026-08-14 19:46:08 Reference ecoli had maximum path complexity of 6 at ecoli:2804050-2804897
-2026-08-14 19:46:09 Representation bias correction factor for SNP 4946/4946.0 = 1.0
-2026-08-14 19:46:09 Representation bias correction factor for NON_SNP 0/0.0 = 1.0
-2026-08-14 19:46:09 Selected score threshold using: maximized F-measure
-2026-08-14 19:46:09 Threshold  True-pos-baseline  True-pos-call  False-pos  False-neg  Precision  Sensitivity  F-measure
+2026-08-14 21:38:17 models.dir = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/models
+2026-08-14 21:38:17 nashorn.option.no.deprecation.warning = true
+2026-08-14 21:38:17 native.encoding = UTF-8
+2026-08-14 21:38:17 os.arch = aarch64
+2026-08-14 21:38:17 os.freememory = 6392283136
+2026-08-14 21:38:17 os.name = Mac OS X
+2026-08-14 21:38:17 os.totalmemory = 25769803776
+2026-08-14 21:38:17 os.version = 26.6.1
+2026-08-14 21:38:17 path.separator = :
+2026-08-14 21:38:17 polyglot.js.nashorn-compat = true
+2026-08-14 21:38:17 processor.arch = aarch64
+2026-08-14 21:38:17 processor.count = 10
+2026-08-14 21:38:17 references.dir = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/references
+2026-08-14 21:38:17 runtime.freememory = 406163264
+2026-08-14 21:38:17 runtime.maxmemory = 23202889728
+2026-08-14 21:38:17 runtime.totalMemory = 419430400
+2026-08-14 21:38:17 socksNonProxyHosts = local|*.local|169.254/16|*.169.254/16
+2026-08-14 21:38:17 stderr.encoding = UTF-8
+2026-08-14 21:38:17 stdout.encoding = UTF-8
+2026-08-14 21:38:17 sun.arch.data.model = 64
+2026-08-14 21:38:17 sun.boot.library.path = /Library/Java/JavaVirtualMachines/jdk-23.jdk/Contents/Home/lib
+2026-08-14 21:38:17 sun.cpu.endian = little
+2026-08-14 21:38:17 sun.io.unicode.encoding = UnicodeBig
+2026-08-14 21:38:17 sun.java.command = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/tools/rtg-tools-3.13/RTG.jar vcfeval -b work/norm/ecoli.truth.snps.vcf.gz -c work/norm/ecoli_cov30_len150_err0_seed1.bwa.freebayes.raw.snps.vcf.gz -t data/refs/ecoli.sdf -e data/truth/ecoli.confident.bed --vcf-score-field=QUAL -o results/vcfeval/ecoli_cov30_len150_err0_seed1__bwa__freebayes__raw__snps
+2026-08-14 21:38:17 sun.java.launcher = SUN_STANDARD
+2026-08-14 21:38:17 sun.jnu.encoding = UTF-8
+2026-08-14 21:38:17 sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+2026-08-14 21:38:17 talkback = false
+2026-08-14 21:38:17 usage = false
+2026-08-14 21:38:17 user.country = US
+2026-08-14 21:38:17 user.dir = /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1
+2026-08-14 21:38:17 user.home = /Users/rash
+2026-08-14 21:38:17 user.language = en
+2026-08-14 21:38:17 user.name = rash
+2026-08-14 21:38:17 user.timezone = Asia/Kolkata
+2026-08-14 21:38:17 vendor = Oracle Corporation
+2026-08-14 21:38:17 gzipfix.enabled = false
+2026-08-14 21:38:17 Command line arguments: rtg vcfeval -b work/norm/ecoli.truth.snps.vcf.gz -c work/norm/ecoli_cov30_len150_err0_seed1.bwa.freebayes.raw.snps.vcf.gz -t data/refs/ecoli.sdf -e data/truth/ecoli.confident.bed --vcf-score-field=QUAL -o results/vcfeval/ecoli_cov30_len150_err0_seed1__bwa__freebayes__raw__snps
+2026-08-14 21:38:17 Run Id: 37da067e-e4bc-456b-8bb4-20d5a5c0b12f
+2026-08-14 21:38:17 Referenced SDF-ID: b7a2474d-c167-426a-9445-3c6c14baf7c1 Type: DNA Sequences: 1 Max-Length: 4641652 Min-Length: 4641652 Arm: UNKNOWN
+2026-08-14 21:38:17 Variant orientors per pass: [unphased (2 haplotypes):unphased (2 haplotypes)]
+2026-08-14 21:38:17 Reference ecoli baseline contains 5000 variants.
+2026-08-14 21:38:17 Reference ecoli calls contains 4962 variants.
+2026-08-14 21:38:17 Reference ecoli had maximum path complexity of 6 at ecoli:2804050-2804897
+2026-08-14 21:38:18 Representation bias correction factor for SNP 4946/4946.0 = 1.0
+2026-08-14 21:38:18 Representation bias correction factor for NON_SNP 0/0.0 = 1.0
+2026-08-14 21:38:18 Selected score threshold using: maximized F-measure
+2026-08-14 21:38:18 Threshold  True-pos-baseline  True-pos-call  False-pos  False-neg  Precision  Sensitivity  F-measure
 ----------------------------------------------------------------------------------------------------
    28.470               4946           4946         16         54     0.9968       0.9892     0.9930
      None               4946           4946         16         54     0.9968       0.9892     0.9930
 
-2026-08-14 19:46:09 Finished successfully in 0 s.
+2026-08-14 21:38:18 Finished successfully in 1 s.

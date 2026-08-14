@@ -23,7 +23,9 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_BASE="${CONDA_BASE:-$HOME/miniforge3}"
-S="$CONDA_BASE/envs/align/bin/samtools"
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/tools.sh"
+S="$(resolve_tool samtools align)"
 W="$REPO/work"; LOGS="$REPO/logs"
 OUT="$REPO/results/align_metrics.tsv"
 mkdir -p "$REPO/results"

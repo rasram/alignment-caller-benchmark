@@ -29,8 +29,10 @@ SEED="${5:-1}"
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_BASE="${CONDA_BASE:-$HOME/miniforge3}"
-ART="$CONDA_BASE/envs/sim/bin/art_illumina"
-SAMTOOLS="$CONDA_BASE/envs/align/bin/samtools"
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/tools.sh"
+ART="$(resolve_tool art_illumina sim)"
+SAMTOOLS="$(resolve_tool samtools align)"
 
 MUT="$REPO/data/truth/${GEN}.simseq.genome.fa"
 REF="$REPO/data/refs/${GEN}.fa"

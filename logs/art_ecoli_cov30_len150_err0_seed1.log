@@ -7,7 +7,7 @@
 
                   Paired-end sequencing simulation
 
-Total CPU time used: 10.3771
+Total CPU time used: 13.0277
 
 The random seed for the run: 1
 
@@ -29,9 +29,9 @@ Quality Profile(s)
 Output files
 
   FASTQ Sequence Files:
-	 the 1st reads: /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/ecoli_cov30_len150_err0_seed1_1.fq
-	 the 2nd reads: /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/ecoli_cov30_len150_err0_seed1_2.fq
+	 the 1st reads: work/ecoli_cov30_len150_err0_seed1_1.fq
+	 the 2nd reads: work/ecoli_cov30_len150_err0_seed1_2.fq
 
   SAM Alignment File:
-	/Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/ecoli_cov30_len150_err0_seed1_.sam
+	work/ecoli_cov30_len150_err0_seed1_.sam
 

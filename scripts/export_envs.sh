@@ -3,9 +3,18 @@
 #
 # Two files are written per environment, because they serve different purposes:
 #
-#   envs/<name>.yaml         — name + version + build string, no platform-specific
-#                              URLs. This is what Snakemake's `conda:` directive uses
-#                              and what a collaborator on Linux can actually install.
+#   envs/<name>.yaml         — the TOP-LEVEL packages only, pinned to the exact
+#                              versions in use. This is what Snakemake's `conda:`
+#                              directive consumes and what a collaborator on
+#                              another platform can actually install.
+#
+#                              It is deliberately NOT a full `conda env export`.
+#                              A full export lists every transitive dependency at
+#                              an exact version; re-solving that set on another
+#                              machine (or another day) frequently fails, because
+#                              it over-constrains packages we never asked for.
+#                              Pinning what we chose and letting the solver fill
+#                              in the rest is both reproducible and installable.
 #
 #   envs/<name>.lock.yaml    — `--explicit`-style full URL lock of this exact build
 #                              set on osx-arm64. Byte-exact reproduction on an
@@ -31,11 +40,24 @@ for env in align callers sim qc ml; do
     continue
   fi
 
-  # Portable: --from-history keeps only what was explicitly requested, but drops
-  # versions. We want the full solved list minus the platform-locked build URLs,
-  # so use the normal export and strip the `prefix:` line (it leaks a local path).
-  conda env export -n "$env" --no-builds \
-    | grep -v '^prefix:' > "$REPO/envs/${env}.yaml"
+  # Portable: the packages we explicitly asked for, at their installed versions.
+  # `--from-history` recovers exactly that request list (but without versions), so
+  # the versions are looked up from `conda list`.
+  {
+    echo "name: $env"
+    echo "channels:"
+    echo "  - bioconda"
+    echo "  - conda-forge"
+    echo "dependencies:"
+    conda env export -n "$env" --from-history \
+      | awk '/^dependencies:/{f=1;next} /^[a-z]/{f=0} f && /^  - /{sub(/^  - /,""); sub(/=.*$/,""); print}' \
+      | while read -r pkg; do
+          [ -n "$pkg" ] || continue
+          v=$(conda list -n "$env" --json "^${pkg}$" 2>/dev/null \
+              | python3 -c "import json,sys; d=json.load(sys.stdin); print(d[0]['version'] if d else '')" 2>/dev/null)
+          if [ -n "$v" ]; then echo "  - ${pkg}=${v}"; else echo "  - ${pkg}"; fi
+        done
+  } > "$REPO/envs/${env}.yaml"
 
   # Exact: full URLs including build hashes.
   conda list -n "$env" --explicit --md5 > "$REPO/envs/${env}.lock.yaml"

@@ -20,6 +20,8 @@ set -euo pipefail
 GEN="${1:?usage: build_truth.sh <genome>}"
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_BASE="${CONDA_BASE:-$HOME/miniforge3}"
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/tools.sh"
 REF="$REPO/data/refs/${GEN}.fa"
 FAI="$REF.fai"
 T="$REPO/data/truth"
@@ -28,7 +30,7 @@ T="$REPO/data/truth"
 source "$CONDA_BASE/etc/profile.d/conda.sh"
 
 # R3/§0.10: ALL normalisation in this project uses this one bcftools binary.
-BCFTOOLS="$CONDA_BASE/envs/callers/bin/bcftools"
+BCFTOOLS="$(resolve_tool bcftools callers)"
 bcf() { "$BCFTOOLS" "$@"; }
 
 SNPVCF="$T/${GEN}.refseq2simseq.SNP.vcf"

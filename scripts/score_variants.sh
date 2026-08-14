@@ -26,7 +26,9 @@ SET="${3:-raw}"
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_BASE="${CONDA_BASE:-$HOME/miniforge3}"
-C="$CONDA_BASE/envs/callers/bin"
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/tools.sh"
+BCFTOOLS="$(resolve_tool bcftools callers)"
 RTG="$REPO/tools/rtg-tools-3.13/rtg"
 REF="$REPO/data/refs/${GEN}.fa"
 SDF="$REPO/data/refs/${GEN}.sdf"
@@ -45,8 +47,8 @@ NORM_ARGS=(-f "$REF" -m -any --atomize)
 # Pre-split the truth set once (same normalisation already applied).
 for VT in snps indels; do
   TS="$W/norm/${GEN}.truth.${VT}.vcf.gz"
-  "$C/bcftools" view -v "$VT" -Oz -o "$TS" "$TRUTH" 2>/dev/null
-  "$C/bcftools" index -t -f "$TS"
+  "$BCFTOOLS" view -v "$VT" -Oz -o "$TS" "$TRUTH" 2>/dev/null
+  "$BCFTOOLS" index -t -f "$TS"
 done
 
 run_eval() { # outdir baseline calls
@@ -72,9 +74,9 @@ for ALN in $ALIGNERS; do
     [[ -s "$SRC" ]] || { echo "  skip (missing) $ALN/$CAL"; continue; }
 
     NORM="$W/norm/${TAG}.${ALN}.${CAL}.${SET}.norm.vcf.gz"
-    "$C/bcftools" norm "${NORM_ARGS[@]}" -Oz -o "$NORM" "$SRC" \
+    "$BCFTOOLS" norm "${NORM_ARGS[@]}" -Oz -o "$NORM" "$SRC" \
         2> "$W/norm/${TAG}.${ALN}.${CAL}.${SET}.norm.log"
-    "$C/bcftools" index -t -f "$NORM"
+    "$BCFTOOLS" index -t -f "$NORM"
 
     # --- full call set (also yields RTG's native snp/non_snp ROC) ------------
     run_eval "$VE/${TAG}__${ALN}__${CAL}__${SET}__all" "$TRUTH" "$NORM"
@@ -82,8 +84,8 @@ for ALN in $ALIGNERS; do
     # --- explicit per-type split (the brief's method) ------------------------
     for VT in snps indels; do
       SPLIT="$W/norm/${TAG}.${ALN}.${CAL}.${SET}.${VT}.vcf.gz"
-      "$C/bcftools" view -v "$VT" -Oz -o "$SPLIT" "$NORM" 2>/dev/null
-      "$C/bcftools" index -t -f "$SPLIT"
+      "$BCFTOOLS" view -v "$VT" -Oz -o "$SPLIT" "$NORM" 2>/dev/null
+      "$BCFTOOLS" index -t -f "$SPLIT"
       run_eval "$VE/${TAG}__${ALN}__${CAL}__${SET}__${VT}" \
                "$W/norm/${GEN}.truth.${VT}.vcf.gz" "$SPLIT"
     done

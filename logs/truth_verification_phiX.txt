@@ -1,4 +1,4 @@
-# Truth-set verification — phiX — 2026-08-14 13:48:31 UTC
+# Truth-set verification — phiX — 2026-08-14 15:59:37 UTC
 
 ## 1. Variant counts
 SNPs   : 50
@@ -23,10 +23,8 @@ Genome : 5386 bp  -> 1 variant per 89 bp
   TYPE   POS        VCF_REF        FASTA_REF      MATCH
   snps   51         A              A              OK
   snps   162        C              C              OK
-  snps   215        A              A              OK
   indels 469        TG             TG             OK
   indels 581        C              C              OK
-  indels 996        A              A              OK
   RESULT: OK — every checked REF matches the reference FASTA.
 
 ## 5. Length bookkeeping: truth VCF vs the actual mutated genome

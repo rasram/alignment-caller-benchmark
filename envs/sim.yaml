@@ -1,17 +1,7 @@
 name: sim
 channels:
-  - conda-forge
   - bioconda
+  - conda-forge
 dependencies:
-  - _openmp_mutex=4.5
   - art=2016.06.05
-  - gsl=2.7
-  - libblas=3.11.0
-  - libcblas=3.11.0
-  - libcxx=22.1.8
-  - libgcc=16.1.0
-  - libgfortran=16.1.0
-  - libgfortran5=16.1.0
-  - libopenblas=0.3.34
-  - llvm-openmp=22.1.8
   - perl=5.32.1

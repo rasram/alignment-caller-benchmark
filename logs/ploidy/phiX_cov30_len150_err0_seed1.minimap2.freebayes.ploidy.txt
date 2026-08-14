@@ -1,0 +1,2 @@
+phiX_cov30_len150_err0_seed1 minimap2 freebayes records=61 diploid=0
+PASS (haploid)

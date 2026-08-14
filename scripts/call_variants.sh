@@ -30,7 +30,13 @@ THREADS="${3:-4}"
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_BASE="${CONDA_BASE:-$HOME/miniforge3}"
-C="$CONDA_BASE/envs/callers/bin"
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/tools.sh"
+GATK="$(resolve_tool gatk callers)"
+GATK_DIR="$(dirname "$GATK")"
+FREEBAYES="$(resolve_tool freebayes callers)"
+BCFTOOLS="$(resolve_tool bcftools callers)"
+BGZIP="$(resolve_tool bgzip callers)"
 REF="$REPO/data/refs/${GEN}.fa"
 W="$REPO/work"; LOGS="$REPO/logs"
 PLOIDY_LOG="$LOGS/ploidy_verification.txt"
@@ -44,7 +50,7 @@ CALLERS="gatk freebayes bcftools"
 # real binary and cannot run a shell function, failing with
 # "time: gatk: No such file or directory" — which looks like a missing install
 # rather than a quoting problem.
-GATK_RUN=(env "PATH=$C:$PATH" "$C/gatk")
+GATK_RUN=(env "PATH=$GATK_DIR:$PATH" "$GATK")
 secs_of() { awk '/ real /{printf "%.2f", $1}' "$1"; }
 
 # ---------------------------------------------------------------------------
@@ -54,10 +60,10 @@ verify_ploidy() { # vcf aligner caller
   local vcf="$1" aln="$2" cal="$3"
   local gts n_hap n_dip total
   # Collect distinct GT values actually present.
-  gts=$("$C/bcftools" query -f '[%GT]\n' "$vcf" 2>/dev/null | sort | uniq -c \
+  gts=$("$BCFTOOLS" query -f '[%GT]\n' "$vcf" 2>/dev/null | sort | uniq -c \
         | awk '{printf "%s(%s) ", $2, $1}')
-  total=$("$C/bcftools" view -H "$vcf" 2>/dev/null | wc -l | tr -d ' ')
-  n_dip=$("$C/bcftools" query -f '[%GT]\n' "$vcf" 2>/dev/null | grep -c '[/|]' || true)
+  total=$("$BCFTOOLS" view -H "$vcf" 2>/dev/null | wc -l | tr -d ' ')
+  n_dip=$("$BCFTOOLS" query -f '[%GT]\n' "$vcf" 2>/dev/null | grep -c '[/|]' || true)
   n_hap=$(( total - n_dip ))
 
   local verdict
@@ -96,7 +102,7 @@ for ALN in $ALIGNERS; do
       > "$LOGS/gatk_${TAG}_${ALN}.log" 2> "$TF" || {
         echo "FATAL: GATK failed; see $TF" >&2
         tail -25 "$TF" >&2; exit 1; }
-  "$C/bcftools" index -t -f "$OUT"
+  "$BCFTOOLS" index -t -f "$OUT"
   verify_ploidy "$OUT" "$ALN" gatk
   printf '%s\t%s\t%s\t%s\n' "$TAG" "$ALN" gatk "$(secs_of "$TF")" >> "$LOGS/call_timing.tsv"
 
@@ -104,11 +110,11 @@ for ALN in $ALIGNERS; do
   OUT="$W/${TAG}.${ALN}.freebayes.raw.vcf.gz"
   TF="$LOGS/timing/${TAG}.${ALN}.freebayes.time"
   echo "  [$ALN/freebayes] calling..."
-  /usr/bin/time -l "$C/freebayes" -f "$REF" -p 1 "$BAM" \
+  /usr/bin/time -l "$FREEBAYES" -f "$REF" -p 1 "$BAM" \
       > "$W/.fb.$$.vcf" 2> "$TF" || {
         echo "FATAL: FreeBayes failed" >&2; tail -20 "$TF" >&2; exit 1; }
-  "$C/bgzip" -c "$W/.fb.$$.vcf" > "$OUT"; rm -f "$W/.fb.$$.vcf"
-  "$C/bcftools" index -t -f "$OUT"
+  "$BGZIP" -c "$W/.fb.$$.vcf" > "$OUT"; rm -f "$W/.fb.$$.vcf"
+  "$BCFTOOLS" index -t -f "$OUT"
   verify_ploidy "$OUT" "$ALN" freebayes
   printf '%s\t%s\t%s\t%s\n' "$TAG" "$ALN" freebayes "$(secs_of "$TF")" >> "$LOGS/call_timing.tsv"
 
@@ -118,10 +124,10 @@ for ALN in $ALIGNERS; do
   echo "  [$ALN/bcftools] calling..."
   # -a AD,DP annotates depth so the shared hard filter can use DP (see below).
   /usr/bin/time -l sh -c \
-      "'$C/bcftools' mpileup -f '$REF' -a AD,DP -Ou '$BAM' \
-       | '$C/bcftools' call -mv --ploidy 1 -Oz -o '$OUT'" 2> "$TF" || {
+      "'$BCFTOOLS' mpileup -f '$REF' -a AD,DP -Ou '$BAM' \
+       | '$BCFTOOLS' call -mv --ploidy 1 -Oz -o '$OUT'" 2> "$TF" || {
         echo "FATAL: BCFtools failed" >&2; tail -20 "$TF" >&2; exit 1; }
-  "$C/bcftools" index -t -f "$OUT"
+  "$BCFTOOLS" index -t -f "$OUT"
   verify_ploidy "$OUT" "$ALN" bcftools
   printf '%s\t%s\t%s\t%s\n' "$TAG" "$ALN" bcftools "$(secs_of "$TF")" >> "$LOGS/call_timing.tsv"
 done
@@ -147,11 +153,11 @@ for ALN in $ALIGNERS; do
     RAW="$W/${TAG}.${ALN}.${CAL}.raw.vcf.gz"
     FLT="$W/${TAG}.${ALN}.${CAL}.filt.vcf.gz"
     [[ -s "$RAW" ]] || continue
-    "$C/bcftools" view -i "$FILTER_EXPR" -Oz -o "$FLT" "$RAW" 2>/dev/null
-    "$C/bcftools" index -t -f "$FLT"
+    "$BCFTOOLS" view -i "$FILTER_EXPR" -Oz -o "$FLT" "$RAW" 2>/dev/null
+    "$BCFTOOLS" index -t -f "$FLT"
     printf '    %-9s %-10s raw=%-7s filtered=%s\n' "$ALN" "$CAL" \
-      "$("$C/bcftools" view -H "$RAW" | wc -l | tr -d ' ')" \
-      "$("$C/bcftools" view -H "$FLT" | wc -l | tr -d ' ')"
+      "$("$BCFTOOLS" view -H "$RAW" | wc -l | tr -d ' ')" \
+      "$("$BCFTOOLS" view -H "$FLT" | wc -l | tr -d ' ')"
   done
 done
 

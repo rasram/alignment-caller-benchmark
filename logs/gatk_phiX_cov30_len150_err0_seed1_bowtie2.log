@@ -1,0 +1,70 @@
+Using GATK jar /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar
+Running:
+    java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar HaplotypeCaller -R data/refs/phiX.fa -I work/phiX_cov30_len150_err0_seed1.bowtie2.md.bam -O work/phiX_cov30_len150_err0_seed1.bowtie2.gatk.raw.vcf.gz --sample-ploidy 1 --native-pair-hmm-threads 4
+21:39:03.188 INFO  NativeLibraryLoader - Loading libgkl_compression.dylib from jar:file:/Users/rash/Documents/Files/Self/College/Semester%207/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_compression.dylib
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.intel.gkl.NativeLibraryLoader in an unnamed module (file:/Users/rash/Documents/Files/Self/College/Semester%207/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+21:39:03.194 WARN  NativeLibraryLoader - Unable to load libgkl_compression.dylib from native/libgkl_compression.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5569606684344295101.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5569606684344295101.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5569606684344295101.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5569606684344295101.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression5569606684344295101.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+21:39:03.197 INFO  NativeLibraryLoader - Loading libgkl_compression.dylib from jar:file:/Users/rash/Documents/Files/Self/College/Semester%207/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_compression.dylib
+21:39:03.199 WARN  NativeLibraryLoader - Unable to load libgkl_compression.dylib from native/libgkl_compression.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression16437256393672207715.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression16437256393672207715.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression16437256393672207715.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression16437256393672207715.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_compression16437256393672207715.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+21:39:03.250 INFO  HaplotypeCaller - ------------------------------------------------------------
+21:39:03.251 INFO  HaplotypeCaller - The Genome Analysis Toolkit (GATK) v4.6.2.0
+21:39:03.251 INFO  HaplotypeCaller - For support and documentation go to https://software.broadinstitute.org/gatk/
+21:39:03.251 INFO  HaplotypeCaller - Executing as rash@Rashwanths-MacBook-Pro.local on Mac OS X v26.6.1 aarch64
+21:39:03.251 INFO  HaplotypeCaller - Java runtime: OpenJDK 64-Bit Server VM v25.0.2+10-LTS
+21:39:03.252 INFO  HaplotypeCaller - Start Date/Time: August 14, 2026, 9:39:03 PM IST
+21:39:03.252 INFO  HaplotypeCaller - ------------------------------------------------------------
+21:39:03.252 INFO  HaplotypeCaller - ------------------------------------------------------------
+21:39:03.252 INFO  HaplotypeCaller - HTSJDK Version: 4.2.0
+21:39:03.252 INFO  HaplotypeCaller - Picard Version: 3.4.0
+21:39:03.252 INFO  HaplotypeCaller - Built for Spark Version: 3.5.0
+21:39:03.252 INFO  HaplotypeCaller - HTSJDK Defaults.COMPRESSION_LEVEL : 2
+21:39:03.252 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+21:39:03.252 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
+21:39:03.252 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+21:39:03.253 INFO  HaplotypeCaller - Deflater: JdkDeflater
+21:39:03.253 INFO  HaplotypeCaller - Inflater: JdkInflater
+21:39:03.253 INFO  HaplotypeCaller - GCS max retries/reopens: 20
+21:39:03.253 INFO  HaplotypeCaller - Requester pays: disabled
+21:39:03.253 INFO  HaplotypeCaller - Initializing engine
+21:39:03.264 WARN  IntelInflaterFactory - IntelInflater is not supported, using Java.util.zip.Inflater
+21:39:03.266 WARN  IntelInflaterFactory - IntelInflater is not supported, using Java.util.zip.Inflater
+21:39:03.303 INFO  HaplotypeCaller - Done initializing engine
+21:39:03.306 INFO  NativeLibraryLoader - Loading libgkl_utils.dylib from jar:file:/Users/rash/Documents/Files/Self/College/Semester%207/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_utils.dylib
+21:39:03.307 WARN  NativeLibraryLoader - Unable to load libgkl_utils.dylib from native/libgkl_utils.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils16620348185000565009.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils16620348185000565009.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils16620348185000565009.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils16620348185000565009.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils16620348185000565009.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+21:39:03.307 WARN  IntelSmithWaterman - Intel GKL Utils not loaded
+21:39:03.307 INFO  SmithWatermanAligner - AVX accelerated SmithWaterman implementation is not supported, falling back to the Java implementation
+21:39:03.308 INFO  HaplotypeCallerEngine - Currently, physical phasing is only available for diploid samples.
+21:39:03.312 INFO  NativeLibraryLoader - Loading libgkl_utils.dylib from jar:file:/Users/rash/Documents/Files/Self/College/Semester%207/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_utils.dylib
+21:39:03.312 WARN  NativeLibraryLoader - Unable to load libgkl_utils.dylib from native/libgkl_utils.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils2367861540566259004.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils2367861540566259004.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils2367861540566259004.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils2367861540566259004.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils2367861540566259004.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+21:39:03.312 WARN  IntelPairHmm - Intel GKL Utils not loaded
+21:39:03.313 INFO  PairHMM - OpenMP multi-threaded AVX-accelerated native PairHMM implementation is not supported
+21:39:03.313 INFO  NativeLibraryLoader - Loading libgkl_utils.dylib from jar:file:/Users/rash/Documents/Files/Self/College/Semester%207/DNA/project/itr1/.snakemake/conda/ded2a8bd1fe5d427680ac2907de2e5f2_/share/gatk4-4.6.2.0-1/gatk-package-4.6.2.0-local.jar!/com/intel/gkl/native/libgkl_utils.dylib
+21:39:03.313 WARN  NativeLibraryLoader - Unable to load libgkl_utils.dylib from native/libgkl_utils.dylib (/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils3391914178467145352.dylib: dlopen(/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils3391914178467145352.dylib, 0x0001): tried: '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils3391914178467145352.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils3391914178467145352.dylib' (no such file), '/private/var/folders/hf/lgxr763d0dx9wh5gzjxr233m0000gn/T/libgkl_utils3391914178467145352.dylib' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')))
+21:39:03.313 WARN  IntelPairHmm - Intel GKL Utils not loaded
+21:39:03.313 WARN  PairHMM - ***WARNING: Machine does not have the AVX instruction set support needed for the accelerated AVX PairHmm. Falling back to the MUCH slower LOGLESS_CACHING implementation!
+21:39:03.315 WARN  IntelDeflaterFactory - Intel Deflater not supported, using Java.util.zip.Deflater
+21:39:03.323 INFO  ProgressMeter - Starting traversal
+21:39:03.324 INFO  ProgressMeter -        Current Locus  Elapsed Minutes     Regions Processed   Regions/Minute
+21:39:03.469 WARN  InbreedingCoeff - InbreedingCoeff will not be calculated at position phiX:51 and possibly subsequent; at least 10 samples must have called genotypes
+21:39:04.577 INFO  HaplotypeCaller - 0 read(s) filtered by: MappingQualityReadFilter 
+0 read(s) filtered by: MappingQualityAvailableReadFilter 
+0 read(s) filtered by: MappedReadFilter 
+0 read(s) filtered by: NotSecondaryAlignmentReadFilter 
+0 read(s) filtered by: NotDuplicateReadFilter 
+0 read(s) filtered by: PassesVendorQualityCheckReadFilter 
+0 read(s) filtered by: NonZeroReferenceLengthAlignmentReadFilter 
+0 read(s) filtered by: GoodCigarReadFilter 
+0 read(s) filtered by: WellformedReadFilter 
+0 total reads filtered out of 1080 reads processed
+21:39:04.577 INFO  ProgressMeter -            phiX:4526              0.0                    45           2154.8
+21:39:04.577 INFO  ProgressMeter - Traversal complete. Processed 45 total regions in 0.0 minutes.
+21:39:04.578 WARN  IntelDeflaterFactory - Intel Deflater not supported, using Java.util.zip.Deflater
+21:39:04.579 INFO  PairHMM - Total compute time in PairHMM computeLogLikelihoods() : 0.504948166
+21:39:04.579 INFO  SmithWatermanAligner - Total compute time in java Smith-Waterman : 0.27 sec
+21:39:04.579 INFO  HaplotypeCaller - Shutting down engine
+[August 14, 2026, 9:39:04 PM IST] org.broadinstitute.hellbender.tools.walkers.haplotypecaller.HaplotypeCaller done. Elapsed time: 0.02 minutes.
+Runtime.totalMemory()=301989888

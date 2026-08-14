@@ -1,0 +1,2 @@
+phiX_cov30_len150_err0_seed1 bowtie2 gatk records=60 diploid=0
+PASS (haploid)

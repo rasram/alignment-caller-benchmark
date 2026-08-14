@@ -1,0 +1,9 @@
+# Minimal interpreter for scripts/collect_results.py, which uses only the
+# Python standard library (csv, gzip, os, re). Pointing the collect rule at the
+# full `ml` environment would pull in jupyterlab, scikit-learn and matplotlib to
+# run a script that needs none of them.
+name: python
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11

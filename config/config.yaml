@@ -1,0 +1,32 @@
+# Snakemake configuration for the alignment / variant-calling benchmark.
+#
+# Override any value on the command line, e.g.:
+#   snakemake -n --config run=all
+#   snakemake --cores 8 --config threads=8
+
+# Which conditions to build. "baseline" = the starred condition at seed 1 only
+# (what Phase 7a executed). "all" = the full 11-condition x 5-seed x 2-genome
+# sweep, which is ~990 pipeline runs and needs explicit sign-off before running.
+run: baseline
+
+conditions: config/conditions.tsv
+baseline_seed: 1
+
+aligners: [bwa, bowtie2, minimap2]
+callers:  [gatk, freebayes, bcftools]
+
+# R8 — identical thread count for every aligner, because runtime is a reported
+# metric and an unequal thread budget would make the comparison meaningless.
+threads: 4
+
+# R6 — read group. Bowtie2 cannot consume this string directly; see the
+# align_bowtie2 rule, which passes the same fields via --rg-id/--rg.
+read_group: "@RG\\tID:s1\\tSM:sim\\tPL:ILLUMINA\\tLB:lib1"
+
+# R8 — one filter expression for all three callers. QUAL and DP are the only
+# fields all three emit comparably; GATK's QD/FS/MQRankSum do not exist in
+# FreeBayes or BCFtools, so filtering on them would tune GATK's filter alone.
+filter_expr: "QUAL>=20 && INFO/DP>=5"
+
+# RTG Tools is a Java application installed outside conda (see NOTES 0.4).
+rtg: tools/rtg-tools-3.13/rtg

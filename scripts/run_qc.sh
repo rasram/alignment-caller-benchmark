@@ -17,8 +17,10 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_BASE="${CONDA_BASE:-$HOME/miniforge3}"
-FASTQC="$CONDA_BASE/envs/qc/bin/fastqc"
-MULTIQC="$CONDA_BASE/envs/qc/bin/multiqc"
+# shellcheck disable=SC1091
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/tools.sh"
+FASTQC="$(resolve_tool fastqc qc)"
+MULTIQC="$(resolve_tool multiqc qc)"
 QC="$REPO/results/qc"
 mkdir -p "$QC" "$REPO/logs"
 
