@@ -1,0 +1,66 @@
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 266668 sequences (40000200 bp)...
+[M::process] read 266668 sequences (40000200 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (0, 129524, 0, 0)
+[M::mem_pestat] skip orientation FF as there are not enough pairs
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (315, 348, 382)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (181, 516)
+[M::mem_pestat] mean and std.dev: (348.34, 49.72)
+[M::mem_pestat] low and high boundaries for proper pairs: (114, 583)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_process_seqs] Processed 266668 reads in 5.751 CPU sec, 1.423 real sec
+[M::process] read 266668 sequences (40000200 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (0, 129390, 0, 0)
+[M::mem_pestat] skip orientation FF as there are not enough pairs
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (315, 348, 382)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (181, 516)
+[M::mem_pestat] mean and std.dev: (348.46, 49.88)
+[M::mem_pestat] low and high boundaries for proper pairs: (114, 583)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_process_seqs] Processed 266668 reads in 5.996 CPU sec, 1.448 real sec
+[M::process] read 128346 sequences (19251900 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (0, 129651, 0, 0)
+[M::mem_pestat] skip orientation FF as there are not enough pairs
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (315, 349, 382)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (181, 516)
+[M::mem_pestat] mean and std.dev: (348.42, 49.63)
+[M::mem_pestat] low and high boundaries for proper pairs: (114, 583)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_process_seqs] Processed 266668 reads in 5.812 CPU sec, 1.418 real sec
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (0, 62343, 0, 0)
+[M::mem_pestat] skip orientation FF as there are not enough pairs
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (314, 348, 382)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (178, 518)
+[M::mem_pestat] mean and std.dev: (348.19, 49.74)
+[M::mem_pestat] low and high boundaries for proper pairs: (110, 586)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_process_seqs] Processed 128346 reads in 2.878 CPU sec, 0.694 real sec
+[main] Version: 0.7.19-r1273
+[main] CMD: /Users/rash/miniforge3/envs/align/bin/bwa mem -t 4 -R @RG\tID:s1\tSM:sim\tPL:ILLUMINA\tLB:lib1 /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/ecoli.fa /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/ecoli_cov30_len150_err0_seed1_1.fq /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/ecoli_cov30_len150_err0_seed1_2.fq
+[main] Real time: 5.156 sec; CPU: 20.555 sec
+        5.16 real        20.17 user         0.37 sys
+           400572416  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               37633  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 510  voluntary context switches
+                8574  involuntary context switches
+        259793297947  instructions retired
+         80081772926  cycles elapsed
+           366789352  peak memory footprint

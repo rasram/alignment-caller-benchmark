@@ -1,0 +1,33 @@
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 1080 sequences (162000 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (0, 540, 0, 0)
+[M::mem_pestat] skip orientation FF as there are not enough pairs
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (314, 346, 377)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (188, 503)
+[M::mem_pestat] mean and std.dev: (345.25, 49.15)
+[M::mem_pestat] low and high boundaries for proper pairs: (125, 566)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_process_seqs] Processed 1080 reads in 0.027 CPU sec, 0.007 real sec
+[main] Version: 0.7.19-r1273
+[main] CMD: /Users/rash/miniforge3/envs/align/bin/bwa mem -t 4 -R @RG\tID:s1\tSM:sim\tPL:ILLUMINA\tLB:lib1 /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/data/refs/phiX.fa /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/phiX_cov30_len150_err0_seed1_1.fq /Users/rash/Documents/Files/Self/College/Semester 7/DNA/project/itr1/work/phiX_cov30_len150_err0_seed1_2.fq
+[main] Real time: 0.010 sec; CPU: 0.030 sec
+        0.01 real         0.02 user         0.00 sys
+             3211264  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 360  page reclaims
+                  22  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  14  voluntary context switches
+                  37  involuntary context switches
+           439571870  instructions retired
+           102359645  cycles elapsed
+             2572648  peak memory footprint

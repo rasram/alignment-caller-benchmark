@@ -825,3 +825,170 @@ No PCR amplification was simulated, so no true duplicates exist.
 This sets the expectation for Phase 5: `gatk MarkDuplicates` should mark ~0%. It is run
 anyway, for pipeline realism, and its inertness here must be stated in the report rather than
 presented as a meaningful result.
+
+---
+
+## Phase 5 — Alignment
+
+### 5.1 What an aligner does
+
+Each read is a 150-letter string that came from somewhere in a 4.6-million-letter genome. The
+aligner finds where. It is hard for two reasons: the read contains sequencing errors and real
+variants (so it will not match exactly anywhere), and the genome contains repeated sequence
+(so a short read may match several places equally well).
+
+The output is a **BAM** file: one record per read giving its position, orientation, a CIGAR
+string describing how it lines up (matches, insertions, deletions, clipping), and a **MAPQ**
+score — the aligner's own confidence, on a Phred scale, that this is the right location.
+
+**R1 again:** reads are aligned to `data/refs/<g>.fa`, the *original* reference, never to the
+mutated genome. `align_reads.sh` asserts this before doing anything.
+
+### 5.2 Read groups — three tools, three different spellings (R6)
+
+A read group tags reads with which sample and sequencing run they came from. GATK refuses to
+run without one. All three aligners were given the identical group
+`ID:s1 SM:sim PL:ILLUMINA LB:lib1`, but they will not accept it the same way:
+
+| Aligner | Syntax |
+|---|---|
+| BWA-MEM | `-R '@RG\tID:s1\tSM:sim\tPL:ILLUMINA\tLB:lib1'` — one tab-delimited string |
+| minimap2 | same `-R` string as BWA |
+| **Bowtie2** | `--rg-id s1 --rg SM:sim --rg PL:ILLUMINA --rg LB:lib1` — ID separately, then one `--rg` per field |
+
+Passing BWA's tab-delimited string to Bowtie2 produces a malformed header that GATK rejects
+later, in a completely different phase, with an error that does not mention read groups.
+Verified after alignment that all three BAMs carry byte-identical `@RG` lines.
+
+### 5.3 A launcher trap: `gatk` is a Python script, not a binary
+
+`MarkDuplicates` failed with:
+
+```
+env: python: No such file or directory
+```
+
+`gatk` is a **Python wrapper** that locates and launches the GATK jar. Calling it by absolute
+path (`$CONDA/envs/callers/bin/gatk`) is not enough — the wrapper itself runs `env python`, so
+its environment's `bin/` must be on `PATH`. Everywhere else in this project, invoking tools by
+absolute path is the right call (it avoids `conda run` overhead and its broken-pipe behaviour,
+see §2 tooling notes), but **gatk is the exception** and needs `PATH="$CONDA/envs/callers/bin:$PATH"`.
+This applies to Phase 6's HaplotypeCaller too.
+
+### 5.4 Timing methodology — the aligner alone
+
+The brief's example pipes each aligner straight into `samtools sort`. That is the normal
+production idiom, but it is a poor measurement: sorting costs roughly the same for all three
+aligners (identical read counts) and would dilute the very difference being measured.
+
+So each aligner is timed **alone**, writing SAM to disk; sorting, duplicate marking and
+indexing happen afterwards, untimed. Applied identically to all three, so the comparison stays
+fair (R8), and all three get 4 threads.
+
+`/usr/bin/time` on macOS is BSD, not GNU: the flag is **`-l`**, not `-v`, and **peak RSS is
+reported in bytes**, whereas GNU `time -v` reports kilobytes. Getting that wrong misreports
+memory by 1024×.
+
+### 5.5 Fairness fix: count primary reads, not "in total" (R8)
+
+`samtools flagstat`'s "in total" line includes **supplementary** alignments — extra records an
+aligner emits when it splits a chimeric read across two locations. BWA-MEM emits them (36 on
+*E. coli*); Bowtie2 and minimap2 `-ax sr` do not.
+
+Using "in total" gave BWA a denominator of 928,386 against 928,350 for the other two, for the
+*same 928,350 input reads* — so the three "mapping rates" were not fractions of the same
+quantity. The metric now uses `primary` / `primary mapped`, which is exactly one record per
+input read for every aligner. The supplementary count is reported as its own column rather
+than being folded into a rate.
+
+This is small (0.004%) but it is precisely the class of error that makes a benchmark
+indefensible: not wrong enough to notice, entirely wrong in principle.
+
+### 5.6 Placement accuracy — and the coordinate conversion, quantified
+
+`scripts/placement_accuracy.py` compares each aligner's BAM against ART's truth SAM and reports
+the fraction of reads placed within ±10 bp of where they really came from. No caller is
+involved, so this is a pure aligner metric.
+
+As predicted in §3.4, the two files are in different coordinate systems (truth SAM = mutated
+genome, BAM = original reference). The script builds an explicit mutated→reference map from
+simuG's injected indels, treating three cases separately: unchanged stretches (a constant
+shift), deleted reference bases (no mutated equivalent), and **inserted bases, which have no
+reference position at all** and are clamped to the anchor base rather than shifted (otherwise
+bases inside a 50 bp insertion land up to 50 bp away — larger than the tolerance, producing
+fake errors concentrated at insertion sites).
+
+The map **validates itself**: simuG records each indel's own mutated coordinate as `sim_start`,
+and the independently-derived map must reproduce it. All 10 phiX and all 1,000 *E. coli* indels
+agree. If they did not, the script hard-errors rather than reporting numbers.
+
+**What the conversion was worth**, BWA on *E. coli*:
+
+| | Placement accuracy | Median \|offset\| |
+|---|---|---|
+| With conversion (correct) | **99.028%** | 0 bp |
+| Without conversion (naive) | **8.903%** | 38 bp |
+
+Drift along the genome, and note it is not monotonic — it wanders as insertions and deletions
+alternate, ending at the net +187:
+
+```
+mutated 500,000 -> reference   499,968   (drift  +32 bp)
+mutated 2,000,000 -> reference 2,000,053   (drift  -53 bp)
+mutated 4,641,000 -> reference 4,640,813   (drift +187 bp)
+```
+
+A naive comparison would have reported all three aligners at ~9% placement accuracy — a
+catastrophic-looking result, with no error message, that is entirely an artefact of the
+measurement.
+
+### 5.7 Results
+
+| Genome | Aligner | Mapping | Properly paired | Mean MAPQ | MAPQ0 | Mean depth | Placement | Runtime | Peak RSS |
+|---|---|---|---|---|---|---|---|---|---|
+| phiX | BWA-MEM | 100% | 100% | 60.00 | 0% | 29.89 | 99.815% | 0.01 s | 3.1 MB |
+| phiX | Bowtie2 | 100% | 100% | 40.90 | 0% | 29.93 | 100.000% | 0.09 s | 57.5 MB |
+| phiX | minimap2 | 100% | 100% | 59.98 | 0% | 29.89 | 99.815% | 0.00 s | 3.9 MB |
+| *E. coli* | BWA-MEM | 100% | 100% | 59.06 | 1.274% | 29.98 | 99.028% | 5.16 s | 382 MB |
+| *E. coli* | Bowtie2 | 99.981% | 99.833% | 41.17 | 0.020% | 29.98 | 99.014% | 17.55 s | 67.1 MB |
+| *E. coli* | minimap2 | 100% | 100% | 59.08 | 1.275% | 29.98 | 99.019% | 1.85 s | 490.5 MB |
+
+Observations worth defending in a viva:
+
+- **Placement accuracy is essentially identical across all three (99.01–99.03% on *E. coli*).**
+  The remaining ~1% is not aligner weakness; it is reads drawn from repeated sequence where the
+  correct location is not recoverable from a 150 bp read. All three hit the same information
+  limit. **Do not expect the aligner to be the discriminating factor at baseline** — with 30×
+  coverage, 150 bp reads and a small bacterial genome, this is an easy alignment problem.
+  Differences should emerge at lower coverage and shorter reads, which is what the sweep is for.
+- **Mean MAPQ differs a lot (BWA/minimap2 ≈ 59, Bowtie2 ≈ 41) but this is a scale difference,
+  not a quality difference.** MAPQ is defined per-tool: BWA caps at 60, Bowtie2 at 42. Comparing
+  the raw numbers across tools is meaningless. It matters anyway, because **callers filter and
+  weight on MAPQ using tool-agnostic thresholds** — so an identical threshold is a stricter
+  filter on Bowtie2 output than on BWA output. This is a real confound for Phase 6 and one of
+  the more interesting things this benchmark can quantify.
+- **MAPQ0 (multi-mapping) reads: BWA and minimap2 flag ~1.27%, Bowtie2 flags 0.02%.** They are
+  looking at the same repeats; they differ in how they report ambiguity. Bowtie2 by default
+  reports one alignment for a multi-mapping read with a low-but-nonzero MAPQ, rather than
+  marking it 0. Since most callers discard MAPQ0 reads outright, BWA and minimap2 effectively
+  hand the caller ~1.25% less usable coverage in repeats.
+- **Runtime: minimap2 (1.85 s) < BWA (5.16 s) < Bowtie2 (17.55 s)** — minimap2 ~9.5× faster
+  than Bowtie2. But memory is inverted: Bowtie2 uses 67 MB where minimap2 uses 490 MB, a ~7×
+  difference. That is a genuine engineering trade-off, not a defect.
+- phiX runtimes (0.00–0.09 s) are **too short to be meaningful** and should not be reported as
+  a speed comparison. They are below timer resolution and dominated by process startup.
+
+### 5.8 MarkDuplicates is inert here, as predicted
+
+Duplicate rate: **0.00% on phiX, ~0.027% on *E. coli*** for all three aligners.
+
+PCR duplicates arise when library amplification copies the same original fragment many times,
+producing reads that look like independent evidence but are not. ART simulates no PCR, so
+there are none. The ~0.027% on *E. coli* is coincidental collision — at 30× coverage two
+independently drawn fragments occasionally share a start position — which matches FastQC's
+independent 97.64%-deduplicated figure from §4.7.
+
+It is run for pipeline realism (a real workflow has this step, and omitting it would make the
+pipeline unrepresentative), but **its inertness must be stated in the report** rather than
+presented as a finding. It also means MarkDuplicates cannot be a source of difference between
+the nine pipelines here.
