@@ -101,10 +101,16 @@ Be careful with these.
 
 1. **`align_metrics.tsv`, `placement_accuracy.tsv` and `call_timing.tsv` are not Snakemake
    rules.** They are produced by the Phase 5/6 shell scripts. When the baseline was rebuilt
-   through Snakemake, those columns in `results.tsv` were **carried over, not recomputed**. The
-   scientific columns (TP/FP/FN/precision/recall/F1) *were* fully regenerated. **Fix this
-   before the sweep** — otherwise every condition inherits the baseline's metrics. This is
-   Phase 8 item #1.
+   through Snakemake, those columns in `results.tsv` were **carried over, not recomputed**.
+   The scientific columns (TP/FP/FN/precision/recall/F1) *were* fully regenerated.
+
+   **Measured consequence for the sweep:** the metric tables are keyed by `(tag, aligner)` and
+   contain only the two baseline tags, so for the 108 unrun condition×seed combinations the
+   join finds nothing and those columns come out **empty** — not stale copies. They are exactly
+   the features the model needs. Note also that each metric script *appends* to one shared TSV,
+   which is unsafe under Snakemake's parallel execution; the fix is one file per work unit plus
+   an aggregation rule. See `docs/PHASE1_COMPLETION_PLAN.md` STEP 1. This is the one blocking
+   defect.
 
 2. **`--use-conda` was exercised only on this machine (macOS arm64).** The environments solve
    and the workflow runs, but portability to Linux is untested.
@@ -143,9 +149,13 @@ change data volume), the 11 conditions sum to **12.17×** a single 30× conditio
 
 | | |
 |---|---|
-| Intermediates per 30× *E. coli* condition | 1.32 GB (2 FASTQ + ART truth SAM + 3 BAMs) |
-| **All *E. coli* intermediates if retained** | **~80 GB** |
-| Free space on this machine now | ~121 GB |
+| Intermediates per 30× *E. coli* condition | **0.83 GB** measured (284 MB FASTQ + 315 MB truth SAM + 249 MB BAMs) |
+| **All *E. coli* intermediates if retained** | **~50 GB** |
+| With reads + truth SAM marked `temp()` | **~15 GB** |
+| Free space on this machine | ~216 GB |
+
+(An earlier revision of this file said 1.32 GB per condition and ~80 GB total; that used a
+guessed 250 MB per BAM. The duplicate-marked BAMs are 83 MB, so the real figures are lower.)
 
 It fits, but not comfortably, and the 100× conditions alone account for ~22 GB. **Recommended
 before running the sweep:** mark the FASTQ and truth-SAM outputs `temp()` in the Snakefile so

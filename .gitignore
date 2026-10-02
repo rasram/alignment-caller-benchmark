@@ -45,3 +45,6 @@ results/qc/*_fastqc.zip
 
 # Node modules for the slide generator (regenerable: npm install pptxgenjs)
 node_modules/
+
+# Office lock files, written while a document is open in Word/PowerPoint
+~$*
