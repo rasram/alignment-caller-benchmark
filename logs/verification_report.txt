@@ -1,12 +1,12 @@
 
 == INFRASTRUCTURE ==
-  [PASS] git repository initialised                                 10 commits
+  [PASS] git repository initialised                                 15 commits
   [PASS] .gitignore excludes work/                                  
   [PASS] .gitignore excludes *.fq                                   
   [PASS] .gitignore excludes *.bam                                  
   [PASS] .gitignore excludes *.sdf/                                 
   [PASS] .snakemake/ not tracked in git                             
-  [PASS] git repo size sane                                         20MB
+  [PASS] git repo size sane                                         26MB
   [PASS] no reads/BAMs/FASTAs tracked in git                        
   [PASS] envs/align.yaml exported with pinned versions              4 pinned
   [PASS] envs/align.lock.yaml exact lock present                    
@@ -46,60 +46,77 @@
   [PASS] confident BED present (phiX)                               phiX	0	5386
   [PASS] confident BED present (ecoli)                              ecoli	0	4641652
 
+  scope: all — auditing 110 run tags (conditions × seeds × genomes)
+
 == PIPELINE — reads, QC (GATE 3, 4) ==
-  [PASS] reads + ART truth SAM present (phiX)                       540 pairs, 30.00x
-  [PASS] coverage is 30x as requested (phiX)                        
-  [PASS] reads + ART truth SAM present (ecoli)                      464175 pairs, 30.00x
-  [PASS] coverage is 30x as requested (ecoli)                       
-  [PASS] MultiQC report generated                                   
-  [PASS] mean-Q table populated                                     4 datasets
+  [PASS] read_metrics.tsv: one row per tag                          110
+  [PASS] actual coverage within ±2% of requested, every tag        
+  [PASS] measured error rate (mean_p) present for every tag         
+  [PASS] baseline MultiQC report present                            
 
 == PIPELINE — alignment (GATE 5) ==
-  [PASS] BAM indexed + duplicate-marked + @RG (phiX/bwa)            
-  [PASS] BAM indexed + duplicate-marked + @RG (phiX/bowtie2)        
-  [PASS] BAM indexed + duplicate-marked + @RG (phiX/minimap2)       
-  [PASS] BAM indexed + duplicate-marked + @RG (ecoli/bwa)           
-  [PASS] BAM indexed + duplicate-marked + @RG (ecoli/bowtie2)       
-  [PASS] BAM indexed + duplicate-marked + @RG (ecoli/minimap2)      
-  [PASS] align_metrics.tsv rows (2 genomes x 3 aligners)            6
-  [PASS] placement_accuracy.tsv rows                                6
-  [PASS] placement accuracy computed (min across aligners)          0.990142
+  [PASS] duplicate-marked, indexed BAMs (3 per tag)                 330
+  [PASS] R6 — read group present in every BAM                     330
+  [PASS] align_metrics.tsv rows (3 per tag)                         330
+  [PASS] placement_accuracy.tsv rows (3 per tag)                    330
+  [PASS] placement accuracy computed (minimum across all runs)      0.980556
+  [PASS] runtime.tsv rows (3 align + 9 call per tag)                1320
+  [PASS] every timed job has wall time AND peak RSS                 
 
 == PIPELINE — variant calling (GATE 6) — R2 PLOIDY ==
-  [PASS] raw VCFs present (2 genomes x 9 pipelines)                 18
-  [PASS] R2 — LIVE re-check: zero diploid genotypes in any VCF    
-  [PASS] logs/ploidy_verification.txt logged                        18 PASS entries
-  [PASS] hard-filtered callsets (raw + filt per pipeline)           18
+  [PASS] raw VCFs present (9 per tag)                               990
+  [PASS] R2 — LIVE re-check: zero diploid genotypes in 990 VCFs   
+  [PASS] logs/ploidy_verification.txt PASS entries (9 per tag)      990
+  [PASS] hard-filtered callsets (9 per tag)                         990
   [PASS] R7 — no BQSR anywhere in scripts or Snakefile            
 
 == SCORING (GATE 7a) ==
-  [PASS] all call sets normalised                                   18 files
+  [PASS] call sets normalised (9 per tag)                           990
   [PASS] R3 — identical norm args in truth, scoring and Snakefile 
-  [PASS] vcfeval runs, full callset (2 x 9)                         18
-  [PASS] vcfeval runs, SNV/indel separately                         36
-  [PASS] results.tsv baseline rows (9 pipelines x 2 genomes x 2 types) 36
-  [PASS] results.tsv total rows (incl. comparison method)           72
-  [PASS] no E. coli pipeline scored F1=0 (bug signature)            
-  [PASS] ROC plot roc_ecoli_SNV.svg                                 
-  [PASS] ROC plot roc_ecoli_INDEL.svg                               
-  [PASS] ROC plot roc_phiX_SNV.svg                                  
-  [PASS] ROC plot roc_phiX_INDEL.svg                                
+  [PASS] vcfeval runs, full call set (9 per tag)                    990
+  [PASS] vcfeval runs, SNV/indel pre-split (18 per tag)             1980
+  [PASS] results.tsv raw single_run rows (18 per tag)               1980
+  [PASS] results.tsv hard-filtered rows scored (18 per tag)         1980
+  [PASS] no missing feature cells in results.tsv                    
+  [PASS] no E. coli pipeline scored F1 = 0 (bug signature)          
   [PASS] scoring negative control recorded                          
 
-== READY FOR THE SWEEP (GATE 7b) ==
+== WORKFLOW (GATE 7b) ==
   [PASS] conditions.tsv unique conditions per genome                11
-  [PASS] conditions.tsv rows (11 x 5 seeds x 2 genomes)             110
-  [PASS] pipeline runs implied by design                            990
-  [PASS] Snakefile present                                          
-  [PASS] workflow_dag.svg exported                                  822 nodes
-  [PASS] snakemake -n resolves the FULL sweep DAG                   13070 jobs
-  [PASS] baseline is up to date under Snakemake (idempotent)        
+  [PASS] conditions.tsv rows (11 × 5 seeds × 2 genomes)           110
+  [PASS] workflow DAG exported                                      
+  [PASS] full 990-run sweep is complete and up to date under Snakemake 
+
+== ANALYSIS, MODEL, FIGURES (STEPS 7–9) ==
+  [PASS] results/analysis/summary_by_condition.tsv                  
+  [PASS] results/analysis/effects.tsv                               
+  [PASS] results/analysis/titv_experiment.tsv                       
+  [PASS] results/analysis/scoring_method_effect.tsv                 
+  [PASS] results/analysis/runtime_by_condition.tsv                  
+  [PASS] results/analysis/hard_filter_effect.tsv                    
+  [PASS] E. coli condition × type cells with a significance test   22
+  [PASS] results/model/validation.tsv                               
+  [PASS] results/model/importances.tsv                              
+  [PASS] results/model/recommendations.tsv                          
+  [PASS] results/model/loco_by_condition.tsv                        
+  [PASS] decision tree rules exported                               
+  [PASS] model recommendations are tie-aware                        top-ranked SETS, not idxmax picks
+  [PASS] report figures F1–F7                                     7
+  [PASS] figures newer than results.tsv (not stale)                 0
+  [PASS] results/analysis/fp_near_indel.tsv rows                    54
+  [PASS] results/analysis/fn_repeats.tsv rows                       18
+  [PASS] results/analysis/phix_errors.tsv                           5 distinct phiX errors outside 5x
 
 == DOCUMENTATION ==
-  [PASS] NOTES.md present                                           1551 lines, 10 sections
+  [PASS] NOTES.md present                                           1882 lines, 11 sections
   [PASS] README.md present                                          
   [PASS] HANDOFF.md present                                         
+  [PASS] final report (markdown)                                    
+  [PASS] final report (PDF)                                         
+  [PASS] final report (DOCX)                                        
+  [PASS] report has no unfilled placeholders                        
+  [PASS] report is up to date                                       newer than results.tsv and its template; PDF newer than markdown
 
 == SUMMARY ==
-  PASS 83   FAIL 0   WARN 0
+  PASS 96   FAIL 0   WARN 0
   All required checks passed.

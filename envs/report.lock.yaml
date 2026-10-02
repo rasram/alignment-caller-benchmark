@@ -1,0 +1,6 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: osx-arm64
+# created-by: conda 26.3.2
+@EXPLICIT
+https://conda.anaconda.org/conda-forge/osx-arm64/pandoc-3.12-hce30654_0.conda#6a98b82d5c651b6bf7833103e757f6d9

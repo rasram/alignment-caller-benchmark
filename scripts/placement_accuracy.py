@@ -41,10 +41,14 @@ Usage:
 import argparse
 import bisect
 import os
+import shutil
 import subprocess
 import sys
 
-SAMTOOLS = os.path.join(
+# Prefer the samtools on PATH (the environment Snakemake activated for this rule);
+# fall back to the developer's named env only when run by hand. A hardcoded path
+# would silently bypass the workflow's pinned environment.
+SAMTOOLS = shutil.which("samtools") or os.path.join(
     os.environ.get("CONDA_BASE", os.path.expanduser("~/miniforge3")),
     "envs", "align", "bin", "samtools")
 
@@ -233,6 +237,10 @@ def main():
     ap.add_argument("--tolerance", type=int, default=10)
     ap.add_argument("--tag", default="")
     ap.add_argument("--out", default="")
+    ap.add_argument("--single", action="store_true",
+                    help="OVERWRITE --out with a header + this run's rows. Used by the "
+                         "Snakemake rule: one file per (tag, aligner). Appending to a "
+                         "shared file is unsafe under parallel execution.")
     args = ap.parse_args()
 
     if len(args.bam) != len(args.aligner):
@@ -281,8 +289,8 @@ def main():
 
     if args.out:
         os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
-        new = not os.path.exists(args.out)
-        with open(args.out, "a") as fh:
+        new = args.single or not os.path.exists(args.out)
+        with open(args.out, "w" if args.single else "a") as fh:
             if new:
                 fh.write("\t".join(cols) + "\n")
             for r in rows:

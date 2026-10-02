@@ -1,0 +1,11 @@
+validation	model	mae	r2	regret	decisions	picked
+held-out seeds [4, 5]	pipeline_mean	0.00499469	0.167497	0.000927273	44	
+held-out seeds [4, 5]	tree	0.00174997	0.880115	0.000855682	44	
+held-out seeds [4, 5]	forest	0.000865249	0.953575	0.000186364	44	
+held-out seeds [4, 5]	always_train_best			0.000927273	44	bwa+gatk
+held-out seeds [4, 5]	random_pick			0.0039404	44	
+leave-one-condition-out	always_train_best			0.000945455	110	
+leave-one-condition-out	forest	0.00521322	-5.75312	0.000802727	110	
+leave-one-condition-out	pipeline_mean	0.00535268	-0.629309	0.000945455	110	
+leave-one-condition-out	random_pick			0.00388101	110	
+leave-one-condition-out	tree	0.00566107	-5.82683	0.000866793	110	

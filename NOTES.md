@@ -1535,9 +1535,13 @@ vcfeval_all      990  = one primary scoring run per pipeline
 
 ### 7b.7 DAG exports
 
-- `results/workflow_dag.svg` — the full baseline job graph, 822 nodes. Complete but dense.
-- `results/workflow_rulegraph.svg` — the rule-level graph, 60 nodes. **This is the one to put
+- `results/workflow_dag.svg` — the full baseline job graph. Complete but dense.
+- `results/workflow_rulegraph.svg` — the rule-level graph. **This is the one to put
   in a report**: it shows the pipeline's structure rather than every individual job.
+
+(Both were regenerated at the end of Phase 8, after the metrics, analysis and report rules were
+added: the rule graph now has 34 rules, ending `collect_results → analyse_sweep / fit_model /
+diagnose_errors → make_figures → build_report → render_report`.)
 
 (`rtg rocplot` and `rtg vcfeval` both refuse to write over existing output, so the relevant
 rules `rm -rf` their target first; otherwise every re-run fails on the second invocation.)
@@ -1549,3 +1553,330 @@ rules `rm -rf` their target first; otherwise every re-run fails on the second in
 They are not: **Snakemake wildcards match `/` by default**, so `{prefix}` in the general rule
 already covers `norm/...` and the two rules are *ambiguous*, not nested. Snakemake refuses to
 build the DAG with `AmbiguousRuleException`. Resolved by deleting the redundant rule.
+
+---
+
+## Phase 8 — Completing the benchmark: truth-set realism, workflow hardening, the sweep
+
+Phase 8 executes the plan in `docs/PHASE1_COMPLETION_PLAN.md`: fix what blocked the sweep,
+run all 990 pipeline runs, and analyse them. Several things went wrong on the way, and each is
+recorded here because each is a way a benchmark can quietly produce wrong numbers.
+
+### 8.1 Truth sets regenerated with a realistic Ti/Tv — and a free controlled experiment
+
+The original truth sets used simuG's default `-titv_ratio 0.5`, which is what *uniformly random*
+substitution produces (each base has one transition partner and two transversion partners, so
+random picking gives 1:2). Real bacterial genomes run Ti/Tv ≈ 1–2. Regenerated with
+`-titv_ratio 2.0`, **same seed** (20260814). Measured: phiX 2.57 (only 50 SNPs, so noisy),
+*E. coli* **2.04**.
+
+**The mid-semester deck quotes the Ti/Tv 0.5 numbers**, so before regenerating, those results
+and truth sets were archived to `results/archive/titv0.5_baseline/` with a README. Every figure
+in that deck stays traceable.
+
+An unexpected bonus: with the same seed, simuG placed **every SNP at the same position and
+kept every indel identical** — verified by hashing positions and alleles. Only the SNP *alleles*
+changed. So the regeneration is a perfectly controlled perturbation: same sites, same indels,
+different mutation spectrum. Comparing the two baselines therefore isolates the effect of Ti/Tv
+on the pipelines:
+
+| | max \|ΔF1\| over all callers and both variant types |
+|---|---|
+| BWA-MEM | 0.0001 |
+| minimap2 | 0.0002 |
+| Bowtie2 | 0.0024 |
+
+**No ranking changed.** The earlier claim — "Ti/Tv shouldn't bias the comparison, because every
+pipeline sees the same truth" — was an argument; it is now a measurement.
+
+### 8.2 The blocking defect: metrics were not part of the workflow
+
+Six metric producers (`align_metrics.sh`, `placement_accuracy.py`, caller timing,
+`extract_mean_q.py`, …) ran only by hand. `collect_results.py` joins them by `(tag, aligner)`,
+and their tables held only the two baseline tags — so a sweep would have produced 3,960 rows
+whose **feature columns were empty** (mapping rate, MAPQ, depth, placement accuracy, runtime,
+memory, error rate) — precisely the features the model needs.
+
+The fix is not "wrap each script in a rule". Every one of those scripts **appended** to a shared
+TSV. Under Snakemake's parallel execution, two jobs appending to one file at once interleave
+their writes and corrupt rows. The standard remedy is **scatter–gather**: each unit of work
+writes its own one-row file (`work/metrics/<tag>.<aligner>.align.tsv`, …), and a single
+aggregation rule concatenates them. Appending is safe serially and unsafe in parallel, and a
+workflow engine *is* parallel.
+
+The collector now runs with `--strict`, which **fails the workflow** if any feature cell is
+empty, `nan` or `NA`. (The first version only checked for empty strings; a `nan` slipped through
+on the first run — see 8.3 — which is why the check now treats all three as missing.)
+
+### 8.3 Timing: sampling versus accounting
+
+Runtime and peak memory are reported metrics, so they must be measured correctly.
+
+**Attempt 1 — Snakemake's `benchmark:` directive.** It recorded wall time but every resource
+column came back `NA`. The cause, found by reading Snakemake's source: it *samples* process memory
+with `psutil` on a timer, and on macOS psutil generally cannot read another process's memory, so
+every sample failed silently. Even where sampling works, a poll can miss a short memory peak.
+
+**Attempt 2 — kernel accounting.** The operating system already records each process's
+true high-water mark (`getrusage`), and `/usr/bin/time` reports it. `scripts/lib/measure.sh`
+wraps exactly one tool invocation and records wall time, peak RSS and CPU time. It handles both
+`time` dialects — BSD `-l` (RSS in bytes) and GNU `-f` (kilobytes) — because mixing those units
+misreports memory by 1024×. Verified on a known 200 MB allocation (reported 243 MB: Python's
+~40 MB baseline + 200 MB) and against the Phase 5 manual numbers (BWA 373 vs 382 MB; Bowtie2 67
+vs 67 MB; minimap2 483 vs 491 MB).
+
+Snakemake's own whole-job time is kept alongside as `job_seconds`. The difference is a uniform
+~0.24 s of conda activation — small, and now visible rather than silently inside every number.
+
+**Fairness (R8): who else is running?** A tool timed while seven other jobs share the CPU is
+measured under arbitrary contention. So timed jobs claim a `machine` resource of 8 units against
+a budget of 8 — they can only start when nothing else runs, and nothing else can start while they
+do. That reproduces the conditions the Phase 5/6 baseline was timed under.
+
+**But exclusivity for every run was too expensive.** While a *single-threaded* FreeBayes or
+BCFtools job held the machine, seven cores sat idle with hundreds of short jobs queued behind it;
+extrapolated, the sweep would have taken 6+ hours. The resolution separates two questions that
+need different designs:
+
+- **Accuracy** varies with the seed — that variance is the whole point — so it needs all 5 seeds.
+- **Runtime** varies with the *condition* (depth, read length), not the seed. One clean
+  measurement per condition is enough.
+
+So only **seed 1** runs timed jobs exclusively (`config.yaml: timing_seeds`); seeds 2–5 run fully
+parallel. Their timings are still recorded but flagged `timing_exclusive = no` and excluded from
+runtime analysis — real measurements, honestly labelled, never presented as clean. Snakemake
+supports this directly: a rule's `resources` can be a function of the wildcards.
+
+A second, larger speed-up came from the scheduler. Snakemake's default solves an integer linear
+program every scheduling round; with ~16,000 jobs that became the bottleneck. `scheduler: greedy`
+in the profile cut the pilot's remaining 388 jobs to **78 seconds**.
+
+### 8.4 Edge cases the baseline never exercised
+
+The sweep reaches 5× coverage and a −10 quality shift, where call sets can be tiny or empty. Two
+things were tested *before* running rather than assumed:
+
+**What does vcfeval do with an empty call set?** It exits 0 and reports TP = 0, FN = every truth
+variant, precision `NaN` (0/0). That is correct behaviour — and it exposed a latent bug in
+`score_variants.sh`, which had a fallback that, *if vcfeval failed*, wrote a placeholder summary
+with **TP = FP = FN = 0**. That fallback was written on the assumption that vcfeval errors on empty
+input. It does not, so the fallback could only ever fire on a *genuine* failure — and would then
+have **fabricated a result** (and FN = 0 would have been wrong even in its own terms). It now fails
+loudly.
+
+**F1 when precision is undefined.** vcfeval computes F1 from precision and recall, so with no calls
+it reports F1 = `NaN`. The collector computes the standard count form, `F1 = 2TP / (2TP + FP + FN)`,
+which equals the harmonic mean wherever that is defined and correctly gives 0 when TP = 0.
+Precision is left as `NaN` — it genuinely is undefined.
+
+**A silent-failure bug in the FreeBayes and BCFtools rules.** Both are pipelines
+(`freebayes … | bgzip`). Run through plain `sh -c`, a pipeline's exit status is the *last*
+command's, so a FreeBayes crash would let `bgzip` "succeed" on empty input and leave behind a
+valid-looking empty VCF. They now run under `bash -o pipefail`, so any stage's failure fails the
+job.
+
+### 8.5 The filtered call sets were never built
+
+Running the sweep-aware audit on the pilot found **zero hard-filtered call sets**. The
+`hard_filter` rule existed in the Snakefile, but *no target ever requested its output*, so
+Snakemake — which only builds what something asks for — never ran it. The old audit had passed
+because it counted `*.filt.vcf.gz` files left behind by the Phase 6 shell scripts; clearing
+`work/` exposed the gap. The brief requires both raw and filtered call sets, so the collector now
+requests filtered sets and they are scored (primary single-run method). `results.tsv` carries both
+under the `callset` column; the primary analysis uses `raw`, because the filtered set is one
+operating point on the raw set's ROC curve.
+
+**General lesson:** in a pull-based build system, a rule that nothing depends on is dead code
+that looks alive. A check that counts files on disk cannot tell "the workflow built this" from
+"something else left this here".
+
+### 8.6 Disk: measured, then managed
+
+Measured per 30× *E. coli* run: FASTQs 284 MB, ART truth SAM 315 MB, three BAMs 249 MB — 0.83 GB
+retained (the HANDOFF's earlier 1.32 GB estimate guessed 250 MB per BAM; they are 83 MB). Across
+the sweep's coverage-weighted total that is ~50 GB. FASTQs and the truth SAM are now `temp()`:
+Snakemake deletes them once their last consumer has run (three aligners and `read_metrics` for
+the reads; three placement jobs for the truth SAM). ART is deterministic for a fixed seed, so
+anything deleted is exactly regenerable. Retained steady state: ~15 GB.
+
+### 8.7 Repository hygiene at sweep scale
+
+The sweep writes ~16,000 per-job logs, ~1,300 benchmark files and ~5,000 vcfeval directories.
+After the `.snakemake/` incident (Phase 7b), these are gitignored up front: `logs/run/`,
+`logs/ploidy/`, `benchmarks/`, `results/vcfeval/`. What is committed is the distilled output —
+`results/*.tsv`, `results/analysis/`, `results/model/`, `results/figures/` — plus summary records
+(`logs/ploidy_verification.txt`, versions, verification reports). The Phase 5–7 per-run logs for
+the Ti/Tv 0.5 run were moved to `logs/legacy_titv0.5/`; they remain in git history.
+
+### 8.8 The pilot gate
+
+Before 990 runs, a pilot ran the harshest corners: *E. coli* at 5× (all 5 seeds), the −10 quality
+shift on both genomes, phiX at 5×, plus both baselines. The sweep-aware audit
+(`VERIFY_SCOPE=present`) passed every check except the filtered-set gap in 8.5, which was fixed
+before launching. Coverage landed within ±2% of the request for every run, every timed job had
+both wall time and peak RSS, and all 90 call sets were haploid.
+
+### 8.9 Three problems that only appeared at sweep scale
+
+**A SIGPIPE race in `align_metrics`.** Two of ~90 jobs failed with exit status 141 (= 128 + 13,
+SIGPIPE). The script parsed `samtools flagstat` output with `echo "$FS" | awk '/primary/{print;
+exit}'`. awk exits the moment it finds its line, closing the pipe; if `echo` is still writing it is
+killed by SIGPIPE, `pipefail` propagates it and `set -e` aborts. A race — never seen in the pilot,
+twice in the sweep. It could only cause a *failure*, never a wrong value (a successful run has read
+the correct line). Fixed with here-strings (`awk '…' <<< "$FS"` — no pipe, no SIGPIPE). The script
+was replaced by write-then-rename rather than edited in place, because bash reads scripts
+incrementally and a running job could otherwise execute a half-old, half-new file. This is the
+same failure class as the `bcftools | head` bug in Phase 2: **any pipe whose reader can exit early
+is unsafe under `pipefail`.**
+
+**A thread reservation is not thread usage.** Mid-sweep the machine was 36% idle with only two
+GATK jobs running, each at ~100% CPU. Each *reserved* 4 cores (`--native-pair-hmm-threads 4`), but
+HaplotypeCaller is single-threaded apart from short PairHMM bursts — so two jobs held the whole
+8-core budget while using about 2. Lowering GATK's threads would have fixed the accounting but
+changed its command, making new timings inconsistent with every seed-1 timing already taken. The
+fix was the budget instead: `--cores 12`. This cannot compromise clean timing, because exclusivity
+is enforced by the separate `machine` resource (8 of 8), not by cores.
+
+**`kill -INT` did nothing.** Restarting the sweep needed the running Snakemake stopped, and SIGINT
+was silently ignored. POSIX rule: a command started with `&` from a *non-interactive* shell runs
+with SIGINT set to "ignore", and that disposition survives `exec`; Python, seeing SIGINT already
+ignored at start-up, never installs its KeyboardInterrupt handler. SIGTERM worked, and Snakemake
+cleaned up its in-flight jobs. Afterwards the process tree was checked for orphaned job processes —
+an orphan still writing an output while the restarted run scheduled the same job would have been a
+genuine race.
+
+A smaller one: adding the report rules to `rule all` made the restart fail immediately, because the
+report template did not exist yet and Snakemake validates the whole DAG before running anything.
+The sweep was relaunched with explicit targets (`results/results.tsv`,
+`logs/ploidy_verification.txt`).
+
+**External processes and clean timing.** The `machine` resource only excludes *Snakemake's own*
+jobs from running beside a timed job; it cannot see anything else on the computer. Work run outside
+the workflow during the sweep (model fitting, figure generation, a conda install) was therefore
+checked against the log: none of it overlapped a seed-1 timed job, and nothing CPU-heavy was run
+outside Snakemake for the remainder of the sweep.
+
+### 8.10 What the sweep found, in plain language
+
+The full numbers are in `docs/FINAL_REPORT.pdf`; this is the shape of the answer.
+
+- **Everything is accurate, and the differences are still real.** On *E. coli* at 30× every
+  pipeline has SNV F1 between 0.989 and 0.995. That sounds like "they're all the same", but the
+  seed-to-seed standard deviation is about 0.0005, so a gap of 0.005 is about ten standard
+  deviations: a reproducible difference, not noise. This is why five seeds were worth running:
+  with one seed (Phase 7) there was no way to tell.
+- **The aligner matters more than the caller.** In a blocked two-way ANOVA the aligner explains a
+  median 78% of the between-pipeline variation in SNV F1 and the caller 2%. Most of that is one
+  aligner, Bowtie2 (8.11).
+- **Depth is the only data property that changes the answer.** Below 10× the ranking reorders:
+  BCFtools, the least conservative caller, wins SNVs because it calls on thinner evidence.
+  Raising the error rate seven-fold barely moves F1. Independent random errors rarely agree on the
+  same wrong base at the same site, so callers filter them easily. The errors that hurt are
+  *systematic* ones from alignment, which repeat across reads.
+- **A model adds little above 10×.** One pipeline family (BWA-MEM or minimap2 with FreeBayes or
+  GATK) is within 0.001 of the best everywhere, so "always use BWA-MEM + GATK" is nearly as good as
+  any prediction. That is itself a finding, and it is reported as one rather than dressed up.
+
+### 8.11 Testing explanations instead of telling stories
+
+A surprising pattern invites a plausible story. The F1-vs-coverage figure showed Bowtie2 with
+FreeBayes or BCFtools getting *worse* with more data. The story wrote itself: Bowtie2 aligns
+end-to-end, cannot soft-clip, so reads ending just past an indel get mismatches instead of a gap,
+and with more depth those mismatches become confident false SNVs. A story is not evidence, so
+`scripts/diagnose_errors.py` turns each one into a test with a number that could have come out
+wrong:
+
+| Story | Test | Result |
+|---|---|---|
+| Bowtie2's false SNVs are indel artefacts | distance from each FP SNV to the nearest *true* indel, vs the fraction of genome that close by chance | 99% within 150 bp at 100× (median 12 bp) vs 6.3% background |
+| …and they grow with depth | same, at every coverage | 24 → 137 FPs from 5× to 100× (Bowtie2 + FreeBayes) |
+| BCFtools' slow F1 decline above 30× is the same thing, milder | same test, BWA-MEM + BCFtools | 5 → 21 FPs, median 1 bp from a true indel |
+| the ~50 variants nobody finds are in repeats | share of reads with MAPQ ≥ 20 at missed sites vs all true sites | 96–100% of misses are low-MAPQ sites vs 1.4–2.3% of all sites |
+| phiX misses are a coverage artefact | list every phiX error by position | every miss is position 51, in the first read length of a linearised circular genome |
+
+Two details are worth noticing. At 5× the false calls are *not* near indels (6% vs 6.3%
+background): that is a different mechanism, low-depth calls on sequencing errors. Without the
+test the indel explanation would have been wrongly applied there too. And Bowtie2 + GATK misses
+about twice as many variants as other GATK pipelines, because Bowtie2 gives low MAPQ at more
+sites and GATK, unlike FreeBayes (threshold 1) and BCFtools (0), drops reads below MAPQ 20 by
+default. That last link is inferred from the tools' documented defaults, not tested by changing
+the threshold, and HANDOFF says so.
+
+The strongest test, rerunning Bowtie2 with `--local` and watching the artefacts disappear, was
+not run. A test that shows a prediction holding is weaker than an intervention that removes the
+cause; that experiment is first on the Phase 2 list.
+
+### 8.12 A bug in the model's scoring: ties broken alphabetically
+
+The first recommendation table claimed the decision tree's pick for 5× indels was Bowtie2 +
+BCFtools. That is the *worst* pipeline at 5×. The cause was not the model but the code scoring it.
+
+A regression tree predicts one value per leaf. Any pipelines that land in the same leaf get the
+same prediction: they are tied, and the model is indifferent between them. The scoring code then
+chose `idxmax()` of the predictions, and pandas' `idxmax` returns the *first* maximum. The rows
+were sorted alphabetically, so every tie went to whichever pipeline name sorts first:
+`bowtie2+bcftools`. The model was being blamed, or credited, for choices it never made.
+
+The fix is to score what the model actually says. When k pipelines tie, the model's choice is a
+uniform random pick among them, so its regret is the *expected* regret: best F1 minus the mean F1
+of the tied set. The recommendation table now reports the tied set itself ("BWA-MEM/minimap2 +
+GATK/FreeBayes, 4 tied"). This changed the conclusions. The tree's held-out-seed regret went from
+worse than the trivial rule (0.00155 vs 0.00093) to slightly better (0.00086). The true best
+pipeline turned out to be inside the tree's set in all 22 condition × type cases.
+
+**The general lesson: any argmax over a model's output needs an explicit tie policy.** Tree
+ensembles average away most ties, but a single tree, a rule list or a rounded score produces
+them constantly, and `idxmax`/`argmax` will silently resolve them by row order.
+
+### 8.13 What the tree's "error rate" splits really mean
+
+The fitted tree splits on measured error rate twice, and neither split means what it says.
+
+- **Under 5× indels**, "error ≤ 0.19%" separates *seeds of one condition*. 5× was only simulated
+  at the baseline error, so its measured error varies only from read set to read set (about 0.5%
+  relative). The split fits seed-level noise. The figure labels it as noise; it was not removed,
+  because re-tuning the tree after seeing an embarrassing split is exactly the kind of
+  after-the-fact adjustment that makes models look better than they are.
+- **"Error ≤ 0.15%" elsewhere is "the 75 bp reads".** ART's error rate rises along a read, so
+  shorter reads have a lower *mean* error (0.145% vs 0.195%). In a one-factor-at-a-time design,
+  read length and error rate are therefore partly confounded, and the tree can use either to
+  separate the 75 bp condition. The forest's separate importances for the two should not be
+  compared with each other.
+
+The figure code works out what each error-rate split separates from the training rows: one
+condition's seeds, or exactly one condition. It does not hard-code the explanation.
+
+### 8.14 Building the report so it cannot drift from the data
+
+Every table in `docs/FINAL_REPORT.md` and every number quoted in its prose is generated by
+`scripts/build_report.py` from `results/`. The prose template uses `{{T_...}}` placeholders for
+tables and `{{V_...}}` for numbers, and the builder refuses to write a report with an unknown or
+unfilled placeholder. A hand-typed number in a report is a number that will silently go stale the
+first time anything is re-run.
+
+The renderer surfaced four problems worth knowing:
+
+- **pandas attribute traps, twice.** `x.cov == 5` compared the DataFrame's `.cov()` *method* to 5
+  and silently matched nothing, so the alignment table came out empty. Later `g.pipe == p` did
+  the same with `.pipe()`. Any column whose name is also a DataFrame method must be accessed as
+  `df["name"]`.
+- **Equal-width table columns.** Pandoc sizes a wrapping pipe table's columns by the *relative
+  number of dashes* in the separator row, so the conventional `|---|---|` makes every column the
+  same width. The 22-row recommendation table spanned 2.5 pages. Sizing dashes by content, floored
+  at each column's longest unbreakable word and capped so one long column cannot starve the rest,
+  brought the report from 23 to 21 pages without dropping anything.
+- **Silent missing glyphs.** XeLaTeX with Helvetica has no `→`. It does not fail; it drops the
+  character and writes "Missing character" to a log nobody reads. The fix maps `→` to a math arrow
+  and uses Menlo for code, which has `≥`. The render was checked by counting those warnings
+  (zero) and by looking at every page.
+- **Tables reported to the reader must be honest about scope.** For example, Table 5's
+  false-positive counts are seed 1 only; the caption says so.
+
+### 8.15 Corrections to earlier claims
+
+- The mid-semester deck's numbers come from the Ti/Tv 0.5 truth sets at seed 1. They remain
+  traceable in `results/archive/titv0.5_baseline/` but are superseded by the report.
+- "All nine pipelines are perfect on phiX" was true for seed 1 at baseline. Across five seeds,
+  16 of 18 baseline cells are perfect, and every exception is explained (8.11).
+- Phase 7's question "is the SNV spread larger than noise?" is answered: yes, by about ten
+  standard deviations.

@@ -1,0 +1,46 @@
+# Decision tree (depth 4) predicting F1 — fitted on all E. coli runs
+# aln_*/cal_* are 0/1 indicators; mean_p is the measured error rate
+
+|--- coverage <= 7.5000
+|   |--- is_indel <= 0.5000
+|   |   |--- cal_bcftools <= 0.5000
+|   |   |   |--- cal_gatk <= 0.5000
+|   |   |   |   |--- value: [0.9711]
+|   |   |   |--- cal_gatk >  0.5000
+|   |   |   |   |--- value: [0.9655]
+|   |   |--- cal_bcftools >  0.5000
+|   |   |   |--- aln_bowtie2 <= 0.5000
+|   |   |   |   |--- value: [0.9837]
+|   |   |   |--- aln_bowtie2 >  0.5000
+|   |   |   |   |--- value: [0.9802]
+|   |--- is_indel >  0.5000
+|   |   |--- mean_p <= 0.0019
+|   |   |   |--- value: [0.9564]
+|   |   |--- mean_p >  0.0019
+|   |   |   |--- mean_p <= 0.0019
+|   |   |   |   |--- value: [0.9687]
+|   |   |   |--- mean_p >  0.0019
+|   |   |   |   |--- value: [0.9633]
+|--- coverage >  7.5000
+|   |--- aln_bowtie2 <= 0.5000
+|   |   |--- is_indel <= 0.5000
+|   |   |   |--- cal_bcftools <= 0.5000
+|   |   |   |   |--- value: [0.9950]
+|   |   |   |--- cal_bcftools >  0.5000
+|   |   |   |   |--- value: [0.9939]
+|   |   |--- is_indel >  0.5000
+|   |   |   |--- mean_p <= 0.0015
+|   |   |   |   |--- value: [0.9926]
+|   |   |   |--- mean_p >  0.0015
+|   |   |   |   |--- value: [0.9968]
+|   |--- aln_bowtie2 >  0.5000
+|   |   |--- cal_gatk <= 0.5000
+|   |   |   |--- is_indel <= 0.5000
+|   |   |   |   |--- value: [0.9897]
+|   |   |   |--- is_indel >  0.5000
+|   |   |   |   |--- value: [0.9815]
+|   |   |--- cal_gatk >  0.5000
+|   |   |   |--- mean_p <= 0.0015
+|   |   |   |   |--- value: [0.9882]
+|   |   |   |--- mean_p >  0.0015
+|   |   |   |   |--- value: [0.9916]

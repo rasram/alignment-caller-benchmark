@@ -1,4 +1,4 @@
-# Truth-set verification — ecoli — 2026-08-14 13:48:31 UTC
+# Truth-set verification — ecoli — 2026-10-02 06:08:14 UTC
 
 ## 1. Variant counts
 SNPs   : 5000
@@ -56,7 +56,7 @@ Genome : 4641652 bp  -> 1 variant per 773 bp
   deletions : 492
 
 ## 3. SNP transition/transversion ratio
-  transitions=1622 transversions=3378 Ti/Tv=0.480
+  transitions=3354 transversions=1646 Ti/Tv=2.038
 
 ## 4. Manual spot-check: VCF REF vs samtools faidx on the reference
   TYPE   POS        VCF_REF        FASTA_REF      MATCH

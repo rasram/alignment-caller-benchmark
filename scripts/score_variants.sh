@@ -56,13 +56,14 @@ run_eval() { # outdir baseline calls
   rm -rf "$out"
   "$RTG" vcfeval -b "$b" -c "$c" -t "$SDF" -e "$BED" \
       --vcf-score-field=QUAL -o "$out" > "$out.log" 2>&1 || {
-    # vcfeval exits non-zero when the call set is empty; record that rather than
-    # aborting the whole sweep.
-    mkdir -p "$out"
-    printf 'Threshold\tTrue-pos-baseline\tTrue-pos-call\tFalse-pos\tFalse-neg\tPrecision\tSensitivity\tF-measure\n' > "$out/summary.txt"
-    printf -- '----\n' >> "$out/summary.txt"
-    printf 'None\t0\t0\t0\t0\t0.0000\t0.0000\t0.0000\n' >> "$out/summary.txt"
-    return 0
+    # FAIL LOUDLY. An earlier version wrote a placeholder summary here
+    # (TP=FP=FN=0) on the assumption that vcfeval errors on an empty call set.
+    # Tested: it does not — it exits 0 and reports FN = all truth variants,
+    # precision NaN. So a non-zero exit is a GENUINE failure, and writing any
+    # numbers would fabricate a result (and FN=0 would have been wrong anyway).
+    echo "FATAL: vcfeval failed for $c — see $out.log" >&2
+    tail -5 "$out.log" >&2
+    exit 1
   }
 }
 

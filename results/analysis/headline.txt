@@ -1,0 +1,46 @@
+== E. coli SNV: 11 conditions ==
+  aligner effect significant (BH q<0.05): 11/11 conditions
+  caller  effect significant (BH q<0.05): 10/11 conditions
+  median share of between-pipeline SS — aligner 0.78, caller 0.02, interaction 0.14
+  aligner explains more than caller in 10/11 conditions
+  median seed sd of F1: 0.00045
+    coverage 100x                best bwa+freebayes        range 0.0110  aln 0.0063 cal 0.0023 seed_sd 0.00039  q_aln=5.1e-31 q_cal=1.4e-17
+    coverage 10x                 best minimap2+freebayes   range 0.0052  aln 0.0032 cal 0.0017 seed_sd 0.00052  q_aln=1.8e-20 q_cal=4.1e-11
+    coverage 20x                 best minimap2+freebayes   range 0.0046  aln 0.0037 cal 0.0005 seed_sd 0.00042  q_aln=9.4e-25 q_cal=0.0021
+    read length 100bp            best minimap2+freebayes   range 0.0091  aln 0.0052 cal 0.0013 seed_sd 0.00051  q_aln=5.7e-25 q_cal=1.5e-07
+    qs shift -10                 best bwa+freebayes        range 0.0094  aln 0.0062 cal 0.0009 seed_sd 0.00041  q_aln=5.1e-31 q_cal=6.5e-07
+    qs shift -2                  best bwa+freebayes        range 0.0067  aln 0.0045 cal 0.0005 seed_sd 0.00034  q_aln=7.3e-30 q_cal=0.00085
+    qs shift -5                  best bwa+freebayes        range 0.0068  aln 0.0049 cal 0.0006 seed_sd 0.00050  q_aln=1.5e-24 q_cal=0.0035
+    baseline (30x, 150bp, qs0)   best minimap2+freebayes   range 0.0066  aln 0.0045 cal 0.0004 seed_sd 0.00045  q_aln=7.5e-24 q_cal=0.028
+    read length 75bp             best minimap2+freebayes   range 0.0069  aln 0.0039 cal 0.0002 seed_sd 0.00047  q_aln=8.3e-22 q_cal=0.34
+    coverage 50x                 best minimap2+freebayes   range 0.0081  aln 0.0050 cal 0.0010 seed_sd 0.00036  q_aln=7.8e-29 q_cal=1.1e-08
+    coverage 5x                  best bwa+bcftools         range 0.0215  aln 0.0033 cal 0.0171 seed_sd 0.00187  q_aln=2.6e-15 q_cal=3e-35
+== E. coli INDEL: 11 conditions ==
+  aligner effect significant (BH q<0.05): 11/11 conditions
+  caller  effect significant (BH q<0.05): 11/11 conditions
+  median share of between-pipeline SS — aligner 0.68, caller 0.13, interaction 0.17
+  aligner explains more than caller in 10/11 conditions
+  median seed sd of F1: 0.00080
+    coverage 100x                best bwa+gatk             range 0.0259  aln 0.0137 cal 0.0078 seed_sd 0.00048  q_aln=6.6e-38 q_cal=2.2e-28
+    coverage 10x                 best minimap2+freebayes   range 0.0133  aln 0.0071 cal 0.0038 seed_sd 0.00117  q_aln=2.3e-20 q_cal=1.8e-12
+    coverage 20x                 best bwa+gatk             range 0.0172  aln 0.0096 cal 0.0046 seed_sd 0.00104  q_aln=2.7e-24 q_cal=2e-13
+    read length 100bp            best bwa+gatk             range 0.0287  aln 0.0163 cal 0.0090 seed_sd 0.00080  q_aln=8.4e-34 q_cal=4.7e-24
+    qs shift -10                 best bwa+gatk             range 0.0149  aln 0.0093 cal 0.0038 seed_sd 0.00088  q_aln=5.9e-25 q_cal=2e-12
+    qs shift -2                  best bwa+gatk             range 0.0178  aln 0.0107 cal 0.0047 seed_sd 0.00049  q_aln=7.2e-35 q_cal=2.5e-22
+    qs shift -5                  best bwa+gatk             range 0.0174  aln 0.0103 cal 0.0046 seed_sd 0.00074  q_aln=1.1e-28 q_cal=1.7e-16
+    baseline (30x, 150bp, qs0)   best bwa+gatk             range 0.0181  aln 0.0104 cal 0.0047 seed_sd 0.00068  q_aln=3.2e-30 q_cal=7.3e-18
+    read length 75bp             best bwa+gatk             range 0.0330  aln 0.0176 cal 0.0112 seed_sd 0.00092  q_aln=5.9e-32 q_cal=2.5e-24
+    coverage 50x                 best bwa+gatk             range 0.0204  aln 0.0116 cal 0.0058 seed_sd 0.00055  q_aln=2.7e-34 q_cal=3.5e-23
+    coverage 5x                  best bwa+gatk             range 0.0107  aln 0.0046 cal 0.0051 seed_sd 0.00483  q_aln=8.1e-08 q_cal=1.8e-08
+== Ti/Tv 0.5 -> 2.0 at baseline (E. coli) ==
+  max |dF1| bwa       0.0001
+  max |dF1| bowtie2   0.0024
+  max |dF1| minimap2  0.0002
+== Pre-split understatement of F1 (single_run minus pre_split), E. coli ==
+  SNV   gatk       mean +0.0007  max +0.0007
+  SNV   freebayes  mean +0.0023  max +0.0025
+  SNV   bcftools   mean +0.0004  max +0.0005
+  INDEL gatk       mean +0.0055  max +0.0057
+  INDEL freebayes  mean +0.0095  max +0.0100
+  INDEL bcftools   mean +0.0022  max +0.0030
+== clean (exclusive) timings: 264 jobs ==

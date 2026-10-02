@@ -1,0 +1,6 @@
+kind	pos	change	runs	of_runs	callers	n_pipelines	conditions	seeds	max_qual
+FN	51	A>T	27	450	bcftools,freebayes,gatk	9	cov10_len150_err0,cov20_len150_err0,cov30_len150_err-2	3,4,5	nan
+FP	1703	C>T	3	450	bcftools	3	cov30_len150_err-5	3	5.04598
+FP	2470	G>C	2	450	bcftools	2	cov30_len150_err-5	5	4.38466
+FP	2615	C>T	8	450	bcftools	2	cov100_len150_err0,cov20_len150_err0,cov30_len150_err0,cov50_len150_err0	4	8.99921
+FP	2903	G>GATCGAGCA	1	450	bcftools	1	cov20_len150_err0	2	225.417

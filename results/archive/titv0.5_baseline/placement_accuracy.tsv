@@ -1,0 +1,7 @@
+tag	aligner	tolerance	total_reads	mapped	mapping_rate	correct	placement_accuracy	placement_accuracy_of_mapped	mean_mapq	mapq0_reads	median_abs_offset	missing_from_truth
+phiX_cov30_len150_err0_seed1	bwa	10	1080	1080	1.000000	1078	0.998148	0.998148	60.000000	0	0	0
+phiX_cov30_len150_err0_seed1	bowtie2	10	1080	1080	1.000000	1080	1.000000	1.000000	40.900000	0	0	0
+phiX_cov30_len150_err0_seed1	minimap2	10	1080	1080	1.000000	1078	0.998148	0.998148	59.981481	0	0	0
+ecoli_cov30_len150_err0_seed1	bwa	10	928350	928350	1.000000	919325	0.990278	0.990278	59.063629	11830	0	0
+ecoli_cov30_len150_err0_seed1	bowtie2	10	928350	928170	0.999806	919198	0.990142	0.990334	41.176324	1	0	0
+ecoli_cov30_len150_err0_seed1	minimap2	10	928350	928350	1.000000	919247	0.990194	0.990194	59.083742	11839	0	0

@@ -1,0 +1,16 @@
+# Default Snakemake profile for this workflow — picked up automatically, so a
+# bare `snakemake` gets the right settings. Each line is a CLI flag.
+use-conda: true
+conda-frontend: conda
+cores: 8
+# Fair timing (R8): total `machine` budget = 8. Timed rules request all 8,
+# everything else requests 1, so timed jobs never share the CPU.
+resources:
+  - machine=8
+default-resources:
+  - machine=1
+rerun-incomplete: true
+printshellcmds: false
+# The default ILP scheduler re-solves an integer program every round, which
+# becomes the bottleneck with ~13,000 jobs. Greedy is near-optimal here.
+scheduler: greedy

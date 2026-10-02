@@ -3,6 +3,16 @@
 Status report and step-by-step instructions to take the project from its current state
 to a complete, defensible semester deliverable.
 
+> **Status, October 2026: EXECUTED.** Every step of Part D is complete and the definition of
+> done (end of this file) is met. `verify_all.sh` passes at full-sweep scope; the result is
+> `docs/FINAL_REPORT.pdf` and the finished state is described in `HANDOFF.md`. Optional
+> extensions (Part E) were not run. Two things were added beyond this plan: error-mechanism tests
+> (`scripts/diagnose_errors.py`, report §3.4) and a correction to how the model's selection regret
+> treats tied predictions (NOTES 8.12). The three questions in Part F were settled as: Ti/Tv
+> regenerated to 2.0; single-run scoring kept as primary, which **still needs the marker's
+> confirmation**; 5 seeds were enough, since the seed sd is about a tenth of the aligner spread.
+> The text below is kept as written, as the plan that was followed.
+
 **Verified state at time of writing:** `bash scripts/verify_all.sh` → **83 PASS / 0 FAIL / 0 WARN**.
 Only the baseline condition has been executed: `results/results.tsv` contains **72 rows**
 covering **2 of 110** condition×seed combinations.
@@ -521,11 +531,11 @@ Plus ~4 h if you take the hap.py cross-validation.
 
 ## Definition of done for Phase 1
 
-- [ ] `verify_all.sh` passes with the sweep data present
-- [ ] `results/results.tsv` has 1,980 `single_run` rows, no empty columns
-- [ ] 990 ploidy checks logged, zero failures
-- [ ] Variance analysis states whether pipeline differences exceed seed noise
-- [ ] Model fitted, validated by held-out **seed**, compared against the trivial baseline
-- [ ] Figures F1–F6 generated
-- [ ] Final report written, limitations section explicit
-- [ ] `HANDOFF.md` updated to describe the finished state
+- [x] `verify_all.sh` passes with the sweep data present
+- [x] `results/results.tsv` has 1,980 `single_run` rows, no empty columns
+- [x] 990 ploidy checks logged, zero failures
+- [x] Variance analysis states whether pipeline differences exceed seed noise
+- [x] Model fitted, validated by held-out **seed**, compared against the trivial baseline
+- [x] Figures F1–F6 generated (F1–F7 in the end)
+- [x] Final report written, limitations section explicit
+- [x] `HANDOFF.md` updated to describe the finished state

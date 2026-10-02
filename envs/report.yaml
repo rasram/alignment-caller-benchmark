@@ -1,0 +1,6 @@
+# Renders docs/FINAL_REPORT.md to PDF (via the system's XeLaTeX) and DOCX.
+name: report
+channels:
+  - conda-forge
+dependencies:
+  - pandoc=3.12

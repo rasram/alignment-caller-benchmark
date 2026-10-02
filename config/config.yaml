@@ -30,3 +30,17 @@ filter_expr: "QUAL>=20 && INFO/DP>=5"
 
 # RTG Tools is a Java application installed outside conda (see NOTES 0.4).
 rtg: tools/rtg-tools-3.13/rtg
+
+# FAIR TIMING (R8). Every timed rule (aligners, callers) requests ALL of these
+# units, every other rule requests 1 (profiles/default/config.yaml), and the
+# profile caps the total at the same number. So a timed job only ever runs with
+# the machine to itself — the conditions the Phase 5/6 baseline was timed under.
+machine_units: 8
+
+# Which seeds get CLEAN (machine-exclusive) timing. Runtime varies with the
+# condition (coverage, read length), not the seed, so one clean measurement per
+# condition is enough — while making every seed exclusive would leave 7 cores
+# idle behind every single-threaded caller and roughly triple the sweep's wall
+# time. Timings from other seeds are still recorded, flagged
+# timing_exclusive=no, and excluded from runtime analysis.
+timing_seeds: [1]

@@ -1,2 +1,0 @@
-ecoli_cov30_len150_err0_seed1 bowtie2 bcftools records=5946 diploid=0
-PASS (haploid)

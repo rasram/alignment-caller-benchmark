@@ -1,4 +1,4 @@
-# Truth-set verification — phiX — 2026-08-14 15:59:37 UTC
+# Truth-set verification — phiX — 2026-10-02 06:08:14 UTC
 
 ## 1. Variant counts
 SNPs   : 50
@@ -17,14 +17,16 @@ Genome : 5386 bp  -> 1 variant per 89 bp
   deletions : 6
 
 ## 3. SNP transition/transversion ratio
-  transitions=20 transversions=30 Ti/Tv=0.667
+  transitions=36 transversions=14 Ti/Tv=2.571
 
 ## 4. Manual spot-check: VCF REF vs samtools faidx on the reference
   TYPE   POS        VCF_REF        FASTA_REF      MATCH
   snps   51         A              A              OK
   snps   162        C              C              OK
+  snps   215        A              A              OK
   indels 469        TG             TG             OK
   indels 581        C              C              OK
+  indels 996        A              A              OK
   RESULT: OK — every checked REF matches the reference FASTA.
 
 ## 5. Length bookkeeping: truth VCF vs the actual mutated genome

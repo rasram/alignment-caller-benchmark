@@ -1,5 +1,5 @@
 ##fileformat=VCFv4.1
-##fileDate=Fri Aug 14 13:35:57 2026 (GMT time)
+##fileDate=Fri Oct  2 06:07:58 2026 (GMT time)
 ##source=simuG.pl
 ##INFO=<ID=variant_type,Number=1,Type=String,Description="The type of the introduced genomic variant">
 ##INFO=<ID=variant_id,Number=1,Type=String,Description="The id of the introduced genomic variant">
@@ -10,53 +10,53 @@
 ##INFO=<ID=sim_start,Number=1,Type=String,Description="The simulated genome based start coordinate of the introduced genomic variant">
 ##INFO=<ID=sim_end,Number=1,Type=String,Description="The simulated genome based end coordinate of the introduced genomic variant">
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
-phiX	51	.	A	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=51;ref_end=51;sim_chr=phiX;sim_start=51;sim_end=51
-phiX	162	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=162;ref_end=162;sim_chr=phiX;sim_start=162;sim_end=162
-phiX	215	.	A	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=215;ref_end=215;sim_chr=phiX;sim_start=215;sim_end=215
-phiX	217	.	A	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=217;ref_end=217;sim_chr=phiX;sim_start=217;sim_end=217
-phiX	427	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=427;ref_end=427;sim_chr=phiX;sim_start=427;sim_end=427
-phiX	486	.	G	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=486;ref_end=486;sim_chr=phiX;sim_start=485;sim_end=485
+phiX	51	.	A	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=51;ref_end=51;sim_chr=phiX;sim_start=51;sim_end=51
+phiX	162	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=162;ref_end=162;sim_chr=phiX;sim_start=162;sim_end=162
+phiX	215	.	A	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=215;ref_end=215;sim_chr=phiX;sim_start=215;sim_end=215
+phiX	217	.	A	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=217;ref_end=217;sim_chr=phiX;sim_start=217;sim_end=217
+phiX	427	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=427;ref_end=427;sim_chr=phiX;sim_start=427;sim_end=427
+phiX	486	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=486;ref_end=486;sim_chr=phiX;sim_start=485;sim_end=485
 phiX	696	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=696;ref_end=696;sim_chr=phiX;sim_start=696;sim_end=696
-phiX	777	.	G	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=777;ref_end=777;sim_chr=phiX;sim_start=777;sim_end=777
-phiX	838	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=838;ref_end=838;sim_chr=phiX;sim_start=838;sim_end=838
-phiX	914	.	G	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=914;ref_end=914;sim_chr=phiX;sim_start=914;sim_end=914
+phiX	777	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=777;ref_end=777;sim_chr=phiX;sim_start=777;sim_end=777
+phiX	838	.	G	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=838;ref_end=838;sim_chr=phiX;sim_start=838;sim_end=838
+phiX	914	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=914;ref_end=914;sim_chr=phiX;sim_start=914;sim_end=914
 phiX	960	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=960;ref_end=960;sim_chr=phiX;sim_start=960;sim_end=960
-phiX	979	.	G	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=979;ref_end=979;sim_chr=phiX;sim_start=979;sim_end=979
-phiX	1067	.	G	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1067;ref_end=1067;sim_chr=phiX;sim_start=1068;sim_end=1068
+phiX	979	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=979;ref_end=979;sim_chr=phiX;sim_start=979;sim_end=979
+phiX	1067	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1067;ref_end=1067;sim_chr=phiX;sim_start=1068;sim_end=1068
 phiX	1154	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1154;ref_end=1154;sim_chr=phiX;sim_start=1155;sim_end=1155
 phiX	1234	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1234;ref_end=1234;sim_chr=phiX;sim_start=1235;sim_end=1235
-phiX	1235	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1235;ref_end=1235;sim_chr=phiX;sim_start=1236;sim_end=1236
+phiX	1235	.	G	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1235;ref_end=1235;sim_chr=phiX;sim_start=1236;sim_end=1236
 phiX	1298	.	A	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1298;ref_end=1298;sim_chr=phiX;sim_start=1299;sim_end=1299
 phiX	1443	.	A	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1443;ref_end=1443;sim_chr=phiX;sim_start=1444;sim_end=1444
-phiX	1469	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1469;ref_end=1469;sim_chr=phiX;sim_start=1470;sim_end=1470
-phiX	1553	.	A	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1553;ref_end=1553;sim_chr=phiX;sim_start=1554;sim_end=1554
+phiX	1469	.	G	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1469;ref_end=1469;sim_chr=phiX;sim_start=1470;sim_end=1470
+phiX	1553	.	A	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1553;ref_end=1553;sim_chr=phiX;sim_start=1554;sim_end=1554
 phiX	1676	.	A	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1676;ref_end=1676;sim_chr=phiX;sim_start=1677;sim_end=1677
-phiX	1699	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1699;ref_end=1699;sim_chr=phiX;sim_start=1700;sim_end=1700
-phiX	1720	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1720;ref_end=1720;sim_chr=phiX;sim_start=1720;sim_end=1720
+phiX	1699	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1699;ref_end=1699;sim_chr=phiX;sim_start=1700;sim_end=1700
+phiX	1720	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1720;ref_end=1720;sim_chr=phiX;sim_start=1720;sim_end=1720
 phiX	1737	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1737;ref_end=1737;sim_chr=phiX;sim_start=1737;sim_end=1737
 phiX	1777	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1777;ref_end=1777;sim_chr=phiX;sim_start=1777;sim_end=1777
 phiX	1836	.	C	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1836;ref_end=1836;sim_chr=phiX;sim_start=1836;sim_end=1836
-phiX	1858	.	T	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1858;ref_end=1858;sim_chr=phiX;sim_start=1858;sim_end=1858
-phiX	1874	.	T	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1874;ref_end=1874;sim_chr=phiX;sim_start=1874;sim_end=1874
-phiX	2091	.	A	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=2091;ref_end=2091;sim_chr=phiX;sim_start=2089;sim_end=2089
+phiX	1858	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1858;ref_end=1858;sim_chr=phiX;sim_start=1858;sim_end=1858
+phiX	1874	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=1874;ref_end=1874;sim_chr=phiX;sim_start=1874;sim_end=1874
+phiX	2091	.	A	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=2091;ref_end=2091;sim_chr=phiX;sim_start=2089;sim_end=2089
 phiX	2434	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=2434;ref_end=2434;sim_chr=phiX;sim_start=2432;sim_end=2432
 phiX	2462	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=2462;ref_end=2462;sim_chr=phiX;sim_start=2460;sim_end=2460
-phiX	2767	.	G	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=2767;ref_end=2767;sim_chr=phiX;sim_start=2762;sim_end=2762
+phiX	2767	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=2767;ref_end=2767;sim_chr=phiX;sim_start=2762;sim_end=2762
 phiX	2774	.	T	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=2774;ref_end=2774;sim_chr=phiX;sim_start=2769;sim_end=2769
-phiX	3029	.	T	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3029;ref_end=3029;sim_chr=phiX;sim_start=3032;sim_end=3032
-phiX	3076	.	A	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3076;ref_end=3076;sim_chr=phiX;sim_start=3079;sim_end=3079
+phiX	3029	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3029;ref_end=3029;sim_chr=phiX;sim_start=3032;sim_end=3032
+phiX	3076	.	A	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3076;ref_end=3076;sim_chr=phiX;sim_start=3079;sim_end=3079
 phiX	3105	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3105;ref_end=3105;sim_chr=phiX;sim_start=3108;sim_end=3108
-phiX	3124	.	A	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3124;ref_end=3124;sim_chr=phiX;sim_start=3127;sim_end=3127
-phiX	3177	.	C	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3177;ref_end=3177;sim_chr=phiX;sim_start=3180;sim_end=3180
-phiX	3366	.	G	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3366;ref_end=3366;sim_chr=phiX;sim_start=3369;sim_end=3369
-phiX	3552	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3552;ref_end=3552;sim_chr=phiX;sim_start=3555;sim_end=3555
-phiX	3700	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3700;ref_end=3700;sim_chr=phiX;sim_start=3701;sim_end=3701
-phiX	4000	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4000;ref_end=4000;sim_chr=phiX;sim_start=4014;sim_end=4014
-phiX	4009	.	G	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4009;ref_end=4009;sim_chr=phiX;sim_start=4023;sim_end=4023
-phiX	4188	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4188;ref_end=4188;sim_chr=phiX;sim_start=4202;sim_end=4202
-phiX	4775	.	T	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4775;ref_end=4775;sim_chr=phiX;sim_start=4789;sim_end=4789
+phiX	3124	.	A	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3124;ref_end=3124;sim_chr=phiX;sim_start=3127;sim_end=3127
+phiX	3177	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3177;ref_end=3177;sim_chr=phiX;sim_start=3180;sim_end=3180
+phiX	3366	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3366;ref_end=3366;sim_chr=phiX;sim_start=3369;sim_end=3369
+phiX	3552	.	G	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3552;ref_end=3552;sim_chr=phiX;sim_start=3555;sim_end=3555
+phiX	3700	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=3700;ref_end=3700;sim_chr=phiX;sim_start=3701;sim_end=3701
+phiX	4000	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4000;ref_end=4000;sim_chr=phiX;sim_start=4014;sim_end=4014
+phiX	4009	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4009;ref_end=4009;sim_chr=phiX;sim_start=4023;sim_end=4023
+phiX	4188	.	G	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4188;ref_end=4188;sim_chr=phiX;sim_start=4202;sim_end=4202
+phiX	4775	.	T	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4775;ref_end=4775;sim_chr=phiX;sim_start=4789;sim_end=4789
 phiX	4848	.	C	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4848;ref_end=4848;sim_chr=phiX;sim_start=4862;sim_end=4862
 phiX	4932	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=4932;ref_end=4932;sim_chr=phiX;sim_start=4946;sim_end=4946
-phiX	5013	.	G	A	.	.	variant_type=SNP;ref_chr=phiX;ref_start=5013;ref_end=5013;sim_chr=phiX;sim_start=5027;sim_end=5027
+phiX	5013	.	G	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=5013;ref_end=5013;sim_chr=phiX;sim_start=5027;sim_end=5027
 phiX	5054	.	T	C	.	.	variant_type=SNP;ref_chr=phiX;ref_start=5054;ref_end=5054;sim_chr=phiX;sim_start=5068;sim_end=5068
-phiX	5238	.	C	G	.	.	variant_type=SNP;ref_chr=phiX;ref_start=5238;ref_end=5238;sim_chr=phiX;sim_start=5252;sim_end=5252
+phiX	5238	.	C	T	.	.	variant_type=SNP;ref_chr=phiX;ref_start=5238;ref_end=5238;sim_chr=phiX;sim_start=5252;sim_end=5252

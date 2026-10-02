@@ -1,0 +1,41 @@
+# Truth-set verification — phiX — 2026-08-14 15:59:37 UTC
+
+## 1. Variant counts
+SNPs   : 50
+INDELs : 10
+TOTAL  : 60
+Genome : 5386 bp  -> 1 variant per 89 bp
+
+## 2. Indel length distribution (ALT length - REF length; +=insertion)
+  size   -2 :     3
+  size   -1 :     3
+  size   +1 :     2
+  size   +8 :     1
+  size  +13 :     1
+
+  insertions: 4
+  deletions : 6
+
+## 3. SNP transition/transversion ratio
+  transitions=20 transversions=30 Ti/Tv=0.667
+
+## 4. Manual spot-check: VCF REF vs samtools faidx on the reference
+  TYPE   POS        VCF_REF        FASTA_REF      MATCH
+  snps   51         A              A              OK
+  snps   162        C              C              OK
+  indels 469        TG             TG             OK
+  indels 581        C              C              OK
+  RESULT: OK — every checked REF matches the reference FASTA.
+
+## 5. Length bookkeeping: truth VCF vs the actual mutated genome
+  reference length      : 5386
+  mutated genome length : 5400
+  observed difference   : 14
+  net indel sum in VCF  : 14
+  RESULT: OK — the truth VCF accounts for every base of length change.
+
+## Contig name consistency (R5)
+  ref.fai : phiX 
+  truth   : phiX 
+  bed     : phiX 
+  mutated : phiX 

@@ -156,153 +156,195 @@ for g in phiX ecoli; do
 done
 
 # =============================================================================
+# Which run tags are we auditing?
+#   VERIFY_SCOPE=all     (default) every tag in config/conditions.tsv — the
+#                        project is only complete when the full sweep has run
+#   VERIFY_SCOPE=present only tags that have been executed (for partial runs)
+# =============================================================================
+SCOPE="${VERIFY_SCOPE:-all}"
+if [[ "$SCOPE" == "present" && -s results/read_metrics.tsv ]]; then
+  TAGS=($(awk -F'\t' 'NR>1{print $1}' results/read_metrics.tsv | sort -u))
+else
+  TAGS=($(awk -F'\t' 'NR>1{print $9}' config/conditions.tsv))
+fi
+NT=${#TAGS[@]}
+TAGFILE="$(mktemp)"; printf '%s\n' "${TAGS[@]}" > "$TAGFILE"
+printf '\n  scope: %s — auditing %d run tags (conditions × seeds × genomes)\n' "$SCOPE" "$NT"
+
+# helper: count rows of a TSV whose column $2 value is one of our tags
+count_tags() { awk -F'\t' -v col="$2" 'NR==FNR{t[$1];next} FNR>1 && ($col in t)' "$TAGFILE" "$1" | wc -l | tr -d ' '; }
+
+# =============================================================================
 sec "PIPELINE — reads, QC (GATE 3, 4)"
 # =============================================================================
-for t in "$TAG_P" "$TAG_E"; do
-  g="${t%%_*}"
-  if [[ -s "work/${t}_1.fq" && -s "work/${t}_2.fq" && -s "work/${t}_.sam" ]]; then
-    ml=$(awk '!/^>/{n+=length($0)} END{print n+0}' "data/truth/${g}.simseq.genome.fa")
-    n1=$(( $(wc -l < "work/${t}_1.fq") / 4 )); n2=$(( $(wc -l < "work/${t}_2.fq") / 4 ))
-    cov=$(python3 -c "print(f'{(($n1+$n2)*150)/$ml:.2f}')")
-    ok "reads + ART truth SAM present ($g)" "${n1} pairs, ${cov}x"
-    [[ "$cov" == "30.00" ]] && ok "coverage is 30x as requested ($g)" \
-                            || warn "coverage ($g)" "$cov"
-  else bad "reads + ART truth SAM present ($g)"; fi
-done
-
-[[ -s results/qc/multiqc_report.html ]] && ok "MultiQC report generated" || bad "MultiQC report"
-if [[ -s results/qc/mean_q.tsv ]]; then
-  n=$(( $(wc -l < results/qc/mean_q.tsv) - 1 ))
-  ok "mean-Q table populated" "$n datasets"
-else bad "mean-Q table populated"; fi
+if [[ -s results/read_metrics.tsv ]]; then
+  check "read_metrics.tsv: one row per tag" "$NT" "$(count_tags results/read_metrics.tsv 1)"
+  # actual coverage must match what was requested, for EVERY tag
+  offcov=$(awk -F'\t' 'NR==FNR{t[$1];next} FNR>1 && ($1 in t) {
+            r=$10/$3; if (r<0.98 || r>1.02) n++ } END{print n+0}' "$TAGFILE" results/read_metrics.tsv)
+  [[ "$offcov" -eq 0 ]] && ok "actual coverage within ±2% of requested, every tag" \
+                        || bad "coverage off by >2%" "$offcov tags"
+  nanq=$(awk -F'\t' 'FNR>1 && ($12=="" || tolower($12)=="nan")' results/read_metrics.tsv | wc -l | tr -d ' ')
+  [[ "$nanq" -eq 0 ]] && ok "measured error rate (mean_p) present for every tag" \
+                      || bad "mean_p missing" "$nanq tags"
+else bad "results/read_metrics.tsv present"; fi
+[[ -s results/qc/multiqc_report.html ]] && ok "baseline MultiQC report present" || bad "MultiQC report"
 
 # =============================================================================
 sec "PIPELINE — alignment (GATE 5)"
 # =============================================================================
-for t in "$TAG_P" "$TAG_E"; do
-  for a in bwa bowtie2 minimap2; do
-    bam="work/${t}.${a}.md.bam"
-    if [[ -s "$bam" && -s "${bam}.bai" ]]; then
-      rg=$("$SAMTOOLS" view -H "$bam" 2>/dev/null | grep -c '^@RG' || true)
-      [[ "$rg" -ge 1 ]] && ok "BAM indexed + duplicate-marked + @RG (${t%%_*}/$a)" \
-                        || bad "R6 read group missing (${t%%_*}/$a)"
-    else bad "BAM present+indexed (${t%%_*}/$a)"; fi
-  done
-done
-
-if [[ -s results/align_metrics.tsv ]]; then
-  n=$(( $(wc -l < results/align_metrics.tsv) - 1 ))
-  check "align_metrics.tsv rows (2 genomes x 3 aligners)" 6 "$n"
-else bad "align_metrics.tsv present"; fi
-
+nbam=0; nrg=0
+for t in "${TAGS[@]}"; do for a in bwa bowtie2 minimap2; do
+  b="work/${t}.${a}.md.bam"
+  [[ -s "$b" && -s "$b.bai" ]] && nbam=$((nbam+1))
+  "$SAMTOOLS" view -H "$b" 2>/dev/null | grep -q '^@RG' && nrg=$((nrg+1))
+done; done
+check "duplicate-marked, indexed BAMs (3 per tag)" "$((NT*3))" "$nbam"
+check "R6 — read group present in every BAM" "$((NT*3))" "$nrg"
+[[ -s results/align_metrics.tsv ]] \
+  && check "align_metrics.tsv rows (3 per tag)" "$((NT*3))" "$(count_tags results/align_metrics.tsv 1)" \
+  || bad "align_metrics.tsv present"
 if [[ -s results/placement_accuracy.tsv ]]; then
-  n=$(( $(wc -l < results/placement_accuracy.tsv) - 1 ))
-  check "placement_accuracy.tsv rows" 6 "$n"
+  check "placement_accuracy.tsv rows (3 per tag)" "$((NT*3))" "$(count_tags results/placement_accuracy.tsv 1)"
   worst=$(awk -F'\t' 'NR>1{print $8}' results/placement_accuracy.tsv | sort -n | head -1)
-  ok "placement accuracy computed (min across aligners)" "$worst"
+  ok "placement accuracy computed (minimum across all runs)" "$worst"
 else bad "placement_accuracy.tsv present"; fi
+if [[ -s results/runtime.tsv ]]; then
+  check "runtime.tsv rows (3 align + 9 call per tag)" "$((NT*12))" "$(count_tags results/runtime.tsv 1)"
+  nanrt=$(awk -F'\t' 'NR>1 && (tolower($5)=="nan" || tolower($6)=="nan")' results/runtime.tsv | wc -l | tr -d ' ')
+  [[ "$nanrt" -eq 0 ]] && ok "every timed job has wall time AND peak RSS" \
+                       || bad "timed jobs with missing measurement" "$nanrt"
+else bad "results/runtime.tsv present"; fi
 
 # =============================================================================
 sec "PIPELINE — variant calling (GATE 6) — R2 PLOIDY"
 # =============================================================================
-NVCF=0; NDIP=0
-for t in "$TAG_P" "$TAG_E"; do
-  for a in bwa bowtie2 minimap2; do
-    for c in gatk freebayes bcftools; do
-      v="work/${t}.${a}.${c}.raw.vcf.gz"
-      [[ -s "$v" ]] || continue
-      NVCF=$((NVCF+1))
-      d=$("$BCFTOOLS" query -f '[%GT]\n' "$v" 2>/dev/null | grep -c '[/|]' || true)
-      NDIP=$((NDIP+d))
-    done
-  done
-done
-check "raw VCFs present (2 genomes x 9 pipelines)" 18 "$NVCF"
-if [[ "$NDIP" -eq 0 ]]; then ok "R2 — LIVE re-check: zero diploid genotypes in any VCF"
+NVCF=0; NDIP=0; NFILT=0
+for t in "${TAGS[@]}"; do for a in bwa bowtie2 minimap2; do for c in gatk freebayes bcftools; do
+  v="work/${t}.${a}.${c}.raw.vcf.gz"
+  [[ -s "$v" ]] || continue
+  NVCF=$((NVCF+1))
+  [[ -s "work/${t}.${a}.${c}.filt.vcf.gz" ]] && NFILT=$((NFILT+1))
+  d=$("$BCFTOOLS" query -f '[%GT]\n' "$v" 2>/dev/null | grep -c '[/|]' || true)
+  NDIP=$((NDIP+d))
+done; done; done
+check "raw VCFs present (9 per tag)" "$((NT*9))" "$NVCF"
+if [[ "$NDIP" -eq 0 ]]; then ok "R2 — LIVE re-check: zero diploid genotypes in $NVCF VCFs"
 else bad "R2 — diploid genotypes found" "$NDIP"; fi
-
 if [[ -s logs/ploidy_verification.txt ]]; then
-  p=$(grep -c "PASS (haploid)" logs/ploidy_verification.txt || true)
-  ok "logs/ploidy_verification.txt logged" "$p PASS entries"
+  p=$(awk 'NR==FNR{t[$1];next} ($1 in t) && /PASS \(haploid\)/' "$TAGFILE" logs/ploidy_verification.txt | wc -l | tr -d ' ')
+  check "logs/ploidy_verification.txt PASS entries (9 per tag)" "$((NT*9))" "$p"
 else bad "logs/ploidy_verification.txt"; fi
-
-NFILT=$(ls work/*.filt.vcf.gz 2>/dev/null | wc -l | tr -d ' ')
-check "hard-filtered callsets (raw + filt per pipeline)" 18 "$NFILT"
-
-# R7: no BQSR anywhere.
+check "hard-filtered callsets (9 per tag)" "$((NT*9))" "$NFILT"
 # NOTE: exclude this file. verify_all.sh lives in scripts/ and contains the
-# search pattern in its own source, so an unfiltered grep matches itself and
-# reports a BQSR violation that does not exist.
-if grep -rliE "BaseRecalibrator|ApplyBQSR" scripts/ Snakefile 2>/dev/null \
-     | grep -qv 'verify_all.sh'; then
-  bad "R7 — no BQSR" "found in: $(grep -rliE 'BaseRecalibrator|ApplyBQSR' scripts/ Snakefile 2>/dev/null | grep -v verify_all.sh | tr '\n' ' ')"
+# search pattern in its own source, so an unfiltered grep matches itself.
+if grep -rliE "BaseRecalibrator|ApplyBQSR" scripts/ Snakefile 2>/dev/null | grep -qv 'verify_all.sh'; then
+  bad "R7 — no BQSR" "found in: $(grep -rliE 'BaseRecalibrator|ApplyBQSR' scripts/ Snakefile | grep -v verify_all.sh | tr '\n' ' ')"
 else ok "R7 — no BQSR anywhere in scripts or Snakefile"; fi
 
 # =============================================================================
 sec "SCORING (GATE 7a)"
 # =============================================================================
-NNORM=$(ls work/norm/*.norm.vcf.gz 2>/dev/null | wc -l | tr -d ' ')
-[[ "$NNORM" -ge 18 ]] && ok "all call sets normalised" "$NNORM files" \
-                      || bad "all call sets normalised" "$NNORM"
-
-# R3: truth and calls must have been normalised with the SAME arguments.
-if grep -q -- "-m -any --atomize" scripts/build_truth.sh 2>/dev/null \
-   && grep -q -- "-m -any --atomize" scripts/score_variants.sh 2>/dev/null \
-   && grep -q -- "-m -any --atomize" Snakefile 2>/dev/null; then
+NNORM=0
+for t in "${TAGS[@]}"; do NNORM=$((NNORM + $(ls work/norm/${t}.*.raw.norm.vcf.gz 2>/dev/null | wc -l))); done
+check "call sets normalised (9 per tag)" "$((NT*9))" "$NNORM"
+if grep -q -- "-m -any --atomize" scripts/build_truth.sh && grep -q -- "-m -any --atomize" scripts/score_variants.sh \
+   && grep -q -- "-m -any --atomize" Snakefile; then
   ok "R3 — identical norm args in truth, scoring and Snakefile"
 else bad "R3 — normalisation arguments differ between truth and calls"; fi
-
-NVE=$(ls -d results/vcfeval/*__raw__all 2>/dev/null | wc -l | tr -d ' ')
-check "vcfeval runs, full callset (2 x 9)" 18 "$NVE"
-NVS=$(ls -d results/vcfeval/*__raw__snps results/vcfeval/*__raw__indels 2>/dev/null | wc -l | tr -d ' ')
-check "vcfeval runs, SNV/indel separately" 36 "$NVS"
-
-if [[ -s results/results.tsv ]]; then
-  tot=$(( $(wc -l < results/results.tsv) - 1 ))
-  pri=$(awk -F'\t' 'NR>1 && $10=="single_run"' results/results.tsv | wc -l | tr -d ' ')
-  check "results.tsv baseline rows (9 pipelines x 2 genomes x 2 types)" 36 "$pri"
-  ok "results.tsv total rows (incl. comparison method)" "$tot"
-  # A row with F1 exactly 0 on E. coli would signal a bug, not a result.
-  z=$(awk -F'\t' 'NR>1 && $1=="ecoli" && $15+0==0' results/results.tsv | wc -l | tr -d ' ')
-  [[ "$z" -eq 0 ]] && ok "no E. coli pipeline scored F1=0 (bug signature)" \
-                   || bad "E. coli rows with F1=0" "$z"
-else bad "results/results.tsv present"; fi
-
-for f in roc_ecoli_SNV roc_ecoli_INDEL roc_phiX_SNV roc_phiX_INDEL; do
-  [[ -s "results/${f}.svg" ]] && ok "ROC plot ${f}.svg" || bad "ROC plot ${f}.svg"
+NVE=0; NVS=0
+for t in "${TAGS[@]}"; do
+  NVE=$((NVE + $(ls -d results/vcfeval/${t}__*__raw__all 2>/dev/null | wc -l)))
+  NVS=$((NVS + $(ls -d results/vcfeval/${t}__*__raw__snps results/vcfeval/${t}__*__raw__indels 2>/dev/null | wc -l)))
 done
-
+check "vcfeval runs, full call set (9 per tag)" "$((NT*9))" "$NVE"
+check "vcfeval runs, SNV/indel pre-split (18 per tag)" "$((NT*18))" "$NVS"
+if [[ -s results/results.tsv ]]; then
+  read -r PRI MISS ZERO < <("$CONDA_BASE/envs/ml/bin/python" - "$TAGFILE" <<'PY'
+import csv, sys
+want = set(open(sys.argv[1]).read().split())
+rows = [r for r in csv.DictReader(open("results/results.tsv"), delimiter="\t")
+        if r["scoring_method"] == "single_run" and r["callset"] == "raw"
+        and f'{r["genome"]}_cov{r["coverage"]}_len{r["read_length"]}_err{r["qs_shift"]}_seed{r["seed"]}' in want]
+feat = ["mapping_rate", "mean_mapq", "mean_depth", "placement_accuracy", "align_seconds",
+        "call_seconds", "peak_rss_mb", "actual_coverage", "mean_q", "mean_p"]
+miss = sum(1 for r in rows for c in feat if str(r[c]).strip().lower() in ("", "nan", "na"))
+zero = sum(1 for r in rows if r["genome"] == "ecoli" and float(r["f1"]) == 0)
+print(len(rows), miss, zero)
+PY
+)
+  check "results.tsv raw single_run rows (18 per tag)" "$((NT*18))" "$PRI"
+  NFROWS=$(awk -F'\t' 'NR==1{for(i=1;i<=NF;i++) h[$i]=i; next}
+           $h["callset"]=="filt" && $h["scoring_method"]=="single_run"' results/results.tsv | wc -l | tr -d ' ')
+  check "results.tsv hard-filtered rows scored (18 per tag)" "$((NT*18))" "$NFROWS"
+  [[ "$MISS" -eq 0 ]] && ok "no missing feature cells in results.tsv" \
+                      || bad "missing feature cells in results.tsv" "$MISS"
+  [[ "$ZERO" -eq 0 ]] && ok "no E. coli pipeline scored F1 = 0 (bug signature)" \
+                      || bad "E. coli rows with F1 = 0" "$ZERO"
+else bad "results/results.tsv present"; fi
 [[ -s logs/scoring_negative_control.txt ]] && ok "scoring negative control recorded" \
   || warn "scoring negative control recorded"
 
 # =============================================================================
-sec "READY FOR THE SWEEP (GATE 7b)"
+sec "WORKFLOW (GATE 7b)"
 # =============================================================================
 if [[ -s config/conditions.tsv ]]; then
-  rows=$(( $(wc -l < config/conditions.tsv) - 1 ))
   uniq=$(awk -F'\t' 'NR>1 && $2=="phiX"{print $3"_"$4"_"$5}' config/conditions.tsv | sort -u | wc -l | tr -d ' ')
   check "conditions.tsv unique conditions per genome" 11 "$uniq"
-  check "conditions.tsv rows (11 x 5 seeds x 2 genomes)" 110 "$rows"
-  ok "pipeline runs implied by design" "$((rows*9))"
+  check "conditions.tsv rows (11 × 5 seeds × 2 genomes)" 110 "$(( $(wc -l < config/conditions.tsv) - 1 ))"
 else bad "config/conditions.tsv present"; fi
-
-[[ -s Snakefile ]] && ok "Snakefile present" || bad "Snakefile present"
-[[ -s results/workflow_dag.svg ]] && ok "workflow_dag.svg exported" \
-    "$(grep -c '<title>' results/workflow_dag.svg) nodes" || bad "workflow_dag.svg exported"
-
+[[ -s results/workflow_dag.svg ]] && ok "workflow DAG exported" || bad "workflow DAG exported"
 SM="$CONDA_BASE/envs/ml/bin/snakemake"
 export PATH="$CONDA_BASE/bin:$CONDA_BASE/condabin:$PATH"
-if out=$("$SM" -n --use-conda --conda-frontend conda --config run=all 2>&1); then
-  jobs=$(echo "$out" | awk '/^total/{print $2; exit}')
-  ok "snakemake -n resolves the FULL sweep DAG" "${jobs:-?} jobs"
-else
-  bad "snakemake -n resolves the FULL sweep DAG" "$(echo "$out" | grep -iE 'error|exception' | head -1)"
+if out=$("$SM" -n --config run=all 2>&1); then
+  if echo "$out" | grep -q "Nothing to be done"; then
+    ok "full 990-run sweep is complete and up to date under Snakemake"
+  else
+    j=$(echo "$out" | awk '/^total/{print $2; exit}')
+    [[ "$SCOPE" == "all" ]] && bad "full sweep not complete" "$j jobs outstanding" \
+                            || ok "full sweep DAG resolves" "$j jobs outstanding"
+  fi
+else bad "snakemake -n --config run=all" "$(echo "$out" | grep -iE 'error|exception' | head -1)"; fi
+rm -f "$TAGFILE"
+
+# =============================================================================
+sec "ANALYSIS, MODEL, FIGURES (STEPS 7–9)"
+# =============================================================================
+for f in summary_by_condition effects titv_experiment scoring_method_effect \
+         runtime_by_condition hard_filter_effect; do
+  [[ -s "results/analysis/${f}.tsv" ]] && ok "results/analysis/${f}.tsv" \
+                                       || bad "results/analysis/${f}.tsv present"
+done
+if [[ -s results/analysis/effects.tsv ]]; then
+  # every E. coli condition must have been TESTED (>= 2 seeds), not merely summarised
+  read -r NT_EC NTESTED < <(awk -F'\t' 'NR==1{for(i=1;i<=NF;i++)h[$i]=i;next}
+       $h["genome"]=="ecoli"{n++; if($h["aligner_q"]!="" && $h["aligner_q"]!="nan") t++}
+       END{print n+0, t+0}' results/analysis/effects.tsv)
+  check "E. coli condition × type cells with a significance test" "22" "$NTESTED"
 fi
-if out=$("$SM" -n --use-conda --conda-frontend conda 2>&1); then
-  echo "$out" | grep -q "Nothing to be done" \
-    && ok "baseline is up to date under Snakemake (idempotent)" \
-    || warn "baseline not up to date" "$(echo "$out" | awk '/^total/{print $2}')"
-else bad "snakemake -n baseline"; fi
+for f in validation importances recommendations loco_by_condition; do
+  [[ -s "results/model/${f}.tsv" ]] && ok "results/model/${f}.tsv" \
+                                    || bad "results/model/${f}.tsv present"
+done
+[[ -s results/model/tree_rules.txt ]] && ok "decision tree rules exported" || bad "tree_rules.txt"
+# a regression tree ranks whole leaves equal; the selection metric must treat a tie
+# as a tie (expected regret), never break it by row order — guard the fix
+if [[ -s results/model/recommendations.tsv ]] && head -1 results/model/recommendations.tsv | grep -q model_top_n; then
+  ok "model recommendations are tie-aware" "top-ranked SETS, not idxmax picks"
+else bad "model recommendations are tie-aware (model_top_n column)"; fi
+NFIG=$(ls results/figures/F*.png 2>/dev/null | wc -l | tr -d ' ')
+check "report figures F1–F7" 7 "$NFIG"
+STALE=$(find results/figures -name 'F*.png' ! -newer results/results.tsv | wc -l | tr -d ' ')
+check "figures newer than results.tsv (not stale)" 0 "$STALE"
+
+# error-mechanism tests (Step 7b): one row per pipeline x depth / pipeline x {30x,100x}
+for f in fp_near_indel:54 fn_repeats:18; do
+  n=$(( $(wc -l < "results/analysis/${f%%:*}.tsv" 2>/dev/null || echo 1) - 1 ))
+  check "results/analysis/${f%%:*}.tsv rows" "${f##*:}" "$n"
+done
+[[ -s results/analysis/phix_errors.tsv ]] && ok "results/analysis/phix_errors.tsv" \
+  "$(( $(wc -l < results/analysis/phix_errors.tsv) - 1 )) distinct phiX errors outside 5x" \
+  || bad "results/analysis/phix_errors.tsv present"
 
 # =============================================================================
 sec "DOCUMENTATION"
@@ -312,6 +354,19 @@ if [[ -s NOTES.md ]]; then
 else bad "NOTES.md present"; fi
 [[ -s README.md ]]   && ok "README.md present"   || bad "README.md present (one-command reproduction)"
 [[ -s HANDOFF.md ]]  && ok "HANDOFF.md present"  || bad "HANDOFF.md present"
+[[ -s docs/FINAL_REPORT.md ]] && ok "final report (markdown)" || bad "docs/FINAL_REPORT.md present"
+[[ -s docs/FINAL_REPORT.pdf ]] && ok "final report (PDF)" || bad "docs/FINAL_REPORT.pdf present"
+[[ -s docs/FINAL_REPORT.docx ]] && ok "final report (DOCX)" || bad "docs/FINAL_REPORT.docx present"
+# the report's tables and quoted numbers must be generated, never left as placeholders
+if [[ -s docs/FINAL_REPORT.md ]] && grep -q '{{' docs/FINAL_REPORT.md; then
+  bad "report contains unfilled placeholders"
+else ok "report has no unfilled placeholders"; fi
+# ...and must have been generated from the CURRENT results and template
+if [[ -s docs/FINAL_REPORT.md && docs/FINAL_REPORT.md -nt results/results.tsv \
+      && docs/FINAL_REPORT.md -nt docs/report/FINAL_REPORT.template.md \
+      && docs/FINAL_REPORT.pdf -nt docs/FINAL_REPORT.md ]]; then
+  ok "report is up to date" "newer than results.tsv and its template; PDF newer than markdown"
+else bad "report is up to date (rebuild: snakemake --config run=all)"; fi
 
 # =============================================================================
 printf '\n\033[1m== SUMMARY ==\033[0m\n'

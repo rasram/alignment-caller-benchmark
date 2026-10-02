@@ -77,11 +77,26 @@ def parse_roc(path):
     if not last:
         return None
     try:
-        return dict(TP=int(float(last[1])), FP=int(float(last[2])),
+        return f1_from_counts(dict(TP=int(float(last[1])), FP=int(float(last[2])),
                     FN=int(float(last[4])), precision=float(last[5]),
-                    recall=float(last[6]), f1=float(last[7]))
+                    recall=float(last[6]), f1=float(last[7])))
     except (ValueError, IndexError):
         return None
+
+
+def f1_from_counts(d):
+    """F1 = 2TP / (2TP + FP + FN).
+
+    vcfeval computes F1 from precision and recall, so when a pipeline makes NO
+    calls of a type, precision is 0/0 and vcfeval reports F1 as NaN. The count
+    form is the standard definition, is identical to the harmonic mean whenever
+    that is defined, and correctly gives 0 when TP = 0. Precision itself is left
+    as NaN in that case — it genuinely is undefined.
+    """
+    den = 2 * d["TP"] + d["FP"] + d["FN"]
+    if d["f1"] != d["f1"] and den > 0:          # NaN check
+        d["f1"] = 2 * d["TP"] / den
+    return d
 
 
 def parse_summary(path):
@@ -104,9 +119,9 @@ def parse_summary(path):
     if not best:
         return None
     try:
-        return dict(TP=int(float(best[1])), FP=int(float(best[3])),
+        return f1_from_counts(dict(TP=int(float(best[1])), FP=int(float(best[3])),
                     FN=int(float(best[4])), precision=float(best[5]),
-                    recall=float(best[6]), f1=float(best[7]))
+                    recall=float(best[6]), f1=float(best[7])))
     except (ValueError, IndexError):
         return None
 
@@ -150,7 +165,16 @@ def main():
     ap.add_argument("--out", default=os.path.join(REPO, "results", "results.tsv"))
     ap.add_argument("--include-all-type", action="store_true",
                     help="also emit the combined (SNV+INDEL) rows")
+    ap.add_argument("--strict", action="store_true",
+                    help="exit non-zero if any metric column is empty. The workflow "
+                         "uses this so a missing join fails loudly instead of "
+                         "producing rows with blank feature columns.")
+    ap.add_argument("--tags", nargs="*", default=None,
+                    help="only collect these run tags. The workflow passes exactly the "
+                         "tags it built, so stale vcfeval directories from a different "
+                         "run mode are never mixed into the table.")
     args = ap.parse_args()
+    want = set(args.tags) if args.tags else None
 
     ve = os.path.join(REPO, "results", "vcfeval")
     if not os.path.isdir(ve):
@@ -161,13 +185,33 @@ def main():
                      lambda r: (r["tag"], r["aligner"]))
     place = load_tsv(os.path.join(REPO, "results", "placement_accuracy.tsv"),
                      lambda r: (r["tag"], r["aligner"]))
-    calltime = load_call_timing(os.path.join(REPO, "logs", "call_timing.tsv"))
+    reads = load_tsv(os.path.join(REPO, "results", "read_metrics.tsv"),
+                     lambda r: r["tag"])
+
+    # Runtime: Snakemake benchmark aggregate if present, else the legacy
+    # /usr/bin/time logs written by the Phase 5/6 shell scripts.
+    rt_path = os.path.join(REPO, "results", "runtime.tsv")
+    align_rt, call_rt = {}, {}
+    if os.path.exists(rt_path):
+        with open(rt_path) as fh:
+            for r in csv.DictReader(fh, delimiter="\t"):
+                if r["stage"] == "align":
+                    align_rt[(r["tag"], r["aligner"])] = r
+                else:
+                    call_rt[(r["tag"], r["aligner"], r["caller"])] = r
+    else:
+        for (tg, al, ca), sec in load_call_timing(
+                os.path.join(REPO, "logs", "call_timing.tsv")).items():
+            call_rt[(tg, al, ca)] = {"seconds": sec, "max_rss_mb": ""}
 
     cols = ["genome", "coverage", "read_length", "qs_shift", "seed",
             "aligner", "caller", "variant_type", "callset", "scoring_method",
             "TP", "FP", "FN", "precision", "recall", "f1",
             "mapping_rate", "mean_mapq", "mean_depth", "placement_accuracy",
-            "align_seconds", "call_seconds", "peak_rss_mb"]
+            "align_seconds", "call_seconds", "peak_rss_mb",
+            # additions beyond the brief's schema — features for the model
+            "call_peak_rss_mb", "actual_coverage", "mean_q", "mean_p",
+            "timing_exclusive"]
 
     rows = []
     for name in sorted(os.listdir(ve)):
@@ -179,6 +223,8 @@ def main():
             continue
 
         if args.callset != "both" and m["set"] != args.callset:
+            continue
+        if want is not None and m["tag"] not in want:
             continue
 
         entries = []
@@ -207,6 +253,9 @@ def main():
 
         a = align.get((m["tag"], m["aligner"]))
         p = place.get((m["tag"], m["aligner"]))
+        q = reads.get(m["tag"])
+        art = align_rt.get((m["tag"], m["aligner"]))
+        crt = call_rt.get((m["tag"], m["aligner"], m["caller"]))
 
         for vlabel, method, s in entries:
           rows.append({
@@ -223,9 +272,18 @@ def main():
             "mean_mapq": num(a, "mean_mapq"),
             "mean_depth": num(a, "mean_depth"),
             "placement_accuracy": num(p, "placement_accuracy"),
-            "align_seconds": num(a, "align_seconds"),
-            "call_seconds": calltime.get((m["tag"], m["aligner"], m["caller"]), ""),
-            "peak_rss_mb": num(a, "peak_rss_mb"),
+            "align_seconds": num(art, "seconds") or num(a, "align_seconds"),
+            "call_seconds": num(crt, "seconds"),
+            "peak_rss_mb": num(art, "max_rss_mb") or num(a, "peak_rss_mb"),
+            "call_peak_rss_mb": num(crt, "max_rss_mb"),
+            "actual_coverage": num(q, "actual_coverage"),
+            "mean_q": num(q, "mean_q"),
+            "mean_p": num(q, "mean_p"),
+            # yes = timed with the machine to itself (clean); no = timed under
+            # contention, recorded for completeness but excluded from runtime
+            # analysis. Both align and call must be clean for "yes".
+            "timing_exclusive": ("yes" if num(art, "exclusive") == "yes"
+                                 and num(crt, "exclusive") == "yes" else "no"),
         })
 
     order = {"SNV": 0, "INDEL": 1, "ALL": 2}
@@ -240,6 +298,22 @@ def main():
         w.writerows(rows)
 
     print(f"Wrote {len(rows)} rows to {args.out}")
+
+    feature_cols = ["mapping_rate", "mean_mapq", "mean_depth", "placement_accuracy",
+                    "align_seconds", "call_seconds", "peak_rss_mb",
+                    "actual_coverage", "mean_q", "mean_p"]
+    # "nan"/"NA" count as missing too: the first pass of the timing refactor wrote
+    # "nan" for peak RSS and an empty-string-only check let it through silently.
+    def missing(v):
+        return str(v).strip().lower() in ("", "nan", "na", "none")
+    blank = {c: sum(1 for r in rows if missing(r[c])) for c in feature_cols}
+    blank = {c: n for c, n in blank.items() if n}
+    if blank:
+        msg = ", ".join(f"{c}={n}" for c, n in blank.items())
+        print(f"{'ERROR' if args.strict else 'WARNING'}: empty metric cells: {msg}",
+              file=sys.stderr)
+        if args.strict:
+            return 2
 
     # 3x3 F1 matrices, printed per genome and variant type.
     genomes = sorted({r["genome"] for r in rows})

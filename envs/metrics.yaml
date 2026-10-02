@@ -1,0 +1,12 @@
+# Environment for the per-unit metric rules (read_metrics, align_metrics,
+# placement_accuracy) and the aggregation rules. Deliberately lean: these rules
+# need an interpreter, numpy (FASTQ quality histograms) and samtools — not the
+# jupyterlab / scikit-learn stack in envs/ml.yaml.
+name: metrics
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy=2.4.6
+  - samtools=1.24

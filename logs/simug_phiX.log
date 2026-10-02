@@ -1,0 +1,45 @@
+
+[Fri Oct  2 11:37:58 2026]
+Starting simuG ..
+
+[Fri Oct  2 11:37:58 2026]
+Check specified options ..
+Running simuG for SNP/INDEL simulation >>
+Ignore all options for CNV/inversion/translocation simulation.
+
+This simulation use the random seed: 20260814
+
+The option snp_count has been specified: snp_count = 50
+The option titv_ratio has been specified: titv_ratio = 2.0
+The option indel_count has been specified: indel_count = 10
+The option ins_del_ratio has been specified: ins_del_ratio = 1
+The option indel_size_powerlaw_alpha has been specified: indel_size_powerlaw_alpha = 2
+The option indel_size_powerlaw_constant has been specified: indel_size_powerlaw_constant = 0.5
+
+[Fri Oct  2 11:37:58 2026] Introducing random SNPs based on the following parameters:
+> snp_count = 50
+> titv_ratio = 2.0
+
+[Fri Oct  2 11:37:58 2026]
+Introducing random INDELs based on the following parameters:
+> indel_count = 10
+> ins_del_ratio = 1
+> indel_size_powerlaw_alpha = 2
+> indel_size_powerlaw_constant = 0.5
+
+[Fri Oct  2 11:37:58 2026]
+Simulation completed! :) 
+
+[Fri Oct  2 11:37:58 2026]
+Generating output files .. 
+
+Generating the correspondance map for genomic variants introduced during simulation:
+phiX.refseq2simseq.map.txt
+
+Generating reference-based vcf file for genomic variants introduced during simulation:
+phiX.refseq2simseq.SNP.vcf
+phiX.refseq2simseq.INDEL.vcf
+
+[Fri Oct  2 11:37:58 2026]
+Done! :) 
+

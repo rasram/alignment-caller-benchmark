@@ -1,0 +1,1321 @@
+tag	stage	aligner	caller	seconds	max_rss_mb	cpu_seconds	job_seconds	exclusive
+ecoli_cov100_len150_err0_seed1	align	bowtie2		61.34	66.9	250.03	61.56	yes
+ecoli_cov100_len150_err0_seed1	align	bwa		16.61	409.2	67.83	16.82	yes
+ecoli_cov100_len150_err0_seed1	align	minimap2		5.84	587.6	25.73	6.07	yes
+ecoli_cov100_len150_err0_seed1	call	bowtie2	bcftools	25.41	48.6	26.04	25.64	yes
+ecoli_cov100_len150_err0_seed1	call	bowtie2	freebayes	30.32	31.0	30.04	30.58	yes
+ecoli_cov100_len150_err0_seed1	call	bowtie2	gatk	82.96	550.2	95.60	83.20	yes
+ecoli_cov100_len150_err0_seed1	call	bwa	bcftools	26.39	56.0	26.90	26.64	yes
+ecoli_cov100_len150_err0_seed1	call	bwa	freebayes	29.13	28.2	29.12	29.37	yes
+ecoli_cov100_len150_err0_seed1	call	bwa	gatk	87.33	517.6	100.28	87.56	yes
+ecoli_cov100_len150_err0_seed1	call	minimap2	bcftools	25.71	52.4	26.33	25.96	yes
+ecoli_cov100_len150_err0_seed1	call	minimap2	freebayes	29.33	27.9	29.25	29.57	yes
+ecoli_cov100_len150_err0_seed1	call	minimap2	gatk	83.85	495.5	96.53	84.07	yes
+ecoli_cov100_len150_err0_seed2	align	bowtie2		108.21	66.9	383.77	108.62	no
+ecoli_cov100_len150_err0_seed2	align	bwa		28.40	431.0	104.72	28.67	no
+ecoli_cov100_len150_err0_seed2	align	minimap2		8.79	583.3	33.24	9.11	no
+ecoli_cov100_len150_err0_seed2	call	bowtie2	bcftools	39.79	52.4	37.13	40.09	no
+ecoli_cov100_len150_err0_seed2	call	bowtie2	freebayes	45.70	34.2	41.03	46.01	no
+ecoli_cov100_len150_err0_seed2	call	bowtie2	gatk	84.72	405.5	98.10	84.97	no
+ecoli_cov100_len150_err0_seed2	call	bwa	bcftools	38.41	59.0	38.51	38.75	no
+ecoli_cov100_len150_err0_seed2	call	bwa	freebayes	42.52	32.3	41.13	42.88	no
+ecoli_cov100_len150_err0_seed2	call	bwa	gatk	81.82	575.2	95.61	82.07	no
+ecoli_cov100_len150_err0_seed2	call	minimap2	bcftools	36.80	60.6	36.71	37.17	no
+ecoli_cov100_len150_err0_seed2	call	minimap2	freebayes	42.00	36.8	40.04	42.48	no
+ecoli_cov100_len150_err0_seed2	call	minimap2	gatk	84.73	511.2	98.86	84.97	no
+ecoli_cov100_len150_err0_seed3	align	bowtie2		95.63	67.5	362.08	95.95	no
+ecoli_cov100_len150_err0_seed3	align	bwa		26.41	430.2	97.39	26.74	no
+ecoli_cov100_len150_err0_seed3	align	minimap2		8.99	580.9	32.91	9.34	no
+ecoli_cov100_len150_err0_seed3	call	bowtie2	bcftools	39.68	52.7	38.21	40.02	no
+ecoli_cov100_len150_err0_seed3	call	bowtie2	freebayes	44.98	34.1	41.66	45.31	no
+ecoli_cov100_len150_err0_seed3	call	bowtie2	gatk	86.59	605.5	100.02	86.83	no
+ecoli_cov100_len150_err0_seed3	call	bwa	bcftools	38.18	62.9	37.01	38.54	no
+ecoli_cov100_len150_err0_seed3	call	bwa	freebayes	43.75	31.0	39.23	44.25	no
+ecoli_cov100_len150_err0_seed3	call	bwa	gatk	83.67	531.1	96.72	83.91	no
+ecoli_cov100_len150_err0_seed3	call	minimap2	bcftools	37.63	61.1	37.57	38.04	no
+ecoli_cov100_len150_err0_seed3	call	minimap2	freebayes	41.98	32.2	40.21	42.39	no
+ecoli_cov100_len150_err0_seed3	call	minimap2	gatk	93.74	568.7	109.76	94.01	no
+ecoli_cov100_len150_err0_seed4	align	bowtie2		98.11	67.6	367.91	98.45	no
+ecoli_cov100_len150_err0_seed4	align	bwa		29.17	392.3	106.10	29.48	no
+ecoli_cov100_len150_err0_seed4	align	minimap2		8.13	580.3	31.25	8.45	no
+ecoli_cov100_len150_err0_seed4	call	bowtie2	bcftools	41.80	52.7	36.69	42.12	no
+ecoli_cov100_len150_err0_seed4	call	bowtie2	freebayes	47.46	33.1	40.92	47.82	no
+ecoli_cov100_len150_err0_seed4	call	bowtie2	gatk	82.88	471.8	95.79	83.12	no
+ecoli_cov100_len150_err0_seed4	call	bwa	bcftools	38.94	57.9	38.89	39.28	no
+ecoli_cov100_len150_err0_seed4	call	bwa	freebayes	46.23	32.2	40.74	46.65	no
+ecoli_cov100_len150_err0_seed4	call	bwa	gatk	84.79	512.0	97.30	85.20	no
+ecoli_cov100_len150_err0_seed4	call	minimap2	bcftools	37.98	60.2	37.96	38.36	no
+ecoli_cov100_len150_err0_seed4	call	minimap2	freebayes	42.49	32.2	40.55	42.83	no
+ecoli_cov100_len150_err0_seed4	call	minimap2	gatk	82.31	599.4	95.62	82.54	no
+ecoli_cov100_len150_err0_seed5	align	bowtie2		109.86	67.4	384.66	110.41	no
+ecoli_cov100_len150_err0_seed5	align	bwa		27.84	414.1	104.26	28.35	no
+ecoli_cov100_len150_err0_seed5	align	minimap2		9.04	580.4	34.27	9.54	no
+ecoli_cov100_len150_err0_seed5	call	bowtie2	bcftools	39.26	53.2	38.08	39.59	no
+ecoli_cov100_len150_err0_seed5	call	bowtie2	freebayes	44.78	38.7	42.19	45.17	no
+ecoli_cov100_len150_err0_seed5	call	bowtie2	gatk	86.00	494.7	99.93	86.24	no
+ecoli_cov100_len150_err0_seed5	call	bwa	bcftools	37.29	57.4	36.53	37.70	no
+ecoli_cov100_len150_err0_seed5	call	bwa	freebayes	42.53	36.8	40.14	42.94	no
+ecoli_cov100_len150_err0_seed5	call	bwa	gatk	84.78	434.8	97.93	85.01	no
+ecoli_cov100_len150_err0_seed5	call	minimap2	bcftools	38.51	61.9	37.19	38.91	no
+ecoli_cov100_len150_err0_seed5	call	minimap2	freebayes	43.69	36.8	40.52	43.99	no
+ecoli_cov100_len150_err0_seed5	call	minimap2	gatk	83.88	476.5	98.60	84.11	no
+ecoli_cov10_len150_err0_seed1	align	bowtie2		6.85	66.6	27.47	7.08	yes
+ecoli_cov10_len150_err0_seed1	align	bwa		1.96	273.6	7.55	2.20	yes
+ecoli_cov10_len150_err0_seed1	align	minimap2		0.91	244.5	2.29	1.15	yes
+ecoli_cov10_len150_err0_seed1	call	bowtie2	bcftools	5.74	45.7	6.24	5.97	yes
+ecoli_cov10_len150_err0_seed1	call	bowtie2	freebayes	4.47	23.5	4.49	4.69	yes
+ecoli_cov10_len150_err0_seed1	call	bowtie2	gatk	18.21	517.9	29.34	18.44	yes
+ecoli_cov10_len150_err0_seed1	call	bwa	bcftools	5.75	49.2	6.25	5.98	yes
+ecoli_cov10_len150_err0_seed1	call	bwa	freebayes	4.41	23.5	4.43	4.64	yes
+ecoli_cov10_len150_err0_seed1	call	bwa	gatk	18.54	464.8	28.72	18.77	yes
+ecoli_cov10_len150_err0_seed1	call	minimap2	bcftools	5.82	49.2	6.32	6.05	yes
+ecoli_cov10_len150_err0_seed1	call	minimap2	freebayes	4.47	23.5	4.50	4.70	yes
+ecoli_cov10_len150_err0_seed1	call	minimap2	gatk	18.13	521.8	28.60	18.36	yes
+ecoli_cov10_len150_err0_seed2	align	bowtie2		10.37	67.1	36.56	10.68	no
+ecoli_cov10_len150_err0_seed2	align	bwa		3.51	273.2	10.48	3.92	no
+ecoli_cov10_len150_err0_seed2	align	minimap2		1.35	238.5	3.11	1.75	no
+ecoli_cov10_len150_err0_seed2	call	bowtie2	bcftools	8.36	49.9	9.05	8.81	no
+ecoli_cov10_len150_err0_seed2	call	bowtie2	freebayes	6.40	25.1	6.28	6.96	no
+ecoli_cov10_len150_err0_seed2	call	bowtie2	gatk	29.91	667.8	40.31	30.23	no
+ecoli_cov10_len150_err0_seed2	call	bwa	bcftools	7.39	54.8	8.49	7.72	no
+ecoli_cov10_len150_err0_seed2	call	bwa	freebayes	6.18	29.6	5.95	6.54	no
+ecoli_cov10_len150_err0_seed2	call	bwa	gatk	21.98	545.6	34.89	22.32	no
+ecoli_cov10_len150_err0_seed2	call	minimap2	bcftools	7.80	56.4	8.89	8.14	no
+ecoli_cov10_len150_err0_seed2	call	minimap2	freebayes	5.94	29.6	5.97	6.29	no
+ecoli_cov10_len150_err0_seed2	call	minimap2	gatk	30.80	773.2	43.28	31.11	no
+ecoli_cov10_len150_err0_seed3	align	bowtie2		10.15	66.8	36.39	10.43	no
+ecoli_cov10_len150_err0_seed3	align	bwa		2.90	274.9	9.62	3.21	no
+ecoli_cov10_len150_err0_seed3	align	minimap2		1.13	242.1	2.88	1.43	no
+ecoli_cov10_len150_err0_seed3	call	bowtie2	bcftools	8.13	51.3	9.04	8.55	no
+ecoli_cov10_len150_err0_seed3	call	bowtie2	freebayes	6.40	29.9	6.33	6.76	no
+ecoli_cov10_len150_err0_seed3	call	bowtie2	gatk	24.05	549.1	37.74	24.32	no
+ecoli_cov10_len150_err0_seed3	call	bwa	bcftools	7.45	54.3	8.54	7.77	no
+ecoli_cov10_len150_err0_seed3	call	bwa	freebayes	5.78	29.6	5.82	6.09	no
+ecoli_cov10_len150_err0_seed3	call	bwa	gatk	27.91	546.5	40.28	28.17	no
+ecoli_cov10_len150_err0_seed3	call	minimap2	bcftools	7.65	54.6	8.72	8.01	no
+ecoli_cov10_len150_err0_seed3	call	minimap2	freebayes	5.83	29.6	5.85	6.17	no
+ecoli_cov10_len150_err0_seed3	call	minimap2	gatk	30.87	864.7	42.65	31.20	no
+ecoli_cov10_len150_err0_seed4	align	bowtie2		9.68	67.4	36.70	9.93	no
+ecoli_cov10_len150_err0_seed4	align	bwa		3.37	273.9	10.27	3.77	no
+ecoli_cov10_len150_err0_seed4	align	minimap2		1.21	242.8	3.06	1.47	no
+ecoli_cov10_len150_err0_seed4	call	bowtie2	bcftools	7.73	50.4	8.79	8.07	no
+ecoli_cov10_len150_err0_seed4	call	bowtie2	freebayes	6.06	25.2	6.06	6.40	no
+ecoli_cov10_len150_err0_seed4	call	bowtie2	gatk	29.81	540.6	42.35	30.40	no
+ecoli_cov10_len150_err0_seed4	call	bwa	bcftools	7.91	55.9	8.69	8.28	no
+ecoli_cov10_len150_err0_seed4	call	bwa	freebayes	6.19	25.1	5.96	6.52	no
+ecoli_cov10_len150_err0_seed4	call	bwa	gatk	22.49	559.7	35.86	22.83	no
+ecoli_cov10_len150_err0_seed4	call	minimap2	bcftools	7.68	55.5	8.77	8.06	no
+ecoli_cov10_len150_err0_seed4	call	minimap2	freebayes	6.03	29.7	6.06	6.34	no
+ecoli_cov10_len150_err0_seed4	call	minimap2	gatk	30.68	853.2	41.89	31.16	no
+ecoli_cov10_len150_err0_seed5	align	bowtie2		9.78	67.0	36.91	10.09	no
+ecoli_cov10_len150_err0_seed5	align	bwa		2.30	274.9	8.97	2.54	no
+ecoli_cov10_len150_err0_seed5	align	minimap2		1.34	243.5	3.12	1.76	no
+ecoli_cov10_len150_err0_seed5	call	bowtie2	bcftools	8.69	49.7	9.09	9.12	no
+ecoli_cov10_len150_err0_seed5	call	bowtie2	freebayes	7.26	29.6	6.37	7.59	no
+ecoli_cov10_len150_err0_seed5	call	bowtie2	gatk	23.56	522.6	36.58	23.85	no
+ecoli_cov10_len150_err0_seed5	call	bwa	bcftools	7.21	54.4	8.31	7.53	no
+ecoli_cov10_len150_err0_seed5	call	bwa	freebayes	5.69	25.1	5.73	5.99	no
+ecoli_cov10_len150_err0_seed5	call	bwa	gatk	28.53	547.2	41.74	28.90	no
+ecoli_cov10_len150_err0_seed5	call	minimap2	bcftools	8.15	56.8	8.94	8.50	no
+ecoli_cov10_len150_err0_seed5	call	minimap2	freebayes	5.88	29.6	5.90	6.22	no
+ecoli_cov10_len150_err0_seed5	call	minimap2	gatk	30.72	644.9	45.27	31.16	no
+ecoli_cov20_len150_err0_seed1	align	bowtie2		14.14	66.7	56.82	14.38	yes
+ecoli_cov20_len150_err0_seed1	align	bwa		3.60	362.1	14.34	3.83	yes
+ecoli_cov20_len150_err0_seed1	align	minimap2		1.51	375.6	5.18	1.79	yes
+ecoli_cov20_len150_err0_seed1	call	bowtie2	bcftools	7.72	45.5	8.24	7.95	yes
+ecoli_cov20_len150_err0_seed1	call	bowtie2	freebayes	7.75	24.3	7.79	7.98	yes
+ecoli_cov20_len150_err0_seed1	call	bowtie2	gatk	24.81	425.1	35.96	25.04	yes
+ecoli_cov20_len150_err0_seed1	call	bwa	bcftools	7.71	50.7	8.23	7.94	yes
+ecoli_cov20_len150_err0_seed1	call	bwa	freebayes	7.59	24.2	7.63	7.82	yes
+ecoli_cov20_len150_err0_seed1	call	bwa	gatk	24.91	503.0	35.07	25.14	yes
+ecoli_cov20_len150_err0_seed1	call	minimap2	bcftools	7.74	50.2	8.25	7.97	yes
+ecoli_cov20_len150_err0_seed1	call	minimap2	freebayes	7.66	25.2	7.66	7.88	yes
+ecoli_cov20_len150_err0_seed1	call	minimap2	gatk	24.96	376.8	34.91	25.18	yes
+ecoli_cov20_len150_err0_seed2	align	bowtie2		13.82	66.8	55.95	14.05	no
+ecoli_cov20_len150_err0_seed2	align	bwa		3.92	362.7	15.62	4.16	no
+ecoli_cov20_len150_err0_seed2	align	minimap2		1.82	366.6	6.39	2.10	no
+ecoli_cov20_len150_err0_seed2	call	bowtie2	bcftools	9.51	49.5	10.65	9.80	no
+ecoli_cov20_len150_err0_seed2	call	bowtie2	freebayes	9.61	26.5	9.66	9.91	no
+ecoli_cov20_len150_err0_seed2	call	bowtie2	gatk	29.41	562.7	42.95	29.69	no
+ecoli_cov20_len150_err0_seed2	call	bwa	bcftools	10.45	56.9	11.22	10.81	no
+ecoli_cov20_len150_err0_seed2	call	bwa	freebayes	9.68	26.5	9.57	10.02	no
+ecoli_cov20_len150_err0_seed2	call	bwa	gatk	29.65	471.2	42.70	30.09	no
+ecoli_cov20_len150_err0_seed2	call	minimap2	bcftools	10.22	56.3	10.97	10.54	no
+ecoli_cov20_len150_err0_seed2	call	minimap2	freebayes	10.14	30.9	9.89	10.43	no
+ecoli_cov20_len150_err0_seed2	call	minimap2	gatk	30.79	465.2	44.59	31.06	no
+ecoli_cov20_len150_err0_seed3	align	bowtie2		16.13	67.2	64.06	16.42	no
+ecoli_cov20_len150_err0_seed3	align	bwa		3.96	363.5	15.84	4.19	no
+ecoli_cov20_len150_err0_seed3	align	minimap2		1.80	366.9	6.19	2.08	no
+ecoli_cov20_len150_err0_seed3	call	bowtie2	bcftools	9.71	49.6	10.85	10.03	no
+ecoli_cov20_len150_err0_seed3	call	bowtie2	freebayes	9.75	31.2	9.80	10.08	no
+ecoli_cov20_len150_err0_seed3	call	bowtie2	gatk	29.33	538.6	42.42	29.60	no
+ecoli_cov20_len150_err0_seed3	call	bwa	bcftools	10.06	52.6	10.94	10.37	no
+ecoli_cov20_len150_err0_seed3	call	bwa	freebayes	9.73	26.3	9.68	10.03	no
+ecoli_cov20_len150_err0_seed3	call	bwa	gatk	29.59	565.0	43.39	29.89	no
+ecoli_cov20_len150_err0_seed3	call	minimap2	bcftools	9.95	54.4	11.01	10.27	no
+ecoli_cov20_len150_err0_seed3	call	minimap2	freebayes	9.80	26.4	9.81	10.09	no
+ecoli_cov20_len150_err0_seed3	call	minimap2	gatk	29.54	500.4	42.87	29.89	no
+ecoli_cov20_len150_err0_seed4	align	bowtie2		16.79	67.0	67.67	17.08	no
+ecoli_cov20_len150_err0_seed4	align	bwa		3.88	361.8	15.47	4.11	no
+ecoli_cov20_len150_err0_seed4	align	minimap2		1.66	367.1	5.82	1.96	no
+ecoli_cov20_len150_err0_seed4	call	bowtie2	bcftools	9.81	50.2	10.95	10.16	no
+ecoli_cov20_len150_err0_seed4	call	bowtie2	freebayes	10.88	30.6	9.91	11.18	no
+ecoli_cov20_len150_err0_seed4	call	bowtie2	gatk	29.13	467.5	43.24	29.44	no
+ecoli_cov20_len150_err0_seed4	call	bwa	bcftools	9.67	55.3	10.71	10.01	no
+ecoli_cov20_len150_err0_seed4	call	bwa	freebayes	9.47	31.0	9.45	9.80	no
+ecoli_cov20_len150_err0_seed4	call	bwa	gatk	29.17	536.0	42.10	29.44	no
+ecoli_cov20_len150_err0_seed4	call	minimap2	bcftools	10.24	57.0	11.28	10.57	no
+ecoli_cov20_len150_err0_seed4	call	minimap2	freebayes	9.76	30.9	9.81	10.06	no
+ecoli_cov20_len150_err0_seed4	call	minimap2	gatk	29.62	450.7	42.88	29.89	no
+ecoli_cov20_len150_err0_seed5	align	bowtie2		16.94	67.1	68.18	17.24	no
+ecoli_cov20_len150_err0_seed5	align	bwa		3.88	365.9	15.49	4.11	no
+ecoli_cov20_len150_err0_seed5	align	minimap2		1.90	366.8	6.35	2.35	no
+ecoli_cov20_len150_err0_seed5	call	bowtie2	bcftools	9.94	50.6	10.77	10.26	no
+ecoli_cov20_len150_err0_seed5	call	bowtie2	freebayes	9.85	26.6	9.77	10.14	no
+ecoli_cov20_len150_err0_seed5	call	bowtie2	gatk	29.52	528.2	44.10	29.82	no
+ecoli_cov20_len150_err0_seed5	call	bwa	bcftools	10.52	59.5	11.25	10.82	no
+ecoli_cov20_len150_err0_seed5	call	bwa	freebayes	10.22	26.4	9.90	10.52	no
+ecoli_cov20_len150_err0_seed5	call	bwa	gatk	30.98	491.4	44.96	31.25	no
+ecoli_cov20_len150_err0_seed5	call	minimap2	bcftools	10.42	56.8	11.14	10.73	no
+ecoli_cov20_len150_err0_seed5	call	minimap2	freebayes	9.83	26.4	9.79	10.13	no
+ecoli_cov20_len150_err0_seed5	call	minimap2	gatk	30.04	488.3	43.76	30.34	no
+ecoli_cov30_len100_err0_seed1	align	bowtie2		20.19	60.2	81.12	20.42	yes
+ecoli_cov30_len100_err0_seed1	align	bwa		5.76	456.8	22.95	6.01	yes
+ecoli_cov30_len100_err0_seed1	align	minimap2		2.11	570.3	7.95	2.34	yes
+ecoli_cov30_len100_err0_seed1	call	bowtie2	bcftools	9.32	43.6	9.85	9.55	yes
+ecoli_cov30_len100_err0_seed1	call	bowtie2	freebayes	11.45	25.4	11.49	11.68	yes
+ecoli_cov30_len100_err0_seed1	call	bowtie2	gatk	33.73	559.9	44.25	33.97	yes
+ecoli_cov30_len100_err0_seed1	call	bwa	bcftools	9.18	46.1	9.70	9.41	yes
+ecoli_cov30_len100_err0_seed1	call	bwa	freebayes	11.53	26.1	11.46	11.76	yes
+ecoli_cov30_len100_err0_seed1	call	bwa	gatk	33.97	514.5	43.99	34.21	yes
+ecoli_cov30_len100_err0_seed1	call	minimap2	bcftools	9.17	46.5	9.70	9.41	yes
+ecoli_cov30_len100_err0_seed1	call	minimap2	freebayes	11.17	24.8	11.21	11.41	yes
+ecoli_cov30_len100_err0_seed1	call	minimap2	gatk	33.53	505.5	43.87	33.76	yes
+ecoli_cov30_len100_err0_seed2	align	bowtie2		31.96	59.9	115.20	32.28	no
+ecoli_cov30_len100_err0_seed2	align	bwa		8.54	454.5	32.06	8.83	no
+ecoli_cov30_len100_err0_seed2	align	minimap2		2.57	577.4	9.20	2.86	no
+ecoli_cov30_len100_err0_seed2	call	bowtie2	bcftools	13.68	46.8	14.16	14.00	no
+ecoli_cov30_len100_err0_seed2	call	bowtie2	freebayes	17.37	27.2	15.90	17.68	no
+ecoli_cov30_len100_err0_seed2	call	bowtie2	gatk	35.55	505.8	48.12	35.80	no
+ecoli_cov30_len100_err0_seed2	call	bwa	bcftools	13.01	51.1	13.95	13.40	no
+ecoli_cov30_len100_err0_seed2	call	bwa	freebayes	16.15	26.9	15.65	16.52	no
+ecoli_cov30_len100_err0_seed2	call	bwa	gatk	36.76	531.2	50.42	37.00	no
+ecoli_cov30_len100_err0_seed2	call	minimap2	bcftools	13.76	50.3	13.81	14.06	no
+ecoli_cov30_len100_err0_seed2	call	minimap2	freebayes	16.36	26.9	14.86	16.68	no
+ecoli_cov30_len100_err0_seed2	call	minimap2	gatk	36.63	580.9	49.94	36.97	no
+ecoli_cov30_len100_err0_seed3	align	bowtie2		29.80	59.9	113.87	30.09	no
+ecoli_cov30_len100_err0_seed3	align	bwa		8.09	450.0	29.65	8.37	no
+ecoli_cov30_len100_err0_seed3	align	minimap2		2.94	576.3	9.95	3.26	no
+ecoli_cov30_len100_err0_seed3	call	bowtie2	bcftools	13.34	47.0	14.29	13.64	no
+ecoli_cov30_len100_err0_seed3	call	bowtie2	freebayes	15.95	31.4	15.82	16.29	no
+ecoli_cov30_len100_err0_seed3	call	bowtie2	gatk	36.46	501.4	49.91	36.71	no
+ecoli_cov30_len100_err0_seed3	call	bwa	bcftools	14.07	49.7	14.21	14.44	no
+ecoli_cov30_len100_err0_seed3	call	bwa	freebayes	16.68	26.9	15.23	17.04	no
+ecoli_cov30_len100_err0_seed3	call	bwa	gatk	36.01	426.1	49.25	36.32	no
+ecoli_cov30_len100_err0_seed3	call	minimap2	bcftools	13.85	50.2	14.17	14.21	no
+ecoli_cov30_len100_err0_seed3	call	minimap2	freebayes	16.41	31.3	15.38	16.72	no
+ecoli_cov30_len100_err0_seed3	call	minimap2	gatk	35.76	426.9	48.32	36.00	no
+ecoli_cov30_len100_err0_seed4	align	bowtie2		31.90	60.2	114.32	32.22	no
+ecoli_cov30_len100_err0_seed4	align	bwa		8.39	449.6	31.25	8.70	no
+ecoli_cov30_len100_err0_seed4	align	minimap2		2.62	578.5	9.32	2.95	no
+ecoli_cov30_len100_err0_seed4	call	bowtie2	bcftools	15.33	46.5	14.42	15.69	no
+ecoli_cov30_len100_err0_seed4	call	bowtie2	freebayes	16.77	27.0	16.08	17.10	no
+ecoli_cov30_len100_err0_seed4	call	bowtie2	gatk	37.82	536.8	51.99	38.11	no
+ecoli_cov30_len100_err0_seed4	call	bwa	bcftools	14.24	51.2	14.30	14.54	no
+ecoli_cov30_len100_err0_seed4	call	bwa	freebayes	16.16	26.7	15.32	16.50	no
+ecoli_cov30_len100_err0_seed4	call	bwa	gatk	36.38	483.3	49.48	36.65	no
+ecoli_cov30_len100_err0_seed4	call	minimap2	bcftools	14.14	49.5	14.29	14.51	no
+ecoli_cov30_len100_err0_seed4	call	minimap2	freebayes	17.28	31.4	15.59	17.65	no
+ecoli_cov30_len100_err0_seed4	call	minimap2	gatk	37.06	513.8	51.57	37.38	no
+ecoli_cov30_len100_err0_seed5	align	bowtie2		30.09	60.0	114.49	30.42	no
+ecoli_cov30_len100_err0_seed5	align	bwa		8.51	453.5	30.38	8.79	no
+ecoli_cov30_len100_err0_seed5	align	minimap2		2.57	577.9	9.20	2.93	no
+ecoli_cov30_len100_err0_seed5	call	bowtie2	bcftools	13.95	47.1	14.12	14.34	no
+ecoli_cov30_len100_err0_seed5	call	bowtie2	freebayes	16.22	31.6	15.81	16.51	no
+ecoli_cov30_len100_err0_seed5	call	bowtie2	gatk	36.94	533.5	49.45	37.18	no
+ecoli_cov30_len100_err0_seed5	call	bwa	bcftools	14.27	51.0	13.97	14.62	no
+ecoli_cov30_len100_err0_seed5	call	bwa	freebayes	17.23	26.8	15.43	17.55	no
+ecoli_cov30_len100_err0_seed5	call	bwa	gatk	36.06	534.6	48.64	36.37	no
+ecoli_cov30_len100_err0_seed5	call	minimap2	bcftools	13.48	51.1	14.39	14.08	no
+ecoli_cov30_len100_err0_seed5	call	minimap2	freebayes	16.21	26.8	15.71	16.59	no
+ecoli_cov30_len100_err0_seed5	call	minimap2	gatk	36.19	472.0	50.86	36.48	no
+ecoli_cov30_len150_err-10_seed1	align	bowtie2		22.93	66.4	92.92	23.16	yes
+ecoli_cov30_len150_err-10_seed1	align	bwa		8.26	382.5	32.81	8.48	yes
+ecoli_cov30_len150_err-10_seed1	align	minimap2		2.05	492.3	7.89	2.27	yes
+ecoli_cov30_len150_err-10_seed1	call	bowtie2	bcftools	10.38	47.6	11.07	10.60	yes
+ecoli_cov30_len150_err-10_seed1	call	bowtie2	freebayes	51.35	28.8	51.93	51.57	yes
+ecoli_cov30_len150_err-10_seed1	call	bowtie2	gatk	38.13	505.2	49.06	38.36	yes
+ecoli_cov30_len150_err-10_seed1	call	bwa	bcftools	10.54	52.0	11.23	10.76	yes
+ecoli_cov30_len150_err-10_seed1	call	bwa	freebayes	50.23	34.5	50.79	50.48	yes
+ecoli_cov30_len150_err-10_seed1	call	bwa	gatk	36.95	504.9	47.54	37.18	yes
+ecoli_cov30_len150_err-10_seed1	call	minimap2	bcftools	10.44	51.9	11.13	10.66	yes
+ecoli_cov30_len150_err-10_seed1	call	minimap2	freebayes	50.49	34.4	51.03	50.77	yes
+ecoli_cov30_len150_err-10_seed1	call	minimap2	gatk	38.02	512.1	49.18	38.26	yes
+ecoli_cov30_len150_err-10_seed2	align	bowtie2		31.35	67.6	124.46	31.65	no
+ecoli_cov30_len150_err-10_seed2	align	bwa		11.37	377.4	45.12	11.64	no
+ecoli_cov30_len150_err-10_seed2	align	minimap2		2.53	486.0	9.37	2.79	no
+ecoli_cov30_len150_err-10_seed2	call	bowtie2	bcftools	15.40	51.4	16.44	15.80	no
+ecoli_cov30_len150_err-10_seed2	call	bowtie2	freebayes	77.79	38.6	75.64	78.15	no
+ecoli_cov30_len150_err-10_seed2	call	bowtie2	gatk	45.36	511.6	59.97	45.64	no
+ecoli_cov30_len150_err-10_seed2	call	bwa	bcftools	16.50	58.7	16.47	16.89	no
+ecoli_cov30_len150_err-10_seed2	call	bwa	freebayes	80.04	33.9	72.45	80.38	no
+ecoli_cov30_len150_err-10_seed2	call	bwa	gatk	47.90	936.0	59.77	48.17	no
+ecoli_cov30_len150_err-10_seed2	call	minimap2	bcftools	15.36	56.3	16.52	15.70	no
+ecoli_cov30_len150_err-10_seed2	call	minimap2	freebayes	77.84	38.4	73.60	78.15	no
+ecoli_cov30_len150_err-10_seed2	call	minimap2	gatk	42.16	527.5	56.29	42.41	no
+ecoli_cov30_len150_err-10_seed3	align	bowtie2		31.32	67.3	125.42	31.60	no
+ecoli_cov30_len150_err-10_seed3	align	bwa		11.02	378.1	43.60	11.36	no
+ecoli_cov30_len150_err-10_seed3	align	minimap2		2.74	488.8	9.88	2.96	no
+ecoli_cov30_len150_err-10_seed3	call	bowtie2	bcftools	16.38	52.0	16.20	16.70	no
+ecoli_cov30_len150_err-10_seed3	call	bowtie2	freebayes	78.60	38.4	74.96	78.96	no
+ecoli_cov30_len150_err-10_seed3	call	bowtie2	gatk	53.26	625.0	65.74	53.54	no
+ecoli_cov30_len150_err-10_seed3	call	bwa	bcftools	16.01	55.6	16.79	16.33	no
+ecoli_cov30_len150_err-10_seed3	call	bwa	freebayes	76.31	33.7	73.27	76.67	no
+ecoli_cov30_len150_err-10_seed3	call	bwa	gatk	43.00	485.1	56.50	43.24	no
+ecoli_cov30_len150_err-10_seed3	call	minimap2	bcftools	15.00	56.5	16.10	15.38	no
+ecoli_cov30_len150_err-10_seed3	call	minimap2	freebayes	77.84	34.0	73.74	78.20	no
+ecoli_cov30_len150_err-10_seed3	call	minimap2	gatk	41.64	507.8	55.76	41.93	no
+ecoli_cov30_len150_err-10_seed4	align	bowtie2		30.95	67.2	124.15	31.24	no
+ecoli_cov30_len150_err-10_seed4	align	bwa		11.26	389.3	44.68	11.52	no
+ecoli_cov30_len150_err-10_seed4	align	minimap2		2.50	485.5	9.27	2.74	no
+ecoli_cov30_len150_err-10_seed4	call	bowtie2	bcftools	15.98	51.2	16.39	16.37	no
+ecoli_cov30_len150_err-10_seed4	call	bowtie2	freebayes	76.97	38.6	74.80	77.29	no
+ecoli_cov30_len150_err-10_seed4	call	bowtie2	gatk	44.80	471.9	59.45	45.06	no
+ecoli_cov30_len150_err-10_seed4	call	bwa	bcftools	15.15	56.1	16.46	15.47	no
+ecoli_cov30_len150_err-10_seed4	call	bwa	freebayes	79.81	34.0	72.31	80.13	no
+ecoli_cov30_len150_err-10_seed4	call	bwa	gatk	41.88	567.9	55.75	42.11	no
+ecoli_cov30_len150_err-10_seed4	call	minimap2	bcftools	15.35	61.0	16.36	15.71	no
+ecoli_cov30_len150_err-10_seed4	call	minimap2	freebayes	76.33	34.1	72.70	76.69	no
+ecoli_cov30_len150_err-10_seed4	call	minimap2	gatk	42.10	425.2	55.87	42.34	no
+ecoli_cov30_len150_err-10_seed5	align	bowtie2		31.46	67.2	124.07	31.75	no
+ecoli_cov30_len150_err-10_seed5	align	bwa		11.34	378.4	44.99	11.61	no
+ecoli_cov30_len150_err-10_seed5	align	minimap2		2.54	488.7	9.37	2.77	no
+ecoli_cov30_len150_err-10_seed5	call	bowtie2	bcftools	16.19	51.6	16.38	16.60	no
+ecoli_cov30_len150_err-10_seed5	call	bowtie2	freebayes	77.20	34.2	74.67	77.56	no
+ecoli_cov30_len150_err-10_seed5	call	bowtie2	gatk	53.34	586.2	65.01	53.62	no
+ecoli_cov30_len150_err-10_seed5	call	bwa	bcftools	15.55	58.4	16.62	15.94	no
+ecoli_cov30_len150_err-10_seed5	call	bwa	freebayes	76.18	38.5	72.75	76.49	no
+ecoli_cov30_len150_err-10_seed5	call	bwa	gatk	42.38	482.9	56.02	42.67	no
+ecoli_cov30_len150_err-10_seed5	call	minimap2	bcftools	15.09	60.2	16.21	15.38	no
+ecoli_cov30_len150_err-10_seed5	call	minimap2	freebayes	76.13	38.5	73.40	76.45	no
+ecoli_cov30_len150_err-10_seed5	call	minimap2	gatk	47.29	505.1	61.48	47.58	no
+ecoli_cov30_len150_err-2_seed1	align	bowtie2		18.84	66.5	76.27	19.07	yes
+ecoli_cov30_len150_err-2_seed1	align	bwa		5.52	376.9	21.93	5.76	yes
+ecoli_cov30_len150_err-2_seed1	align	minimap2		1.84	486.2	6.98	2.08	yes
+ecoli_cov30_len150_err-2_seed1	call	bowtie2	bcftools	9.93	47.1	10.49	10.16	yes
+ecoli_cov30_len150_err-2_seed1	call	bowtie2	freebayes	13.03	25.3	13.10	13.26	yes
+ecoli_cov30_len150_err-2_seed1	call	bowtie2	gatk	31.90	505.2	42.31	32.12	yes
+ecoli_cov30_len150_err-2_seed1	call	bwa	bcftools	10.38	52.7	10.85	10.61	yes
+ecoli_cov30_len150_err-2_seed1	call	bwa	freebayes	12.75	24.9	12.81	12.98	yes
+ecoli_cov30_len150_err-2_seed1	call	bwa	gatk	33.89	499.3	43.88	34.12	yes
+ecoli_cov30_len150_err-2_seed1	call	minimap2	bcftools	10.05	50.7	10.63	10.27	yes
+ecoli_cov30_len150_err-2_seed1	call	minimap2	freebayes	12.86	25.9	12.86	13.08	yes
+ecoli_cov30_len150_err-2_seed1	call	minimap2	gatk	33.34	505.3	44.10	33.57	yes
+ecoli_cov30_len150_err-2_seed2	align	bowtie2		26.31	67.2	105.79	26.61	no
+ecoli_cov30_len150_err-2_seed2	align	bwa		7.86	379.8	31.04	8.13	no
+ecoli_cov30_len150_err-2_seed2	align	minimap2		2.84	453.8	9.72	3.12	no
+ecoli_cov30_len150_err-2_seed2	call	bowtie2	bcftools	16.29	51.7	15.64	16.62	no
+ecoli_cov30_len150_err-2_seed2	call	bowtie2	freebayes	20.57	32.4	18.88	20.89	no
+ecoli_cov30_len150_err-2_seed2	call	bowtie2	gatk	37.56	461.7	51.05	37.80	no
+ecoli_cov30_len150_err-2_seed2	call	bwa	bcftools	15.41	56.5	15.53	15.75	no
+ecoli_cov30_len150_err-2_seed2	call	bwa	freebayes	19.37	32.4	18.13	19.72	no
+ecoli_cov30_len150_err-2_seed2	call	bwa	gatk	38.68	456.3	54.13	38.94	no
+ecoli_cov30_len150_err-2_seed2	call	minimap2	bcftools	14.88	57.9	15.42	15.19	no
+ecoli_cov30_len150_err-2_seed2	call	minimap2	freebayes	18.89	32.5	18.18	19.17	no
+ecoli_cov30_len150_err-2_seed2	call	minimap2	gatk	38.90	523.8	51.78	39.17	no
+ecoli_cov30_len150_err-2_seed3	align	bowtie2		26.45	67.1	106.33	26.75	no
+ecoli_cov30_len150_err-2_seed3	align	bwa		7.62	377.0	30.29	7.89	no
+ecoli_cov30_len150_err-2_seed3	align	minimap2		2.31	489.9	8.65	2.55	no
+ecoli_cov30_len150_err-2_seed3	call	bowtie2	bcftools	19.62	50.3	15.51	20.10	no
+ecoli_cov30_len150_err-2_seed3	call	bowtie2	freebayes	23.60	32.3	18.42	24.01	no
+ecoli_cov30_len150_err-2_seed3	call	bowtie2	gatk	38.66	526.8	51.53	38.90	no
+ecoli_cov30_len150_err-2_seed3	call	bwa	bcftools	17.33	59.5	15.58	17.67	no
+ecoli_cov30_len150_err-2_seed3	call	bwa	freebayes	21.56	32.3	17.93	21.92	no
+ecoli_cov30_len150_err-2_seed3	call	bwa	gatk	40.08	426.2	53.93	40.36	no
+ecoli_cov30_len150_err-2_seed3	call	minimap2	bcftools	16.65	58.8	14.98	16.97	no
+ecoli_cov30_len150_err-2_seed3	call	minimap2	freebayes	21.25	32.4	17.70	21.59	no
+ecoli_cov30_len150_err-2_seed3	call	minimap2	gatk	37.48	529.7	51.54	37.74	no
+ecoli_cov30_len150_err-2_seed4	align	bowtie2		28.77	68.0	109.30	29.09	no
+ecoli_cov30_len150_err-2_seed4	align	bwa		7.70	383.7	30.63	7.97	no
+ecoli_cov30_len150_err-2_seed4	align	minimap2		2.36	485.7	8.70	2.66	no
+ecoli_cov30_len150_err-2_seed4	call	bowtie2	bcftools	17.27	51.7	15.65	17.62	no
+ecoli_cov30_len150_err-2_seed4	call	bowtie2	freebayes	22.78	27.9	18.72	23.18	no
+ecoli_cov30_len150_err-2_seed4	call	bowtie2	gatk	35.89	457.7	49.77	36.16	no
+ecoli_cov30_len150_err-2_seed4	call	bwa	bcftools	14.73	59.4	15.22	15.05	no
+ecoli_cov30_len150_err-2_seed4	call	bwa	freebayes	19.25	32.5	18.15	19.55	no
+ecoli_cov30_len150_err-2_seed4	call	bwa	gatk	39.18	530.0	53.27	39.44	no
+ecoli_cov30_len150_err-2_seed4	call	minimap2	bcftools	14.72	58.6	15.26	15.04	no
+ecoli_cov30_len150_err-2_seed4	call	minimap2	freebayes	19.17	27.9	18.08	19.49	no
+ecoli_cov30_len150_err-2_seed4	call	minimap2	gatk	38.01	510.9	52.00	38.27	no
+ecoli_cov30_len150_err-2_seed5	align	bowtie2		26.31	67.3	105.66	26.62	no
+ecoli_cov30_len150_err-2_seed5	align	bwa		8.08	375.7	31.26	8.34	no
+ecoli_cov30_len150_err-2_seed5	align	minimap2		2.69	410.3	9.46	3.17	no
+ecoli_cov30_len150_err-2_seed5	call	bowtie2	bcftools	15.00	52.2	15.49	15.30	no
+ecoli_cov30_len150_err-2_seed5	call	bowtie2	freebayes	19.20	32.9	18.29	19.52	no
+ecoli_cov30_len150_err-2_seed5	call	bowtie2	gatk	38.79	491.4	50.57	39.04	no
+ecoli_cov30_len150_err-2_seed5	call	bwa	bcftools	15.35	60.4	15.43	15.64	no
+ecoli_cov30_len150_err-2_seed5	call	bwa	freebayes	19.26	32.4	18.00	19.63	no
+ecoli_cov30_len150_err-2_seed5	call	bwa	gatk	38.93	515.5	53.51	39.25	no
+ecoli_cov30_len150_err-2_seed5	call	minimap2	bcftools	17.93	57.4	15.27	18.28	no
+ecoli_cov30_len150_err-2_seed5	call	minimap2	freebayes	21.26	32.6	17.58	21.61	no
+ecoli_cov30_len150_err-2_seed5	call	minimap2	gatk	38.58	524.9	52.26	38.90	no
+ecoli_cov30_len150_err-5_seed1	align	bowtie2		19.94	66.6	80.91	20.18	yes
+ecoli_cov30_len150_err-5_seed1	align	bwa		7.09	382.8	28.02	7.33	yes
+ecoli_cov30_len150_err-5_seed1	align	minimap2		2.15	491.7	8.15	2.40	yes
+ecoli_cov30_len150_err-5_seed1	call	bowtie2	bcftools	10.52	49.0	11.06	10.74	yes
+ecoli_cov30_len150_err-5_seed1	call	bowtie2	freebayes	20.68	27.9	20.64	20.93	yes
+ecoli_cov30_len150_err-5_seed1	call	bowtie2	gatk	35.43	506.3	46.88	35.67	yes
+ecoli_cov30_len150_err-5_seed1	call	bwa	bcftools	10.33	50.3	10.99	10.55	yes
+ecoli_cov30_len150_err-5_seed1	call	bwa	freebayes	19.87	25.8	20.02	20.10	yes
+ecoli_cov30_len150_err-5_seed1	call	bwa	gatk	41.61	509.4	53.06	41.84	yes
+ecoli_cov30_len150_err-5_seed1	call	minimap2	bcftools	10.25	50.0	10.91	10.48	yes
+ecoli_cov30_len150_err-5_seed1	call	minimap2	freebayes	19.91	26.2	20.06	20.13	yes
+ecoli_cov30_len150_err-5_seed1	call	minimap2	gatk	35.38	505.3	46.28	35.61	yes
+ecoli_cov30_len150_err-5_seed2	align	bowtie2		28.48	67.2	114.08	28.73	no
+ecoli_cov30_len150_err-5_seed2	align	bwa		8.97	377.5	35.43	9.27	no
+ecoli_cov30_len150_err-5_seed2	align	minimap2		2.32	484.1	8.69	2.60	no
+ecoli_cov30_len150_err-5_seed2	call	bowtie2	bcftools	18.33	51.6	15.81	18.65	no
+ecoli_cov30_len150_err-5_seed2	call	bowtie2	freebayes	32.29	34.2	28.33	32.69	no
+ecoli_cov30_len150_err-5_seed2	call	bowtie2	gatk	38.98	535.5	52.83	39.21	no
+ecoli_cov30_len150_err-5_seed2	call	bwa	bcftools	14.63	57.2	15.72	14.95	no
+ecoli_cov30_len150_err-5_seed2	call	bwa	freebayes	28.74	34.0	28.12	29.12	no
+ecoli_cov30_len150_err-5_seed2	call	bwa	gatk	41.30	507.7	54.47	41.54	no
+ecoli_cov30_len150_err-5_seed2	call	minimap2	bcftools	14.90	58.8	15.70	15.26	no
+ecoli_cov30_len150_err-5_seed2	call	minimap2	freebayes	31.62	33.8	28.61	31.97	no
+ecoli_cov30_len150_err-5_seed2	call	minimap2	gatk	39.90	505.9	53.84	40.13	no
+ecoli_cov30_len150_err-5_seed3	align	bowtie2		27.84	67.1	111.84	28.13	no
+ecoli_cov30_len150_err-5_seed3	align	bwa		8.99	380.2	35.71	9.24	no
+ecoli_cov30_len150_err-5_seed3	align	minimap2		2.35	477.8	8.77	2.59	no
+ecoli_cov30_len150_err-5_seed3	call	bowtie2	bcftools	16.87	51.6	15.88	17.19	no
+ecoli_cov30_len150_err-5_seed3	call	bowtie2	freebayes	30.87	29.3	28.30	31.26	no
+ecoli_cov30_len150_err-5_seed3	call	bowtie2	gatk	39.24	512.4	52.96	39.48	no
+ecoli_cov30_len150_err-5_seed3	call	bwa	bcftools	15.29	58.5	16.34	15.64	no
+ecoli_cov30_len150_err-5_seed3	call	bwa	freebayes	28.60	34.0	28.08	28.95	no
+ecoli_cov30_len150_err-5_seed3	call	bwa	gatk	39.17	509.5	52.65	39.41	no
+ecoli_cov30_len150_err-5_seed3	call	minimap2	bcftools	14.92	60.0	15.62	15.26	no
+ecoli_cov30_len150_err-5_seed3	call	minimap2	freebayes	30.73	33.9	28.49	31.06	no
+ecoli_cov30_len150_err-5_seed3	call	minimap2	gatk	39.13	534.7	53.02	39.38	no
+ecoli_cov30_len150_err-5_seed4	align	bowtie2		27.77	67.4	111.62	28.05	no
+ecoli_cov30_len150_err-5_seed4	align	bwa		8.84	377.2	35.08	9.10	no
+ecoli_cov30_len150_err-5_seed4	align	minimap2		2.35	484.0	8.79	2.58	no
+ecoli_cov30_len150_err-5_seed4	call	bowtie2	bcftools	16.10	51.8	15.79	16.46	no
+ecoli_cov30_len150_err-5_seed4	call	bowtie2	freebayes	32.24	29.6	28.33	32.61	no
+ecoli_cov30_len150_err-5_seed4	call	bowtie2	gatk	39.15	439.5	52.96	39.40	no
+ecoli_cov30_len150_err-5_seed4	call	bwa	bcftools	18.26	58.9	15.69	18.60	no
+ecoli_cov30_len150_err-5_seed4	call	bwa	freebayes	31.65	34.1	27.76	32.19	no
+ecoli_cov30_len150_err-5_seed4	call	bwa	gatk	39.24	505.7	52.91	39.50	no
+ecoli_cov30_len150_err-5_seed4	call	minimap2	bcftools	14.73	58.5	15.64	15.11	no
+ecoli_cov30_len150_err-5_seed4	call	minimap2	freebayes	31.76	29.3	28.05	32.12	no
+ecoli_cov30_len150_err-5_seed4	call	minimap2	gatk	39.44	422.0	53.90	39.69	no
+ecoli_cov30_len150_err-5_seed5	align	bowtie2		28.35	67.3	113.73	28.63	no
+ecoli_cov30_len150_err-5_seed5	align	bwa		8.85	384.3	34.91	9.12	no
+ecoli_cov30_len150_err-5_seed5	align	minimap2		2.31	478.6	8.53	2.55	no
+ecoli_cov30_len150_err-5_seed5	call	bowtie2	bcftools	14.61	50.9	15.69	14.92	no
+ecoli_cov30_len150_err-5_seed5	call	bowtie2	freebayes	29.93	33.9	28.38	30.72	no
+ecoli_cov30_len150_err-5_seed5	call	bowtie2	gatk	39.79	535.7	53.11	40.04	no
+ecoli_cov30_len150_err-5_seed5	call	bwa	bcftools	15.03	57.4	15.84	15.38	no
+ecoli_cov30_len150_err-5_seed5	call	bwa	freebayes	29.42	32.5	27.91	29.86	no
+ecoli_cov30_len150_err-5_seed5	call	bwa	gatk	40.23	458.2	53.50	40.47	no
+ecoli_cov30_len150_err-5_seed5	call	minimap2	bcftools	18.50	58.4	16.10	18.84	no
+ecoli_cov30_len150_err-5_seed5	call	minimap2	freebayes	31.63	29.1	27.80	31.96	no
+ecoli_cov30_len150_err-5_seed5	call	minimap2	gatk	40.48	483.8	53.82	40.72	no
+ecoli_cov30_len150_err0_seed1	align	bowtie2		20.84	67.0	82.63	21.09	yes
+ecoli_cov30_len150_err0_seed1	align	bwa		6.10	372.6	24.02	6.34	yes
+ecoli_cov30_len150_err0_seed1	align	minimap2		2.13	483.0	8.08	2.37	yes
+ecoli_cov30_len150_err0_seed1	call	bowtie2	bcftools	10.43	46.6	10.95	10.67	yes
+ecoli_cov30_len150_err0_seed1	call	bowtie2	freebayes	11.91	25.0	11.93	12.14	yes
+ecoli_cov30_len150_err0_seed1	call	bowtie2	gatk	32.70	462.0	43.81	32.94	yes
+ecoli_cov30_len150_err0_seed1	call	bwa	bcftools	10.50	50.6	11.03	10.74	yes
+ecoli_cov30_len150_err0_seed1	call	bwa	freebayes	11.67	29.3	11.71	11.91	yes
+ecoli_cov30_len150_err0_seed1	call	bwa	gatk	33.90	374.1	45.08	34.14	yes
+ecoli_cov30_len150_err0_seed1	call	minimap2	bcftools	10.51	50.9	11.04	10.75	yes
+ecoli_cov30_len150_err0_seed1	call	minimap2	freebayes	11.65	25.8	11.67	11.89	yes
+ecoli_cov30_len150_err0_seed1	call	minimap2	gatk	35.98	498.5	47.37	36.22	yes
+ecoli_cov30_len150_err0_seed2	align	bowtie2		28.06	67.3	106.75	28.37	no
+ecoli_cov30_len150_err0_seed2	align	bwa		7.52	377.3	29.60	7.90	no
+ecoli_cov30_len150_err0_seed2	align	minimap2		2.37	436.8	8.52	2.63	no
+ecoli_cov30_len150_err0_seed2	call	bowtie2	bcftools	17.24	50.9	15.14	17.55	no
+ecoli_cov30_len150_err0_seed2	call	bowtie2	freebayes	19.55	32.0	15.77	19.97	no
+ecoli_cov30_len150_err0_seed2	call	bowtie2	gatk	38.02	499.6	51.86	38.29	no
+ecoli_cov30_len150_err0_seed2	call	bwa	bcftools	14.87	54.6	15.34	15.19	no
+ecoli_cov30_len150_err0_seed2	call	bwa	freebayes	16.60	31.9	15.71	16.95	no
+ecoli_cov30_len150_err0_seed2	call	bwa	gatk	37.18	480.7	50.83	37.47	no
+ecoli_cov30_len150_err0_seed2	call	minimap2	bcftools	16.24	58.0	15.36	16.61	no
+ecoli_cov30_len150_err0_seed2	call	minimap2	freebayes	17.23	31.8	15.42	17.62	no
+ecoli_cov30_len150_err0_seed2	call	minimap2	gatk	38.32	552.2	51.98	38.58	no
+ecoli_cov30_len150_err0_seed3	align	bowtie2		25.84	67.2	103.83	26.14	no
+ecoli_cov30_len150_err0_seed3	align	bwa		7.67	376.1	29.55	7.93	no
+ecoli_cov30_len150_err0_seed3	align	minimap2		2.27	486.7	8.41	2.92	no
+ecoli_cov30_len150_err0_seed3	call	bowtie2	bcftools	15.00	51.9	15.14	15.35	no
+ecoli_cov30_len150_err0_seed3	call	bowtie2	freebayes	16.92	27.6	15.88	17.40	no
+ecoli_cov30_len150_err0_seed3	call	bowtie2	gatk	37.24	522.6	51.32	37.51	no
+ecoli_cov30_len150_err0_seed3	call	bwa	bcftools	14.67	57.0	15.09	15.11	no
+ecoli_cov30_len150_err0_seed3	call	bwa	freebayes	16.31	31.9	15.59	16.72	no
+ecoli_cov30_len150_err0_seed3	call	bwa	gatk	38.51	531.4	52.15	38.82	no
+ecoli_cov30_len150_err0_seed3	call	minimap2	bcftools	16.32	59.0	15.06	16.68	no
+ecoli_cov30_len150_err0_seed3	call	minimap2	freebayes	17.70	31.9	15.23	18.10	no
+ecoli_cov30_len150_err0_seed3	call	minimap2	gatk	37.66	493.5	51.12	38.01	no
+ecoli_cov30_len150_err0_seed4	align	bowtie2		25.98	67.2	104.49	26.24	no
+ecoli_cov30_len150_err0_seed4	align	bwa		7.09	377.6	28.18	7.38	no
+ecoli_cov30_len150_err0_seed4	align	minimap2		2.30	487.2	8.57	2.54	no
+ecoli_cov30_len150_err0_seed4	call	bowtie2	bcftools	17.68	51.2	15.09	18.06	no
+ecoli_cov30_len150_err0_seed4	call	bowtie2	freebayes	19.63	32.1	15.91	19.98	no
+ecoli_cov30_len150_err0_seed4	call	bowtie2	gatk	38.48	403.8	51.86	38.87	no
+ecoli_cov30_len150_err0_seed4	call	bwa	bcftools	16.84	56.5	15.50	17.16	no
+ecoli_cov30_len150_err0_seed4	call	bwa	freebayes	18.55	31.8	15.73	19.08	no
+ecoli_cov30_len150_err0_seed4	call	bwa	gatk	36.97	427.7	49.91	37.23	no
+ecoli_cov30_len150_err0_seed4	call	minimap2	bcftools	18.38	57.4	15.22	18.78	no
+ecoli_cov30_len150_err0_seed4	call	minimap2	freebayes	19.23	31.7	15.44	19.57	no
+ecoli_cov30_len150_err0_seed4	call	minimap2	gatk	37.82	446.2	52.33	38.09	no
+ecoli_cov30_len150_err0_seed5	align	bowtie2		26.81	67.0	107.52	27.10	no
+ecoli_cov30_len150_err0_seed5	align	bwa		7.48	376.4	29.56	7.76	no
+ecoli_cov30_len150_err0_seed5	align	minimap2		2.28	486.9	8.49	2.53	no
+ecoli_cov30_len150_err0_seed5	call	bowtie2	bcftools	16.11	51.6	15.23	16.48	no
+ecoli_cov30_len150_err0_seed5	call	bowtie2	freebayes	18.30	32.1	15.96	18.67	no
+ecoli_cov30_len150_err0_seed5	call	bowtie2	gatk	37.30	432.2	51.84	37.65	no
+ecoli_cov30_len150_err0_seed5	call	bwa	bcftools	15.17	57.0	15.26	15.54	no
+ecoli_cov30_len150_err0_seed5	call	bwa	freebayes	16.58	32.0	15.63	16.90	no
+ecoli_cov30_len150_err0_seed5	call	bwa	gatk	37.70	475.2	50.95	37.96	no
+ecoli_cov30_len150_err0_seed5	call	minimap2	bcftools	16.16	57.5	15.42	16.49	no
+ecoli_cov30_len150_err0_seed5	call	minimap2	freebayes	17.89	31.9	15.91	18.26	no
+ecoli_cov30_len150_err0_seed5	call	minimap2	gatk	38.02	487.7	52.68	38.31	no
+ecoli_cov30_len75_err0_seed1	align	bowtie2		21.93	55.7	87.83	22.16	yes
+ecoli_cov30_len75_err0_seed1	align	bwa		5.86	526.1	23.40	6.09	yes
+ecoli_cov30_len75_err0_seed1	align	minimap2		2.20	635.0	8.21	2.43	yes
+ecoli_cov30_len75_err0_seed1	call	bowtie2	bcftools	9.23	44.7	9.74	9.49	yes
+ecoli_cov30_len75_err0_seed1	call	bowtie2	freebayes	12.09	25.1	12.09	12.32	yes
+ecoli_cov30_len75_err0_seed1	call	bowtie2	gatk	34.15	455.7	44.98	34.37	yes
+ecoli_cov30_len75_err0_seed1	call	bwa	bcftools	9.58	45.6	9.81	9.82	yes
+ecoli_cov30_len75_err0_seed1	call	bwa	freebayes	11.80	29.4	11.80	12.05	yes
+ecoli_cov30_len75_err0_seed1	call	bwa	gatk	34.45	512.3	45.41	34.68	yes
+ecoli_cov30_len75_err0_seed1	call	minimap2	bcftools	9.18	45.1	9.71	9.41	yes
+ecoli_cov30_len75_err0_seed1	call	minimap2	freebayes	11.62	29.4	11.65	11.86	yes
+ecoli_cov30_len75_err0_seed1	call	minimap2	gatk	34.16	465.0	46.13	34.39	yes
+ecoli_cov30_len75_err0_seed2	align	bowtie2		31.59	56.1	117.62	31.97	no
+ecoli_cov30_len75_err0_seed2	align	bwa		9.36	522.8	34.25	9.79	no
+ecoli_cov30_len75_err0_seed2	align	minimap2		2.64	625.2	9.50	2.94	no
+ecoli_cov30_len75_err0_seed2	call	bowtie2	bcftools	13.67	46.3	13.98	13.94	no
+ecoli_cov30_len75_err0_seed2	call	bowtie2	freebayes	17.66	31.2	16.79	17.97	no
+ecoli_cov30_len75_err0_seed2	call	bowtie2	gatk	43.49	800.8	55.79	43.76	no
+ecoli_cov30_len75_err0_seed2	call	bwa	bcftools	13.71	46.8	13.61	14.05	no
+ecoli_cov30_len75_err0_seed2	call	bwa	freebayes	17.22	31.0	16.01	17.51	no
+ecoli_cov30_len75_err0_seed2	call	bwa	gatk	36.21	497.6	49.23	36.54	no
+ecoli_cov30_len75_err0_seed2	call	minimap2	bcftools	15.92	48.1	13.74	16.31	no
+ecoli_cov30_len75_err0_seed2	call	minimap2	freebayes	18.47	31.0	15.96	18.82	no
+ecoli_cov30_len75_err0_seed2	call	minimap2	gatk	43.76	698.0	56.05	44.01	no
+ecoli_cov30_len75_err0_seed3	align	bowtie2		32.90	56.0	119.75	33.41	no
+ecoli_cov30_len75_err0_seed3	align	bwa		10.39	529.5	36.82	10.68	no
+ecoli_cov30_len75_err0_seed3	align	minimap2		2.76	628.0	9.86	3.08	no
+ecoli_cov30_len75_err0_seed3	call	bowtie2	bcftools	13.27	47.0	13.83	13.63	no
+ecoli_cov30_len75_err0_seed3	call	bowtie2	freebayes	17.21	26.6	16.58	17.50	no
+ecoli_cov30_len75_err0_seed3	call	bowtie2	gatk	43.48	500.2	56.07	43.79	no
+ecoli_cov30_len75_err0_seed3	call	bwa	bcftools	13.53	47.5	13.81	13.89	no
+ecoli_cov30_len75_err0_seed3	call	bwa	freebayes	16.84	26.6	16.03	17.14	no
+ecoli_cov30_len75_err0_seed3	call	bwa	gatk	38.24	431.5	52.39	38.50	no
+ecoli_cov30_len75_err0_seed3	call	minimap2	bcftools	14.04	48.5	13.53	14.69	no
+ecoli_cov30_len75_err0_seed3	call	minimap2	freebayes	18.05	30.4	15.68	18.37	no
+ecoli_cov30_len75_err0_seed3	call	minimap2	gatk	43.71	569.0	56.13	44.03	no
+ecoli_cov30_len75_err0_seed4	align	bowtie2		33.44	56.0	120.77	33.79	no
+ecoli_cov30_len75_err0_seed4	align	bwa		10.83	529.3	37.53	11.22	no
+ecoli_cov30_len75_err0_seed4	align	minimap2		2.61	617.0	9.45	2.89	no
+ecoli_cov30_len75_err0_seed4	call	bowtie2	bcftools	16.28	46.4	13.71	16.63	no
+ecoli_cov30_len75_err0_seed4	call	bowtie2	freebayes	20.72	26.6	16.05	21.02	no
+ecoli_cov30_len75_err0_seed4	call	bowtie2	gatk	36.90	484.6	51.09	37.28	no
+ecoli_cov30_len75_err0_seed4	call	bwa	bcftools	12.87	47.7	13.60	13.22	no
+ecoli_cov30_len75_err0_seed4	call	bwa	freebayes	16.58	26.6	16.10	16.95	no
+ecoli_cov30_len75_err0_seed4	call	bwa	gatk	36.54	514.1	50.74	36.61	no
+ecoli_cov30_len75_err0_seed4	call	minimap2	bcftools	13.01	48.6	13.74	13.30	no
+ecoli_cov30_len75_err0_seed4	call	minimap2	freebayes	16.60	31.0	15.93	16.95	no
+ecoli_cov30_len75_err0_seed4	call	minimap2	gatk	43.94	609.3	56.10	44.30	no
+ecoli_cov30_len75_err0_seed5	align	bowtie2		31.27	56.4	117.01	31.62	no
+ecoli_cov30_len75_err0_seed5	align	bwa		8.94	529.7	33.33	9.25	no
+ecoli_cov30_len75_err0_seed5	align	minimap2		2.66	630.3	9.58	2.95	no
+ecoli_cov30_len75_err0_seed5	call	bowtie2	bcftools	13.22	46.9	13.55	13.54	no
+ecoli_cov30_len75_err0_seed5	call	bowtie2	freebayes	18.05	31.3	16.51	18.34	no
+ecoli_cov30_len75_err0_seed5	call	bowtie2	gatk	37.51	460.0	51.99	37.79	no
+ecoli_cov30_len75_err0_seed5	call	bwa	bcftools	14.17	47.9	13.79	14.54	no
+ecoli_cov30_len75_err0_seed5	call	bwa	freebayes	17.54	31.3	15.98	17.90	no
+ecoli_cov30_len75_err0_seed5	call	bwa	gatk	36.24	534.2	50.45	36.53	no
+ecoli_cov30_len75_err0_seed5	call	minimap2	bcftools	13.11	48.4	13.79	13.46	no
+ecoli_cov30_len75_err0_seed5	call	minimap2	freebayes	16.70	26.6	16.14	17.01	no
+ecoli_cov30_len75_err0_seed5	call	minimap2	gatk	48.18	551.4	61.04	48.49	no
+ecoli_cov50_len150_err0_seed1	align	bowtie2		33.36	67.1	129.12	33.62	yes
+ecoli_cov50_len150_err0_seed1	align	bwa		10.33	385.6	38.63	10.62	yes
+ecoli_cov50_len150_err0_seed1	align	minimap2		3.12	542.5	12.76	3.38	yes
+ecoli_cov50_len150_err0_seed1	call	bowtie2	bcftools	14.14	48.2	14.72	14.42	yes
+ecoli_cov50_len150_err0_seed1	call	bowtie2	freebayes	16.60	27.0	16.47	16.85	yes
+ecoli_cov50_len150_err0_seed1	call	bowtie2	gatk	46.01	472.0	57.41	46.25	yes
+ecoli_cov50_len150_err0_seed1	call	bwa	bcftools	14.42	54.0	14.99	14.68	yes
+ecoli_cov50_len150_err0_seed1	call	bwa	freebayes	15.91	31.3	15.92	16.18	yes
+ecoli_cov50_len150_err0_seed1	call	bwa	gatk	46.79	418.0	58.04	47.02	yes
+ecoli_cov50_len150_err0_seed1	call	minimap2	bcftools	14.13	52.9	14.67	14.36	yes
+ecoli_cov50_len150_err0_seed1	call	minimap2	freebayes	15.98	26.2	15.95	16.21	yes
+ecoli_cov50_len150_err0_seed1	call	minimap2	gatk	49.07	510.8	61.81	49.30	yes
+ecoli_cov50_len150_err0_seed2	align	bowtie2		51.70	67.5	187.93	52.05	no
+ecoli_cov50_len150_err0_seed2	align	bwa		14.94	388.4	54.26	15.27	no
+ecoli_cov50_len150_err0_seed2	align	minimap2		4.20	532.2	16.39	4.51	no
+ecoli_cov50_len150_err0_seed2	call	bowtie2	bcftools	21.16	52.5	20.64	21.53	no
+ecoli_cov50_len150_err0_seed2	call	bowtie2	freebayes	23.84	34.4	22.24	24.17	no
+ecoli_cov50_len150_err0_seed2	call	bowtie2	gatk	63.74	494.9	74.90	64.05	no
+ecoli_cov50_len150_err0_seed2	call	bwa	bcftools	21.18	60.1	21.04	21.55	no
+ecoli_cov50_len150_err0_seed2	call	bwa	freebayes	22.91	28.8	22.01	23.22	no
+ecoli_cov50_len150_err0_seed2	call	bwa	gatk	60.57	653.7	74.32	60.84	no
+ecoli_cov50_len150_err0_seed2	call	minimap2	bcftools	20.55	58.8	21.17	20.87	no
+ecoli_cov50_len150_err0_seed2	call	minimap2	freebayes	22.89	28.8	22.15	23.19	no
+ecoli_cov50_len150_err0_seed2	call	minimap2	gatk	48.10	487.8	60.92	48.36	no
+ecoli_cov50_len150_err0_seed3	align	bowtie2		51.83	67.0	189.73	52.16	no
+ecoli_cov50_len150_err0_seed3	align	bwa		13.26	391.4	50.27	13.55	no
+ecoli_cov50_len150_err0_seed3	align	minimap2		3.75	527.3	14.78	4.02	no
+ecoli_cov50_len150_err0_seed3	call	bowtie2	bcftools	23.02	51.8	20.20	23.35	no
+ecoli_cov50_len150_err0_seed3	call	bowtie2	freebayes	25.95	29.3	21.86	26.35	no
+ecoli_cov50_len150_err0_seed3	call	bowtie2	gatk	66.21	530.1	78.52	66.52	no
+ecoli_cov50_len150_err0_seed3	call	bwa	bcftools	19.88	58.2	20.72	20.17	no
+ecoli_cov50_len150_err0_seed3	call	bwa	freebayes	22.04	33.3	21.56	22.36	no
+ecoli_cov50_len150_err0_seed3	call	bwa	gatk	58.98	528.0	72.08	59.36	no
+ecoli_cov50_len150_err0_seed3	call	minimap2	bcftools	20.14	58.8	20.71	20.48	no
+ecoli_cov50_len150_err0_seed3	call	minimap2	freebayes	22.90	33.3	21.77	23.21	no
+ecoli_cov50_len150_err0_seed3	call	minimap2	gatk	46.92	434.9	58.80	47.16	no
+ecoli_cov50_len150_err0_seed4	align	bowtie2		50.29	67.6	185.57	50.65	no
+ecoli_cov50_len150_err0_seed4	align	bwa		13.69	388.9	51.42	14.00	no
+ecoli_cov50_len150_err0_seed4	align	minimap2		4.48	533.5	16.01	4.73	no
+ecoli_cov50_len150_err0_seed4	call	bowtie2	bcftools	20.16	51.3	20.90	20.47	no
+ecoli_cov50_len150_err0_seed4	call	bowtie2	freebayes	23.02	29.5	22.48	23.54	no
+ecoli_cov50_len150_err0_seed4	call	bowtie2	gatk	64.29	556.0	76.23	64.53	no
+ecoli_cov50_len150_err0_seed4	call	bwa	bcftools	20.53	47.3	20.37	20.86	no
+ecoli_cov50_len150_err0_seed4	call	bwa	freebayes	24.00	33.4	21.65	24.30	no
+ecoli_cov50_len150_err0_seed4	call	bwa	gatk	59.76	535.9	73.31	60.06	no
+ecoli_cov50_len150_err0_seed4	call	minimap2	bcftools	20.96	60.7	20.96	21.31	no
+ecoli_cov50_len150_err0_seed4	call	minimap2	freebayes	23.03	28.7	22.02	23.43	no
+ecoli_cov50_len150_err0_seed4	call	minimap2	gatk	46.74	543.8	59.39	46.99	no
+ecoli_cov50_len150_err0_seed5	align	bowtie2		52.09	67.2	189.95	52.43	no
+ecoli_cov50_len150_err0_seed5	align	bwa		13.45	402.0	49.92	13.88	no
+ecoli_cov50_len150_err0_seed5	align	minimap2		3.76	538.6	14.85	4.06	no
+ecoli_cov50_len150_err0_seed5	call	bowtie2	bcftools	20.36	52.2	21.13	20.68	no
+ecoli_cov50_len150_err0_seed5	call	bowtie2	freebayes	22.50	29.5	22.13	22.81	no
+ecoli_cov50_len150_err0_seed5	call	bowtie2	gatk	65.00	679.2	76.70	65.26	no
+ecoli_cov50_len150_err0_seed5	call	bwa	bcftools	20.10	56.8	20.98	20.40	no
+ecoli_cov50_len150_err0_seed5	call	bwa	freebayes	22.34	28.9	21.99	22.66	no
+ecoli_cov50_len150_err0_seed5	call	bwa	gatk	60.46	609.0	73.66	60.79	no
+ecoli_cov50_len150_err0_seed5	call	minimap2	bcftools	20.46	62.5	20.45	20.80	no
+ecoli_cov50_len150_err0_seed5	call	minimap2	freebayes	23.29	33.4	21.68	23.66	no
+ecoli_cov50_len150_err0_seed5	call	minimap2	gatk	47.82	635.3	60.85	48.05	no
+ecoli_cov5_len150_err0_seed1	align	bowtie2		3.21	65.9	12.86	3.44	yes
+ecoli_cov5_len150_err0_seed1	align	bwa		1.00	152.8	3.50	1.22	yes
+ecoli_cov5_len150_err0_seed1	align	minimap2		0.48	145.8	1.18	0.70	yes
+ecoli_cov5_len150_err0_seed1	call	bowtie2	bcftools	4.58	46.7	5.06	4.80	yes
+ecoli_cov5_len150_err0_seed1	call	bowtie2	freebayes	2.76	23.2	2.79	2.98	yes
+ecoli_cov5_len150_err0_seed1	call	bowtie2	gatk	15.65	510.6	25.48	15.88	yes
+ecoli_cov5_len150_err0_seed1	call	bwa	bcftools	4.75	48.8	5.24	5.17	yes
+ecoli_cov5_len150_err0_seed1	call	bwa	freebayes	2.75	23.2	2.76	2.98	yes
+ecoli_cov5_len150_err0_seed1	call	bwa	gatk	16.33	510.7	24.93	16.56	yes
+ecoli_cov5_len150_err0_seed1	call	minimap2	bcftools	4.60	48.5	5.09	4.83	yes
+ecoli_cov5_len150_err0_seed1	call	minimap2	freebayes	2.75	27.9	2.77	2.98	yes
+ecoli_cov5_len150_err0_seed1	call	minimap2	gatk	15.82	517.0	26.73	16.04	yes
+ecoli_cov5_len150_err0_seed2	align	bowtie2		3.20	66.0	12.84	3.43	no
+ecoli_cov5_len150_err0_seed2	align	bwa		0.99	152.5	3.46	1.22	no
+ecoli_cov5_len150_err0_seed2	align	minimap2		0.48	158.5	1.16	0.70	no
+ecoli_cov5_len150_err0_seed2	call	bowtie2	bcftools	4.59	47.1	5.09	4.82	no
+ecoli_cov5_len150_err0_seed2	call	bowtie2	freebayes	2.79	23.5	2.81	3.02	no
+ecoli_cov5_len150_err0_seed2	call	bowtie2	gatk	15.59	506.6	25.45	15.81	no
+ecoli_cov5_len150_err0_seed2	call	bwa	bcftools	4.65	47.8	5.11	4.88	no
+ecoli_cov5_len150_err0_seed2	call	bwa	freebayes	2.73	23.2	2.74	3.10	no
+ecoli_cov5_len150_err0_seed2	call	bwa	gatk	16.36	443.6	24.67	16.59	no
+ecoli_cov5_len150_err0_seed2	call	minimap2	bcftools	4.59	48.3	5.09	4.82	no
+ecoli_cov5_len150_err0_seed2	call	minimap2	freebayes	2.75	23.4	2.77	2.98	no
+ecoli_cov5_len150_err0_seed2	call	minimap2	gatk	15.67	501.4	25.36	15.90	no
+ecoli_cov5_len150_err0_seed3	align	bowtie2		3.15	66.0	12.66	3.38	no
+ecoli_cov5_len150_err0_seed3	align	bwa		0.96	152.4	3.39	1.19	no
+ecoli_cov5_len150_err0_seed3	align	minimap2		0.50	159.8	1.17	0.72	no
+ecoli_cov5_len150_err0_seed3	call	bowtie2	bcftools	4.65	46.3	5.15	4.90	no
+ecoli_cov5_len150_err0_seed3	call	bowtie2	freebayes	2.79	23.4	2.80	3.01	no
+ecoli_cov5_len150_err0_seed3	call	bowtie2	gatk	15.55	522.9	25.98	15.78	no
+ecoli_cov5_len150_err0_seed3	call	bwa	bcftools	4.66	46.3	5.13	5.04	no
+ecoli_cov5_len150_err0_seed3	call	bwa	freebayes	2.73	23.7	2.75	2.96	no
+ecoli_cov5_len150_err0_seed3	call	bwa	gatk	16.18	495.3	24.86	16.42	no
+ecoli_cov5_len150_err0_seed3	call	minimap2	bcftools	4.62	49.4	5.11	4.85	no
+ecoli_cov5_len150_err0_seed3	call	minimap2	freebayes	2.75	23.5	2.77	2.98	no
+ecoli_cov5_len150_err0_seed3	call	minimap2	gatk	15.86	522.8	26.42	16.09	no
+ecoli_cov5_len150_err0_seed4	align	bowtie2		3.21	66.2	12.89	3.43	no
+ecoli_cov5_len150_err0_seed4	align	bwa		0.98	152.2	3.44	1.21	no
+ecoli_cov5_len150_err0_seed4	align	minimap2		0.49	155.2	1.17	0.71	no
+ecoli_cov5_len150_err0_seed4	call	bowtie2	bcftools	4.65	45.4	5.13	4.87	no
+ecoli_cov5_len150_err0_seed4	call	bowtie2	freebayes	2.82	23.9	2.84	3.05	no
+ecoli_cov5_len150_err0_seed4	call	bowtie2	gatk	15.57	536.8	24.68	15.80	no
+ecoli_cov5_len150_err0_seed4	call	bwa	bcftools	4.84	47.7	5.32	5.06	no
+ecoli_cov5_len150_err0_seed4	call	bwa	freebayes	2.81	23.7	2.82	3.24	no
+ecoli_cov5_len150_err0_seed4	call	bwa	gatk	16.40	488.1	24.90	16.64	no
+ecoli_cov5_len150_err0_seed4	call	minimap2	bcftools	4.65	48.0	5.13	4.88	no
+ecoli_cov5_len150_err0_seed4	call	minimap2	freebayes	2.76	23.4	2.78	2.99	no
+ecoli_cov5_len150_err0_seed4	call	minimap2	gatk	15.69	512.6	25.64	15.92	no
+ecoli_cov5_len150_err0_seed5	align	bowtie2		3.16	66.6	12.57	3.39	no
+ecoli_cov5_len150_err0_seed5	align	bwa		0.98	152.4	3.43	1.21	no
+ecoli_cov5_len150_err0_seed5	align	minimap2		0.49	158.8	1.17	0.71	no
+ecoli_cov5_len150_err0_seed5	call	bowtie2	bcftools	4.57	45.6	5.05	4.80	no
+ecoli_cov5_len150_err0_seed5	call	bowtie2	freebayes	2.77	23.1	2.79	2.99	no
+ecoli_cov5_len150_err0_seed5	call	bowtie2	gatk	15.32	500.9	24.25	15.56	no
+ecoli_cov5_len150_err0_seed5	call	bwa	bcftools	4.69	49.0	5.17	4.94	no
+ecoli_cov5_len150_err0_seed5	call	bwa	freebayes	2.76	23.2	2.78	2.99	no
+ecoli_cov5_len150_err0_seed5	call	bwa	gatk	16.34	453.5	26.10	16.57	no
+ecoli_cov5_len150_err0_seed5	call	minimap2	bcftools	4.62	51.4	5.11	4.85	no
+ecoli_cov5_len150_err0_seed5	call	minimap2	freebayes	2.76	28.0	2.78	2.99	no
+ecoli_cov5_len150_err0_seed5	call	minimap2	gatk	15.77	517.6	25.80	15.99	no
+phiX_cov100_len150_err0_seed1	align	bowtie2		0.14	58.0	0.32	0.36	yes
+phiX_cov100_len150_err0_seed1	align	bwa		0.02	5.8	0.07	0.26	yes
+phiX_cov100_len150_err0_seed1	align	minimap2		0.01	5.5	0.02	0.25	yes
+phiX_cov100_len150_err0_seed1	call	bowtie2	bcftools	0.13	38.0	0.13	0.37	yes
+phiX_cov100_len150_err0_seed1	call	bowtie2	freebayes	0.07	5.9	0.06	0.30	yes
+phiX_cov100_len150_err0_seed1	call	bowtie2	gatk	4.29	429.6	7.83	4.52	yes
+phiX_cov100_len150_err0_seed1	call	bwa	bcftools	0.12	38.3	0.11	0.35	yes
+phiX_cov100_len150_err0_seed1	call	bwa	freebayes	0.07	5.9	0.06	0.30	yes
+phiX_cov100_len150_err0_seed1	call	bwa	gatk	4.30	413.3	7.65	4.53	yes
+phiX_cov100_len150_err0_seed1	call	minimap2	bcftools	0.14	39.6	0.12	0.37	yes
+phiX_cov100_len150_err0_seed1	call	minimap2	freebayes	0.07	5.9	0.06	0.30	yes
+phiX_cov100_len150_err0_seed1	call	minimap2	gatk	3.68	409.7	7.13	3.91	yes
+phiX_cov100_len150_err0_seed2	align	bowtie2		0.21	59.1	0.45	0.59	no
+phiX_cov100_len150_err0_seed2	align	bwa		0.03	6.1	0.09	0.30	no
+phiX_cov100_len150_err0_seed2	align	minimap2		0.01	5.7	0.03	0.28	no
+phiX_cov100_len150_err0_seed2	call	bowtie2	bcftools	0.16	41.0	0.16	0.53	no
+phiX_cov100_len150_err0_seed2	call	bowtie2	freebayes	0.11	11.1	0.09	0.47	no
+phiX_cov100_len150_err0_seed2	call	bowtie2	gatk	9.13	455.4	12.42	9.48	no
+phiX_cov100_len150_err0_seed2	call	bwa	bcftools	0.17	41.0	0.16	0.62	no
+phiX_cov100_len150_err0_seed2	call	bwa	freebayes	0.09	10.5	0.09	0.50	no
+phiX_cov100_len150_err0_seed2	call	bwa	gatk	7.05	518.1	12.03	7.46	no
+phiX_cov100_len150_err0_seed2	call	minimap2	bcftools	0.17	41.9	0.16	0.58	no
+phiX_cov100_len150_err0_seed2	call	minimap2	freebayes	0.09	10.5	0.09	0.49	no
+phiX_cov100_len150_err0_seed2	call	minimap2	gatk	7.57	614.8	12.84	7.87	no
+phiX_cov100_len150_err0_seed3	align	bowtie2		0.17	58.7	0.44	0.48	no
+phiX_cov100_len150_err0_seed3	align	bwa		0.03	6.1	0.09	0.30	no
+phiX_cov100_len150_err0_seed3	align	minimap2		0.01	5.6	0.03	0.27	no
+phiX_cov100_len150_err0_seed3	call	bowtie2	bcftools	0.15	40.6	0.16	0.53	no
+phiX_cov100_len150_err0_seed3	call	bowtie2	freebayes	0.10	11.8	0.10	0.53	no
+phiX_cov100_len150_err0_seed3	call	bowtie2	gatk	7.51	452.8	10.87	7.93	no
+phiX_cov100_len150_err0_seed3	call	bwa	bcftools	0.16	40.6	0.16	0.50	no
+phiX_cov100_len150_err0_seed3	call	bwa	freebayes	0.09	10.8	0.09	0.46	no
+phiX_cov100_len150_err0_seed3	call	bwa	gatk	4.84	449.9	9.57	5.12	no
+phiX_cov100_len150_err0_seed3	call	minimap2	bcftools	0.20	41.7	0.16	0.61	no
+phiX_cov100_len150_err0_seed3	call	minimap2	freebayes	0.09	10.0	0.09	0.55	no
+phiX_cov100_len150_err0_seed3	call	minimap2	gatk	6.49	382.5	11.13	6.80	no
+phiX_cov100_len150_err0_seed4	align	bowtie2		0.17	58.6	0.43	0.50	no
+phiX_cov100_len150_err0_seed4	align	bwa		0.03	6.2	0.10	0.35	no
+phiX_cov100_len150_err0_seed4	align	minimap2		0.01	5.5	0.03	0.28	no
+phiX_cov100_len150_err0_seed4	call	bowtie2	bcftools	0.14	39.6	0.14	0.54	no
+phiX_cov100_len150_err0_seed4	call	bowtie2	freebayes	0.08	9.7	0.08	0.53	no
+phiX_cov100_len150_err0_seed4	call	bowtie2	gatk	6.06	450.0	10.92	6.47	no
+phiX_cov100_len150_err0_seed4	call	bwa	bcftools	0.15	40.0	0.15	0.55	no
+phiX_cov100_len150_err0_seed4	call	bwa	freebayes	0.09	10.2	0.08	0.47	no
+phiX_cov100_len150_err0_seed4	call	bwa	gatk	4.60	451.4	9.48	4.91	no
+phiX_cov100_len150_err0_seed4	call	minimap2	bcftools	0.15	40.6	0.15	0.76	no
+phiX_cov100_len150_err0_seed4	call	minimap2	freebayes	0.09	12.0	0.09	0.82	no
+phiX_cov100_len150_err0_seed4	call	minimap2	gatk	8.56	402.8	11.57	9.04	no
+phiX_cov100_len150_err0_seed5	align	bowtie2		0.16	58.3	0.41	0.45	no
+phiX_cov100_len150_err0_seed5	align	bwa		0.03	6.1	0.10	0.31	no
+phiX_cov100_len150_err0_seed5	align	minimap2		0.01	5.6	0.03	0.30	no
+phiX_cov100_len150_err0_seed5	call	bowtie2	bcftools	0.17	40.9	0.17	0.61	no
+phiX_cov100_len150_err0_seed5	call	bowtie2	freebayes	0.11	11.0	0.10	0.68	no
+phiX_cov100_len150_err0_seed5	call	bowtie2	gatk	6.11	388.6	11.01	6.59	no
+phiX_cov100_len150_err0_seed5	call	bwa	bcftools	0.18	41.5	0.17	0.58	no
+phiX_cov100_len150_err0_seed5	call	bwa	freebayes	0.10	11.8	0.10	0.55	no
+phiX_cov100_len150_err0_seed5	call	bwa	gatk	5.99	406.6	11.37	6.35	no
+phiX_cov100_len150_err0_seed5	call	minimap2	bcftools	0.17	40.8	0.15	0.56	no
+phiX_cov100_len150_err0_seed5	call	minimap2	freebayes	0.11	11.3	0.10	0.52	no
+phiX_cov100_len150_err0_seed5	call	minimap2	gatk	7.26	346.5	11.63	7.65	no
+phiX_cov10_len150_err0_seed1	align	bowtie2		0.08	38.6	0.05	0.31	yes
+phiX_cov10_len150_err0_seed1	align	bwa		0.00	2.8	0.00	0.22	yes
+phiX_cov10_len150_err0_seed1	align	minimap2		0.00	3.6	0.00	0.22	yes
+phiX_cov10_len150_err0_seed1	call	bowtie2	bcftools	0.07	37.9	0.06	0.29	yes
+phiX_cov10_len150_err0_seed1	call	bowtie2	freebayes	0.02	4.8	0.01	0.24	yes
+phiX_cov10_len150_err0_seed1	call	bowtie2	gatk	1.55	435.2	4.26	1.77	yes
+phiX_cov10_len150_err0_seed1	call	bwa	bcftools	0.07	37.7	0.06	0.29	yes
+phiX_cov10_len150_err0_seed1	call	bwa	freebayes	0.02	4.7	0.01	0.24	yes
+phiX_cov10_len150_err0_seed1	call	bwa	gatk	1.53	480.9	4.28	1.76	yes
+phiX_cov10_len150_err0_seed1	call	minimap2	bcftools	0.07	37.7	0.06	0.29	yes
+phiX_cov10_len150_err0_seed1	call	minimap2	freebayes	0.02	4.7	0.01	0.24	yes
+phiX_cov10_len150_err0_seed1	call	minimap2	gatk	1.54	487.2	4.38	1.77	yes
+phiX_cov10_len150_err0_seed2	align	bowtie2		0.09	38.6	0.06	0.37	no
+phiX_cov10_len150_err0_seed2	align	bwa		0.01	2.9	0.01	0.47	no
+phiX_cov10_len150_err0_seed2	align	minimap2		0.00	3.8	0.00	0.30	no
+phiX_cov10_len150_err0_seed2	call	bowtie2	bcftools	0.11	40.4	0.10	0.81	no
+phiX_cov10_len150_err0_seed2	call	bowtie2	freebayes	0.04	6.2	0.03	0.75	no
+phiX_cov10_len150_err0_seed2	call	bowtie2	gatk	3.25	439.9	6.36	3.63	no
+phiX_cov10_len150_err0_seed2	call	bwa	bcftools	0.09	39.1	0.08	0.65	no
+phiX_cov10_len150_err0_seed2	call	bwa	freebayes	0.05	6.2	0.03	0.65	no
+phiX_cov10_len150_err0_seed2	call	bwa	gatk	4.17	467.5	7.67	4.63	no
+phiX_cov10_len150_err0_seed2	call	minimap2	bcftools	0.14	40.7	0.09	0.68	no
+phiX_cov10_len150_err0_seed2	call	minimap2	freebayes	0.04	6.0	0.03	0.48	no
+phiX_cov10_len150_err0_seed2	call	minimap2	gatk	3.78	415.5	6.85	4.17	no
+phiX_cov10_len150_err0_seed3	align	bowtie2		0.09	39.0	0.06	0.46	no
+phiX_cov10_len150_err0_seed3	align	bwa		0.04	2.9	0.01	0.52	no
+phiX_cov10_len150_err0_seed3	align	minimap2		0.00	3.9	0.00	0.44	no
+phiX_cov10_len150_err0_seed3	call	bowtie2	bcftools	0.09	39.6	0.09	0.45	no
+phiX_cov10_len150_err0_seed3	call	bowtie2	freebayes	0.03	5.4	0.03	0.45	no
+phiX_cov10_len150_err0_seed3	call	bowtie2	gatk	5.61	373.2	7.18	6.04	no
+phiX_cov10_len150_err0_seed3	call	bwa	bcftools	0.10	38.1	0.09	0.73	no
+phiX_cov10_len150_err0_seed3	call	bwa	freebayes	0.03	5.7	0.03	0.44	no
+phiX_cov10_len150_err0_seed3	call	bwa	gatk	5.02	437.6	7.64	5.70	no
+phiX_cov10_len150_err0_seed3	call	minimap2	bcftools	0.13	40.3	0.10	0.58	no
+phiX_cov10_len150_err0_seed3	call	minimap2	freebayes	0.05	5.3	0.03	0.39	no
+phiX_cov10_len150_err0_seed3	call	minimap2	gatk	3.91	413.9	7.22	4.27	no
+phiX_cov10_len150_err0_seed4	align	bowtie2		0.08	45.4	0.06	0.35	no
+phiX_cov10_len150_err0_seed4	align	bwa		0.01	3.1	0.01	0.50	no
+phiX_cov10_len150_err0_seed4	align	minimap2		0.00	3.9	0.00	0.75	no
+phiX_cov10_len150_err0_seed4	call	bowtie2	bcftools	0.08	38.6	0.08	0.57	no
+phiX_cov10_len150_err0_seed4	call	bowtie2	freebayes	0.03	4.9	0.01	0.41	no
+phiX_cov10_len150_err0_seed4	call	bowtie2	gatk	3.64	470.1	7.13	3.98	no
+phiX_cov10_len150_err0_seed4	call	bwa	bcftools	0.11	39.4	0.09	0.49	no
+phiX_cov10_len150_err0_seed4	call	bwa	freebayes	0.05	4.9	0.01	0.42	no
+phiX_cov10_len150_err0_seed4	call	bwa	gatk	3.54	408.9	7.27	4.07	no
+phiX_cov10_len150_err0_seed4	call	minimap2	bcftools	0.10	39.3	0.09	0.68	no
+phiX_cov10_len150_err0_seed4	call	minimap2	freebayes	0.07	5.9	0.03	0.64	no
+phiX_cov10_len150_err0_seed4	call	minimap2	gatk	3.13	440.7	7.33	3.46	no
+phiX_cov10_len150_err0_seed5	align	bowtie2		0.08	38.8	0.06	0.36	no
+phiX_cov10_len150_err0_seed5	align	bwa		0.01	2.9	0.01	0.37	no
+phiX_cov10_len150_err0_seed5	align	minimap2		0.00	3.8	0.00	0.26	no
+phiX_cov10_len150_err0_seed5	call	bowtie2	bcftools	0.11	40.6	0.09	0.98	no
+phiX_cov10_len150_err0_seed5	call	bowtie2	freebayes	0.05	6.3	0.03	0.78	no
+phiX_cov10_len150_err0_seed5	call	bowtie2	gatk	3.45	359.5	7.17	3.86	no
+phiX_cov10_len150_err0_seed5	call	bwa	bcftools	0.11	38.7	0.10	0.78	no
+phiX_cov10_len150_err0_seed5	call	bwa	freebayes	0.05	5.4	0.03	0.81	no
+phiX_cov10_len150_err0_seed5	call	bwa	gatk	4.05	412.5	7.25	4.59	no
+phiX_cov10_len150_err0_seed5	call	minimap2	bcftools	0.10	40.0	0.09	0.45	no
+phiX_cov10_len150_err0_seed5	call	minimap2	freebayes	0.02	4.9	0.01	0.38	no
+phiX_cov10_len150_err0_seed5	call	minimap2	gatk	3.50	430.5	7.08	4.01	no
+phiX_cov20_len150_err0_seed1	align	bowtie2		0.08	51.2	0.08	0.31	yes
+phiX_cov20_len150_err0_seed1	align	bwa		0.00	3.2	0.01	0.24	yes
+phiX_cov20_len150_err0_seed1	align	minimap2		0.00	3.9	0.00	0.24	yes
+phiX_cov20_len150_err0_seed1	call	bowtie2	bcftools	0.07	37.9	0.07	0.30	yes
+phiX_cov20_len150_err0_seed1	call	bowtie2	freebayes	0.02	4.9	0.02	0.24	yes
+phiX_cov20_len150_err0_seed1	call	bowtie2	gatk	1.73	436.7	4.42	1.95	yes
+phiX_cov20_len150_err0_seed1	call	bwa	bcftools	0.07	37.9	0.07	0.30	yes
+phiX_cov20_len150_err0_seed1	call	bwa	freebayes	0.02	4.8	0.02	0.25	yes
+phiX_cov20_len150_err0_seed1	call	bwa	gatk	1.74	476.8	4.69	1.96	yes
+phiX_cov20_len150_err0_seed1	call	minimap2	bcftools	0.07	37.9	0.07	0.30	yes
+phiX_cov20_len150_err0_seed1	call	minimap2	freebayes	0.02	4.8	0.02	0.25	yes
+phiX_cov20_len150_err0_seed1	call	minimap2	gatk	1.75	486.6	4.57	1.97	yes
+phiX_cov20_len150_err0_seed2	align	bowtie2		0.09	58.1	0.11	0.38	no
+phiX_cov20_len150_err0_seed2	align	bwa		0.04	3.3	0.02	0.56	no
+phiX_cov20_len150_err0_seed2	align	minimap2		0.01	4.0	0.00	0.55	no
+phiX_cov20_len150_err0_seed2	call	bowtie2	bcftools	0.21	40.3	0.11	0.94	no
+phiX_cov20_len150_err0_seed2	call	bowtie2	freebayes	0.04	6.3	0.03	0.53	no
+phiX_cov20_len150_err0_seed2	call	bowtie2	gatk	3.92	469.6	7.25	4.25	no
+phiX_cov20_len150_err0_seed2	call	bwa	bcftools	0.09	38.9	0.09	0.54	no
+phiX_cov20_len150_err0_seed2	call	bwa	freebayes	0.06	5.9	0.04	0.56	no
+phiX_cov20_len150_err0_seed2	call	bwa	gatk	2.98	451.3	6.34	3.30	no
+phiX_cov20_len150_err0_seed2	call	minimap2	bcftools	0.11	38.5	0.09	0.53	no
+phiX_cov20_len150_err0_seed2	call	minimap2	freebayes	0.03	6.2	0.03	0.41	no
+phiX_cov20_len150_err0_seed2	call	minimap2	gatk	2.46	374.0	6.49	2.82	no
+phiX_cov20_len150_err0_seed3	align	bowtie2		0.14	58.4	0.13	0.45	no
+phiX_cov20_len150_err0_seed3	align	bwa		0.01	3.4	0.02	0.38	no
+phiX_cov20_len150_err0_seed3	align	minimap2		0.00	4.1	0.01	0.39	no
+phiX_cov20_len150_err0_seed3	call	bowtie2	bcftools	0.15	39.5	0.10	0.67	no
+phiX_cov20_len150_err0_seed3	call	bowtie2	freebayes	0.12	6.1	0.03	0.76	no
+phiX_cov20_len150_err0_seed3	call	bowtie2	gatk	4.93	445.9	7.46	5.42	no
+phiX_cov20_len150_err0_seed3	call	bwa	bcftools	0.12	40.9	0.10	0.59	no
+phiX_cov20_len150_err0_seed3	call	bwa	freebayes	0.05	7.0	0.04	0.55	no
+phiX_cov20_len150_err0_seed3	call	bwa	gatk	3.96	415.8	7.66	4.29	no
+phiX_cov20_len150_err0_seed3	call	minimap2	bcftools	0.09	38.3	0.09	0.45	no
+phiX_cov20_len150_err0_seed3	call	minimap2	freebayes	0.03	6.2	0.02	0.34	no
+phiX_cov20_len150_err0_seed3	call	minimap2	gatk	2.94	403.3	6.37	3.25	no
+phiX_cov20_len150_err0_seed4	align	bowtie2		0.09	51.9	0.10	0.38	no
+phiX_cov20_len150_err0_seed4	align	bwa		0.01	3.3	0.03	0.37	no
+phiX_cov20_len150_err0_seed4	align	minimap2		0.00	3.9	0.00	0.33	no
+phiX_cov20_len150_err0_seed4	call	bowtie2	bcftools	0.11	39.7	0.09	0.72	no
+phiX_cov20_len150_err0_seed4	call	bowtie2	freebayes	0.04	5.8	0.04	0.63	no
+phiX_cov20_len150_err0_seed4	call	bowtie2	gatk	3.28	432.8	6.91	3.72	no
+phiX_cov20_len150_err0_seed4	call	bwa	bcftools	0.15	39.1	0.09	0.63	no
+phiX_cov20_len150_err0_seed4	call	bwa	freebayes	0.04	6.5	0.04	0.52	no
+phiX_cov20_len150_err0_seed4	call	bwa	gatk	3.04	421.4	6.59	3.33	no
+phiX_cov20_len150_err0_seed4	call	minimap2	bcftools	0.11	38.9	0.09	0.64	no
+phiX_cov20_len150_err0_seed4	call	minimap2	freebayes	0.05	6.9	0.04	0.39	no
+phiX_cov20_len150_err0_seed4	call	minimap2	gatk	2.89	396.1	5.98	3.17	no
+phiX_cov20_len150_err0_seed5	align	bowtie2		0.08	58.1	0.10	0.38	no
+phiX_cov20_len150_err0_seed5	align	bwa		0.01	3.5	0.03	0.39	no
+phiX_cov20_len150_err0_seed5	align	minimap2		0.00	4.0	0.01	0.38	no
+phiX_cov20_len150_err0_seed5	call	bowtie2	bcftools	0.14	40.9	0.11	0.84	no
+phiX_cov20_len150_err0_seed5	call	bowtie2	freebayes	0.05	6.5	0.03	0.76	no
+phiX_cov20_len150_err0_seed5	call	bowtie2	gatk	3.70	389.5	6.56	4.05	no
+phiX_cov20_len150_err0_seed5	call	bwa	bcftools	0.12	40.2	0.11	0.58	no
+phiX_cov20_len150_err0_seed5	call	bwa	freebayes	0.07	6.8	0.04	0.50	no
+phiX_cov20_len150_err0_seed5	call	bwa	gatk	2.92	389.2	6.13	3.27	no
+phiX_cov20_len150_err0_seed5	call	minimap2	bcftools	0.09	40.2	0.09	0.42	no
+phiX_cov20_len150_err0_seed5	call	minimap2	freebayes	0.03	5.9	0.03	0.39	no
+phiX_cov20_len150_err0_seed5	call	minimap2	gatk	3.19	394.1	6.53	3.75	no
+phiX_cov30_len100_err0_seed1	align	bowtie2		0.09	46.5	0.11	0.31	yes
+phiX_cov30_len100_err0_seed1	align	bwa		0.00	3.8	0.02	0.24	yes
+phiX_cov30_len100_err0_seed1	align	minimap2		0.00	4.2	0.00	0.23	yes
+phiX_cov30_len100_err0_seed1	call	bowtie2	bcftools	0.08	37.7	0.07	0.30	yes
+phiX_cov30_len100_err0_seed1	call	bowtie2	freebayes	0.03	5.0	0.02	0.25	yes
+phiX_cov30_len100_err0_seed1	call	bowtie2	gatk	2.10	469.6	5.19	2.32	yes
+phiX_cov30_len100_err0_seed1	call	bwa	bcftools	0.08	38.2	0.07	0.31	yes
+phiX_cov30_len100_err0_seed1	call	bwa	freebayes	0.03	4.9	0.02	0.26	yes
+phiX_cov30_len100_err0_seed1	call	bwa	gatk	2.13	440.7	5.32	2.37	yes
+phiX_cov30_len100_err0_seed1	call	minimap2	bcftools	0.08	37.7	0.07	0.30	yes
+phiX_cov30_len100_err0_seed1	call	minimap2	freebayes	0.03	5.0	0.02	0.25	yes
+phiX_cov30_len100_err0_seed1	call	minimap2	gatk	2.08	440.3	5.22	2.31	yes
+phiX_cov30_len100_err0_seed2	align	bowtie2		0.11	52.1	0.15	0.43	no
+phiX_cov30_len100_err0_seed2	align	bwa		0.01	4.0	0.03	0.42	no
+phiX_cov30_len100_err0_seed2	align	minimap2		0.00	4.2	0.01	0.36	no
+phiX_cov30_len100_err0_seed2	call	bowtie2	bcftools	0.11	39.7	0.10	0.93	no
+phiX_cov30_len100_err0_seed2	call	bowtie2	freebayes	0.05	7.0	0.05	0.86	no
+phiX_cov30_len100_err0_seed2	call	bowtie2	gatk	5.54	363.1	8.69	6.06	no
+phiX_cov30_len100_err0_seed2	call	bwa	bcftools	0.17	39.9	0.12	0.87	no
+phiX_cov30_len100_err0_seed2	call	bwa	freebayes	0.06	7.6	0.04	0.95	no
+phiX_cov30_len100_err0_seed2	call	bwa	gatk	4.74	375.0	8.41	5.15	no
+phiX_cov30_len100_err0_seed2	call	minimap2	bcftools	0.12	39.2	0.10	0.82	no
+phiX_cov30_len100_err0_seed2	call	minimap2	freebayes	0.16	7.8	0.05	0.75	no
+phiX_cov30_len100_err0_seed2	call	minimap2	gatk	4.85	371.0	8.53	5.57	no
+phiX_cov30_len100_err0_seed3	align	bowtie2		0.09	51.9	0.14	0.42	no
+phiX_cov30_len100_err0_seed3	align	bwa		0.01	3.9	0.03	0.61	no
+phiX_cov30_len100_err0_seed3	align	minimap2		0.01	4.2	0.01	0.43	no
+phiX_cov30_len100_err0_seed3	call	bowtie2	bcftools	0.11	39.6	0.10	0.59	no
+phiX_cov30_len100_err0_seed3	call	bowtie2	freebayes	0.06	7.1	0.05	0.57	no
+phiX_cov30_len100_err0_seed3	call	bowtie2	gatk	4.82	427.3	8.91	5.47	no
+phiX_cov30_len100_err0_seed3	call	bwa	bcftools	0.18	39.8	0.10	0.78	no
+phiX_cov30_len100_err0_seed3	call	bwa	freebayes	0.05	7.5	0.04	0.63	no
+phiX_cov30_len100_err0_seed3	call	bwa	gatk	4.42	372.7	7.82	4.84	no
+phiX_cov30_len100_err0_seed3	call	minimap2	bcftools	0.11	39.5	0.10	0.67	no
+phiX_cov30_len100_err0_seed3	call	minimap2	freebayes	0.05	6.9	0.05	0.61	no
+phiX_cov30_len100_err0_seed3	call	minimap2	gatk	3.59	519.1	8.32	3.92	no
+phiX_cov30_len100_err0_seed4	align	bowtie2		0.11	51.9	0.16	0.53	no
+phiX_cov30_len100_err0_seed4	align	bwa		0.01	3.9	0.03	0.59	no
+phiX_cov30_len100_err0_seed4	align	minimap2		0.01	4.3	0.01	0.39	no
+phiX_cov30_len100_err0_seed4	call	bowtie2	bcftools	0.13	40.5	0.11	0.68	no
+phiX_cov30_len100_err0_seed4	call	bowtie2	freebayes	0.06	7.0	0.05	0.61	no
+phiX_cov30_len100_err0_seed4	call	bowtie2	gatk	4.96	492.4	8.20	5.40	no
+phiX_cov30_len100_err0_seed4	call	bwa	bcftools	0.11	39.6	0.10	0.82	no
+phiX_cov30_len100_err0_seed4	call	bwa	freebayes	0.06	7.2	0.05	0.82	no
+phiX_cov30_len100_err0_seed4	call	bwa	gatk	4.16	368.1	8.13	4.64	no
+phiX_cov30_len100_err0_seed4	call	minimap2	bcftools	0.10	38.5	0.09	0.71	no
+phiX_cov30_len100_err0_seed4	call	minimap2	freebayes	0.14	7.6	0.05	0.79	no
+phiX_cov30_len100_err0_seed4	call	minimap2	gatk	4.14	364.2	8.14	4.58	no
+phiX_cov30_len100_err0_seed5	align	bowtie2		0.09	52.1	0.14	0.36	no
+phiX_cov30_len100_err0_seed5	align	bwa		0.01	4.1	0.03	0.41	no
+phiX_cov30_len100_err0_seed5	align	minimap2		0.01	4.3	0.01	0.38	no
+phiX_cov30_len100_err0_seed5	call	bowtie2	bcftools	0.11	40.2	0.11	0.54	no
+phiX_cov30_len100_err0_seed5	call	bowtie2	freebayes	0.06	6.8	0.04	0.44	no
+phiX_cov30_len100_err0_seed5	call	bowtie2	gatk	6.87	369.8	8.37	7.26	no
+phiX_cov30_len100_err0_seed5	call	bwa	bcftools	0.12	39.8	0.12	0.67	no
+phiX_cov30_len100_err0_seed5	call	bwa	freebayes	0.05	7.4	0.05	0.58	no
+phiX_cov30_len100_err0_seed5	call	bwa	gatk	4.81	462.6	8.68	5.24	no
+phiX_cov30_len100_err0_seed5	call	minimap2	bcftools	0.12	39.5	0.10	0.59	no
+phiX_cov30_len100_err0_seed5	call	minimap2	freebayes	0.06	7.6	0.05	0.64	no
+phiX_cov30_len100_err0_seed5	call	minimap2	gatk	3.29	396.5	7.62	3.67	no
+phiX_cov30_len150_err-10_seed1	align	bowtie2		0.11	51.4	0.13	0.34	yes
+phiX_cov30_len150_err-10_seed1	align	bwa		0.01	3.7	0.03	0.25	yes
+phiX_cov30_len150_err-10_seed1	align	minimap2		0.00	4.1	0.01	0.24	yes
+phiX_cov30_len150_err-10_seed1	call	bowtie2	bcftools	0.08	38.0	0.08	0.31	yes
+phiX_cov30_len150_err-10_seed1	call	bowtie2	freebayes	0.09	5.6	0.08	0.31	yes
+phiX_cov30_len150_err-10_seed1	call	bowtie2	gatk	2.15	402.6	5.21	2.38	yes
+phiX_cov30_len150_err-10_seed1	call	bwa	bcftools	0.08	37.4	0.08	0.29	yes
+phiX_cov30_len150_err-10_seed1	call	bwa	freebayes	0.11	8.6	0.09	0.33	yes
+phiX_cov30_len150_err-10_seed1	call	bwa	gatk	2.18	487.4	5.34	2.41	yes
+phiX_cov30_len150_err-10_seed1	call	minimap2	bcftools	0.08	37.9	0.08	0.30	yes
+phiX_cov30_len150_err-10_seed1	call	minimap2	freebayes	0.08	5.5	0.08	0.30	yes
+phiX_cov30_len150_err-10_seed1	call	minimap2	gatk	2.04	422.5	5.38	2.28	yes
+phiX_cov30_len150_err-10_seed2	align	bowtie2		0.11	58.4	0.18	0.46	no
+phiX_cov30_len150_err-10_seed2	align	bwa		0.02	3.8	0.06	0.41	no
+phiX_cov30_len150_err-10_seed2	align	minimap2		0.00	4.2	0.01	0.33	no
+phiX_cov30_len150_err-10_seed2	call	bowtie2	bcftools	0.12	41.3	0.12	0.67	no
+phiX_cov30_len150_err-10_seed2	call	bowtie2	freebayes	0.13	10.5	0.12	0.55	no
+phiX_cov30_len150_err-10_seed2	call	bowtie2	gatk	5.51	443.1	9.10	5.96	no
+phiX_cov30_len150_err-10_seed2	call	bwa	bcftools	0.21	40.7	0.11	0.59	no
+phiX_cov30_len150_err-10_seed2	call	bwa	freebayes	0.11	7.2	0.09	0.55	no
+phiX_cov30_len150_err-10_seed2	call	bwa	gatk	4.26	501.0	8.50	4.63	no
+phiX_cov30_len150_err-10_seed2	call	minimap2	bcftools	0.17	40.6	0.11	0.66	no
+phiX_cov30_len150_err-10_seed2	call	minimap2	freebayes	0.16	10.0	0.14	0.75	no
+phiX_cov30_len150_err-10_seed2	call	minimap2	gatk	4.36	461.6	8.22	4.72	no
+phiX_cov30_len150_err-10_seed3	align	bowtie2		0.10	58.4	0.15	0.40	no
+phiX_cov30_len150_err-10_seed3	align	bwa		0.02	3.9	0.05	0.43	no
+phiX_cov30_len150_err-10_seed3	align	minimap2		0.01	4.3	0.02	0.29	no
+phiX_cov30_len150_err-10_seed3	call	bowtie2	bcftools	0.13	40.5	0.12	0.76	no
+phiX_cov30_len150_err-10_seed3	call	bowtie2	freebayes	0.15	10.2	0.11	0.51	no
+phiX_cov30_len150_err-10_seed3	call	bowtie2	gatk	7.29	518.1	9.09	7.76	no
+phiX_cov30_len150_err-10_seed3	call	bwa	bcftools	0.14	39.2	0.10	0.51	no
+phiX_cov30_len150_err-10_seed3	call	bwa	freebayes	0.16	11.3	0.14	0.59	no
+phiX_cov30_len150_err-10_seed3	call	bwa	gatk	6.58	504.1	9.31	7.08	no
+phiX_cov30_len150_err-10_seed3	call	minimap2	bcftools	0.13	41.7	0.11	0.60	no
+phiX_cov30_len150_err-10_seed3	call	minimap2	freebayes	0.16	10.0	0.14	0.85	no
+phiX_cov30_len150_err-10_seed3	call	minimap2	gatk	4.57	501.6	8.72	4.96	no
+phiX_cov30_len150_err-10_seed4	align	bowtie2		0.10	58.3	0.15	0.39	no
+phiX_cov30_len150_err-10_seed4	align	bwa		0.03	4.0	0.05	0.43	no
+phiX_cov30_len150_err-10_seed4	align	minimap2		0.00	4.1	0.01	0.45	no
+phiX_cov30_len150_err-10_seed4	call	bowtie2	bcftools	0.10	39.4	0.10	0.57	no
+phiX_cov30_len150_err-10_seed4	call	bowtie2	freebayes	0.11	9.6	0.10	0.57	no
+phiX_cov30_len150_err-10_seed4	call	bowtie2	gatk	5.38	408.8	8.70	6.03	no
+phiX_cov30_len150_err-10_seed4	call	bwa	bcftools	0.10	39.2	0.10	0.44	no
+phiX_cov30_len150_err-10_seed4	call	bwa	freebayes	0.11	7.9	0.10	0.47	no
+phiX_cov30_len150_err-10_seed4	call	bwa	gatk	5.76	371.7	8.11	6.85	no
+phiX_cov30_len150_err-10_seed4	call	minimap2	bcftools	0.15	39.8	0.11	0.63	no
+phiX_cov30_len150_err-10_seed4	call	minimap2	freebayes	0.12	9.8	0.11	0.65	no
+phiX_cov30_len150_err-10_seed4	call	minimap2	gatk	3.30	439.9	7.59	3.58	no
+phiX_cov30_len150_err-10_seed5	align	bowtie2		0.10	58.3	0.16	0.37	no
+phiX_cov30_len150_err-10_seed5	align	bwa		0.02	3.9	0.05	0.49	no
+phiX_cov30_len150_err-10_seed5	align	minimap2		0.00	4.1	0.01	0.31	no
+phiX_cov30_len150_err-10_seed5	call	bowtie2	bcftools	0.11	38.5	0.09	0.66	no
+phiX_cov30_len150_err-10_seed5	call	bowtie2	freebayes	0.13	10.6	0.13	0.52	no
+phiX_cov30_len150_err-10_seed5	call	bowtie2	gatk	5.13	438.8	8.48	5.84	no
+phiX_cov30_len150_err-10_seed5	call	bwa	bcftools	0.10	39.4	0.09	0.70	no
+phiX_cov30_len150_err-10_seed5	call	bwa	freebayes	0.10	7.9	0.10	0.90	no
+phiX_cov30_len150_err-10_seed5	call	bwa	gatk	4.16	470.6	7.93	4.58	no
+phiX_cov30_len150_err-10_seed5	call	minimap2	bcftools	0.11	38.0	0.09	0.69	no
+phiX_cov30_len150_err-10_seed5	call	minimap2	freebayes	0.19	11.0	0.15	0.84	no
+phiX_cov30_len150_err-10_seed5	call	minimap2	gatk	4.32	381.8	8.77	4.67	no
+phiX_cov30_len150_err-2_seed1	align	bowtie2		0.09	57.8	0.11	0.31	yes
+phiX_cov30_len150_err-2_seed1	align	bwa		0.01	3.5	0.02	0.23	yes
+phiX_cov30_len150_err-2_seed1	align	minimap2		0.00	4.1	0.00	0.24	yes
+phiX_cov30_len150_err-2_seed1	call	bowtie2	bcftools	0.08	38.1	0.08	0.31	yes
+phiX_cov30_len150_err-2_seed1	call	bowtie2	freebayes	0.03	5.5	0.03	0.26	yes
+phiX_cov30_len150_err-2_seed1	call	bowtie2	gatk	2.11	446.9	5.15	2.34	yes
+phiX_cov30_len150_err-2_seed1	call	bwa	bcftools	0.08	37.9	0.07	0.30	yes
+phiX_cov30_len150_err-2_seed1	call	bwa	freebayes	0.03	5.0	0.03	0.25	yes
+phiX_cov30_len150_err-2_seed1	call	bwa	gatk	2.13	433.2	5.25	2.35	yes
+phiX_cov30_len150_err-2_seed1	call	minimap2	bcftools	0.08	37.9	0.07	0.30	yes
+phiX_cov30_len150_err-2_seed1	call	minimap2	freebayes	0.03	5.0	0.03	0.25	yes
+phiX_cov30_len150_err-2_seed1	call	minimap2	gatk	2.03	428.3	5.23	2.26	yes
+phiX_cov30_len150_err-2_seed2	align	bowtie2		0.08	58.4	0.14	0.36	no
+phiX_cov30_len150_err-2_seed2	align	bwa		0.01	3.8	0.04	0.41	no
+phiX_cov30_len150_err-2_seed2	align	minimap2		0.01	4.4	0.01	0.48	no
+phiX_cov30_len150_err-2_seed2	call	bowtie2	bcftools	0.12	40.9	0.11	0.58	no
+phiX_cov30_len150_err-2_seed2	call	bowtie2	freebayes	0.06	7.3	0.05	0.50	no
+phiX_cov30_len150_err-2_seed2	call	bowtie2	gatk	3.35	372.9	7.21	3.75	no
+phiX_cov30_len150_err-2_seed2	call	bwa	bcftools	0.10	39.8	0.10	0.52	no
+phiX_cov30_len150_err-2_seed2	call	bwa	freebayes	0.05	7.2	0.05	0.48	no
+phiX_cov30_len150_err-2_seed2	call	bwa	gatk	3.39	509.6	7.26	3.82	no
+phiX_cov30_len150_err-2_seed2	call	minimap2	bcftools	0.15	41.4	0.11	0.85	no
+phiX_cov30_len150_err-2_seed2	call	minimap2	freebayes	0.06	7.5	0.03	0.65	no
+phiX_cov30_len150_err-2_seed2	call	minimap2	gatk	3.43	426.6	7.69	3.78	no
+phiX_cov30_len150_err-2_seed3	align	bowtie2		0.08	58.3	0.15	0.37	no
+phiX_cov30_len150_err-2_seed3	align	bwa		0.02	3.8	0.04	0.46	no
+phiX_cov30_len150_err-2_seed3	align	minimap2		0.00	4.2	0.01	0.35	no
+phiX_cov30_len150_err-2_seed3	call	bowtie2	bcftools	0.11	39.9	0.11	0.58	no
+phiX_cov30_len150_err-2_seed3	call	bowtie2	freebayes	0.06	7.1	0.05	0.49	no
+phiX_cov30_len150_err-2_seed3	call	bowtie2	gatk	3.40	416.1	7.38	3.69	no
+phiX_cov30_len150_err-2_seed3	call	bwa	bcftools	0.15	41.0	0.13	0.71	no
+phiX_cov30_len150_err-2_seed3	call	bwa	freebayes	0.06	7.3	0.06	0.66	no
+phiX_cov30_len150_err-2_seed3	call	bwa	gatk	3.52	392.3	7.92	3.82	no
+phiX_cov30_len150_err-2_seed3	call	minimap2	bcftools	0.12	41.0	0.11	0.65	no
+phiX_cov30_len150_err-2_seed3	call	minimap2	freebayes	0.12	8.1	0.05	0.74	no
+phiX_cov30_len150_err-2_seed3	call	minimap2	gatk	3.53	420.5	7.73	3.85	no
+phiX_cov30_len150_err-2_seed4	align	bowtie2		0.09	58.3	0.14	0.40	no
+phiX_cov30_len150_err-2_seed4	align	bwa		0.02	3.8	0.04	0.44	no
+phiX_cov30_len150_err-2_seed4	align	minimap2		0.00	4.2	0.01	0.24	no
+phiX_cov30_len150_err-2_seed4	call	bowtie2	bcftools	0.12	41.0	0.11	0.59	no
+phiX_cov30_len150_err-2_seed4	call	bowtie2	freebayes	0.08	7.8	0.06	0.57	no
+phiX_cov30_len150_err-2_seed4	call	bowtie2	gatk	3.40	396.9	7.75	3.69	no
+phiX_cov30_len150_err-2_seed4	call	bwa	bcftools	0.11	41.1	0.11	0.47	no
+phiX_cov30_len150_err-2_seed4	call	bwa	freebayes	0.05	7.6	0.05	0.50	no
+phiX_cov30_len150_err-2_seed4	call	bwa	gatk	3.67	404.9	7.81	3.95	no
+phiX_cov30_len150_err-2_seed4	call	minimap2	bcftools	0.12	39.7	0.11	0.64	no
+phiX_cov30_len150_err-2_seed4	call	minimap2	freebayes	0.06	7.3	0.05	0.50	no
+phiX_cov30_len150_err-2_seed4	call	minimap2	gatk	3.57	416.0	7.61	3.95	no
+phiX_cov30_len150_err-2_seed5	align	bowtie2		0.09	58.3	0.14	0.35	no
+phiX_cov30_len150_err-2_seed5	align	bwa		0.01	3.8	0.04	0.59	no
+phiX_cov30_len150_err-2_seed5	align	minimap2		0.00	4.1	0.01	0.27	no
+phiX_cov30_len150_err-2_seed5	call	bowtie2	bcftools	0.12	41.0	0.11	0.53	no
+phiX_cov30_len150_err-2_seed5	call	bowtie2	freebayes	0.05	7.6	0.05	0.47	no
+phiX_cov30_len150_err-2_seed5	call	bowtie2	gatk	3.38	473.3	7.32	3.71	no
+phiX_cov30_len150_err-2_seed5	call	bwa	bcftools	0.12	40.3	0.11	0.55	no
+phiX_cov30_len150_err-2_seed5	call	bwa	freebayes	0.04	6.0	0.04	0.47	no
+phiX_cov30_len150_err-2_seed5	call	bwa	gatk	3.62	433.0	7.81	3.89	no
+phiX_cov30_len150_err-2_seed5	call	minimap2	bcftools	0.16	41.1	0.11	0.85	no
+phiX_cov30_len150_err-2_seed5	call	minimap2	freebayes	0.11	7.9	0.06	0.80	no
+phiX_cov30_len150_err-2_seed5	call	minimap2	gatk	3.46	390.2	7.86	3.74	no
+phiX_cov30_len150_err-5_seed1	align	bowtie2		0.09	51.3	0.12	0.32	yes
+phiX_cov30_len150_err-5_seed1	align	bwa		0.01	3.5	0.02	0.24	yes
+phiX_cov30_len150_err-5_seed1	align	minimap2		0.00	4.2	0.01	0.23	yes
+phiX_cov30_len150_err-5_seed1	call	bowtie2	bcftools	0.08	37.9	0.08	0.30	yes
+phiX_cov30_len150_err-5_seed1	call	bowtie2	freebayes	0.04	5.1	0.03	0.26	yes
+phiX_cov30_len150_err-5_seed1	call	bowtie2	gatk	2.15	415.4	5.33	2.37	yes
+phiX_cov30_len150_err-5_seed1	call	bwa	bcftools	0.08	38.3	0.08	0.30	yes
+phiX_cov30_len150_err-5_seed1	call	bwa	freebayes	0.04	5.1	0.03	0.26	yes
+phiX_cov30_len150_err-5_seed1	call	bwa	gatk	2.16	454.7	5.25	2.38	yes
+phiX_cov30_len150_err-5_seed1	call	minimap2	bcftools	0.08	37.9	0.08	0.30	yes
+phiX_cov30_len150_err-5_seed1	call	minimap2	freebayes	0.04	5.7	0.03	0.26	yes
+phiX_cov30_len150_err-5_seed1	call	minimap2	gatk	2.20	452.9	5.22	2.43	yes
+phiX_cov30_len150_err-5_seed2	align	bowtie2		0.10	58.4	0.15	0.37	no
+phiX_cov30_len150_err-5_seed2	align	bwa		0.01	3.8	0.04	0.43	no
+phiX_cov30_len150_err-5_seed2	align	minimap2		0.01	4.2	0.01	0.36	no
+phiX_cov30_len150_err-5_seed2	call	bowtie2	bcftools	0.12	40.5	0.10	0.77	no
+phiX_cov30_len150_err-5_seed2	call	bowtie2	freebayes	0.09	8.2	0.08	0.80	no
+phiX_cov30_len150_err-5_seed2	call	bowtie2	gatk	4.01	384.7	7.67	4.26	no
+phiX_cov30_len150_err-5_seed2	call	bwa	bcftools	0.14	39.8	0.09	0.71	no
+phiX_cov30_len150_err-5_seed2	call	bwa	freebayes	0.07	7.8	0.06	0.80	no
+phiX_cov30_len150_err-5_seed2	call	bwa	gatk	3.46	403.8	7.31	3.82	no
+phiX_cov30_len150_err-5_seed2	call	minimap2	bcftools	0.10	40.8	0.10	0.78	no
+phiX_cov30_len150_err-5_seed2	call	minimap2	freebayes	0.07	8.3	0.05	0.60	no
+phiX_cov30_len150_err-5_seed2	call	minimap2	gatk	3.74	385.1	8.19	4.17	no
+phiX_cov30_len150_err-5_seed3	align	bowtie2		0.09	58.1	0.14	0.34	no
+phiX_cov30_len150_err-5_seed3	align	bwa		0.02	3.8	0.04	0.41	no
+phiX_cov30_len150_err-5_seed3	align	minimap2		0.01	4.2	0.01	0.28	no
+phiX_cov30_len150_err-5_seed3	call	bowtie2	bcftools	0.15	40.6	0.13	1.57	no
+phiX_cov30_len150_err-5_seed3	call	bowtie2	freebayes	0.17	8.9	0.08	1.27	no
+phiX_cov30_len150_err-5_seed3	call	bowtie2	gatk	3.66	462.9	8.06	4.10	no
+phiX_cov30_len150_err-5_seed3	call	bwa	bcftools	0.10	39.1	0.10	0.63	no
+phiX_cov30_len150_err-5_seed3	call	bwa	freebayes	0.08	7.9	0.07	0.52	no
+phiX_cov30_len150_err-5_seed3	call	bwa	gatk	3.52	402.4	8.09	3.82	no
+phiX_cov30_len150_err-5_seed3	call	minimap2	bcftools	0.21	40.7	0.11	0.88	no
+phiX_cov30_len150_err-5_seed3	call	minimap2	freebayes	0.07	7.6	0.06	0.78	no
+phiX_cov30_len150_err-5_seed3	call	minimap2	gatk	3.43	450.9	7.40	3.73	no
+phiX_cov30_len150_err-5_seed4	align	bowtie2		0.11	58.3	0.16	0.44	no
+phiX_cov30_len150_err-5_seed4	align	bwa		0.01	3.8	0.03	0.37	no
+phiX_cov30_len150_err-5_seed4	align	minimap2		0.01	4.2	0.01	0.36	no
+phiX_cov30_len150_err-5_seed4	call	bowtie2	bcftools	0.13	40.4	0.11	0.85	no
+phiX_cov30_len150_err-5_seed4	call	bowtie2	freebayes	0.09	8.4	0.07	0.70	no
+phiX_cov30_len150_err-5_seed4	call	bowtie2	gatk	4.35	395.5	8.53	4.72	no
+phiX_cov30_len150_err-5_seed4	call	bwa	bcftools	0.12	40.2	0.11	0.56	no
+phiX_cov30_len150_err-5_seed4	call	bwa	freebayes	0.06	7.7	0.06	0.59	no
+phiX_cov30_len150_err-5_seed4	call	bwa	gatk	3.54	375.5	7.85	3.83	no
+phiX_cov30_len150_err-5_seed4	call	minimap2	bcftools	0.09	38.6	0.09	0.55	no
+phiX_cov30_len150_err-5_seed4	call	minimap2	freebayes	0.06	7.1	0.04	0.50	no
+phiX_cov30_len150_err-5_seed4	call	minimap2	gatk	3.85	423.3	7.89	4.17	no
+phiX_cov30_len150_err-5_seed5	align	bowtie2		0.10	58.3	0.16	0.39	no
+phiX_cov30_len150_err-5_seed5	align	bwa		0.02	3.8	0.04	0.50	no
+phiX_cov30_len150_err-5_seed5	align	minimap2		0.01	4.3	0.01	0.33	no
+phiX_cov30_len150_err-5_seed5	call	bowtie2	bcftools	0.15	40.8	0.12	0.83	no
+phiX_cov30_len150_err-5_seed5	call	bowtie2	freebayes	0.06	7.4	0.05	0.72	no
+phiX_cov30_len150_err-5_seed5	call	bowtie2	gatk	4.34	391.0	7.77	4.79	no
+phiX_cov30_len150_err-5_seed5	call	bwa	bcftools	0.13	40.9	0.11	0.89	no
+phiX_cov30_len150_err-5_seed5	call	bwa	freebayes	0.07	8.5	0.06	0.66	no
+phiX_cov30_len150_err-5_seed5	call	bwa	gatk	3.47	424.5	8.10	3.75	no
+phiX_cov30_len150_err-5_seed5	call	minimap2	bcftools	0.12	39.6	0.10	0.66	no
+phiX_cov30_len150_err-5_seed5	call	minimap2	freebayes	0.11	8.5	0.07	0.57	no
+phiX_cov30_len150_err-5_seed5	call	minimap2	gatk	3.69	415.2	7.96	4.00	no
+phiX_cov30_len150_err0_seed1	align	bowtie2		0.10	57.8	0.11	0.34	yes
+phiX_cov30_len150_err0_seed1	align	bwa		0.01	3.7	0.02	0.25	yes
+phiX_cov30_len150_err0_seed1	align	minimap2		0.00	4.1	0.01	0.24	yes
+phiX_cov30_len150_err0_seed1	call	bowtie2	bcftools	0.09	38.5	0.08	0.32	yes
+phiX_cov30_len150_err0_seed1	call	bowtie2	freebayes	0.03	6.5	0.03	0.27	yes
+phiX_cov30_len150_err0_seed1	call	bowtie2	gatk	2.19	462.1	5.45	2.43	yes
+phiX_cov30_len150_err0_seed1	call	bwa	bcftools	0.08	38.1	0.08	0.32	yes
+phiX_cov30_len150_err0_seed1	call	bwa	freebayes	0.03	5.2	0.03	0.27	yes
+phiX_cov30_len150_err0_seed1	call	bwa	gatk	2.20	474.4	5.55	2.44	yes
+phiX_cov30_len150_err0_seed1	call	minimap2	bcftools	0.08	38.0	0.08	0.32	yes
+phiX_cov30_len150_err0_seed1	call	minimap2	freebayes	0.03	6.3	0.03	0.27	yes
+phiX_cov30_len150_err0_seed1	call	minimap2	gatk	2.22	457.7	5.82	2.46	yes
+phiX_cov30_len150_err0_seed2	align	bowtie2		0.08	58.3	0.14	0.37	no
+phiX_cov30_len150_err0_seed2	align	bwa		0.01	3.8	0.03	0.47	no
+phiX_cov30_len150_err0_seed2	align	minimap2		0.00	4.2	0.01	0.29	no
+phiX_cov30_len150_err0_seed2	call	bowtie2	bcftools	0.19	41.4	0.11	0.81	no
+phiX_cov30_len150_err0_seed2	call	bowtie2	freebayes	0.06	8.4	0.05	1.02	no
+phiX_cov30_len150_err0_seed2	call	bowtie2	gatk	3.39	435.9	7.23	3.70	no
+phiX_cov30_len150_err0_seed2	call	bwa	bcftools	0.12	40.3	0.11	0.55	no
+phiX_cov30_len150_err0_seed2	call	bwa	freebayes	0.04	5.8	0.04	0.54	no
+phiX_cov30_len150_err0_seed2	call	bwa	gatk	3.60	414.4	7.61	3.94	no
+phiX_cov30_len150_err0_seed2	call	minimap2	bcftools	0.13	40.9	0.11	0.76	no
+phiX_cov30_len150_err0_seed2	call	minimap2	freebayes	0.04	7.1	0.04	0.51	no
+phiX_cov30_len150_err0_seed2	call	minimap2	gatk	3.64	474.9	7.30	4.03	no
+phiX_cov30_len150_err0_seed3	align	bowtie2		0.11	58.3	0.16	0.41	no
+phiX_cov30_len150_err0_seed3	align	bwa		0.01	3.8	0.03	0.47	no
+phiX_cov30_len150_err0_seed3	align	minimap2		0.01	4.2	0.01	0.32	no
+phiX_cov30_len150_err0_seed3	call	bowtie2	bcftools	0.11	39.7	0.10	0.54	no
+phiX_cov30_len150_err0_seed3	call	bowtie2	freebayes	0.05	7.8	0.05	0.50	no
+phiX_cov30_len150_err0_seed3	call	bowtie2	gatk	3.49	467.0	7.46	3.77	no
+phiX_cov30_len150_err0_seed3	call	bwa	bcftools	0.10	39.8	0.10	0.59	no
+phiX_cov30_len150_err0_seed3	call	bwa	freebayes	0.06	7.5	0.05	0.53	no
+phiX_cov30_len150_err0_seed3	call	bwa	gatk	3.58	392.9	7.63	3.93	no
+phiX_cov30_len150_err0_seed3	call	minimap2	bcftools	0.11	40.2	0.10	0.62	no
+phiX_cov30_len150_err0_seed3	call	minimap2	freebayes	0.06	7.5	0.05	0.55	no
+phiX_cov30_len150_err0_seed3	call	minimap2	gatk	3.60	407.1	7.39	3.90	no
+phiX_cov30_len150_err0_seed4	align	bowtie2		0.10	58.2	0.15	0.39	no
+phiX_cov30_len150_err0_seed4	align	bwa		0.02	3.7	0.03	0.46	no
+phiX_cov30_len150_err0_seed4	align	minimap2		0.01	4.2	0.01	0.33	no
+phiX_cov30_len150_err0_seed4	call	bowtie2	bcftools	0.12	41.6	0.11	0.55	no
+phiX_cov30_len150_err0_seed4	call	bowtie2	freebayes	0.06	7.8	0.04	0.52	no
+phiX_cov30_len150_err0_seed4	call	bowtie2	gatk	3.43	422.6	7.47	3.73	no
+phiX_cov30_len150_err0_seed4	call	bwa	bcftools	0.14	40.9	0.12	0.66	no
+phiX_cov30_len150_err0_seed4	call	bwa	freebayes	0.04	6.3	0.04	0.78	no
+phiX_cov30_len150_err0_seed4	call	bwa	gatk	3.52	431.7	7.91	3.95	no
+phiX_cov30_len150_err0_seed4	call	minimap2	bcftools	0.09	39.4	0.09	0.52	no
+phiX_cov30_len150_err0_seed4	call	minimap2	freebayes	0.05	7.3	0.03	0.52	no
+phiX_cov30_len150_err0_seed4	call	minimap2	gatk	3.64	429.1	7.59	3.97	no
+phiX_cov30_len150_err0_seed5	align	bowtie2		0.11	58.2	0.16	0.47	no
+phiX_cov30_len150_err0_seed5	align	bwa		0.02	3.6	0.04	0.41	no
+phiX_cov30_len150_err0_seed5	align	minimap2		0.00	4.1	0.01	0.27	no
+phiX_cov30_len150_err0_seed5	call	bowtie2	bcftools	0.12	40.7	0.11	1.03	no
+phiX_cov30_len150_err0_seed5	call	bowtie2	freebayes	0.05	7.0	0.04	0.90	no
+phiX_cov30_len150_err0_seed5	call	bowtie2	gatk	3.36	531.7	7.38	3.68	no
+phiX_cov30_len150_err0_seed5	call	bwa	bcftools	0.12	40.2	0.11	0.77	no
+phiX_cov30_len150_err0_seed5	call	bwa	freebayes	0.04	7.0	0.04	0.75	no
+phiX_cov30_len150_err0_seed5	call	bwa	gatk	3.36	381.0	7.30	3.71	no
+phiX_cov30_len150_err0_seed5	call	minimap2	bcftools	0.11	39.7	0.10	0.60	no
+phiX_cov30_len150_err0_seed5	call	minimap2	freebayes	0.04	6.5	0.04	0.47	no
+phiX_cov30_len150_err0_seed5	call	minimap2	gatk	3.83	387.5	7.51	4.19	no
+phiX_cov30_len75_err0_seed1	align	bowtie2		0.09	43.6	0.11	0.31	yes
+phiX_cov30_len75_err0_seed1	align	bwa		0.00	3.6	0.02	0.24	yes
+phiX_cov30_len75_err0_seed1	align	minimap2		0.00	4.3	0.00	0.23	yes
+phiX_cov30_len75_err0_seed1	call	bowtie2	bcftools	0.07	37.6	0.07	0.30	yes
+phiX_cov30_len75_err0_seed1	call	bowtie2	freebayes	0.03	4.9	0.02	0.25	yes
+phiX_cov30_len75_err0_seed1	call	bowtie2	gatk	2.03	465.1	5.16	2.26	yes
+phiX_cov30_len75_err0_seed1	call	bwa	bcftools	0.07	37.6	0.07	0.30	yes
+phiX_cov30_len75_err0_seed1	call	bwa	freebayes	0.03	4.9	0.02	0.25	yes
+phiX_cov30_len75_err0_seed1	call	bwa	gatk	2.11	497.0	5.28	2.34	yes
+phiX_cov30_len75_err0_seed1	call	minimap2	bcftools	0.07	37.6	0.07	0.30	yes
+phiX_cov30_len75_err0_seed1	call	minimap2	freebayes	0.03	5.0	0.02	0.25	yes
+phiX_cov30_len75_err0_seed1	call	minimap2	gatk	2.04	453.3	5.29	2.26	yes
+phiX_cov30_len75_err0_seed2	align	bowtie2		0.10	48.2	0.16	0.44	no
+phiX_cov30_len75_err0_seed2	align	bwa		0.01	4.0	0.02	0.39	no
+phiX_cov30_len75_err0_seed2	align	minimap2		0.00	4.3	0.01	0.28	no
+phiX_cov30_len75_err0_seed2	call	bowtie2	bcftools	0.12	38.4	0.10	0.64	no
+phiX_cov30_len75_err0_seed2	call	bowtie2	freebayes	0.04	6.3	0.03	0.90	no
+phiX_cov30_len75_err0_seed2	call	bowtie2	gatk	4.14	501.5	7.90	4.60	no
+phiX_cov30_len75_err0_seed2	call	bwa	bcftools	0.10	38.5	0.09	0.47	no
+phiX_cov30_len75_err0_seed2	call	bwa	freebayes	0.04	4.9	0.04	0.49	no
+phiX_cov30_len75_err0_seed2	call	bwa	gatk	5.40	402.1	8.68	6.35	no
+phiX_cov30_len75_err0_seed2	call	minimap2	bcftools	0.10	37.8	0.09	0.47	no
+phiX_cov30_len75_err0_seed2	call	minimap2	freebayes	0.08	5.6	0.04	0.48	no
+phiX_cov30_len75_err0_seed2	call	minimap2	gatk	3.91	470.1	7.31	4.26	no
+phiX_cov30_len75_err0_seed3	align	bowtie2		0.09	48.2	0.14	0.37	no
+phiX_cov30_len75_err0_seed3	align	bwa		0.01	3.9	0.03	0.63	no
+phiX_cov30_len75_err0_seed3	align	minimap2		0.00	4.3	0.01	0.32	no
+phiX_cov30_len75_err0_seed3	call	bowtie2	bcftools	0.10	39.4	0.10	0.54	no
+phiX_cov30_len75_err0_seed3	call	bowtie2	freebayes	0.05	6.8	0.04	0.59	no
+phiX_cov30_len75_err0_seed3	call	bowtie2	gatk	4.92	394.1	8.07	5.40	no
+phiX_cov30_len75_err0_seed3	call	bwa	bcftools	0.09	38.1	0.09	0.46	no
+phiX_cov30_len75_err0_seed3	call	bwa	freebayes	0.04	5.6	0.03	0.38	no
+phiX_cov30_len75_err0_seed3	call	bwa	gatk	4.53	452.6	8.61	5.28	no
+phiX_cov30_len75_err0_seed3	call	minimap2	bcftools	0.11	38.6	0.10	0.62	no
+phiX_cov30_len75_err0_seed3	call	minimap2	freebayes	0.04	6.4	0.04	0.45	no
+phiX_cov30_len75_err0_seed3	call	minimap2	gatk	3.87	481.5	7.36	4.35	no
+phiX_cov30_len75_err0_seed4	align	bowtie2		0.09	48.1	0.14	0.36	no
+phiX_cov30_len75_err0_seed4	align	bwa		0.01	3.9	0.03	0.35	no
+phiX_cov30_len75_err0_seed4	align	minimap2		0.01	4.4	0.01	0.43	no
+phiX_cov30_len75_err0_seed4	call	bowtie2	bcftools	0.11	39.9	0.11	0.63	no
+phiX_cov30_len75_err0_seed4	call	bowtie2	freebayes	0.05	7.3	0.05	0.64	no
+phiX_cov30_len75_err0_seed4	call	bowtie2	gatk	4.87	450.2	7.89	5.25	no
+phiX_cov30_len75_err0_seed4	call	bwa	bcftools	0.09	38.7	0.09	0.45	no
+phiX_cov30_len75_err0_seed4	call	bwa	freebayes	0.06	5.5	0.04	0.43	no
+phiX_cov30_len75_err0_seed4	call	bwa	gatk	6.69	404.5	8.74	7.72	no
+phiX_cov30_len75_err0_seed4	call	minimap2	bcftools	0.14	39.2	0.10	0.74	no
+phiX_cov30_len75_err0_seed4	call	minimap2	freebayes	0.20	7.1	0.05	0.70	no
+phiX_cov30_len75_err0_seed4	call	minimap2	gatk	3.77	457.9	7.73	4.12	no
+phiX_cov30_len75_err0_seed5	align	bowtie2		0.09	48.1	0.14	0.40	no
+phiX_cov30_len75_err0_seed5	align	bwa		0.01	3.9	0.02	0.39	no
+phiX_cov30_len75_err0_seed5	align	minimap2		0.01	4.3	0.01	0.40	no
+phiX_cov30_len75_err0_seed5	call	bowtie2	bcftools	0.11	39.1	0.10	0.50	no
+phiX_cov30_len75_err0_seed5	call	bowtie2	freebayes	0.04	5.3	0.03	0.73	no
+phiX_cov30_len75_err0_seed5	call	bowtie2	gatk	5.42	459.0	8.38	6.43	no
+phiX_cov30_len75_err0_seed5	call	bwa	bcftools	0.10	37.8	0.09	0.70	no
+phiX_cov30_len75_err0_seed5	call	bwa	freebayes	0.05	6.1	0.04	0.51	no
+phiX_cov30_len75_err0_seed5	call	bwa	gatk	4.62	413.1	8.38	5.01	no
+phiX_cov30_len75_err0_seed5	call	minimap2	bcftools	0.12	39.1	0.10	0.51	no
+phiX_cov30_len75_err0_seed5	call	minimap2	freebayes	0.05	7.1	0.04	0.53	no
+phiX_cov30_len75_err0_seed5	call	minimap2	gatk	4.02	396.5	7.79	4.40	no
+phiX_cov50_len150_err0_seed1	align	bowtie2		0.10	57.9	0.17	0.33	yes
+phiX_cov50_len150_err0_seed1	align	bwa		0.01	4.1	0.04	0.33	yes
+phiX_cov50_len150_err0_seed1	align	minimap2		0.00	4.5	0.01	0.23	yes
+phiX_cov50_len150_err0_seed1	call	bowtie2	bcftools	0.10	37.9	0.09	0.33	yes
+phiX_cov50_len150_err0_seed1	call	bowtie2	freebayes	0.04	5.3	0.04	0.27	yes
+phiX_cov50_len150_err0_seed1	call	bowtie2	gatk	2.45	396.5	5.63	2.68	yes
+phiX_cov50_len150_err0_seed1	call	bwa	bcftools	0.09	37.9	0.09	0.31	yes
+phiX_cov50_len150_err0_seed1	call	bwa	freebayes	0.04	5.2	0.03	0.26	yes
+phiX_cov50_len150_err0_seed1	call	bwa	gatk	2.43	405.9	5.65	2.66	yes
+phiX_cov50_len150_err0_seed1	call	minimap2	bcftools	0.09	37.8	0.09	0.31	yes
+phiX_cov50_len150_err0_seed1	call	minimap2	freebayes	0.04	5.3	0.04	0.26	yes
+phiX_cov50_len150_err0_seed1	call	minimap2	gatk	2.46	471.4	5.68	2.69	yes
+phiX_cov50_len150_err0_seed2	align	bowtie2		0.13	58.3	0.25	0.45	no
+phiX_cov50_len150_err0_seed2	align	bwa		0.01	4.4	0.05	0.29	no
+phiX_cov50_len150_err0_seed2	align	minimap2		0.00	4.6	0.01	0.27	no
+phiX_cov50_len150_err0_seed2	call	bowtie2	bcftools	0.22	41.6	0.13	0.72	no
+phiX_cov50_len150_err0_seed2	call	bowtie2	freebayes	0.10	8.4	0.05	0.55	no
+phiX_cov50_len150_err0_seed2	call	bowtie2	gatk	4.54	446.0	8.56	4.84	no
+phiX_cov50_len150_err0_seed2	call	bwa	bcftools	0.12	39.9	0.12	0.49	no
+phiX_cov50_len150_err0_seed2	call	bwa	freebayes	0.07	8.8	0.06	0.46	no
+phiX_cov50_len150_err0_seed2	call	bwa	gatk	4.72	436.2	9.05	5.08	no
+phiX_cov50_len150_err0_seed2	call	minimap2	bcftools	0.12	40.9	0.12	0.71	no
+phiX_cov50_len150_err0_seed2	call	minimap2	freebayes	0.05	8.2	0.05	0.65	no
+phiX_cov50_len150_err0_seed2	call	minimap2	gatk	5.66	408.1	9.70	6.03	no
+phiX_cov50_len150_err0_seed3	align	bowtie2		0.11	58.3	0.23	0.38	no
+phiX_cov50_len150_err0_seed3	align	bwa		0.01	4.5	0.05	0.30	no
+phiX_cov50_len150_err0_seed3	align	minimap2		0.00	4.7	0.01	0.26	no
+phiX_cov50_len150_err0_seed3	call	bowtie2	bcftools	0.15	40.3	0.14	0.56	no
+phiX_cov50_len150_err0_seed3	call	bowtie2	freebayes	0.06	7.7	0.06	0.53	no
+phiX_cov50_len150_err0_seed3	call	bowtie2	gatk	4.16	396.2	8.23	4.46	no
+phiX_cov50_len150_err0_seed3	call	bwa	bcftools	0.13	38.1	0.11	0.54	no
+phiX_cov50_len150_err0_seed3	call	bwa	freebayes	0.08	5.9	0.06	0.49	no
+phiX_cov50_len150_err0_seed3	call	bwa	gatk	4.44	394.5	8.15	4.76	no
+phiX_cov50_len150_err0_seed3	call	minimap2	bcftools	0.16	41.3	0.15	0.66	no
+phiX_cov50_len150_err0_seed3	call	minimap2	freebayes	0.08	9.2	0.07	0.62	no
+phiX_cov50_len150_err0_seed3	call	minimap2	gatk	4.89	481.1	8.82	5.24	no
+phiX_cov50_len150_err0_seed4	align	bowtie2		0.11	58.3	0.21	0.39	no
+phiX_cov50_len150_err0_seed4	align	bwa		0.01	4.4	0.04	0.30	no
+phiX_cov50_len150_err0_seed4	align	minimap2		0.01	4.7	0.01	0.29	no
+phiX_cov50_len150_err0_seed4	call	bowtie2	bcftools	0.18	40.4	0.11	0.59	no
+phiX_cov50_len150_err0_seed4	call	bowtie2	freebayes	0.07	8.4	0.06	0.47	no
+phiX_cov50_len150_err0_seed4	call	bowtie2	gatk	5.61	383.8	8.69	5.95	no
+phiX_cov50_len150_err0_seed4	call	bwa	bcftools	0.12	38.6	0.11	0.53	no
+phiX_cov50_len150_err0_seed4	call	bwa	freebayes	0.07	6.0	0.06	0.54	no
+phiX_cov50_len150_err0_seed4	call	bwa	gatk	6.45	375.2	9.15	7.03	no
+phiX_cov50_len150_err0_seed4	call	minimap2	bcftools	0.14	42.0	0.12	0.75	no
+phiX_cov50_len150_err0_seed4	call	minimap2	freebayes	0.06	8.5	0.06	0.69	no
+phiX_cov50_len150_err0_seed4	call	minimap2	gatk	4.54	452.1	8.66	4.92	no
+phiX_cov50_len150_err0_seed5	align	bowtie2		0.11	58.4	0.21	0.42	no
+phiX_cov50_len150_err0_seed5	align	bwa		0.01	4.4	0.05	0.30	no
+phiX_cov50_len150_err0_seed5	align	minimap2		0.01	4.5	0.01	0.28	no
+phiX_cov50_len150_err0_seed5	call	bowtie2	bcftools	0.16	41.9	0.15	0.56	no
+phiX_cov50_len150_err0_seed5	call	bowtie2	freebayes	0.06	8.4	0.06	0.50	no
+phiX_cov50_len150_err0_seed5	call	bowtie2	gatk	4.16	485.6	8.57	4.54	no
+phiX_cov50_len150_err0_seed5	call	bwa	bcftools	0.12	40.9	0.12	0.50	no
+phiX_cov50_len150_err0_seed5	call	bwa	freebayes	0.07	8.4	0.06	0.45	no
+phiX_cov50_len150_err0_seed5	call	bwa	gatk	4.89	432.6	8.79	5.48	no
+phiX_cov50_len150_err0_seed5	call	minimap2	bcftools	0.10	39.0	0.10	0.50	no
+phiX_cov50_len150_err0_seed5	call	minimap2	freebayes	0.06	7.3	0.06	0.48	no
+phiX_cov50_len150_err0_seed5	call	minimap2	gatk	4.92	415.6	9.27	5.33	no
+phiX_cov5_len150_err0_seed1	align	bowtie2		0.08	32.4	0.04	0.32	yes
+phiX_cov5_len150_err0_seed1	align	bwa		0.00	2.5	0.00	0.22	yes
+phiX_cov5_len150_err0_seed1	align	minimap2		0.00	3.5	0.00	0.23	yes
+phiX_cov5_len150_err0_seed1	call	bowtie2	bcftools	0.06	37.5	0.06	0.28	yes
+phiX_cov5_len150_err0_seed1	call	bowtie2	freebayes	0.01	4.6	0.01	0.23	yes
+phiX_cov5_len150_err0_seed1	call	bowtie2	gatk	1.40	438.1	4.05	1.63	yes
+phiX_cov5_len150_err0_seed1	call	bwa	bcftools	0.06	37.8	0.06	0.28	yes
+phiX_cov5_len150_err0_seed1	call	bwa	freebayes	0.01	4.7	0.01	0.23	yes
+phiX_cov5_len150_err0_seed1	call	bwa	gatk	1.40	435.5	3.96	1.62	yes
+phiX_cov5_len150_err0_seed1	call	minimap2	bcftools	0.06	37.8	0.06	0.28	yes
+phiX_cov5_len150_err0_seed1	call	minimap2	freebayes	0.01	4.6	0.01	0.23	yes
+phiX_cov5_len150_err0_seed1	call	minimap2	gatk	1.40	424.3	3.91	1.62	yes
+phiX_cov5_len150_err0_seed2	align	bowtie2		0.08	32.3	0.04	0.35	no
+phiX_cov5_len150_err0_seed2	align	bwa		0.00	2.9	0.00	0.31	no
+phiX_cov5_len150_err0_seed2	align	minimap2		0.00	3.7	0.00	0.39	no
+phiX_cov5_len150_err0_seed2	call	bowtie2	bcftools	0.10	40.4	0.09	0.70	no
+phiX_cov5_len150_err0_seed2	call	bowtie2	freebayes	0.03	5.0	0.02	0.65	no
+phiX_cov5_len150_err0_seed2	call	bowtie2	gatk	3.00	505.6	6.40	3.33	no
+phiX_cov5_len150_err0_seed2	call	bwa	bcftools	0.12	40.5	0.09	0.62	no
+phiX_cov5_len150_err0_seed2	call	bwa	freebayes	0.03	5.1	0.03	0.69	no
+phiX_cov5_len150_err0_seed2	call	bwa	gatk	2.71	522.4	5.96	3.11	no
+phiX_cov5_len150_err0_seed2	call	minimap2	bcftools	0.11	38.6	0.09	0.64	no
+phiX_cov5_len150_err0_seed2	call	minimap2	freebayes	0.03	5.6	0.02	0.56	no
+phiX_cov5_len150_err0_seed2	call	minimap2	gatk	2.94	390.1	6.45	3.25	no
+phiX_cov5_len150_err0_seed3	align	bowtie2		0.08	32.4	0.04	0.35	no
+phiX_cov5_len150_err0_seed3	align	bwa		0.00	2.8	0.00	0.31	no
+phiX_cov5_len150_err0_seed3	align	minimap2		0.00	3.6	0.00	0.37	no
+phiX_cov5_len150_err0_seed3	call	bowtie2	bcftools	0.21	38.5	0.08	0.70	no
+phiX_cov5_len150_err0_seed3	call	bowtie2	freebayes	0.12	5.6	0.03	0.68	no
+phiX_cov5_len150_err0_seed3	call	bowtie2	gatk	3.01	422.1	6.64	3.55	no
+phiX_cov5_len150_err0_seed3	call	bwa	bcftools	0.12	40.4	0.10	0.67	no
+phiX_cov5_len150_err0_seed3	call	bwa	freebayes	0.04	4.8	0.01	0.61	no
+phiX_cov5_len150_err0_seed3	call	bwa	gatk	2.64	521.3	6.22	2.91	no
+phiX_cov5_len150_err0_seed3	call	minimap2	bcftools	0.09	39.5	0.09	0.89	no
+phiX_cov5_len150_err0_seed3	call	minimap2	freebayes	0.03	5.7	0.03	0.72	no
+phiX_cov5_len150_err0_seed3	call	minimap2	gatk	2.95	452.5	6.75	3.33	no
+phiX_cov5_len150_err0_seed4	align	bowtie2		0.08	32.5	0.04	0.35	no
+phiX_cov5_len150_err0_seed4	align	bwa		0.01	2.7	0.00	0.30	no
+phiX_cov5_len150_err0_seed4	align	minimap2		0.01	3.7	0.00	0.66	no
+phiX_cov5_len150_err0_seed4	call	bowtie2	bcftools	0.10	39.7	0.09	0.55	no
+phiX_cov5_len150_err0_seed4	call	bowtie2	freebayes	0.05	4.9	0.02	0.54	no
+phiX_cov5_len150_err0_seed4	call	bowtie2	gatk	2.67	397.6	6.02	3.08	no
+phiX_cov5_len150_err0_seed4	call	bwa	bcftools	0.12	39.2	0.09	0.57	no
+phiX_cov5_len150_err0_seed4	call	bwa	freebayes	0.02	5.1	0.02	0.64	no
+phiX_cov5_len150_err0_seed4	call	bwa	gatk	2.79	389.3	6.16	3.13	no
+phiX_cov5_len150_err0_seed4	call	minimap2	bcftools	0.11	38.5	0.09	0.68	no
+phiX_cov5_len150_err0_seed4	call	minimap2	freebayes	0.03	5.2	0.02	0.47	no
+phiX_cov5_len150_err0_seed4	call	minimap2	gatk	3.26	404.0	6.84	3.73	no
+phiX_cov5_len150_err0_seed5	align	bowtie2		0.08	32.1	0.04	0.36	no
+phiX_cov5_len150_err0_seed5	align	bwa		0.01	2.8	0.00	0.31	no
+phiX_cov5_len150_err0_seed5	align	minimap2		0.01	3.7	0.00	0.74	no
+phiX_cov5_len150_err0_seed5	call	bowtie2	bcftools	0.11	40.5	0.09	0.71	no
+phiX_cov5_len150_err0_seed5	call	bowtie2	freebayes	0.03	4.9	0.02	0.68	no
+phiX_cov5_len150_err0_seed5	call	bowtie2	gatk	2.95	355.0	6.41	3.48	no
+phiX_cov5_len150_err0_seed5	call	bwa	bcftools	0.09	39.2	0.08	0.59	no
+phiX_cov5_len150_err0_seed5	call	bwa	freebayes	0.02	5.4	0.01	0.49	no
+phiX_cov5_len150_err0_seed5	call	bwa	gatk	2.55	467.5	5.90	2.84	no
+phiX_cov5_len150_err0_seed5	call	minimap2	bcftools	0.10	39.5	0.09	0.56	no
+phiX_cov5_len150_err0_seed5	call	minimap2	freebayes	0.04	5.4	0.02	0.49	no
+phiX_cov5_len150_err0_seed5	call	minimap2	gatk	2.99	398.1	6.55	3.38	no

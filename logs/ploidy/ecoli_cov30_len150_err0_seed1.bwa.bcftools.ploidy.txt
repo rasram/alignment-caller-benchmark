@@ -1,2 +1,0 @@
-ecoli_cov30_len150_err0_seed1 bwa bcftools records=5948 diploid=0
-PASS (haploid)

@@ -1,4 +1,4 @@
-# Scoring negative control — 2026-08-14 14:15:46 UTC
+# Scoring negative control — 2026-10-02 09:19:51 UTC
 # Baseline: phiX truth (50 SNP + 10 indel). Calls: bwa/gatk, normalised.
 
   0. unmodified (expect F1=1.0)      TP=60    FP=0     FN=0     precision=1.0000   recall=1.0000   F1=1.0000

@@ -1,4 +1,4 @@
-# Genotype-encoding decision experiment — phiX — 2026-08-14 13:43:20 UTC
+# Genotype-encoding decision experiment — phiX — 2026-10-02 09:19:45 UTC
 # Variant content is IDENTICAL across all call sets; only GT encoding differs.
 
 ## Option (a): truth HAS a sample column with GT=1
@@ -11,8 +11,8 @@
   GT=0/1 squashed        TP=60    FP=0     FN=0     precision=1.0000   recall=1.0000   F1=1.0000
 
 ## Option (b): truth has NO sample column (raw simuG shape)
-  no-GT baseline         REFUSED TO RUN: Error: Record did not contain enough samples: phiX	51	.	A	C	.	.	
-  no-GT + squash-ploidy  REFUSED TO RUN: Error: Record did not contain enough samples: phiX	51	.	A	C	.	.	
+  no-GT baseline         REFUSED TO RUN: Error: Record did not contain enough samples: phiX	51	.	A	T	.	.	
+  no-GT + squash-ploidy  REFUSED TO RUN: Error: Record did not contain enough samples: phiX	51	.	A	T	.	.	
 
 ## DECISION
 

@@ -1,0 +1,133 @@
+genome	variant_type	condition	caller	mean	max	size
+ecoli	INDEL	baseline (30x, 150bp, qs0)	bcftools	0.0028	0.003	15
+ecoli	INDEL	baseline (30x, 150bp, qs0)	freebayes	0.00976667	0.0101	15
+ecoli	INDEL	baseline (30x, 150bp, qs0)	gatk	0.00553333	0.006	15
+ecoli	INDEL	coverage 100x	bcftools	0.00272667	0.003	15
+ecoli	INDEL	coverage 100x	freebayes	0.00921333	0.0101	15
+ecoli	INDEL	coverage 100x	gatk	0.00563333	0.0061	15
+ecoli	INDEL	coverage 10x	bcftools	0.00137333	0.002	15
+ecoli	INDEL	coverage 10x	freebayes	0.00935333	0.0101	15
+ecoli	INDEL	coverage 10x	gatk	0.00551333	0.0061	15
+ecoli	INDEL	coverage 20x	bcftools	0.0024	0.003	15
+ecoli	INDEL	coverage 20x	freebayes	0.00965333	0.0101	15
+ecoli	INDEL	coverage 20x	gatk	0.00551333	0.006	15
+ecoli	INDEL	coverage 50x	bcftools	0.0028	0.003	15
+ecoli	INDEL	coverage 50x	freebayes	0.00921333	0.0101	15
+ecoli	INDEL	coverage 50x	gatk	0.00553333	0.006	15
+ecoli	INDEL	coverage 5x	bcftools	0.000826667	0.0011	15
+ecoli	INDEL	coverage 5x	freebayes	0.00862667	0.0105	15
+ecoli	INDEL	coverage 5x	gatk	0.00526	0.0062	15
+ecoli	INDEL	qs shift -10	bcftools	0.00273333	0.003	15
+ecoli	INDEL	qs shift -10	freebayes	0.00986	0.0101	15
+ecoli	INDEL	qs shift -10	gatk	0.00550667	0.006	15
+ecoli	INDEL	qs shift -2	bcftools	0.003	0.003	15
+ecoli	INDEL	qs shift -2	freebayes	0.00982667	0.0101	15
+ecoli	INDEL	qs shift -2	gatk	0.00553333	0.006	15
+ecoli	INDEL	qs shift -5	bcftools	0.00286667	0.003	15
+ecoli	INDEL	qs shift -5	freebayes	0.0100467	0.0101	15
+ecoli	INDEL	qs shift -5	gatk	0.00553333	0.006	15
+ecoli	INDEL	read length 100bp	bcftools	0.00166	0.002	15
+ecoli	INDEL	read length 100bp	freebayes	0.00979333	0.0101	15
+ecoli	INDEL	read length 100bp	gatk	0.0057	0.006	15
+ecoli	INDEL	read length 75bp	bcftools	0.00128	0.002	15
+ecoli	INDEL	read length 75bp	freebayes	0.00903333	0.0101	15
+ecoli	INDEL	read length 75bp	gatk	0.00561333	0.0061	15
+ecoli	SNV	baseline (30x, 150bp, qs0)	bcftools	0.000526667	0.0006	15
+ecoli	SNV	baseline (30x, 150bp, qs0)	freebayes	0.00243333	0.0025	15
+ecoli	SNV	baseline (30x, 150bp, qs0)	gatk	0.000666667	0.0007	15
+ecoli	SNV	coverage 100x	bcftools	0.0005	0.0005	15
+ecoli	SNV	coverage 100x	freebayes	0.00231333	0.0025	15
+ecoli	SNV	coverage 100x	gatk	0.000673333	0.0007	15
+ecoli	SNV	coverage 10x	bcftools	0.00018	0.0003	15
+ecoli	SNV	coverage 10x	freebayes	0.00222667	0.0025	15
+ecoli	SNV	coverage 10x	gatk	0.000693333	0.0008	15
+ecoli	SNV	coverage 20x	bcftools	0.00044	0.0006	15
+ecoli	SNV	coverage 20x	freebayes	0.00238667	0.0025	15
+ecoli	SNV	coverage 20x	gatk	0.000666667	0.0007	15
+ecoli	SNV	coverage 50x	bcftools	0.000506667	0.0006	15
+ecoli	SNV	coverage 50x	freebayes	0.00231333	0.0025	15
+ecoli	SNV	coverage 50x	gatk	0.000666667	0.0007	15
+ecoli	SNV	coverage 5x	bcftools	8e-05	0.0001	15
+ecoli	SNV	coverage 5x	freebayes	0.00198	0.0026	15
+ecoli	SNV	coverage 5x	gatk	0.000646667	0.0008	15
+ecoli	SNV	qs shift -10	bcftools	0.0005	0.0007	15
+ecoli	SNV	qs shift -10	freebayes	0.00246	0.0025	15
+ecoli	SNV	qs shift -10	gatk	0.000666667	0.0007	15
+ecoli	SNV	qs shift -2	bcftools	0.000506667	0.0006	15
+ecoli	SNV	qs shift -2	freebayes	0.00245333	0.0025	15
+ecoli	SNV	qs shift -2	gatk	0.000666667	0.0007	15
+ecoli	SNV	qs shift -5	bcftools	0.000506667	0.0006	15
+ecoli	SNV	qs shift -5	freebayes	0.00249333	0.0025	15
+ecoli	SNV	qs shift -5	gatk	0.000666667	0.0007	15
+ecoli	SNV	read length 100bp	bcftools	0.000233333	0.0003	15
+ecoli	SNV	read length 100bp	freebayes	0.00244	0.0025	15
+ecoli	SNV	read length 100bp	gatk	0.00068	0.0007	15
+ecoli	SNV	read length 75bp	bcftools	0.00016	0.0003	15
+ecoli	SNV	read length 75bp	freebayes	0.00211333	0.0025	15
+ecoli	SNV	read length 75bp	gatk	0.000693333	0.0008	15
+phiX	INDEL	baseline (30x, 150bp, qs0)	bcftools	0	0	15
+phiX	INDEL	baseline (30x, 150bp, qs0)	freebayes	0	0	15
+phiX	INDEL	baseline (30x, 150bp, qs0)	gatk	0	0	15
+phiX	INDEL	coverage 100x	bcftools	0	0	15
+phiX	INDEL	coverage 100x	freebayes	0	0	15
+phiX	INDEL	coverage 100x	gatk	0	0	15
+phiX	INDEL	coverage 10x	bcftools	0	0	15
+phiX	INDEL	coverage 10x	freebayes	0	0	15
+phiX	INDEL	coverage 10x	gatk	0	0	15
+phiX	INDEL	coverage 20x	bcftools	0	0	15
+phiX	INDEL	coverage 20x	freebayes	0	0	15
+phiX	INDEL	coverage 20x	gatk	0	0	15
+phiX	INDEL	coverage 50x	bcftools	0	0	15
+phiX	INDEL	coverage 50x	freebayes	0	0	15
+phiX	INDEL	coverage 50x	gatk	0	0	15
+phiX	INDEL	coverage 5x	bcftools	0	0	15
+phiX	INDEL	coverage 5x	freebayes	0	0	15
+phiX	INDEL	coverage 5x	gatk	0	0	15
+phiX	INDEL	qs shift -10	bcftools	0	0	15
+phiX	INDEL	qs shift -10	freebayes	0	0	15
+phiX	INDEL	qs shift -10	gatk	0	0	15
+phiX	INDEL	qs shift -2	bcftools	0	0	15
+phiX	INDEL	qs shift -2	freebayes	0	0	15
+phiX	INDEL	qs shift -2	gatk	0	0	15
+phiX	INDEL	qs shift -5	bcftools	0	0	15
+phiX	INDEL	qs shift -5	freebayes	0	0	15
+phiX	INDEL	qs shift -5	gatk	0	0	15
+phiX	INDEL	read length 100bp	bcftools	0	0	15
+phiX	INDEL	read length 100bp	freebayes	0	0	15
+phiX	INDEL	read length 100bp	gatk	0	0	15
+phiX	INDEL	read length 75bp	bcftools	0	0	15
+phiX	INDEL	read length 75bp	freebayes	0	0	15
+phiX	INDEL	read length 75bp	gatk	0	0	15
+phiX	SNV	baseline (30x, 150bp, qs0)	bcftools	0	0	15
+phiX	SNV	baseline (30x, 150bp, qs0)	freebayes	0	0	15
+phiX	SNV	baseline (30x, 150bp, qs0)	gatk	0	0	15
+phiX	SNV	coverage 100x	bcftools	0	0	15
+phiX	SNV	coverage 100x	freebayes	0	0	15
+phiX	SNV	coverage 100x	gatk	0	0	15
+phiX	SNV	coverage 10x	bcftools	0	0	15
+phiX	SNV	coverage 10x	freebayes	0	0	15
+phiX	SNV	coverage 10x	gatk	0	0	15
+phiX	SNV	coverage 20x	bcftools	0	0	15
+phiX	SNV	coverage 20x	freebayes	0	0	15
+phiX	SNV	coverage 20x	gatk	0	0	15
+phiX	SNV	coverage 50x	bcftools	0	0	15
+phiX	SNV	coverage 50x	freebayes	0	0	15
+phiX	SNV	coverage 50x	gatk	0	0	15
+phiX	SNV	coverage 5x	bcftools	0	0	15
+phiX	SNV	coverage 5x	freebayes	0	0	15
+phiX	SNV	coverage 5x	gatk	0	0	15
+phiX	SNV	qs shift -10	bcftools	0	0	15
+phiX	SNV	qs shift -10	freebayes	0	0	15
+phiX	SNV	qs shift -10	gatk	0	0	15
+phiX	SNV	qs shift -2	bcftools	0	0	15
+phiX	SNV	qs shift -2	freebayes	0	0	15
+phiX	SNV	qs shift -2	gatk	0	0	15
+phiX	SNV	qs shift -5	bcftools	0	0	15
+phiX	SNV	qs shift -5	freebayes	0	0	15
+phiX	SNV	qs shift -5	gatk	0	0	15
+phiX	SNV	read length 100bp	bcftools	0	0	15
+phiX	SNV	read length 100bp	freebayes	0	0	15
+phiX	SNV	read length 100bp	gatk	0	0	15
+phiX	SNV	read length 75bp	bcftools	0	0	15
+phiX	SNV	read length 75bp	freebayes	0	0	15
+phiX	SNV	read length 75bp	gatk	0	0	15

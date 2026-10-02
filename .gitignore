@@ -48,3 +48,17 @@ node_modules/
 
 # Office lock files, written while a document is open in Word/PowerPoint
 ~$*
+
+# --- Sweep-scale output (Phase 8) -------------------------------------------
+# Per-job logs, benchmark files and raw vcfeval directories: thousands of files,
+# all regenerable by the workflow. The distilled tables in results/*.tsv and the
+# summary records in logs/*.txt are what get committed.
+logs/run/
+logs/ploidy/
+logs/timing/
+logs/legacy_titv0.5/
+benchmarks/
+results/vcfeval/
+
+# Model pickle: regenerable by `fit_model`, and tied to the exact scikit-learn version
+results/model/*.pkl

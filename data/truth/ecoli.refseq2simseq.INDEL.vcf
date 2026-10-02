@@ -1,5 +1,5 @@
 ##fileformat=VCFv4.1
-##fileDate=Fri Aug 14 13:39:42 2026 (GMT time)
+##fileDate=Fri Oct  2 06:08:01 2026 (GMT time)
 ##source=simuG.pl
 ##INFO=<ID=variant_type,Number=1,Type=String,Description="The type of the introduced genomic variant">
 ##INFO=<ID=variant_id,Number=1,Type=String,Description="The id of the introduced genomic variant">

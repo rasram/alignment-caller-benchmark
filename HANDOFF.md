@@ -1,212 +1,121 @@
 # HANDOFF
 
-State of the project at the end of the Phase 0–7b session, for whoever picks up Phase 8.
-
-Read this before running anything. **[NOTES.md](NOTES.md)** explains *why* each decision was
-made; this file records *what is true right now*, what was assumed, and what is not yet
-verified.
+State of the project at the **end of Phase 1** (October 2026): the full benchmark has been run,
+analysed and written up. This file records *what is true right now*, what was assumed, what is
+not verified, and what Phase 2 should do. **[NOTES.md](NOTES.md)** explains *why* each decision
+was made; **[docs/FINAL_REPORT.pdf](docs/FINAL_REPORT.pdf)** is the result.
 
 ---
 
-## 1. What works
+## 1. What is done
 
-Verified by `bash scripts/verify_all.sh` — **81 of 83 checks pass**, and the two failures were
-this file and `README.md` not yet existing. Full output in
+`bash scripts/verify_all.sh` — **all checks pass** at full-sweep scope (110 run tags). Output:
 [logs/verification_report.txt](logs/verification_report.txt).
 
 | Area | Status |
 |---|---|
-| Five conda environments, pinned + locked | ✅ |
-| RTG Tools 3.13 (Java 23), simuG `0289e58` | ✅ |
-| Both references downloaded, renamed, 5 index types each | ✅ |
-| Truth sets: phiX 50 SNV + 10 indel; *E. coli* 5,000 + 1,000 | ✅ |
-| Baseline reads, both genomes, exactly 30.00× | ✅ |
-| FastQC/MultiQC + mean-Q extraction | ✅ |
-| 3 aligners → indexed, duplicate-marked BAMs with read groups | ✅ |
-| Placement accuracy (with mutated→reference coordinate conversion) | ✅ |
-| 9 aligner×caller VCFs per genome (18 total), raw + hard-filtered | ✅ |
-| **Ploidy haploid in all 18, logged and re-verified live** | ✅ |
-| `rtg vcfeval` scoring, SNV and indel separately | ✅ |
-| `results/results.tsv` — 36 baseline rows + 36 comparison rows | ✅ |
-| ROC curves, both genomes, both variant types | ✅ |
-| Snakemake workflow reproducing the baseline **byte-for-byte** | ✅ |
-| Full 990-run sweep DAG resolves (13,320 jobs) | ✅ |
+| Truth sets regenerated with Ti/Tv 2.0 (same positions as the Ti/Tv 0.5 originals) | ✅ |
+| Full sweep: 11 conditions × 5 seeds × 2 genomes × 9 pipelines = **990 runs** | ✅ |
+| Every call set haploid — 990 VCFs re-grepped live, zero diploid genotypes | ✅ |
+| Per-run metrics as Snakemake rules (read, alignment, placement, runtime, ploidy) | ✅ |
+| Clean (machine-exclusive) timings for seed 1 of every condition | ✅ |
+| Raw **and** hard-filtered call sets scored; single-run and pre-split scoring | ✅ |
+| `results/results.tsv` — 5,940 rows, no empty metric cells (`--strict`) | ✅ |
+| Variance analysis (blocked ANOVA + Friedman, BH-corrected) | ✅ |
+| Error-mechanism tests (`scripts/diagnose_errors.py`) | ✅ |
+| Predictive model (tree + forest; held-out-seed and leave-one-condition-out) | ✅ |
+| Figures F1–F7, report (MD/PDF/DOCX) — every table and quoted number generated | ✅ |
+| One command reproduces everything: `snakemake --config run=all` | ✅ |
 
-**The single most reassuring result:** the baseline was rebuilt from scratch through Snakemake
-in freshly created conda environments, using command lines written independently of the shell
-scripts, and `results.tsv` came out byte-for-byte identical. Two independent implementations
-agree.
+**Compute actually used:** about 2.5 h wall-clock for the sweep on an Apple M4 (10 cores, 24 GB),
+14,865 Snakemake jobs. Retained on disk: `work/` 17 GB (BAMs, VCFs), `results/vcfeval/` 0.9 GB,
+workflow conda envs 2.1 GB. All of it is gitignored and regenerable.
 
 ---
 
-## 2. Assumptions you should verify
+## 2. Headline results
 
-These are choices made without explicit instruction. None is hidden in the code; all are
-listed here because they affect how the results should be read.
-
-### 2.1 Ti/Tv ratio is ~0.5, not biologically realistic — **most important**
-
-simuG's default `-titv_ratio 0.5` was kept. That is what uniformly random substitution
-produces (each base has one transition partner and two transversion partners). **Real bacterial
-genomes run Ti/Tv ≈ 1–2.** Measured: phiX 0.667, *E. coli* 0.480.
-
-*Impact:* does **not** bias the comparison — all nine pipelines score against the same truth
-and none is Ti/Tv-tuned, so the **ranking holds**. But absolute recall is not directly
-transferable to a real resequencing project. Fixing it means regenerating the truth sets with
-`-titv_ratio 2.0` and re-running everything (~2.5 min for the baseline).
-
-### 2.2 ART seed 1 for the baseline; simuG seed 20260814 fixed project-wide
-
-The mutated genome is the *experimental subject* and must not change between conditions, so
-simuG's seed is fixed. ART's seed varies 1–5 across the sweep as replicate sequencing runs.
-**The baseline reported here is a single seed** — no error bars. The sweep's 5 seeds will give
-the first estimate of run-to-run variance, and that variance is needed before claiming any
-pipeline difference is real (see §5, Q2).
-
-### 2.3 Hard filter is `QUAL>=20 && INFO/DP>=5`
-
-Chosen because QUAL and DP are the only fields all three callers emit comparably. GATK Best
-Practices would use `QD`/`FS`/`MQRankSum`, but FreeBayes and BCFtools do not produce them, so
-using them would tune GATK's filter and not its competitors'. **QUAL is not calibrated
-identically across the three tools**, so one threshold is *procedurally* identical but not
-*statistically* equivalent. This is why the ROC curves are the honest comparison and the
-hard-filtered numbers are one operating point on them.
-
-### 2.4 Primary scoring uses one vcfeval run, not the brief's pre-split method
-
-The brief specified splitting the VCF by type before scoring. Measured, that **distorts
-results** — it degrades vcfeval's haplotype-aware comparison into a context-free one. Both are
-in `results.tsv` under `scoring_method`; **`single_run` is primary**. Detail and evidence in
-[NOTES.md §7.6](NOTES.md). *This is a deviation from the brief and should be confirmed.*
-
-### 2.5 Threads fixed at 4 for aligners; callers differ in threading
-
-R8 requires an identical thread count across aligners, and that is enforced. But the callers
-are not equally parallel: GATK takes `--native-pair-hmm-threads 4`, BCFtools is effectively
-single-threaded for the pileup, and FreeBayes is single-threaded. **Caller runtimes are
-therefore not a like-for-like speed comparison** and should be reported as "as typically run",
-not as a controlled benchmark.
-
-### 2.6 MarkDuplicates is inert here
-
-~0% duplicates, as expected — ART simulates no PCR. It is run for pipeline realism and cannot
-be a source of difference between pipelines. Say so in the report rather than presenting it as
-a result.
+Full detail, tables and figures are in the report. In one paragraph: all nine pipelines are
+accurate on simulated haploid data (*E. coli* 30× SNV F1 0.989–0.995). Their differences are
+real (seed sd ≈ 0.0005, about a tenth of the aligner spread) and **driven mainly by the
+aligner**. The aligner accounts for a median 0.78 of between-pipeline variation for SNVs, the
+caller 0.02. Bowtie2's end-to-end alignment creates false SNVs beside true indels that grow with
+depth; GATK's reassembly absorbs them. About 50 variants sit in repeats that no pipeline recovers.
+Depth is the only data property that changes the ranking: at 5× BCFtools wins for SNVs. Error
+rate (7× range) barely matters. A model predicts the best pipeline only marginally better than
+"always BWA-MEM + GATK", except at low depth.
 
 ---
 
-## 3. What is NOT verified
+## 3. Assumptions and decisions you should know about
 
-Be careful with these.
+### 3.1 Primary scoring is one vcfeval run, not the brief's pre-split method — **confirm this**
 
-1. **`align_metrics.tsv`, `placement_accuracy.tsv` and `call_timing.tsv` are not Snakemake
-   rules.** They are produced by the Phase 5/6 shell scripts. When the baseline was rebuilt
-   through Snakemake, those columns in `results.tsv` were **carried over, not recomputed**.
-   The scientific columns (TP/FP/FN/precision/recall/F1) *were* fully regenerated.
+The brief specified splitting call sets by type before scoring. Measured, that understates F1 by
+up to 0.0105, and most for FreeBayes, so it changes conclusions rather than shifting all numbers
+(report §3.8, [NOTES.md §7.6](NOTES.md)). Both methods are in `results.tsv` under
+`scoring_method`; **`single_run` is primary**. If the marker expects the brief's method, the
+primary column must change.
 
-   **Measured consequence for the sweep:** the metric tables are keyed by `(tag, aligner)` and
-   contain only the two baseline tags, so for the 108 unrun condition×seed combinations the
-   join finds nothing and those columns come out **empty** — not stale copies. They are exactly
-   the features the model needs. Note also that each metric script *appends* to one shared TSV,
-   which is unsafe under Snakemake's parallel execution; the fix is one file per work unit plus
-   an aggregation rule. See `docs/PHASE1_COMPLETION_PLAN.md` STEP 1. This is the one blocking
-   defect.
+### 3.2 Ti/Tv regenerated to 2.0 after the mid-semester review
 
-2. **`--use-conda` was exercised only on this machine (macOS arm64).** The environments solve
-   and the workflow runs, but portability to Linux is untested.
+The original truth sets used simuG's default Ti/Tv 0.5. They were regenerated with 2.0 (measured
+2.04 for *E. coli*), keeping the identical 5,000 SNV positions and identical indels. At baseline,
+F1 changed by ≤ 0.0002 for BWA-MEM/minimap2 pipelines and ≤ 0.0024 for Bowtie2. The Ti/Tv 0.5
+baseline is archived in `results/archive/titv0.5_baseline/`.
 
-3. **Only the baseline condition has been executed.** Nothing at 5×, 100×, 75 bp, or any qs
-   shift has ever run. The DAG resolves for them; the *commands* are unexercised at those
-   parameter values.
+### 3.3 Other choices
 
-4. **phiX cannot discriminate between pipelines.** All nine score F1 = 1.0000. Verified real
-   (not a bug) with a negative control, but phiX is a smoke test, not a result. Do not put a
-   9-way phiX comparison in a report as if it means something.
-
-5. **The `filt` call sets exist but were never scored.** Only `raw` was pushed through vcfeval.
-   Scoring them is a one-line change (`score_variants.sh ... filt`).
-
-6. **`.snakemake/` was briefly committed to git and then removed by amending the commit.** The
-   history was rewritten before any push. If you cloned this repo *very* early, re-clone.
+| Choice | Why | Where |
+|---|---|---|
+| simuG seed 20260814 fixed; ART seeds 1–5 | the variants are the subject; seeds are replicate *sequencing runs* | NOTES Phase 3 |
+| Hard filter `QUAL ≥ 20 && DP ≥ 5` | only fields all three callers emit comparably; QUAL is not equally calibrated | NOTES Phase 6 |
+| 4 threads for aligners and GATK | identical thread budget (R8); FreeBayes/BCFtools are single-threaded | config.yaml |
+| Clean timing for seed 1 only | runtime depends on condition, not seed; exclusive timing of all seeds would idle 7 cores | NOTES 8.3 |
+| Default tool parameters except ploidy | an out-of-the-box comparison; tuning would favour whichever tool was tuned | report §4.3 |
+| No BQSR/VQSR for GATK | needs a known-variant database these organisms lack | report §2.4 |
+| Tree depth 4, min leaf 5, fixed before fitting | interpretability; not re-tuned after seeing results | report §2.10 |
+| Model regret treats tied predictions as ties | a tree ranks whole leaves equal; breaking ties by name was a bug | NOTES 8.12 |
 
 ---
 
-## 4. Compute budget for the sweep
+## 4. Corrections to earlier statements
 
-**Measured**, not estimated: one full *E. coli* 9-pipeline baseline condition = **120 s
-wall-clock on 8 cores** (67 Snakemake jobs). phiX adds ~13 s.
-
-Scaling by coverage (compute tracks total bases sequenced; read length and qs shift do not
-change data volume), the 11 conditions sum to **12.17×** a single 30× condition:
-
-| | Estimate |
-|---|---|
-| *E. coli* sweep (11 conditions × 5 seeds) | **~2.0 h** |
-| phiX sweep | ~0.2 h |
-| **Total, 8 cores** | **~2.25 h** |
-
-### This is far cheaper than the brief's ~50 h estimate — but disk is the real constraint
-
-| | |
-|---|---|
-| Intermediates per 30× *E. coli* condition | **0.83 GB** measured (284 MB FASTQ + 315 MB truth SAM + 249 MB BAMs) |
-| **All *E. coli* intermediates if retained** | **~50 GB** |
-| With reads + truth SAM marked `temp()` | **~15 GB** |
-| Free space on this machine | ~216 GB |
-
-(An earlier revision of this file said 1.32 GB per condition and ~80 GB total; that used a
-guessed 250 MB per BAM. The duplicate-marked BAMs are 83 MB, so the real figures are lower.)
-
-It fits, but not comfortably, and the 100× conditions alone account for ~22 GB. **Recommended
-before running the sweep:** mark the FASTQ and truth-SAM outputs `temp()` in the Snakefile so
-Snakemake deletes them once the BAMs exist. The BAMs are what the callers need; the reads are
-regenerable from the recorded seed. That cuts peak disk roughly in half.
-
-The 2.25 h figure assumes linear scaling in coverage and this machine's 8 cores. Treat it as
-the right order of magnitude, not a promise.
+- **Mid-semester deck numbers** (`docs/midsem_presentation.pptx`) are from the Ti/Tv 0.5 truth
+  sets, seed 1 only. They are archived for traceability; the final numbers are in the report.
+- **"All nine pipelines score F1 = 1.0 on phiX"** was true for seed 1 at baseline only. Across five
+  seeds, 16 of 18 baseline cells are perfect. Every phiX error outside 5× is explained in report
+  §3.7: a variant at position 51, near the end of the linearised circular genome, and low-QUAL
+  BCFtools calls.
+- **The earlier open question "is the 0.0047 SNV spread more than noise?"** is answered: the seed
+  sd is about 0.0005, roughly ten times smaller than the aligner spread.
 
 ---
 
-## 5. What Phase 8 should do first
+## 5. What is NOT verified
 
-**In this order.**
-
-1. **Make the metrics collection Snakemake rules** (§3.1). Without this the sweep produces
-   36 × 11 × 5 rows whose mapping-rate, MAPQ, depth, placement-accuracy and timing columns are
-   all copies of the baseline. This is the one blocking defect.
-
-2. **Add `temp()` to the read outputs** (§4) so the sweep does not run the disk out.
-
-3. **Decide the Ti/Tv question** (§2.1) *before* burning compute. Regenerating the truth sets
-   afterwards invalidates every result.
-
-4. **Then run the sweep**, ideally coverage-first — the coverage axis is where pipeline
-   differences should appear, since all three aligners are at ~99% placement accuracy at 30×
-   and the baseline barely separates them.
-
-5. **Only then** start any modelling. With one seed per condition there is no variance
-   estimate; with five there is a weak one.
+1. **Real data.** Everything is simulated. ART has no PCR duplicates, GC bias or contamination;
+   simuG places variants uniformly. Real-data F1 will be lower.
+2. **The Bowtie2 mechanism is tested by its prediction, not by intervention.** The false SNVs
+   cluster beside true indels exactly as predicted (99% within 150 bp vs 6.3% background), but
+   Bowtie2 was never rerun with `--local` to show they disappear. That is the decisive experiment.
+3. **GATK's MAPQ-20 read filter** is inferred, not tested, as the reason Bowtie2 + GATK misses
+   twice as many variants. Rerunning with `--minimum-mapping-quality` lowered would test it.
+4. **`vcfeval` is the only scorer.** A `hap.py` cross-check was out of scope.
+5. **Portability.** The workflow ran only on macOS arm64. Linux is untested.
+6. **Interactions between axes** (e.g. 5× with 75 bp reads) were never sampled; the design is
+   one-factor-at-a-time.
 
 ---
 
-## 6. The three questions I most want answered
+## 6. What Phase 2 should do first
 
-1. **Is the deviation in §2.4 acceptable?** I scored with one vcfeval run per pipeline instead
-   of the brief's pre-split method, because pre-splitting measurably distorts results
-   (*E. coli* BWA+FreeBayes indels: 983 TP / 9 FP / 17 FN pre-split versus 994 / 0 / 6 in a
-   single run, with 70.6% of the spurious FNs having another truth variant within 50 bp). It
-   penalises FreeBayes hardest, so it changes conclusions rather than shifting all numbers.
-   Both are in `results.tsv`. **If the marker expects the brief's method, the primary column
-   must change.**
-
-2. **Should the truth sets be regenerated with a realistic Ti/Tv (§2.1)?** It costs ~3 minutes
-   to redo the baseline and makes absolute numbers transferable to real data. It must happen
-   before the sweep or not at all.
-
-3. **How many seeds are needed to call a difference real?** At baseline the nine *E. coli* SNV
-   F1 values span 0.9906–0.9953 — a range of 0.0047. Nothing in this session establishes
-   whether that exceeds seed-to-seed noise. If it does not, the headline finding
-   ("aligner matters more than caller") is not yet supported, and 5 seeds may not be enough.
+1. **Rerun Bowtie2 with `--local`** at 30× and 100× (a small, targeted run). It confirms or
+   kills the report's main mechanistic claim.
+2. **Real data**: an *E. coli* run with an independent closed assembly as truth, to test whether
+   the simulated ranking holds.
+3. **`hap.py` cross-check** of `vcfeval` on a subset.
+4. **A factorial design at low depth**, where the ranking actually changes.
 
 ---
 
@@ -214,13 +123,18 @@ the right order of magnitude, not a promise.
 
 | Trap | Symptom |
 |---|---|
-| Running Snakemake without `--use-conda` | every rule fails with **exit 127** |
-| Snakemake cannot find `conda` | `Error running conda info` — looks like a broken install |
+| Running Snakemake without `--use-conda` | every rule fails with **exit 127** (the default profile sets it) |
+| Snakemake cannot find `conda` | `Error running conda info` — add `~/miniforge3/bin` to `PATH` |
 | `gatk` called by absolute path | `env: python: No such file or directory` — it is a Python launcher |
-| `/usr/bin/time` wrapping a shell function | `time: gatk: No such file or directory` |
 | `grep` on simuG's mutated FASTA | silently truncates the single 4.6 Mb line; use `awk` |
-| `bcftools ... \| head` under `set -o pipefail` | SIGPIPE kills the whole script silently |
+| `cmd \| head` / `echo \| awk '{…; exit}'` under `pipefail` | intermittent exit 141 (SIGPIPE); use here-strings |
 | ART truth SAM vs aligner BAM | different coordinate systems, same contig name — no error, wrong answers |
 | RTG output directory already exists | refuses to overwrite; `rm -rf` the target first |
-| `grep -c` with `\|\| echo 0` | appends a second line on zero matches |
-| macOS `bash` is 3.2 | no associative arrays; `/usr/bin/time` is BSD (`-l`, bytes not KB) |
+| macOS `bash` 3.2, BSD `/usr/bin/time` | no associative arrays; `-l` reports bytes, not KB |
+| `snakemake benchmark:` on macOS | `max_rss` is NA — use `scripts/lib/measure.sh` |
+| `kill -INT` on a backgrounded Snakemake | ignored (POSIX: `&` from a script ignores SIGINT); use SIGTERM |
+| GATK `--native-pair-hmm-threads 4` | reserves 4 cores, uses ~1; run the sweep with `--cores 12` |
+| pandas `df.cov`, `df.pipe` | DataFrame **methods**, not your columns — use `df["cov"]` |
+| `rule all` lists the report before its template exists | whole DAG fails to validate; give explicit targets |
+| pandoc pipe tables with `\|---\|---\|` | every column the same width; size dashes by content |
+| XeLaTeX + Helvetica | no `→` glyph, silently dropped — check the log for "Missing character" |

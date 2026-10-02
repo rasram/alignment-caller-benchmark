@@ -1,0 +1,56 @@
+validation	model	mae	r2	regret	decisions	held_out	picked
+leave-one-condition-out	pipeline_mean	0.00393589	0.467492	3e-05	10	cov100 len150 qs0	
+leave-one-condition-out	tree	0.0016396	0.876847	0.000340833	10	cov100 len150 qs0	
+leave-one-condition-out	forest	0.000904409	0.936571	0	10	cov100 len150 qs0	
+leave-one-condition-out	always_train_best			3e-05	10	cov100 len150 qs0	bwa+gatk
+leave-one-condition-out	random_pick			0.00405111	10	cov100 len150 qs0	
+leave-one-condition-out	pipeline_mean	0.00242293	-0.220695	0.00033	10	cov10 len150 qs0	
+leave-one-condition-out	tree	0.0239741	-62.336	0.00209056	10	cov10 len150 qs0	
+leave-one-condition-out	forest	0.0241645	-62.6962	0.00077	10	cov10 len150 qs0	
+leave-one-condition-out	always_train_best			0.00033	10	cov10 len150 qs0	bwa+gatk
+leave-one-condition-out	random_pick			0.00247667	10	cov10 len150 qs0	
+leave-one-condition-out	pipeline_mean	0.00362496	-0.0485121	5e-05	10	cov20 len150 qs0	
+leave-one-condition-out	tree	0.00121551	0.7127	0.0004625	10	cov20 len150 qs0	
+leave-one-condition-out	forest	0.00136928	0.858927	0.00037	10	cov20 len150 qs0	
+leave-one-condition-out	always_train_best			5e-05	10	cov20 len150 qs0	bwa+gatk
+leave-one-condition-out	random_pick			0.00271333	10	cov20 len150 qs0	
+leave-one-condition-out	pipeline_mean	0.00331213	0.547093	0.00014	10	cov30 len100 qs0	
+leave-one-condition-out	tree	0.0024939	0.659661	0.000911667	10	cov30 len100 qs0	
+leave-one-condition-out	forest	0.00169243	0.897605	2e-05	10	cov30 len100 qs0	
+leave-one-condition-out	always_train_best			0.00014	10	cov30 len100 qs0	bwa+gatk
+leave-one-condition-out	random_pick			0.00459778	10	cov30 len100 qs0	
+leave-one-condition-out	pipeline_mean	0.00284222	0.362669	0.00025	10	cov30 len150 qs-10	
+leave-one-condition-out	tree	0.00111949	0.795001	0.000534167	10	cov30 len150 qs-10	
+leave-one-condition-out	forest	0.000818165	0.919726	0.0001	10	cov30 len150 qs-10	
+leave-one-condition-out	always_train_best			0.00025	10	cov30 len150 qs-10	bwa+gatk
+leave-one-condition-out	random_pick			0.00322778	10	cov30 len150 qs-10	
+leave-one-condition-out	pipeline_mean	0.00356189	0.167798	4e-05	10	cov30 len150 qs-2	
+leave-one-condition-out	tree	0.0010526	0.856118	0.0003275	10	cov30 len150 qs-2	
+leave-one-condition-out	forest	0.00036716	0.983131	0	10	cov30 len150 qs-2	
+leave-one-condition-out	always_train_best			4e-05	10	cov30 len150 qs-2	bwa+gatk
+leave-one-condition-out	random_pick			0.00298889	10	cov30 len150 qs-2	
+leave-one-condition-out	pipeline_mean	0.00351311	0.197788	0.00013	10	cov30 len150 qs-5	
+leave-one-condition-out	tree	0.00106488	0.828559	0.000385	10	cov30 len150 qs-5	
+leave-one-condition-out	forest	0.00040742	0.979196	0.0001	10	cov30 len150 qs-5	
+leave-one-condition-out	always_train_best			0.00013	10	cov30 len150 qs-5	bwa+gatk
+leave-one-condition-out	random_pick			0.00307556	10	cov30 len150 qs-5	
+leave-one-condition-out	pipeline_mean	0.00363733	0.168103	5e-05	10	cov30 len150 qs0	
+leave-one-condition-out	tree	0.00110193	0.833055	0.000314167	10	cov30 len150 qs0	
+leave-one-condition-out	forest	0.000453563	0.97442	0	10	cov30 len150 qs0	
+leave-one-condition-out	always_train_best			5e-05	10	cov30 len150 qs0	bwa+gatk
+leave-one-condition-out	random_pick			0.00289222	10	cov30 len150 qs0	
+leave-one-condition-out	pipeline_mean	0.00347711	0.444112	0.00095	10	cov30 len75 qs0	
+leave-one-condition-out	tree	0.0035242	0.414901	0.001985	10	cov30 len75 qs0	
+leave-one-condition-out	forest	0.00205608	0.857141	0	10	cov30 len75 qs0	
+leave-one-condition-out	always_train_best			0.00095	10	cov30 len75 qs0	minimap2+freebayes
+leave-one-condition-out	random_pick			0.00553444	10	cov30 len75 qs0	
+leave-one-condition-out	pipeline_mean	0.00375229	0.31958	0.00011	10	cov50 len150 qs0	
+leave-one-condition-out	tree	0.000956435	0.913261	0.000273333	10	cov50 len150 qs0	
+leave-one-condition-out	forest	0.000470347	0.979626	5e-05	10	cov50 len150 qs0	
+leave-one-condition-out	always_train_best			0.00011	10	cov50 len150 qs0	bwa+gatk
+leave-one-condition-out	random_pick			0.00322444	10	cov50 len150 qs0	
+leave-one-condition-out	pipeline_mean	0.0247997	-9.32782	0.00832	10	cov5 len150 qs0	
+leave-one-condition-out	tree	0.0241292	-8.64925	0.00191	10	cov5 len150 qs0	
+leave-one-condition-out	forest	0.0246421	-8.9745	0.00742	10	cov5 len150 qs0	
+leave-one-condition-out	always_train_best			0.00832	10	cov5 len150 qs0	bwa+gatk
+leave-one-condition-out	random_pick			0.00790889	10	cov5 len150 qs0	
